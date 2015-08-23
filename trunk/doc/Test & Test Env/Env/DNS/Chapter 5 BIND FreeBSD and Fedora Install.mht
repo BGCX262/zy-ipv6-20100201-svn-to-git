@@ -1,0 +1,3644 @@
+From: <ÓÉ Microsoft Internet Explorer 5 ±£´æ>
+Subject: Chapter 5 BIND FreeBSD and Fedora Install
+Date: Tue, 4 Aug 2009 17:36:54 +0800
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0000_01CA152A.28FC17E0"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0000_01CA152A.28FC17E0
+Content-Type: text/html;
+	charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.zytrax.com/books/dns/ch5/
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" =
+"http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML><HEAD><TITLE>Chapter 5 BIND FreeBSD and Fedora Install</TITLE>
+<META http-equiv=3DContent-Language content=3Den-us>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dwindows-1252">
+<META content=3D"MSHTML 6.00.2900.5659" name=3DGENERATOR><LINK=20
+href=3D"http://www.zytrax.com/favicon.ico" rel=3D"SHORTCUT ICON">
+<META=20
+content=3D"DHCP,DNS, BIND, DNS Security, DNSSEC, TSIG, TKEY, SOA =
+Resource Record, MX Resource Record, NS Resource Record, PTR Resource =
+Record, A Resource Record,CNAME Resource Record,AAAA Resource Record, =
+DNAME Resource Record, caching name server, master name server, slave =
+name server, forwarding name server, stealth name server,LDAP, OpenLDAP, =
+DIT, ASN.1, Organisational Units, OU, AD, Active Directory, SSO, LDIF, =
+slapd.conf, LDAP Objects,LDAP Attributes, Schema, LDAP Schema, X.500, =
+ObjectClasses, Structural objectclasses, Auxilliary objectclasses, =
+InetOrgPerson,email, SMTP, ESTMP, POP3, IMAP, mail headers, mail =
+content, MUA, Mail Agents, Mail clients, mail body, mail envelope, RFC =
+822"=20
+name=3Dkeywords><!-- this page originated from =
+http://www.zytrax.com/books/dns/ch5/ --><!-- =
+HTTP_USER_AGENT=3DMozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; =
+SV1; CIBA; .NET CLR 2.0.50727; .NET CLR 3.0.04506.648; .NET CLR =
+3.5.21022; baiduie8; TheWorld) -->
+<STYLE type=3Dtext/css>v\:* {
+	BEHAVIOR: url(#default#VML)
+}
+A {
+	TEXT-DECORATION: none
+}
+BODY {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: =
+0px; FONT: 10pt Verdana,Arial, Helvetica, sans-serif; COLOR: black; =
+PADDING-TOP: 0px; BACKGROUND-COLOR: white
+}
+DIV.l-f TABLE {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; WIDTH: =
+100%; PADDING-TOP: 4px
+}
+H1 {
+	BORDER-RIGHT: #9bf 0px solid; PADDING-RIGHT: 4px; BORDER-TOP: #9bf 0px =
+solid; PADDING-LEFT: 4px; FONT-SIZE: 14pt; BACKGROUND: #eee; =
+PADDING-BOTTOM: 4px; BORDER-LEFT: #9bf 0px solid; COLOR: #336; =
+PADDING-TOP: 4px; BORDER-BOTTOM: #9bf 5px solid
+}
+H2 {
+	BORDER-RIGHT: #9bf 0px solid; PADDING-RIGHT: 4px; BORDER-TOP: #9bf 0px =
+solid; PADDING-LEFT: 4px; FONT-WEIGHT: bold; FONT-SIZE: 12pt; =
+PADDING-BOTTOM: 4px; BORDER-LEFT: #9bf 0px solid; COLOR: #336; =
+PADDING-TOP: 4px; BORDER-BOTTOM: #9bf 5px solid
+}
+H3 {
+	BORDER-RIGHT: #9bf 0px solid; PADDING-RIGHT: 4px; BORDER-TOP: #9bf 0px =
+solid; PADDING-LEFT: 4px; FONT-SIZE: 12pt; PADDING-BOTTOM: 4px; =
+BORDER-LEFT: #9bf 0px solid; COLOR: #336; PADDING-TOP: 4px; =
+BORDER-BOTTOM: #9bf 3px solid
+}
+H4 {
+	BORDER-RIGHT: #9bf 0px solid; PADDING-RIGHT: 2px; BORDER-TOP: #9bf 0px =
+solid; PADDING-LEFT: 2px; FONT-SIZE: 10pt; PADDING-BOTTOM: 2px; =
+BORDER-LEFT: #9bf 0px solid; COLOR: #336; PADDING-TOP: 2px; =
+BORDER-BOTTOM: #9bf 2px solid
+}
+H5 {
+	BORDER-RIGHT: silver 0px solid; PADDING-RIGHT: 4px; BORDER-TOP: silver =
+0px solid; PADDING-LEFT: 4px; FONT-WEIGHT: bold; FONT-SIZE: 10pt; =
+PADDING-BOTTOM: 4px; BORDER-LEFT: silver 0px solid; PADDING-TOP: 4px; =
+BORDER-BOTTOM: silver 2px solid
+}
+H6 {
+	BORDER-RIGHT: silver 0px solid; PADDING-RIGHT: 4px; BORDER-TOP: silver =
+0px solid; PADDING-LEFT: 4px; FONT-SIZE: 10pt; PADDING-BOTTOM: 4px; =
+BORDER-LEFT: silver 0px solid; COLOR: silver; PADDING-TOP: 4px; =
+BORDER-BOTTOM: silver 1px solid
+}
+FORM {
+	BORDER-RIGHT: #ccc 1px solid; BORDER-TOP: #ccc 1px solid; BORDER-LEFT: =
+#ccc 1px solid; BORDER-BOTTOM: #ccc 1px solid
+}
+INPUT {
+	BORDER-RIGHT: #999 1px solid; BORDER-TOP: #999 1px solid; BACKGROUND: =
+#acf; BORDER-LEFT: #999 1px solid; BORDER-BOTTOM: #999 1px solid
+}
+TEXTAREA {
+	BORDER-RIGHT: #999 1px solid; BORDER-TOP: #999 1px solid; BACKGROUND: =
+#acf; BORDER-LEFT: #999 1px solid; BORDER-BOTTOM: #999 1px solid
+}
+DIV.l-r #layout {
+	VISIBILITY: visible
+}
+DIV.l-l-fp #layout {
+	VISIBILITY: visible
+}
+DIV.l-l-fp #popups {
+	VISIBILITY: visible
+}
+.l-l {
+	LEFT: 6px; FONT: 10pt Verdana, Helvetica, Arial, sans-serif; WIDTH: =
+110px; POSITION: absolute; TOP: 60px
+}
+.l-c {
+	BORDER-RIGHT: #336 1px solid; PADDING-RIGHT: 20px; BORDER-TOP: #336 0px =
+solid; PADDING-LEFT: 20px; Z-INDEX: 5; PADDING-BOTTOM: 4px; MARGIN: 0px =
+170px 0px 125px; FONT: 1em/1.3em Verdana,Helvetica, Arial sans-serif; =
+BORDER-LEFT: #336 1px solid; PADDING-TOP: 4px; BORDER-BOTTOM: #336 0px =
+solid
+}
+.l-r {
+	RIGHT: 6px; BACKGROUND: #eee; FONT: 10pt =
+Verdana,Arial,Helvetica,sans-serif; WIDTH: 160px; POSITION: absolute; =
+TOP: 60px
+}
+.button {
+	BACKGROUND: #ddd
+}
+.l-f {
+	MARGIN: 0px 200px 0px 125px
+}
+.l-c-fp {
+	BORDER-RIGHT: #336 1px solid; PADDING-RIGHT: 4px; BORDER-TOP: #336 0px =
+solid; PADDING-LEFT: 4px; Z-INDEX: 5; PADDING-BOTTOM: 4px; MARGIN: 0px =
+160px 0px 125px; FONT: 10pt Verdana,Helvetica, Arial, sans-serif; =
+BORDER-LEFT: #336 1px solid; PADDING-TOP: 4px; BORDER-BOTTOM: #336 0px =
+solid
+}
+.l-p {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; MARGIN: =
+10px; FONT: 10pt Verdana,Helvetica, Arial, sans-serif; PADDING-TOP: 4px
+}
+.l-100 {
+	MARGIN: 0px; WIDTH: 100%
+}
+.n-l1 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: =
+0px; WIDTH: 100px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+.n-l1-e {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; MARGIN: =
+0px; PADDING-TOP: 2px; POSITION: relative; TEXT-ALIGN: right
+}
+.n-t1-e {
+	BORDER-RIGHT: blue 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: blue 1px =
+solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 2px; MARGIN: 0px; BORDER-LEFT: =
+blue 1px solid; PADDING-TOP: 2px; BORDER-BOTTOM: blue 0px solid; =
+POSITION: relative; TEXT-ALIGN: left
+}
+.n-t2-e {
+	BORDER-RIGHT: blue 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: blue 1px =
+solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 2px; MARGIN: 0px; BORDER-LEFT: =
+blue 1px solid; PADDING-TOP: 2px; BORDER-BOTTOM: blue 0px solid; =
+POSITION: relative; TEXT-ALIGN: left
+}
+.n-t3-e {
+	BORDER-RIGHT: blue 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: blue 1px =
+solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 2px; MARGIN: 0px; BORDER-LEFT: =
+blue 1px solid; PADDING-TOP: 2px; BORDER-BOTTOM: blue 0px solid; =
+POSITION: relative; TEXT-ALIGN: left
+}
+.n-t1-es {
+	BORDER-RIGHT: blue 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: blue 1px =
+solid; PADDING-LEFT: 5px; BACKGROUND: #ccf; PADDING-BOTTOM: 2px; MARGIN: =
+0px; BORDER-LEFT: blue 1px solid; PADDING-TOP: 2px; BORDER-BOTTOM: blue =
+0px solid; POSITION: relative; TEXT-ALIGN: left
+}
+.n-t2-es {
+	BORDER-RIGHT: blue 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: blue 1px =
+solid; PADDING-LEFT: 5px; BACKGROUND: #ccf; PADDING-BOTTOM: 2px; MARGIN: =
+0px; BORDER-LEFT: blue 1px solid; PADDING-TOP: 2px; BORDER-BOTTOM: blue =
+0px solid; POSITION: relative; TEXT-ALIGN: left
+}
+.n-t3-es {
+	BORDER-RIGHT: blue 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: blue 1px =
+solid; PADDING-LEFT: 5px; BACKGROUND: #ccf; PADDING-BOTTOM: 2px; MARGIN: =
+0px; BORDER-LEFT: blue 1px solid; PADDING-TOP: 2px; BORDER-BOTTOM: blue =
+0px solid; POSITION: relative; TEXT-ALIGN: left
+}
+.n-t1-v {
+	PADDING-RIGHT: 0px; DISPLAY: none; PADDING-LEFT: 0px; RIGHT: 0px; =
+BACKGROUND: #eee; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 100px; =
+PADDING-TOP: 0px; BORDER-BOTTOM: blue 1px solid; LIST-STYLE-TYPE: none; =
+POSITION: absolute; TOP: 100%
+}
+.n-t1-vr {
+	PADDING-RIGHT: 0px; DISPLAY: none; PADDING-LEFT: 0px; RIGHT: 0px; =
+BACKGROUND: #eee; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 100px; =
+PADDING-TOP: 0px; BORDER-BOTTOM: blue 1px solid; LIST-STYLE-TYPE: none; =
+POSITION: absolute; TOP: 100%
+}
+.n-t2 {
+	PADDING-RIGHT: 0px; DISPLAY: none; PADDING-LEFT: 0px; RIGHT: 100%; =
+BACKGROUND: #eee; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 120px; =
+PADDING-TOP: 0px; BORDER-BOTTOM: blue 1px solid; LIST-STYLE-TYPE: none; =
+POSITION: absolute; TOP: 0px
+}
+.n-t3 {
+	PADDING-RIGHT: 0px; DISPLAY: none; PADDING-LEFT: 0px; RIGHT: 100%; =
+BACKGROUND: #eee; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 120px; =
+PADDING-TOP: 0px; BORDER-BOTTOM: blue 1px solid; LIST-STYLE-TYPE: none; =
+POSITION: absolute; TOP: 0px
+}
+A:hover {
+	TEXT-DECORATION: underline
+}
+A.p-f-s:hover {
+	COLOR: black
+}
+.g-c-n:hover {
+	BACKGROUND: #eee
+}
+.g-c-s:hover {
+	BACKGROUND: #eee
+}
+.g-t-n:hover {
+	BACKGROUND: #acf
+}
+DIV.n-l A:hover {
+	COLOR: #336
+}
+DIV.g-sb A:hover {
+	BACKGROUND-COLOR: #ddd
+}
+UNKNOWN {
+	DISPLAY: block
+}
+UNKNOWN {
+	DISPLAY: block
+}
+UNKNOWN {
+	DISPLAY: block
+}
+LI.n-t1-e:hover {
+	BACKGROUND: #ccc
+}
+LI.n-t1-es:hover {
+	BACKGROUND: #ccc
+}
+LI.n-t2-e:hover {
+	BACKGROUND: #ccc
+}
+LI.n-t2-es:hover {
+	BACKGROUND: #ccc
+}
+LI.n-t3-e:hover {
+	BACKGROUND: #ccc
+}
+UNKNOWN {
+	DISPLAY: block
+}
+UNKNOWN {
+	DISPLAY: block
+}
+UNKNOWN {
+	DISPLAY: block
+}
+UNKNOWN {
+	DISPLAY: block
+}
+UNKNOWN {
+	DISPLAY: block
+}
+UNKNOWN {
+	DISPLAY: block
+}
+UNKNOWN {
+	DISPLAY: block
+}
+UNKNOWN {
+	DISPLAY: block
+}
+LI.n-l1-e:hover {
+	BACKGROUND: #ccc
+}
+LI.n-l2-e:hover {
+	BACKGROUND: #ccc
+}
+LI.n-l2-es:hover {
+	BACKGROUND: #ccc
+}
+LI.n-l3-e:hover {
+	BACKGROUND: #ccc
+}
+LI.n-l3-es:hover {
+	BACKGROUND: #ccc
+}
+LI.n-l4-e:hover {
+	BACKGROUND: #ccc
+}
+.adv {
+=09
+}
+.at {
+	FONT-SIZE: 9pt; MARGIN: 0px; TEXT-INDENT: 8px; FONT-FAMILY: =
+Verdana,sans-serif
+}
+.b-1 {
+	FONT-FAMILY: Verdana, sans-serif
+}
+.b-r {
+	BORDER-RIGHT: #336 0px solid; BORDER-TOP: #336 0px solid; BORDER-LEFT: =
+#336 1px solid; WIDTH: 150px; BORDER-BOTTOM: #336 0px solid
+}
+.b-l {
+	BORDER-RIGHT: #336 1px solid; BORDER-TOP: #336 0px solid; BORDER-LEFT: =
+#336 0px solid; WIDTH: 110px; BORDER-BOTTOM: #336 0px solid
+}
+.b-b {
+	PADDING-RIGHT: 1em; PADDING-LEFT: 1em; PADDING-BOTTOM: 0px; MARGIN: =
+2px; FONT: 9pt Verdana,Arial,, sans-serif; PADDING-TOP: 0px; =
+LIST-STYLE-TYPE: none
+}
+.b-b-s {
+	BORDER-RIGHT: black 1px solid; BORDER-TOP: black 1px solid; =
+BORDER-LEFT: black 1px solid; BORDER-BOTTOM: black 1px solid
+}
+LI.b-b-l {
+	VISIBILITY: hidden; MARGIN: 10px 0px
+}
+.b-b-a {
+	BORDER-RIGHT: black 1px solid; PADDING-RIGHT: 0.25em; BORDER-TOP: black =
+1px solid; PADDING-LEFT: 0px; BACKGROUND: #336; PADDING-BOTTOM: 0px; =
+BORDER-LEFT: black 1px solid; COLOR: white; PADDING-TOP: 0px; =
+BORDER-BOTTOM: black 1px solid; TEXT-DECORATION: none
+}
+A.b-b-a SPAN {
+	PADDING-RIGHT: 0.25em; PADDING-LEFT: 0.33em; BACKGROUND: white; =
+PADDING-BOTTOM: 0px; COLOR: #336; PADDING-TOP: 0px; TEXT-DECORATION: =
+none
+}
+.d {
+	FONT-SIZE: 9pt; MARGIN: 0px; FONT-FAMILY: Verdana,sans-serif
+}
+.dd {
+	BORDER-RIGHT: black 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: black =
+1px solid; PADDING-LEFT: 2px; FONT-SIZE: 9pt; BACKGROUND: cyan; LEFT: =
+0px; VISIBILITY: hidden; PADDING-BOTTOM: 2px; MARGIN: 0px; BORDER-LEFT: =
+black 1px solid; COLOR: black; PADDING-TOP: 2px; BORDER-BOTTOM: black =
+1px solid; FONT-FAMILY: Tahoma,sans-serif; POSITION: absolute; TOP: 0px
+}
+.f-d {
+	FONT-WEIGHT: bold
+}
+.f-bd {
+	FONT-WEIGHT: bold; FONT-SIZE: 12pt
+}
+.g-c-n {
+	BORDER-RIGHT: #ccc 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #ccc 1px =
+solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; FONT: 10pt "Courier =
+New",monospace; BORDER-LEFT: #ccc 5px solid; COLOR: black; PADDING-TOP: =
+5px; BORDER-BOTTOM: #ccc 1px solid; BACKGROUND-COLOR: #acf
+}
+.g-c-nm {
+	BORDER-RIGHT: #ccc 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #ccc 1px =
+solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; MARGIN: 0px 0px 0px 40px; =
+FONT: 10pt "Courier New",monospace; BORDER-LEFT: #ccc 5px solid; COLOR: =
+black; PADDING-TOP: 5px; BORDER-BOTTOM: #ccc 1px solid; =
+BACKGROUND-COLOR: #ddd
+}
+.g-c-s {
+	BORDER-RIGHT: #ccc 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #ccc 1px =
+solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; FONT: 8pt "Courier =
+New",monospace; BORDER-LEFT: #ccc 5px solid; COLOR: black; PADDING-TOP: =
+5px; BORDER-BOTTOM: #ccc 1px solid; BACKGROUND-COLOR: #acf
+}
+.codegray {
+	BORDER-RIGHT: #ccc 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #ccc 1px =
+solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; FONT: 8pt "Courier =
+New",monospace; BORDER-LEFT: #ccc 5px solid; COLOR: black; PADDING-TOP: =
+5px; BORDER-BOTTOM: #ccc 1px solid; BACKGROUND-COLOR: #acf
+}
+.g-e-t {
+	FONT-WEIGHT: normal
+}
+.g-e-d {
+	FONT-WEIGHT: normal
+}
+.g-f-n {
+	FONT: 10pt "Courier New", monospace
+}
+.g-h-n {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; FONT-WEIGHT: normal; FONT-SIZE: =
+10pt; BACKGROUND: #336; PADDING-BOTTOM: 4px; COLOR: white; PADDING-TOP: =
+4px
+}
+.g-h-ng {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; BACKGROUND: #9bf; =
+PADDING-BOTTOM: 4px; FONT: bold 10pt Verdana,sans-serif; COLOR: #336; =
+PADDING-TOP: 4px; TEXT-DECORATION: none
+}
+.section {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; BACKGROUND: #9bf; =
+PADDING-BOTTOM: 4px; FONT: bold 10pt Verdana,sans-serif; COLOR: #336; =
+PADDING-TOP: 4px; TEXT-DECORATION: none
+}
+.g-h-s {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; FONT-WEIGHT: bold; FONT-SIZE: =
+8pt; BACKGROUND: #336; PADDING-BOTTOM: 4px; COLOR: white; PADDING-TOP: =
+4px
+}
+.g-n {
+	COLOR: white; TEXT-DECORATION: none
+}
+.g-i1-n {
+	MARGIN: 5px 5px 5px 20px
+}
+.g-i2-n {
+	MARGIN: 5px 5px 5px 30px
+}
+.g-i3-n {
+	MARGIN: 5px 5px 5px 40px
+}
+.g-l-n {
+	LIST-STYLE-TYPE: none
+}
+.g-s-b {
+	BORDER-RIGHT: black 5px solid; BORDER-TOP: black 1px solid; =
+FONT-WEIGHT: bold; FONT-SIZE: 14pt; BACKGROUND: #eee; BORDER-LEFT: black =
+5px solid; COLOR: black; BORDER-BOTTOM: black 1px solid; FONT-FAMILY: =
+Verdana,sans-serif; TEXT-DECORATION: none
+}
+.g-sb-h1 {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; FONT-WEIGHT: bold; FONT-SIZE: =
+14pt; BACKGROUND: #336; PADDING-BOTTOM: 4px; COLOR: white; PADDING-TOP: =
+4px
+}
+.g-sb-h2 {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; FONT-WEIGHT: bold; FONT-SIZE: =
+10pt; BACKGROUND: #336; PADDING-BOTTOM: 2px; COLOR: white; PADDING-TOP: =
+2px
+}
+.g-sb-n {
+	FONT-SIZE: 8pt; MARGIN: 2px; COLOR: blue; LINE-HEIGHT: 150%
+}
+.g-s-n {
+	FONT-SIZE: 10pt; COLOR: black; BACKGROUND-COLOR: #eeeeee; =
+TEXT-DECORATION: none
+}
+.g-s-nr {
+	FONT-WEIGHT: bold; FONT-SIZE: 10pt; COLOR: white; FONT-FAMILY: =
+Verdana,sans-serif; BACKGROUND-COLOR: red; TEXT-DECORATION: none
+}
+.g-s-gn {
+	FONT-WEIGHT: bold; FONT-SIZE: 10pt; COLOR: black; FONT-FAMILY: =
+Verdana,sans-serif; BACKGROUND-COLOR: silver; TEXT-DECORATION: none
+}
+.g-t-n {
+	BORDER-RIGHT: #bbb 1px solid; PADDING-RIGHT: 3px; BORDER-TOP: #bbb 1px =
+solid; PADDING-LEFT: 3px; FONT-SIZE: 9pt; PADDING-BOTTOM: 3px; MARGIN: =
+7px; BORDER-LEFT: #bbb 5px solid; COLOR: black; PADDING-TOP: 3px; =
+BORDER-BOTTOM: #bbb 1px solid; BACKGROUND-COLOR: #eee
+}
+.gs-h {
+	FONT-WEIGHT: bold; FONT-SIZE: 28pt; COLOR: black; FONT-FAMILY: =
+Verdana,sans-serif; TEXT-DECORATION: none
+}
+.gs-m {
+	FONT-WEIGHT: bold; FONT-SIZE: 22pt; MARGIN-LEFT: 100px; COLOR: black; =
+FONT-FAMILY: Verdana,sans-serif; TEXT-DECORATION: none
+}
+.gs-f {
+	FONT-WEIGHT: normal; FONT-SIZE: 12pt; COLOR: black; FONT-FAMILY: =
+Verdana,sans-serif; TEXT-DECORATION: none
+}
+.h-b {
+	FONT-WEIGHT: bold; BACKGROUND: #ddd; COLOR: black
+}
+.i-2 {
+	BACKGROUND: url(../../images/info.gif) no-repeat left top
+}
+.i-3 {
+	BACKGROUND: url(../../../images/info.gif) no-repeat left top
+}
+.i-n {
+	BORDER-RIGHT: #bbb 0px solid; PADDING-RIGHT: 10px; BORDER-TOP: #bbb 3px =
+solid; PADDING-LEFT: 10px; FONT-SIZE: 10pt; PADDING-BOTTOM: 10px; =
+MARGIN: 10px 10px 10px 60px; BORDER-LEFT: #bbb 0px solid; PADDING-TOP: =
+10px; BORDER-BOTTOM: #bbb 3px solid
+}
+.i-h {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; MARGIN: 5px =
+5px 10px 60px; PADDING-TOP: 5px
+}
+.i-m-s {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; MARGIN: =
+0px; PADDING-TOP: 2px
+}
+.i-s {
+	BORDER-RIGHT: #bbb 0px solid; PADDING-RIGHT: 10px; BORDER-TOP: #bbb 3px =
+solid; PADDING-LEFT: 10px; FONT-SIZE: 8pt; PADDING-BOTTOM: 10px; MARGIN: =
+10px 10px 10px 60px; BORDER-LEFT: #bbb 0px solid; PADDING-TOP: 10px; =
+BORDER-BOTTOM: #bbb 3px solid
+}
+.n-b-l {
+	BORDER-RIGHT: #ccf 0px solid; PADDING-RIGHT: 0px; BORDER-TOP: #ccf 0px =
+solid; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; FONT: 1pt =
+Verdana, Arial, Helvetica, sans-serif; BORDER-LEFT: #ccf 0px solid; =
+PADDING-TOP: 0px; BORDER-BOTTOM: #ccf 1px solid
+}
+.n-l-s {
+	VISIBILITY: hidden; FONT: 8pt Verdana, Arial, Helvetica, sans-serif
+}
+.n-t0 {
+	FLOAT: right; COLOR: white; POSITION: relative
+}
+.n-t-t {
+	PADDING-RIGHT: 1px; PADDING-LEFT: 1px; PADDING-BOTTOM: 8px; MARGIN: =
+0px; COLOR: white; PADDING-TOP: 1px; TEXT-ALIGN: right
+}
+.p-b {
+	BACKGROUND: #eee; TEXT-INDENT: 3em
+}
+.p-m-ni {
+	FONT-SIZE: 10pt; FONT-STYLE: italic; FONT-FAMILY: Verdana,sans-serif
+}
+.navback {
+	FONT-WEIGHT: bold; FONT-SIZE: 10pt; BACKGROUND: white; COLOR: black; =
+FONT-FAMILY: Verdana,sans-serif; TEXT-DECORATION: none
+}
+.nav-top {
+	FONT-WEIGHT: bold; FONT-SIZE: 10pt; BACKGROUND: blue; COLOR: white; =
+FONT-FAMILY: Verdana,sans-serif; TEXT-DECORATION: none
+}
+.p-m-n {
+	FONT-SIZE: 10pt; FONT-FAMILY: Verdana, Helvetica, Arial, sans-serif
+}
+.norm {
+	FONT-SIZE: 10pt; FONT-FAMILY: Verdana, Helvetica, Arial, sans-serif
+}
+.p-m-s {
+	FONT: 8pt Verdana,Helvetica, Arial, sans-serif
+}
+.p-m-si {
+	FONT: italic 8pt Verdana, Helvetica, Arial, sans-serif
+}
+.p-m-sp {
+	BACKGROUND: white; FONT: 8pt Verdana,Helvetica, Arial, sans-serif
+}
+.q-i-2 {
+	BACKGROUND: url(../../images/quotes-open.gif) no-repeat left top
+}
+.q-s {
+	BORDER-RIGHT: #acf 0px solid; PADDING-RIGHT: 10px; BORDER-TOP: #acf 0px =
+solid; PADDING-LEFT: 10px; FONT-SIZE: 8pt; PADDING-BOTTOM: 10px; MARGIN: =
+10px 10px 10px 60px; BORDER-LEFT: #acf 6px solid; PADDING-TOP: 10px; =
+BORDER-BOTTOM: #acf 0px solid
+}
+.smallbold {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; FONT-FAMILY: Verdana, sans-serif
+}
+.t-dd:hover {
+	BACKGROUND: #ddd
+}
+.t-ba {
+	FONT-WEIGHT: bold; COLOR: #aaa
+}
+.t-gb {
+	BACKGROUND: #eee; COLOR: blue
+}
+.t-dr {
+	COLOR: red; TEXT-DECORATION: none
+}
+.t-dw {
+	COLOR: #666; TEXT-DECORATION: none
+}
+.t-td1-l {
+	BORDER-RIGHT: #ddd 0px solid; PADDING-RIGHT: 3px; BORDER-TOP: #ddd 5px =
+solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 8px; BORDER-LEFT: #ddd 0px =
+solid; PADDING-TOP: 3px; BORDER-BOTTOM: #ddd 0px solid
+}
+.t-td1 {
+	BORDER-RIGHT: #ddd 0px solid; PADDING-RIGHT: 3px; BORDER-TOP: #ddd 5px =
+solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 8px; BORDER-LEFT: #ddd 0px =
+solid; PADDING-TOP: 3px; BORDER-BOTTOM: #ddd 0px solid
+}
+.t-td2-l {
+	BORDER-RIGHT: #acf 0px solid; PADDING-RIGHT: 3px; BORDER-TOP: #acf 5px =
+solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 8px; BORDER-LEFT: #acf 0px =
+solid; PADDING-TOP: 3px; BORDER-BOTTOM: #acf 0px solid
+}
+.t-td2 {
+	BORDER-RIGHT: #acf 0px solid; PADDING-RIGHT: 3px; BORDER-TOP: #acf 5px =
+solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 8px; BORDER-LEFT: #acf 0px =
+solid; PADDING-TOP: 3px; BORDER-BOTTOM: #acf 0px solid
+}
+.t-m {
+	BACKGROUND: #ccc; COLOR: blue; TEXT-DECORATION: none
+}
+.vital {
+	FONT-SIZE: 12pt; BORDER-LEFT-COLOR: red; BORDER-BOTTOM-COLOR: red; =
+COLOR: black; BORDER-TOP-COLOR: red; FONT-FAMILY: Tahoma,Arial, =
+sans-serif; BACKGROUND-COLOR: #ddd; BORDER-RIGHT-COLOR: red
+}
+.w-2 {
+	BACKGROUND: url(../../images/warning.gif) no-repeat left top
+}
+.w-3 {
+	BORDER-RIGHT: #bbb 0px solid; BORDER-TOP: #bbb 3px solid; BACKGROUND: =
+url(../../../images/warning.gif) no-repeat left top; BORDER-LEFT: #bbb =
+0px solid; BORDER-BOTTOM: #bbb 3px solid
+}
+.l-l-fp {
+	Z-INDEX: 1001; LEFT: 0px; FONT: 8pt Tahoma, Arial,sans-serif; WIDTH: =
+120px; POSITION: absolute; TOP: 95px; TEXT-ALIGN: right
+}
+.l-l-fpn {
+	FONT: 8pt Verdana,Arial,sans-serif; WIDTH: 100%; POSITION: relative
+}
+.none {
+	BORDER-COLLAPSE: collapse
+}
+.none TD {
+	BORDER-TOP-WIDTH: 0px; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; =
+BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 0px; =
+PADDING-TOP: 0px; BORDER-RIGHT-WIDTH: 0px
+}
+.n-p-f {
+	PADDING-RIGHT: 5px; BACKGROUND: white; FONT: 9pt/16pt =
+Verdana,Arial,sans-serif; WIDTH: 120px; COLOR: #336; TEXT-ALIGN: right; =
+TEXT-DECORATION: none
+}
+.n-p-f:hover {
+	BACKGROUND: #ccc; COLOR: blue; TEXT-INDENT: 0px
+}
+.n-p-f UL {
+	DISPLAY: block; POSITION: absolute
+}
+.n-p-f LI {
+	DISPLAY: block; POSITION: relative
+}
+.n-p-f A {
+	DISPLAY: none; FONT-SIZE: 8pt; Z-INDEX: 1000; TEXT-INDENT: 5px; =
+TEXT-ALIGN: left
+}
+.n-p-f:hover .n-l2 {
+	BORDER-RIGHT: blue 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: blue 1px =
+solid; DISPLAY: block; PADDING-LEFT: 0px; Z-INDEX: 1000; LEFT: 100%; =
+PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-LEFT: blue 1px solid; WIDTH: =
+120px; PADDING-TOP: 0px; BORDER-BOTTOM: blue 0px solid; LIST-STYLE-TYPE: =
+none; POSITION: absolute; TOP: 0px
+}
+.n-p-f:hover .n-l2 .n-l2-e {
+	DISPLAY: block; Z-INDEX: 1000
+}
+.n-p-f:hover .n-l2 .n-l2-es {
+	DISPLAY: block; Z-INDEX: 1000
+}
+.n-p-f:hover .n-l2 .n-l2-e .t-dn {
+	BORDER-RIGHT: blue 0px solid; PADDING-RIGHT: 0px; BORDER-TOP: blue 0px =
+solid; DISPLAY: block; PADDING-LEFT: 0px; Z-INDEX: 1000; BACKGROUND: =
+#eee; PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-LEFT: blue 0px solid; =
+COLOR: black; PADDING-TOP: 0px; BORDER-BOTTOM: blue 1px solid; HEIGHT: =
+15px; TEXT-DECORATION: none
+}
+.n-p-f:hover .n-l2 .n-l2-es .t-dn {
+	BORDER-RIGHT: blue 0px solid; PADDING-RIGHT: 0px; BORDER-TOP: blue 0px =
+solid; DISPLAY: block; PADDING-LEFT: 0px; Z-INDEX: 1000; BACKGROUND: =
+#eee; PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-LEFT: blue 0px solid; =
+COLOR: black; PADDING-TOP: 0px; BORDER-BOTTOM: blue 1px solid; HEIGHT: =
+15px; TEXT-DECORATION: none
+}
+.n-p-f:hover .n-l2 .n-l2-e .t-dn:hover {
+	Z-INDEX: 1000; BACKGROUND: #ccc; COLOR: blue
+}
+.n-p-f:hover .n-l2 .n-l2-es .t-dn:hover {
+	Z-INDEX: 1000; BACKGROUND: #ccc; COLOR: blue
+}
+.n-l2 {
+	DISPLAY: none
+}
+.t-dn {
+	DISPLAY: none
+}
+.n-l2-e {
+	DISPLAY: none
+}
+.n-l3 {
+	PADDING-RIGHT: 0px; DISPLAY: none; PADDING-LEFT: 0px; BACKGROUND: #eee; =
+LEFT: 100%; PADDING-BOTTOM: 0px; MARGIN: 0px; FONT: 8pt =
+Verdana,Helvetica, Arial, sans-serif; WIDTH: 120px; PADDING-TOP: 0px; =
+BORDER-BOTTOM: blue 1px solid; LIST-STYLE-TYPE: none; POSITION: =
+absolute; TOP: 0px
+}
+.n-l4 {
+	PADDING-RIGHT: 0px; DISPLAY: none; PADDING-LEFT: 0px; BACKGROUND: #eee; =
+LEFT: 100%; PADDING-BOTTOM: 0px; MARGIN: 0px; FONT: 8pt =
+Verdana,Helvetica, Arial, sans-serif; WIDTH: 120px; PADDING-TOP: 0px; =
+BORDER-BOTTOM: blue 1px solid; LIST-STYLE-TYPE: none; POSITION: =
+absolute; TOP: 0px
+}
+.n-l3-e {
+	BORDER-RIGHT: blue 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: blue 1px =
+solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 2px; MARGIN: 0px; BORDER-LEFT: =
+blue 1px solid; PADDING-TOP: 2px; BORDER-BOTTOM: blue 0px solid; =
+POSITION: relative; TEXT-ALIGN: left
+}
+.n-l4-e {
+	BORDER-RIGHT: blue 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: blue 1px =
+solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 2px; MARGIN: 0px; BORDER-LEFT: =
+blue 1px solid; PADDING-TOP: 2px; BORDER-BOTTOM: blue 0px solid; =
+POSITION: relative; TEXT-ALIGN: left
+}
+.n-l3-es {
+	BORDER-RIGHT: blue 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: blue 1px =
+solid; PADDING-LEFT: 5px; BACKGROUND: #ccf; PADDING-BOTTOM: 2px; MARGIN: =
+0px; BORDER-LEFT: blue 1px solid; PADDING-TOP: 2px; BORDER-BOTTOM: blue =
+0px solid; POSITION: relative; TEXT-ALIGN: left
+}
+.n-l4-es {
+	BORDER-RIGHT: blue 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: blue 1px =
+solid; PADDING-LEFT: 5px; BACKGROUND: #ccf; PADDING-BOTTOM: 2px; MARGIN: =
+0px; BORDER-LEFT: blue 1px solid; PADDING-TOP: 2px; BORDER-BOTTOM: blue =
+0px solid; POSITION: relative; TEXT-ALIGN: left
+}
+LI.n-l1-e:hover {
+	BACKGROUND: #ccc
+}
+LI.n-l1-e:hover .n-l2 {
+	BORDER-RIGHT: blue 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: blue 1px =
+solid; DISPLAY: block; PADDING-LEFT: 0px; LEFT: 100%; PADDING-BOTTOM: =
+0px; MARGIN: 0px; BORDER-LEFT: blue 1px solid; WIDTH: 120px; =
+PADDING-TOP: 0px; BORDER-BOTTOM: blue 0px solid; POSITION: absolute; =
+TOP: 0px
+}
+LI.n-l1-e:hover .n-l2 .n-l2-e {
+	DISPLAY: block
+}
+LI.n-l1-e:hover .n-l2 .n-l2-es {
+	DISPLAY: block
+}
+LI.n-l1-e:hover .n-l2 .n-l2-e .t-dn {
+	BORDER-RIGHT: blue 0px solid; PADDING-RIGHT: 0px; BORDER-TOP: blue 0px =
+solid; DISPLAY: block; PADDING-LEFT: 0px; BACKGROUND: #eee; =
+PADDING-BOTTOM: 0px; MARGIN: 0px; FONT: 7pt Verdana, sans-serif; =
+BORDER-LEFT: blue 0px solid; WIDTH: 100%; COLOR: black; TEXT-INDENT: =
+5px; PADDING-TOP: 0px; BORDER-BOTTOM: blue 1px solid; HEIGHT: 15px; =
+TEXT-ALIGN: left
+}
+LI.n-l1-e:hover .n-l2 .n-l2-es .t-dn {
+	BORDER-RIGHT: blue 0px solid; PADDING-RIGHT: 0px; BORDER-TOP: blue 0px =
+solid; DISPLAY: block; PADDING-LEFT: 0px; BACKGROUND: #ccf; =
+PADDING-BOTTOM: 0px; MARGIN: 0px; FONT: 7pt Verdana, sans-serif; =
+BORDER-LEFT: blue 0px solid; WIDTH: 100%; COLOR: black; TEXT-INDENT: =
+5px; PADDING-TOP: 0px; BORDER-BOTTOM: blue 1px solid; HEIGHT: 15px; =
+TEXT-ALIGN: left
+}
+LI.n-l1-e .n-l2 .n-l2-e .t-dn:hover {
+	BACKGROUND: #ccc
+}
+LI.n-l1-e .n-l2 .n-l2-es .t-dn:hover {
+	BACKGROUND: #ccc
+}
+.v-f {
+	DISPLAY: none
+}
+.v-o {
+	DISPLAY: block
+}
+.n-l-f A {
+	COLOR: #336
+}
+.g-b-n {
+	BORDER-RIGHT: #ccc 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #ccc 1px =
+solid; PADDING-LEFT: 5px; BACKGROUND: #eee; PADDING-BOTTOM: 5px; FONT: =
+10pt "Courier New",monospace; BORDER-LEFT: #ccc 5px solid; PADDING-TOP: =
+5px; BORDER-BOTTOM: #ccc 1px solid
+}
+.g-b-s {
+	BORDER-RIGHT: #ccc 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #ccc 1px =
+solid; PADDING-LEFT: 5px; BACKGROUND: #eee; PADDING-BOTTOM: 5px; FONT: =
+8pt "Courier New",monospace; BORDER-LEFT: #ccc 5px solid; PADDING-TOP: =
+5px; BORDER-BOTTOM: #ccc 1px solid
+}
+.g-sb {
+	WIDTH: 150px; FONT-FAMILY: Verdana, sans-serif
+}
+.jp-h-n {
+	BACKGROUND: #eeeeee; LEFT: 0px; VISIBILITY: hidden; FONT: 10pt =
+Verdana,sans-serif; COLOR: blue; TEXT-INDENT: 4px; POSITION: absolute; =
+TOP: 0px; TEXT-DECORATION: none
+}
+.l-b {
+	BORDER-TOP-WIDTH: 0px; PADDING-RIGHT: 5px; PADDING-LEFT: 5%; =
+BORDER-LEFT-WIDTH: 0px; Z-INDEX: 9; BACKGROUND: #336; =
+BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px 0px 5px; =
+FONT: 8pt Verdana, Arial, Helvetica, sans-serif; COLOR: white; =
+PADDING-TOP: 5px; HEIGHT: 45px; BORDER-RIGHT-WIDTH: 0px
+}
+.l-b-fp {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5%; Z-INDEX: 9; BACKGROUND: white; =
+PADDING-BOTTOM: 0px; MARGIN: 0px 0px 5px; FONT: 8pt Verdana, Arial, =
+Helvetica, sans-serif; COLOR: #ccf; PADDING-TOP: 5px; HEIGHT: 88px
+}
+.l-c-i {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; WIDTH: =
+100%; PADDING-TOP: 10px
+}
+.l-r-fp {
+	Z-INDEX: 2; RIGHT: 6px; WIDTH: 150px; POSITION: absolute; TOP: 120px
+}
+.n-p-n {
+	BORDER-RIGHT: #336 1px solid; BORDER-TOP: #336 1px solid; BACKGROUND: =
+#eee; FONT: 9pt/16pt Verdana,sans-serif; BORDER-LEFT: #336 1px solid; =
+COLOR: #336; TEXT-INDENT: 6px; BORDER-BOTTOM: #336 1px solid
+}
+.n-p-n A {
+	DISPLAY: block; TEXT-INDENT: 6px; TEXT-DECORATION: none
+}
+.n-p-n A:hover {
+	BACKGROUND: #ccc
+}
+.n-p-o {
+	BACKGROUND: #eeeeee; FONT: 10pt Verdana,sans-serif; COLOR: blue; =
+HEIGHT: 16pt; TEXT-DECORATION: none
+}
+.n-l {
+	BACKGROUND: #eee; LEFT: 6px; FONT: 8pt Verdana,sans-serif; WIDTH: =
+110px; POSITION: fixed; TOP: 60px
+}
+.n-l-u {
+	BACKGROUND: #eee; LEFT: 6px; FONT: 8pt Verdana,sans-serif; WIDTH: =
+110px; TOP: 60px
+}
+.n-l-f {
+	FONT-SIZE: 9pt; MARGIN: 2px; LINE-HEIGHT: 1.2em; TEXT-ALIGN: right
+}
+.n-l-l {
+	COLOR: black; TEXT-ALIGN: right
+}
+.n-t-b {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: #336; =
+PADDING-BOTTOM: 0px; MARGIN: 0px; FONT: 8pt Verdana,sans-serif; COLOR: =
+white; PADDING-TOP: 0px; HEIGHT: 44px; TEXT-DECORATION: none
+}
+.n-t-i {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: white; =
+PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 8px
+}
+.n-t-n {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: =
+0px; FONT: 10pt Verdana,sans-serif; COLOR: #336; PADDING-TOP: 0px; =
+TEXT-DECORATION: none
+}
+.n-t-s {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: #336; =
+PADDING-BOTTOM: 0px; MARGIN: 0px; FONT: 8pt Verdana,sans-serif; COLOR: =
+white; PADDING-TOP: 0px; TEXT-DECORATION: none
+}
+.p-b-h {
+	VISIBILITY: hidden
+}
+.p-n-h {
+	BACKGROUND: #eee; LEFT: 0px; VISIBILITY: hidden; FONT: 10pt =
+Verdana,sans-serif; COLOR: blue; TEXT-INDENT: 4px; POSITION: absolute; =
+TOP: 0px; TEXT-DECORATION: none
+}
+.p-f-s {
+	BACKGROUND: white; FONT: 8pt Verdana,Helvetica, Arial,sans-serif; =
+COLOR: silver; TEXT-DECORATION: none
+}
+.t-db {
+	COLOR: blue; TEXT-DECORATION: none
+}
+.t-dd {
+	COLOR: blue; TEXT-DECORATION: none
+}
+.w-db {
+	COLOR: blue; TEXT-DECORATION: none
+}
+</STYLE>
+
+<STYLE type=3Dtext/css media=3Dprint>.l-l {
+	DISPLAY: none
+}
+.l-r {
+	DISPLAY: none
+}
+.l-c {
+	BORDER-TOP-WIDTH: 0px; PADDING-RIGHT: 10px; PADDING-LEFT: 10px; =
+BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 5px; =
+MARGIN: 0px; WIDTH: 600px; PADDING-TOP: 30px; BORDER-RIGHT-WIDTH: 0px
+}
+.l-f {
+	MARGIN: 5px
+}
+.n-t-t {
+	DISPLAY: none
+}
+.n-t0 {
+	DISPLAY: none
+}
+.adv {
+	DISPLAY: none
+}
+</STYLE>
+
+<SCRIPT language=3DJavaScript type=3Dtext/javascript>=0A=
+<!--=0A=
+// copyright ZYTRAX, Inc. 1994 - 2003=0A=
+// you may use this javascript code at your own risk.=0A=
+// we would like you to keep the copyright statement intact but don't =
+insist on it.=0A=
+// If you make improvements mail us a copy or make it available on your =
+own web site.=0A=
+// global variables=0A=
+		var topall =3D new Array(2);=0A=
+		var lownav =3D new Array(2);=0A=
+		var lowpop =3D new Array(2);=0A=
+		var rightnav =3D new Array(2);=0A=
+		var rightpop =3D new Array(2);=0A=
+		var x =3D 0;	// global menu level=0A=
+		var way =3D 'h';=0A=
+		var menu =3D null;=0A=
+		var menus =3D null;=0A=
+		var pop1 =3D new Array(2);=0A=
+=0A=
+// -- IE specific code=0A=
+	=0A=
+function lock(num)=0A=
+{=0A=
+	// lock relies on a style which end with -l=0A=
+	rollover =3D document.all["l" + num];=0A=
+	if(rollover)=0A=
+	{=0A=
+  	cn =3D rollover.className=0A=
+  	if((pos =3D cn.lastIndexOf("-")) !=3D -1)=0A=
+  	{=0A=
+  		bcn =3D cn.substring(0,pos + 1);=0A=
+  		scn =3D cn.substring(pos +1);=0A=
+  		if(scn =3D=3D "f" || scn =3D=3D "o")=0A=
+  		{=0A=
+  			rollover.className =3D bcn + "l";=0A=
+  		}=0A=
+  	}=0A=
+  }=0A=
+}=0A=
+=0A=
+function expand(cid,img){=0A=
+ // expand hidden div cid =3D div class name, img =3D id=0A=
+ var io =3D document.getElementById(img); =0A=
+}=0A=
+function gotourl($url)=0A=
+{=0A=
+	window.location =3D $url;=0A=
+}=0A=
+function mailus(mbox,stub,subject)=0A=
+{=0A=
+	mail =3D "mailto:"+mbox+"@"+stub;=0A=
+	if(subject !=3D ""){=0A=
+		mail =3D mail+"?SUBJECT=3D"+"A-M: "+subject;=0A=
+	}=0A=
+	window.location =3D mail;=0A=
+	return;=0A=
+}=0A=
+=0A=
+// -- IE specific code=0A=
+function pop(p,s,axis)=0A=
+{=0A=
+	// p =3D menu level=0A=
+	// s =3D object id number to be made visible=0A=
+	// axis =3D v or h=0A=
+	way =3D axis;=0A=
+	x =3D p;	// save index=0A=
+	if(p !=3D 0)=0A=
+	{=0A=
+		pop1[x] =3D document.all["t" + s];=0A=
+		if(pop1[x])=0A=
+		{=0A=
+			// pop the next level=0A=
+			topall[x] =3D topall[0];=0A=
+			rightnav[x] =3D rightpop[0]-8;=0A=
+			lowpop[x] =3D (topall[x] + pop1[x].clientHeight) -4;=0A=
+			rightpop[x] =3D rightnav[x] + pop1[x].clientWidth;=0A=
+			pop1[x].style.left =3D (rightnav[x]-2)+"px";=0A=
+			pop1[x].style.top =3D (topall[x]-4)+"px";=0A=
+			pop1[x].style.visibility =3D "visible"; =0A=
+		}=0A=
+		return;=0A=
+	}=0A=
+	popclean(s, axis);	// kill all others=0A=
+	menu =3D document.all["p" + s];=0A=
+	if(menu)=0A=
+	{=0A=
+  	pop1[x] =3D document.all["h" + s];=0A=
+  	if(way =3D=3D "v")=0A=
+  	{=0A=
+  		// vertical popop=0A=
+  		topall[x] =3D menu.offsetTop + 12;=0A=
+  		rightnav[x] =3D menu.offsetLeft + logo.clientWidth + =
+pagetop.offsetLeft + 2;=0A=
+  		lownav[x] =3D topall[x] + menu.clientHeight - 4;=0A=
+  		lowpop[x] =3D topall[x] + pop1[x].clientHeight+ 2;=0A=
+  		rightpop[x] =3D rightnav[x] + pop1[x].clientWidth;=0A=
+  		pop1[x].style.top =3D topall[x];=0A=
+  		pop1[x].style.left =3D rightnav[x] -2;=0A=
+  	}=0A=
+  	else=0A=
+  	{=0A=
+  		// horizontal pop-up=0A=
+  		menus =3D document.all["s" + s];=0A=
+  		topall[x] =3D menu.offsetTop +  menutop.offsetTop + 4;=0A=
+  		rightnav[x] =3D menu.clientWidth;=0A=
+  		lownav[x] =3D topall[x] + menu.clientHeight - 4;=0A=
+  		lowpop[x] =3D topall[x] + pop1[x].clientHeight - 4;=0A=
+  		rightpop[x] =3D rightnav[x] + pop1[x].clientWidth;=0A=
+  		pop1[x].style.top =3D topall[x] -4;=0A=
+  		pop1[x].style.left =3D rightnav[x];=0A=
+  	}=0A=
+  	// save the clipping area for mouseover (popdown)=0A=
+  	pop1[x].style.visibility =3D "visible";=0A=
+  	cn =3D menu.className=0A=
+  	if((pos =3D cn.lastIndexOf("-")) !=3D -1)=0A=
+  	{=0A=
+  		bcn =3D cn.substring(0,pos + 1);=0A=
+  		scn =3D cn.substring(pos +1);=0A=
+  		if(scn =3D=3D 'f')=0A=
+  		{=0A=
+  			menu.className =3D bcn + "o";=0A=
+  			if(way =3D=3D 'h') menus.className =3D bcn + "o";=0A=
+  		}=0A=
+  	}=0A=
+	}=0A=
+}=0A=
+function swapout()=0A=
+{=0A=
+	h =3D event.clientX=0A=
+	if (h =3D=3D -1) h =3D 0;=0A=
+	h =3D h + document.body.scrollLeft;=0A=
+	v =3D event.clientY =0A=
+	if (v =3D=3D -1)=0A=
+	{=0A=
+		v =3D topall;=0A=
+	}=0A=
+	else=0A=
+	{=0A=
+		v =3D v + document.body.scrollTop;=0A=
+	}=0A=
+	// are we still in area=0A=
+	for(i =3D x+1;i > 0; i--)=0A=
+	{=0A=
+		if(clip(h,v) =3D=3D true)=0A=
+		{=0A=
+			return true;	// still OK=0A=
+		}=0A=
+		// out of one area=0A=
+		unpop();=0A=
+		x--;	// decrement index=0A=
+	}=0A=
+	return true;=0A=
+}=0A=
+function clip(h,v)=0A=
+{=0A=
+	if (h < rightpop[x] && h > rightnav[x])=0A=
+	{=0A=
+		// left=0A=
+		if (v > topall[x] && v < lowpop[x])=0A=
+		{=0A=
+			return true;=0A=
+		}=0A=
+	}=0A=
+	else=0A=
+	{=0A=
+		// alert("h=3D"+h+" rn=3D"+rightnav[x]);=0A=
+	}=0A=
+	return false;=0A=
+}=0A=
+function unpop()=0A=
+{=0A=
+	// out of area=0A=
+	pop1[x].style.visibility =3D "hidden";=0A=
+	if(x) return;	// return if index non-zero=0A=
+	cn =3D menu.className=0A=
+	if((pos =3D cn.lastIndexOf("-")) !=3D -1)=0A=
+	{=0A=
+		bcn =3D cn.substring(0,pos + 1);=0A=
+		scn =3D cn.substring(pos +1);=0A=
+		if(scn =3D=3D 'o')=0A=
+		{=0A=
+			menu.className =3D bcn + "f";=0A=
+			if(way =3D=3D 'h') menus.className =3D bcn + "f";=0A=
+		}=0A=
+	}=0A=
+}=0A=
+function popclean(s, axis)=0A=
+{=0A=
+	way =3D axis;=0A=
+// ensure that everything except 's' is invisible and 'off'=0A=
+	for(i=3D0;i < 10; i++)=0A=
+	{=0A=
+		if(i !=3D s)=0A=
+		{=0A=
+			o1 =3D document.all["p" + i];=0A=
+			if(o1)=0A=
+			{=0A=
+  			cn =3D o1.className=0A=
+  			if((pos =3D cn.lastIndexOf("-")) !=3D -1)=0A=
+  			{=0A=
+  				bcn =3D cn.substring(0,pos + 1);=0A=
+  				scn =3D cn.substring(pos +1);=0A=
+  				if(scn =3D=3D 'o')=0A=
+  				{=0A=
+  					o1.className =3D bcn + "f";=0A=
+  					if(way =3D=3D'h')=0A=
+  					{=0A=
+  						o3 =3D document.all["s" + i];=0A=
+  					 	o3.className =3D bcn + "f";=0A=
+  					}=0A=
+  				}=0A=
+  			}=0A=
+  			o2 =3D document.all["h" + i];=0A=
+  			o2.style.visibility =3D "hidden";=0A=
+			}=0A=
+		}=0A=
+	}=0A=
+}=0A=
+=0A=
+=0A=
+//-->=0A=
+</SCRIPT>
+</HEAD>
+<BODY><!-- Page Header plus top nav bar -->
+<TABLE class=3Dn-t-b id=3Dpagetop cellSpacing=3D0 cellPadding=3D0 =
+width=3D"100%"=20
+align=3Dcenter border=3D0>
+  <TBODY>
+  <TR class=3Dn-t-s vAlign=3Dbottom>
+    <TD class=3Dn-t-s id=3Dlogo><A href=3D"http://www.zytrax.com/"><IMG=20
+      alt=3D"ZYTRAX OPEN LOGO"=20
+      src=3D"http://www.zytrax.com/images/zytrax-open-dark-cut.gif"=20
+    border=3D0></A></TD>
+    <TD class=3Dn-t-s align=3Dright><A class=3Dn-t-s=20
+      href=3D"http://www.zytrax.com/feedback.htm">mail us</A> =
+&nbsp;|&nbsp; <A=20
+      class=3Dn-t-s href=3D"http://www.zytrax.com/run/mailpage.php">mail =
+this=20
+      page</A><BR><BR><A class=3Dn-t-s id=3Dp3 =
+onmouseover=3D"pop(0,3,'v')"=20
+      onmouseout=3Dswapout() =
+href=3D"http://www.zytrax.com/products/">products</A>=20
+      &nbsp;|&nbsp; <A class=3Dn-t-s id=3Dp5 =
+onmouseover=3D"pop(0,5,'v')"=20
+      onmouseout=3Dswapout() =
+href=3D"http://www.zytrax.com/Company/">company</A>=20
+      &nbsp;|&nbsp; <A class=3Dn-t-s id=3Dp7 =
+onmouseover=3D"pop(0,7,'v')"=20
+      onmouseout=3Dswapout() =
+href=3D"http://www.zytrax.com/support/">support</A>=20
+      &nbsp;|&nbsp; <A class=3Dn-t-s id=3Dp6 =
+onmouseover=3D"pop(0,6,'v')"=20
+      onmouseout=3Dswapout() =
+href=3D"http://www.zytrax.com/download/">downloads</A>=20
+      &nbsp;|&nbsp; <A class=3Dn-t-s onmouseover=3D"pop(0,15,'v')"=20
+      href=3D"http://www.zytrax.com/isp/">isp services</A> &nbsp;|&nbsp; =
+<A=20
+      class=3Dn-t-s =
+href=3D"http://www.zytrax.com/Company/contacts.html">contact=20
+      us</A> </TD></TR></TBODY></TABLE>
+<P class=3Dn-t-i><IMG alt=3D"ZYTRAX OPEN LOGO"=20
+src=3D"http://www.zytrax.com/images/zytrax-open-dark-i.gif" =
+border=3D0></P><!-- begin body table -->
+<DIV class=3Dl-c>
+<DIV class=3Dl-100>
+<P align=3Dcenter>
+<SCRIPT type=3Dtext/javascript><!--=0A=
+google_ad_client =3D "pub-9419480011552853";=0A=
+/* DNS_Guide */=0A=
+google_ad_slot =3D "0617963648";=0A=
+google_ad_width =3D 468;=0A=
+google_ad_height =3D 60;=0A=
+google_ad_format =3D "468x60_as";=0A=
+google_ad_type =3D "text";=0A=
+google_ad_channel =3D "";=0A=
+google_color_border =3D "000000";=0A=
+google_color_bg =3D "C3D9FF";=0A=
+google_color_link =3D "000000";=0A=
+google_color_text =3D "000000";=0A=
+google_color_url =3D "008000";=0A=
+//-->=0A=
+</SCRIPT>
+
+<SCRIPT src=3D"http://pagead2.googlesyndication.com/pagead/show_ads.js"=20
+type=3Dtext/javascript>=0A=
+</SCRIPT>
+
+<SCRIPT type=3Dtext/javascript><!--=0A=
+google_ad_client =3D "pub-9419480011552853";=0A=
+google_ad_width =3D 468;=0A=
+google_ad_height =3D 15;=0A=
+google_ad_format =3D "468x15_0ads_al_s";=0A=
+google_ad_channel =3D "";=0A=
+google_color_border =3D "000000";=0A=
+google_color_bg =3D "FFFFFF";=0A=
+google_color_link =3D "333333";=0A=
+google_color_text =3D "000000";=0A=
+google_color_url =3D "008000";=0A=
+//-->=0A=
+</SCRIPT>
+
+<SCRIPT src=3D"http://pagead2.googlesyndication.com/pagead/show_ads.js"=20
+type=3Dtext/javascript>=0A=
+</SCRIPT>
+</P>
+<H1><A name=3Dcontents></A>Chapter 5. BIND (Berkeley Internet Name =
+Domain)</H1>
+<DIV class=3Dg-i1-n>
+<P>This chapter describes HOWTO install BIND 9.3.x on a variety of OS =
+Platforms=20
+as well as BIND's command line arguments. Finally - BIND runs as the =
+daemon=20
+<B>named</B> on *nix systems and named.exe under Windows.</P>
+<P><B>Note:</B> The following notes also apply to BIND 9.4.x with the =
+single=20
+exception that since BIND 9.3.2 NT 4.0 is no longer supported while =
+Windows XP=20
+and Server 2003 have been added to BIND's supported platforms.</P>
+<UL style=3D"LIST-STYLE-TYPE: none">
+  <LI>
+  <P><A class=3Dt-db =
+href=3D"http://www.zytrax.com/books/dns/ch5/#fbsd">FreeBSD=20
+  Install (4.x, 5.x and 6.x)</A></P>
+  <LI>
+  <P><A class=3Dt-db =
+href=3D"http://www.zytrax.com/books/dns/ch5/#fc2">Linux Install=20
+  (Fedora Core 2)</A></P>
+  <LI>
+  <P><A class=3Dt-db =
+href=3D"http://www.zytrax.com/books/dns/ch5/win2k.html">Windows=20
+  Install (Win2K and NT 4.0)</A></P>
+  <LI>
+  <P><A class=3Dt-db =
+href=3D"http://www.zytrax.com/books/dns/ch5/#command-line">BIND=20
+  Command Line Arguments</A></P></LI></UL></DIV>
+<H2><A name=3Dfbsd></A>FreeBSD Installation</H2>
+<DIV class=3Dg-i1-n>
+<P>FreeBSD 4.x and 5.1 ships with BIND version 8.x as the default or =
+base=20
+installation. FreeBSD 5.3 - the first of the stable 5.x series - ships =
+with BIND=20
+9.3.0 and some annoying traits. FreeBSD 6.2 ships with BIND 9.4.1 as the =
+base=20
+installation.</P>
+<P>FreeBSD differentiates between a base DNS install and a normal DNS =
+install.=20
+There are some serious choices to be made when installing from the ports =
+system.=20
+We assume the theory behind this is to enable experimentation with the =
+new=20
+software but with the ability to return to the original DNS software by =
+changing=20
+configuration options in the rc.conf file if things get a bit =
+wobbly.</P>
+<P>You can either install BIND 9 <I>as well as</I> the default BIND 8 or =
+9=20
+installation or you can replace the base version. The base version is =
+installed=20
+in /usr/sbin (and the tools in /usr/bin) whereas a normal (non-base) =
+ports=20
+installation is made to /usr/local/sbin (and the tools to =
+/usr/local/bin).=20
+Finally the base version assumes the named.conf file in =
+/etc/namedb/named.conf=20
+whereas a non-base install assumes /usr/local/etc/named.conf.</P>
+<P><B>Notes:</B></P>
+<OL>
+  <LI>On our very <I>dirty</I> FreeBSD 4.x test system - we have done a =
+lot of=20
+  very naughty things to this poor system none of them deliberately! - =
+we failed=20
+  to get Bind9 to install initially. The DNS make kept failing with =
+undefined's=20
+  during compilations in exotic modules caused by incompletely generated =
+header=20
+  files - created by the <I>gen</I> program which is in turn built =
+during the=20
+  install! We eventually tracked the problem to an install of=20
+  /usr/local/lib/libnsl which was causing the installation to assume a =
+linux=20
+  base and hence the <I>gen</I> program failed to generate the headers=20
+  correctly. We deleted the library (it's not normally installed in =
+FreeBSD)=20
+  re-ran and all was well again. The Bind9 build process is really =
+rather=20
+  horrible we have concluded. Maybe its all essential but complex man, =
+complex.=20
+  Still it forced us to find out more about autoconf and configure and =
+automake=20
+  and make and gmake... We had to take a couple of days off work to =
+recover.=20
+  </LI></OL>
+<H3>BIND 9 non-base install</H3>
+<P>Assuming you have updated the ports-dns collection proceed as =
+normal:</P><PRE class=3Dg-c-n>cd /usr/ports/dns/bind9
+make install clean
+</PRE>
+<P>The above sequence installs BIND9 in /usr/local/sbin and the tools in =
+
+/usr/local/bin and assumes the named.conf file is in /usr/local/etc.</P>
+<P>If you want to run BIND9 at startup you must edit /etc/rc.conf as=20
+follows:</P><PRE class=3Dg-c-n># add following line if not present
+named_enable=3D"YES"
+# the line below must replace the line named_program=3D"/usr/sbin/named' =
+if present=20
+# otherwise add it
+named_program=3D"/usr/local/sbin/named"
+</PRE>
+<P>Either copy your named.conf file from /etc/namedb to /usr/local/etc =
+before=20
+you restart Bind or create a new version of the file in this =
+directory.</P>
+<P>To use the BIND9 tools you must precede the command with the BIND9 =
+tool=20
+directory path e.g. </P><PRE class=3Dg-c-n>=20
+# this will run the installed Bind9 version
+/usr/local/bin/dig example.com any
+# but this command
+dig example.com
+# this will run the base dig version
+# 4.x and 5.1 =3D Bind 8, 5.3 =3D Bind 9.3.0
+dig example.com
+</PRE>
+<H3>BIND 9 replace base install</H3>
+<P>This assumes you either want to run the latest version of BIND as the =
+base=20
+system - replacing the exiting BIND - or a new install with Bind 9 as =
+the base=20
+system. Assuming you have updated the ports-dns collection proceed as=20
+follows:</P><PRE class=3Dg-c-n>cd /usr/ports/dns/bind9
+make PORT_REPLACES_BASE_BIND9=3Dyes install clean
+</PRE>
+<P><B>Note:</B> BIND 9.3.1+ installation has changed the above value to=20
+WITH_PORT_REPLACES_BASE_BIND9=3Dyes. Other than to screw everyone up =
+it's not=20
+clear why this has been done - perhaps a desire to be consistent with =
+other=20
+options which mostly start with WITH_ - if you get the drift.</P>
+<P>The above sequence installs BIND9 in /usr/sbin and the tools in =
+/usr/bin.</P>
+<P>If you want to run BIND9 at startup you may need to edit /etc/rc.conf =
+as=20
+follows:</P><PRE class=3Dg-c-n># add following line if not present
+named_enable=3D"YES"
+# add the line following line if not present
+named_program=3D"/usr/sbin/named"
+</PRE>
+<P>No special action is required to run BIND9 tools:</P><PRE =
+class=3Dg-c-n>=20
+# this will run the Bind9 dig version
+dig example.com
+</PRE>
+<H2>FreeBSD 5.3/6.2 Issues</H2>
+<P>By default FreeBSD 5.3 installs Bind 9 (9.3.0) as the default (or =
+base)=20
+version and 6.2 installs 9.4.1 as the base version but with the =
+following=20
+wrinkles:</P>
+<OL>
+  <LI>
+  <P>Bind9 defaults to run in a chroot jail or a sandbox (which nows =
+seems the=20
+  "in" term for a jail) in which <I>all</I> BIND9 files are maintained =
+under=20
+  /var/named - including named.conf, log files and pid files (hard links =
+are=20
+  provided so you can continue to find the files where you thought they =
+would=20
+  be). To disable the sandbox add to /etc/rc.conf the following =
+line(s):</P><PRE class=3Dg-c-s>named_chrootdir=3D""	               # =
+disables jail/sandbox=20
+named_pidfile=3D"/var/run/named/pid" # Must set this in named.conf as =
+well
+named_chroot_autoupdate=3D"NO"       # Automatically install/update =
+chrooted
+                                   # components of named. See =
+/etc/rc.d/named.
+named_symlink_enable=3D"NO"	         # Symlink the chrooted pid file
+</PRE>
+  <P>The default value of these parameters in /etc/defaults/rc.conf =
+are:</P><PRE class=3Dg-c-s>named_enable=3D"YES"                 # Run =
+named, the DNS server (or NO).
+named_program=3D"/usr/sbin/named"	   # path to named, if you want a =
+different one.
+named_flags=3D"-u bind"              # Flags for named
+named_pidfile=3D"/var/run/named/pid" # Must set this in named.conf as =
+well
+named_chrootdir=3D"/var/named"       # Chroot directory (or "" not to =
+auto-chroot it)
+named_chroot_autoupdate=3D"YES"      # Automatically install/update =
+chrooted
+                                   # components of named. See =
+/etc/rc.d/named.
+named_symlink_enable=3D"YES"         # Symlink the chrooted pid file
+</PRE>
+  <P>As always you should not update the /etc/defaults/rc.conf file but =
+rather=20
+  edit /etc/rc.conf which will replace entries already defined in=20
+  /etc/defaults/rc.conf.</P>
+  <LI>The system does not ship with localhost or localhost.ca =
+(localhost.rev in=20
+  our terminology) files instead there is a script /etc/namedb/named.sh =
+which=20
+  will help you define these files. </LI></OL></DIV>
+<P><A href=3D"http://www.zytrax.com/books/dns/ch5/#contents"><IMG =
+alt=3D"up icon"=20
+src=3D"http://www.zytrax.com/images/go_up.gif" border=3D0></A></P>
+<H2><A name=3Dfc2></A>Fedora Core 2 Installation</H2>
+<DIV class=3Dg-i1-n>
+<P>This section describes the installation of BIND 9.3.0 on a clean <A=20
+class=3Dt-db href=3D"http://fedora.redhat.com/">Fedora Core 2 =
+system</A>. This was=20
+the first Linux system we had used used since Redhat 7.x series and we =
+found it=20
+significantly more windows like (this may be good or bad depending on =
+your=20
+predilictions for these things). It was also the first time we had ever =
+had a=20
+X11 graphical installation work without fooling around with XF86Config =
+config=20
+files (or the /etc/X11/xorg.conf as it is now). How much of this is a =
+function=20
+of time and better probing routines and how much the change to Xorg we =
+have no=20
+real idea. Never-the-less if you want a graphical system it surely was =
+real fun=20
+(read difficult) to configure X-Windows in the old days and it appears =
+at least=20
+one of the objections to Linux vs Windows has been removed if you are =
+into GUIs.=20
+The configuration had the following highlights:</P>
+<OL>
+  <LI>We used the graphical configuration option (anaconda)=20
+  <LI>Automatic Partitioning was selected=20
+  <LI>A server install was selected=20
+  <LI>We selected a GNOME based desktop - we had read somewhere that RH =
+had=20
+  elected to go with GNOME (rather than KDE) - and we were curious to =
+see what=20
+  stage the GUI stuff had reached. We would not normally install a GUI =
+for a=20
+  server configuration.=20
+  <LI>Since we were going to install BIND 9.3.0 we did not select to =
+install DNS=20
+  from the installation menu. In fact, as we shall see, it partially =
+installed=20
+  BIND-9.2.8-13.=20
+  <LI>We selected very few install options other that the development =
+tools and=20
+  graphical internet utilities - this later to allow us to get a hold of =
+the=20
+  various RPMs and tarballs. We would use the browser for FTPing the =
+rpms and=20
+  the former for use with the various tarballs. </LI></OL>
+<P>Installation was very uneventful and we were up in &lt; 30 minutes.=20
+<B>Note:</B> We were using a VIA M10000 motherboard (we love these =
+systems)=20
+based server and had failed to install FC3 on this system so we =
+retreated fairly=20
+quickly to FC2. We note in passing that Fedora is pushing releases out a =
+pretty=20
+quick rate these days. We also noted that FC2 does not support the =
+latest SE=20
+Linux options - well it does but they are disabled 'cos they don't work. =
+You=20
+need at least FC3 for this functionality or even FC4 which is on the=20
+horizon.</P>
+<H2>BIND 9 Install</H2>
+<P>We used mozilla (the FC2 default installed browser) to obtain, from=20
+rpmfind.net, Fedora Core Development rpms for:</P>
+<OL>
+  <LI>bind-9.3.0-2.i386.rpm=20
+  <LI>bind-utils-9.3.0-2.i386.rpm=20
+  <LI>bind-libs-9.3.0-2.i386.rpm=20
+  <LI>bind-devel-9.3.0-2.i386.rpm </LI></OL>
+<P>The above were all downloaded to /tmp. Before we installed we ran the =
+
+following from a terminal window:</P><PRE class=3Dg-c-n>rpm -q bind
+# which returned
+bind-9.2.8-13
+</PRE>
+<P>In retrospect this was surprising (since we had not requested any DNS =
+
+software during the FC2 installation procedure - FC2 install was kind =
+enough to=20
+do it anyway) and perhaps we should have removed this version before =
+installing=20
+since we ended up with -in our view - an incomplete installation. We may =
+have=20
+had a complete install if we had done this - maybe not. We issued the =
+following=20
+command to upgrade the installation:</P><PRE class=3Dg-c-n>rpm -Uvh =
+/tmp/bind*
+</PRE>
+<P>every thing appeared to work - there were no error messages. So far =
+so=20
+good.</P>
+<H3>BIND 9 Configure</H3>
+<P>So we had a bright shiny FC2 GNOME destktop with BIND 9.3.0 installed =
+in=20
+front of us and now to get BIND up and running. We were as conversant as =
+normal=20
+with the details of any system that was new to us - we read nothing but =
+figured=20
+we could wing it and hit google if we got into trouble. We rounded up =
+the normal=20
+suspects looking for the default named.conf and default zone files in =
+the normal=20
+Linux locations being /etc/named.conf and /var/named for the zone files =
+-=20
+typically named.ca for the root servers - and localhost.zone and =
+named.local=20
+(one day someone may explain the the idea behind the naming scheme here =
+- we=20
+suspect drunken revelry ourselves). We discovered only a file called=20
+named.custom in /etc which was a vestigial named.conf file. We poked =
+around a=20
+bit more and then found a GUI BIND configuration tool under System =
+Settings-&gt;=20
+Server Settings-&gt; DNS from the main menu (which is very windows =
+like). After=20
+5 minutes and a look at the help file for system-config-bind we =
+abandoned the=20
+GUI method. Why it could not provide a set of default configurations to =
+include=20
+caching server configuration (or at the very least default local host =
+files) is=20
+beyond us. What is the point in having a GUI utility that forces you to =
+know=20
+just as much as if you manually configure - and the help files don't =
+even=20
+hyperlink the BIND documentation - beats us. This GUI for the sake of =
+GUI which=20
+- IOHO - misses the point about the power of a GUI.</P>
+<P>We manually built a simple <A class=3Dt-db=20
+href=3D"http://www.zytrax.com/books/dns/ch6/#caching">caching server=20
+named.conf</A> (no we didn't use vi - we used gEdit). We FTP'd the =
+missing=20
+root.server(called named.ca in RH Lunix distributions - also available =
+<A=20
+class=3Dt-db href=3D"ftp://ftp.internic.net./domain/">here</A> as =
+named.root) and=20
+master.localhost (called localhost.zone in RH Lunix distributions) and=20
+localhost.rev (called named.local in RH Lunix distributions) from =
+another system=20
+- if you can't do this you will have to manually create them. We always =
+log to=20
+/var/log/named/named.txt (habit really) so we had to create and fix the=20
+permissions for this directory using:</P><PRE class=3Dg-c-n>cd /var/log
+mkdir named
+chown named:named named
+</PRE>
+<P>We then fired up BIND using:</P><PRE =
+class=3Dg-c-n>/etc/rc.d/init.d/named start
+</PRE>
+<P>And it failed with a segmentation fault!</P>
+<P>syslog (/var/log/messages) showed the following message:</P><PRE =
+class=3Dg-c-n>/usr/lib/libisc.so.9: symbol __snprint_chk, version =
+GLIBC_2.3.4
+not defined in file libc.so.6 with link time reference failed
+</PRE>
+<P>We checked the version of GLIBC:</P><PRE class=3Dg-c-n>rpm -q glibc
+glibc-2.3.3-27
+</PRE>
+<P>Surprising that rpm forgot the dependency on glibc!! We downloaded =
+the=20
+following Fedora Core Development rpms - all demanded by various=20
+dependencies:</P>
+<OL>
+  <LI>glibc-2.3.4-3=20
+  <LI>glibc-common-2.3.4-3=20
+  <LI>glibc-devel-2.3.4-3=20
+  <LI>glibc-headers-2.3.4-3=20
+  <LI>nscd-2.3.4-3=20
+  <LI>selinux-1.20.1-2 </LI></OL>
+<P>The easiest way we know to solve all those terrible dependency with =
+rpms is=20
+to create a new folder (in this case /tmp/glibc) - download or move all =
+the rpms=20
+into it and then:</P><PRE class=3Dg-c-n>rpm -Uvh /tmp/glibc/*
+glibc-2.3.3-27
+</PRE>
+<P>We fired up bind again:
+<P><PRE class=3Dg-c-n>/etc/rc.d/init.d/named start
+</PRE>
+<P>and confirmed it was running:</P><PRE class=3Dg-c-n>ps ax |grep named
+1846   ?    S    0:00 /usr/sbin/named -u named
+</PRE>
+<P>Finally we verified that all was working using a dig:</P><PRE =
+class=3Dg-c-n>dig @192.168.2.2 example.com any
+# where @192.168.2.2 is the new server address
+# forces use of new server irrespective of=20
+# resolv.conf configuration
+</PRE>
+<P>Which returned a good result and confirmed that all was working. We =
+wanted=20
+this server to use our new DNS so we edited /etc/resolve.conf to include =
+this=20
+servers IP as the first <B>namesever</B> record.</P>
+<P>We also want bind to load at start-up time so we need to ensure the =
+named=20
+script in invoked - the named script was installed as usual as=20
+/etc/rc.d/init.d/named by either the initial install or the upgrade - =
+who=20
+knows). To do this we linked the named start/stop script for each of the =
+
+run-level directories that we might use:</P><PRE class=3Dg-c-n>ln =
+/etc/rc.d/init.d/named /etc/rc.d/rc5.d/S68named # gui interface
+ln /etc/rc.d/init.d/named /etc/rc.d/rc5.d/K68named # gui interface
+ln /etc/rc.d/init.d/named /etc/rc.d/rc3.d/S68named # tty interface
+ln /etc/rc.d/init.d/named /etc/rc.d/rc3.d/K68named # tty interface
+</PRE>
+<P>The 68 in the S and K values is pretty arbitrary.</P>
+<P>Finally we rebooted the system, checked syslog for any errors and =
+verified=20
+that BIND was indeed running, again with the command:</P><PRE =
+class=3Dg-c-n>ps aux |grep named
+1846   ?    S    0:00 /usr/sbin/named -u named
+</PRE>
+<P>In our follow-up research we discovered we had two other choices for=20
+installation as well as the standard rpms:</P>
+<OL>
+  <LI>caching-nameserver rpm which seems to be a package installed after =
+BIND=20
+  has been installed.=20
+  <LI>bind-chroot rpms </LI></OL>
+<P>We could find no further documentation that describes use, =
+specification of=20
+installation instructions for either of these packages. We're sure it =
+must=20
+exist.</P></DIV>
+<P><A href=3D"http://www.zytrax.com/books/dns/ch5/#contents"><IMG =
+alt=3D"up icon"=20
+src=3D"http://www.zytrax.com/images/go_up.gif" border=3D0></A></P>
+<H2><A name=3Dcommand-line></A>BIND Command Line Arguments</H2>
+<DIV class=3Dg-i1-n>
+<P>This section describes the various command line options for BIND. You =
+can get=20
+these using <B>man named</B> but reproduced here for consistency.</P>
+<TABLE class=3Dp-m-s cellSpacing=3D0 cellPadding=3D4 border=3D1>
+  <TBODY>
+  <TR class=3Dg-h-n vAlign=3Dtop>
+    <TD>Arg</TD>
+    <TD>Param</TD>
+    <TD>Notes</TD></TR>
+  <TR vAlign=3Dtop>
+    <TD>-c</TD>
+    <TD>/path/to/config-file</TD>
+    <TD>Absolute path to the config file (named.conf). This allows you =
+to both=20
+      change the location and the name of this file. Default depends of =
+OS=20
+      (Linux =3D /etc/named.conf, BSD =3D either /etc/namedb/named.conf =
+or=20
+      /etc/local/etc/named.conf, Windows =3D=20
+    c:\winnt\system32\dns\etc\named.conf.</TD></TR>
+  <TR vAlign=3Dtop>
+    <TD>-d</TD>
+    <TD>de-bug level</TD>
+    <TD></TD></TR>
+  <TR vAlign=3Dtop>
+    <TD>-f</TD>
+    <TD>-</TD>
+    <TD>run in foreground (don't run as daemon) - normally only for =
+de-bug=20
+      purposes.</TD></TR>
+  <TR vAlign=3Dtop>
+    <TD>-g</TD>
+    <TD>-</TD>
+    <TD>run in foreground (don't run as daemon) and log to stderr =
+(console) -=20
+      normally only for de-bug purposes.</TD></TR>
+  <TR vAlign=3Dtop>
+    <TD>-n</TD>
+    <TD>#cpus</TD>
+    <TD>Create #cpus worker threads to take advantage of multiple CPUs. =
+If not=20
+      specified, named will try to determine the number of CPUs present =
+and=20
+      create one thread per CPU. If it is unable to determine the number =
+of=20
+      CPUs, a single worker thread will be created.</TD></TR>
+  <TR vAlign=3Dtop>
+    <TD>-p</TD>
+    <TD>port-no</TD>
+    <TD>Listen on defined port number. Default is 53. Normally only used =
+for=20
+      debugging purposes since queries are received on port =
+53.</TD></TR>
+  <TR vAlign=3Dtop>
+    <TD>-t</TD>
+    <TD>directory</TD>
+    <TD>The path to the a directory to be used when named is run in a =
+sandbox=20
+      (a chroot jail). This is conventionally set to /var/named/chroot =
+in most=20
+      systems which offer this service as a standard configuration or =
+option=20
+      (BSD and FC2 do) but can be set to anything you want. Must be used =
+in=20
+      conjunction with the -u argument below to provide any meaningful=20
+    security.</TD></TR>
+  <TR vAlign=3Dtop>
+    <TD>-u</TD>
+    <TD>user</TD>
+    <TD>Cause bind to <B>suid()</B> (change user name) after creating =
+sockets=20
+      on port 53 (which is in the privileged range of &lt; 1024). If not =
+present=20
+      runs as user <B>root</B>. Generally used only with <B>chroot</B> =
+options=20
+      (-t above) but most start-up scripts now use -u named argument =
+even if not=20
+      chrooted which means that log files files will have to have =
+appropriate=20
+      permissions set.</TD></TR>
+  <TR vAlign=3Dtop>
+    <TD>-v</TD>
+    <TD>-</TD>
+    <TD>Displays the bind version number to stdout (console) and=20
+  exit.</TD></TR></TBODY></TABLE>
+<P>There are two further arguments (-s and -x) which should only be used =
+by=20
+developers and have been omitted.</P></DIV>
+<P><A href=3D"http://www.zytrax.com/books/dns/ch5/#contents"><IMG =
+alt=3D"up icon"=20
+src=3D"http://www.zytrax.com/images/go_up.gif" border=3D0></A></P>
+<H2><A class=3Dt-db =
+href=3D"http://www.zytrax.com/books/dns/ch5/win2k.html">Install=20
+on Win2K</A></H2><!-- end body table --></DIV></DIV>
+<DIV class=3Dl-f>
+<DIV class=3Dl-100><!-- standard footer full width -->
+<TABLE cellSpacing=3D0 align=3Dcenter border=3D0>
+  <TBODY>
+  <TR vAlign=3Dtop>
+    <TD class=3Dp-f-s align=3Dleft>Copyright =A9 1994 - 2009 ZyTrax, =
+Inc.<BR>All=20
+      rights reserved. <A class=3Dp-f-s=20
+      href=3D"http://www.zytrax.com/legal.html">Legal and Privacy</A> =
+</TD>
+    <TD align=3Dmiddle><A class=3Dp-f-s =
+href=3D"http://www.zytrax.com/isp/web"=20
+      target=3D_blank>site by zytrax</A><BR><A class=3Dp-f-s=20
+      href=3D"http://www.super.net.sg/" target=3D_blank><IMG=20
+      alt=3D"Hosted by super.net.sg" =
+src=3D"http://www.zytrax.com/super-net-s.gif"=20
+      border=3D0></A></TD>
+    <TD class=3Dp-f-s align=3Dright><A class=3Dp-f-s=20
+      =
+href=3D"javascript:mailus('web-master','zytrax.com','About%20Web%20site')=
+">web-master=20
+      at zytrax</A><BR>Page modified: December 02 2007.=20
+</TD></TR></TBODY></TABLE></DIV></DIV>
+<DIV class=3Dl-l><!-- left hand navigation -->
+<DIV class=3Dn-l-u>
+<P align=3Dcenter><A class=3Dt-db=20
+href=3D"http://www.netwidget.net/books/apress/dns"><IMG=20
+alt=3D"Pro DNS and BIND by Ron Aitchison"=20
+src=3D"http://www.zytrax.com/images/dns_book_small.jpg" border=3D0></A> =
+</P>
+<H2 align=3Dright>Contents</H2>
+<P class=3Dn-l-f><A href=3D"http://www.zytrax.com/tech/">tech =
+info</A><BR><A=20
+href=3D"http://www.zytrax.com/books/">guides home</A><BR><A=20
+title=3D"Articles, information and opinion pieces about DNS topics"=20
+href=3D"http://www.zytrax.com/books/dns/info">dns=20
+articles</A><BR><B>intro</B><BR><A=20
+href=3D"http://www.zytrax.com/books/dns/">contents</A><BR><A=20
+title=3D"Some vaugie ramblings and explanation of terminolgy used"=20
+href=3D"http://www.zytrax.com/books/dns/ch1">1 objectives</A><BR><B>big=20
+picture</B><BR><A=20
+title=3D"The Domain Name hierarchy, queries, zone maintenance and =
+security overview"=20
+href=3D"http://www.zytrax.com/books/dns/ch2">2 concepts</A><BR><A=20
+title=3D"Reverse-mapping (IP to Host) concepts and explanation"=20
+href=3D"http://www.zytrax.com/books/dns/ch3">3 reverse map</A><BR><A=20
+title=3D"Explanation of various DNS configurations"=20
+href=3D"http://www.zytrax.com/books/dns/ch4">4 dns=20
+types</A><BR><B>quickstart</B><BR><A=20
+title=3D"Installing BIND on Fedora Core 2, Windows 2000 and FreeeBSD"=20
+href=3D"http://www.zytrax.com/books/dns/ch5">5 install bind</A><BR><A=20
+title=3D"Chapter 5 types with worked examples"=20
+href=3D"http://www.zytrax.com/books/dns/ch6">6=20
+samples</A><BR><B>reference</B><BR><A=20
+title=3D"BIND's named.conf clauses and statements"=20
+href=3D"http://www.zytrax.com/books/dns/ch7">7 named.conf</A><BR><A=20
+title=3D"Zone File Directives and Resource Records"=20
+href=3D"http://www.zytrax.com/books/dns/ch8">8 dns=20
+records</A><BR><B>operations</B><BR><A=20
+title=3D"Common HOWTOs for various requirements"=20
+href=3D"http://www.zytrax.com/books/dns/ch9">9 howtos</A><BR><A=20
+title=3D"when head-scratching does not work - nslookup, dig"=20
+href=3D"http://www.zytrax.com/books/dns/ch10">10 tools</A><BR><A=20
+href=3D"http://www.zytrax.com/books/dns/ch11">11=20
+trouble</A><BR><B>programming</B><BR><A=20
+href=3D"http://www.zytrax.com/books/dns/ch12">12 bind=20
+api's</A><BR><B>security</B><BR><A=20
+href=3D"http://www.zytrax.com/books/dns/ch13">13 dns =
+security</A><BR><B>bits &amp;=20
+bytes</B><BR><A title=3D"On-the-wire DNS message format"=20
+href=3D"http://www.zytrax.com/books/dns/ch15">15=20
+messages</A><BR><B>resources</B><BR><A=20
+title=3D"Mostly Explanations and Terminology"=20
+href=3D"http://www.zytrax.com/books/dns/apa/">notes &amp; tips</A><BR><A =
+
+title=3D"How and where to register domains"=20
+href=3D"http://www.zytrax.com/books/dns/apb/">registration FAQ</A><BR><A =
+
+title=3D"List of DNS sofware, web site and other resources"=20
+href=3D"http://www.zytrax.com/books/dns/apc/">dns resources</A><BR><A=20
+title=3D"RFCs applicable to DNS" =
+href=3D"http://www.zytrax.com/books/dns/apd/">dns=20
+rfc's</A><BR><A title=3D"Changes made for each revision of the guide"=20
+href=3D"http://www.zytrax.com/books/dns/changelog.html">change =
+log</A><BR></P><!-- Creative Commons License -->
+<P class=3Dp-m-s align=3Dright><A=20
+href=3D"http://creativecommons.org/licenses/by-nc/2.0/"><IMG=20
+alt=3D"Creative Commons License" =
+src=3D"http://www.zytrax.com/images/somerights.gif"=20
+border=3D0></A><BR>This work is licensed under a <A=20
+href=3D"http://creativecommons.org/licenses/by-nc/2.0/">Creative Commons =
+
+License</A>.</P>
+<P class=3Dp-b-h align=3Dright>If you are happy it's OK - but your =
+browser is giving=20
+a less than optimal experience on our site. You could, at no charge, =
+upgrade to=20
+a W3C STANDARDS COMPLIANT browser such as <A class=3Dt-db=20
+href=3D"http://www.mozilla.org/">Mozilla</A></P></DIV></DIV>
+<DIV class=3Dl-r><!-- left hand navigation -->
+<DIV class=3Dg-sb><!-- SiteSearch Google -->
+<FORM action=3Dhttp://www.google.com/custom method=3Dget target=3D_top>
+<TABLE border=3D0>
+  <TBODY>
+  <TR>
+    <TD noWrap><INPUT type=3Dhidden value=3Dwww.zytrax.com =
+name=3Ddomains> <INPUT=20
+      maxLength=3D255 name=3Dq> </TD></TR>
+  <TR>
+    <TD noWrap>
+      <TABLE>
+        <TBODY>
+        <TR>
+          <TD><INPUT type=3Dradio CHECKED value=3D"" name=3Dsitesearch> =
+<FONT=20
+            color=3D#000000 size=3D-2>web</FONT> </TD>
+          <TD><INPUT type=3Dradio value=3Dwww.zytrax.com =
+name=3Dsitesearch> <FONT=20
+            color=3D#000000 size=3D-2>zytrax.com</FONT> =
+</TD></TR></TBODY></TABLE><INPUT type=3Dsubmit value=3D"Google Search" =
+name=3Dsa>=20
+      <INPUT type=3Dhidden value=3Dpub-9419480011552853 name=3Dclient> =
+<INPUT=20
+      type=3Dhidden value=3D1 name=3Dforid> <INPUT type=3Dhidden =
+value=3DISO-8859-1=20
+      name=3Die> <INPUT type=3Dhidden value=3DISO-8859-1 name=3Doe> =
+<INPUT type=3Dhidden=20
+      value=3Dactive name=3Dsafe> <INPUT type=3Dhidden=20
+      =
+value=3DGALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBG=
+C:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;LH:50;LW:3=
+55;L:http://www.zytrax.com/images/zytrax-info-google.gif;S:http://www.zyt=
+rax.com/tech;FORID:1;=20
+      name=3Dcof> <INPUT type=3Dhidden value=3Den name=3Dhl> =
+</TD></TR></TBODY></TABLE></FORM><!-- SiteSearch Google -->
+<DIV class=3Db-b-s><A=20
+href=3D"http://www.facebook.com/sharer.php?u=3Dhttp://www.zytrax.com/book=
+s/dns/ch5/"><IMG=20
+class=3Di-m-s title=3D"add page to facebook" alt=3D"add page to =
+facebook"=20
+src=3D"http://www.zytrax.com/images/facebook.gif" border=3D0></A> <A=20
+href=3D"http://technorati.com/cosmos/search.html?url=3Dhttp://www.zytrax.=
+com/books/dns/ch5/"><IMG=20
+class=3Di-m-s title=3D"add page to technorati.com" alt=3D"add page to =
+technorati.com"=20
+src=3D"http://www.zytrax.com/images/technorati.gif" border=3D0></A> <A=20
+href=3D"http://digg.com/submit?phase=3D2&amp;url=3Dhttp://www.zytrax.com/=
+books/dns/ch5/"><IMG=20
+class=3Di-m-s title=3D"add page to digg.com" alt=3D"add page to =
+digg.com"=20
+src=3D"http://www.zytrax.com/images/digg.gif" border=3D0></A> <A=20
+href=3D"http://del.icio.us/post?url=3Dhttp://www.zytrax.com/books/dns/ch5=
+/&amp;title=3DChapter 5 BIND FreeBSD and Fedora Install"><IMG=20
+class=3Di-m-s title=3D"add page to del.icio.us" alt=3D"add page to =
+del.icio.us"=20
+src=3D"http://www.zytrax.com/images/delicious.gif" border=3D0></A> <A=20
+href=3D"http://furl.net/storeIt.jsp?t=3DChapter 5 BIND FreeBSD and =
+Fedora Install&amp;u=3Dhttp://www.zytrax.com/books/dns/ch5/"><IMG=20
+class=3Di-m-s title=3D"add page to furl.net" alt=3D"add page to =
+furl.net"=20
+src=3D"http://www.zytrax.com/images/furl.gif" border=3D0></A> <A=20
+href=3D"http://www.stumbleupon.com/submit?url=3Dhttp://www.zytrax.com/boo=
+ks/dns/ch5/&amp;title=3DChapter 5 BIND FreeBSD and Fedora Install"><IMG=20
+class=3Di-m-s title=3D"add page to to stumbleupon" alt=3D"add page to =
+stumbleupon"=20
+src=3D"http://www.zytrax.com/images/stumbleupon.gif" border=3D0></A> <A=20
+href=3D"http://reddit.com/submit?url=3Dhttp://www.zytrax.com/books/dns/ch=
+5/&amp;title=3DChapter 5 BIND FreeBSD and Fedora Install"><IMG=20
+class=3Di-m-s title=3D"add page to to reddit.com" alt=3D"add page to =
+reddit.com"=20
+src=3D"http://www.zytrax.com/images/reddit.gif" border=3D0></A> <A=20
+href=3D"http://www.zytrax.com/run/mailpage.php"><IMG class=3Di-m-s=20
+title=3D"mail this page feature" alt=3D"mail this page feature"=20
+src=3D"http://www.zytrax.com/images/mail.gif" border=3D0></A> <A=20
+onclick=3D"window.print();return false;"=20
+href=3D"http://www.zytrax.com/books/dns/ch5/#"><IMG class=3Di-m-s=20
+title=3D"print this page" alt=3D"print this page"=20
+src=3D"http://www.zytrax.com/images/pf.gif" border=3D0></A> </DIV>
+<P><A=20
+title=3D"RSS (2.0) Feed - right click on icon, select 'Copy Link URL' or =
+'Copy Shortcut', paste into RSS Feed Reader, or drag and drop into RSS =
+Feed Reader"=20
+href=3D"http://www.zytrax.com/zytrax.rss"><IMG alt=3D"RSS Feed Icon"=20
+src=3D"http://www.zytrax.com/images/feed-icon-14x14.png" =
+border=3D0>&nbsp;RSS=20
+Feed</A></P>
+<H3>Resources</H3>
+<H4>Systems</H4>
+<P class=3Dg-sb-n><A class=3Dt-db title=3D"The biggest and most stable =
+of the BSDs"=20
+href=3D"http://www.freebsd.org/" target=3D_blank>FreeBSD</A><BR><A =
+class=3Dt-db=20
+title=3D"NetBSD runs on just about every processor known to mankind and =
+a few more besides"=20
+href=3D"http://www.netbsd.org/" target=3D_blank>NetBSD</A><BR><A =
+class=3Dt-db=20
+title=3D"A high security version of BSD" =
+href=3D"http://www.openbsd.org/"=20
+target=3D_blank>OpenBSD</A><BR><A class=3Dt-db=20
+title=3D"The latest major fork of BSD (from FreeBSD 4.x) - following a =
+well-worn tradition of independent thought in the BSD community"=20
+href=3D"http://www.dragonflybsd.org/" =
+target=3D_blank>DragonFlyBSD</A><BR><A=20
+class=3Dt-db href=3D"http://www.linux.org/" =
+target=3D_blank>Linux</A><BR></P>
+<H4>Applications</H4>
+<P class=3Dg-sb-n><A class=3Dt-db=20
+title=3D"Complete High Quality Office Productivity Suite - Word =
+Processor, Spreadsheet, Drawing Tools and Presentation software. Runs on =
+Linux and Windows. Full interworking with MS Office files. Great =
+Software."=20
+href=3D"http://www.openoffice.org/" target=3D_blank>OpenOffice</A><BR><A =
+class=3Dt-db=20
+title=3D"Home of the Gecko range of browsers. Excellent W3C DOM and CSS2 =
+support. If you are not using one of the Mozilla family of browsers or =
+email clients - you should be!"=20
+href=3D"http://www.mozilla.org/" target=3D_blank>Mozilla</A><BR><A =
+class=3Dt-db=20
+title=3D"Major source of Open software developments and applications"=20
+href=3D"http://www.sourceforge.net/" =
+target=3D_blank>SourceForge</A><BR><A=20
+class=3Dt-db=20
+title=3D"Home of the extensive software collection of the Free Sofware =
+Foundation"=20
+href=3D"http://www.gnu.org/" target=3D_blank>GNU-Free SW =
+Foundation</A><BR></P>
+<H4>Organisations</H4>
+<P class=3Dg-sb-n><A class=3Dt-db=20
+title=3D"Excellent source for approved Open Source licences"=20
+href=3D"http://www.opensource.org/" target=3D_blank>Open Source =
+Initiative</A><BR><A=20
+class=3Dt-db=20
+title=3D"Site devoted to making creative material as widely available as =
+possible"=20
+href=3D"http://www.creativecommons.org/" target=3D_blank>Creative=20
+Commons</A><BR></P>
+<H4>Misc.</H4>
+<P class=3Dg-sb-n><A class=3Dt-db=20
+title=3D"Open Libray of thousands of out of copyright books - plus many =
+more associated projects"=20
+href=3D"http://ibiblio.org/" target=3D_blank>Ibiblio - Library</A><BR><A =
+class=3Dt-db=20
+title=3D"Part of the Ibiblio project - new works freely available"=20
+href=3D"http://www.ibiblio.org/obp/books/" target=3D_blank>Open Book=20
+Project</A><BR><A class=3Dt-db title=3D"Open Directory Project"=20
+href=3D"http://dmoz.org/" target=3D_blank>Open Directory</A><BR><A =
+class=3Dt-db=20
+title=3D"Open Encyclopedia project - staggering volume of high quality =
+content and growing daily"=20
+href=3D"http://www.wikipedia.org/" =
+target=3D_blank>Wikipedia</A><BR></P></DIV>
+<UL class=3Db-b>
+  <LI class=3Db-b-l id=3Dlayout><A class=3Db-b-a=20
+  href=3D"http://www.zytrax.com/about_site.htm#buttons"><SPAN>CSS</SPAN> =
+
+  Layout</A>=20
+  <LI class=3Db-b-l id=3Dpopups><A class=3Db-b-a=20
+  href=3D"http://www.zytrax.com/about_site.htm#buttons"><SPAN>CSS</SPAN> =
+Popup</A>=20
+  </LI></UL>
+<P align=3Dcenter><IMG alt=3D"" =
+src=3D"http://www.zytrax.com/images/pf.gif"=20
+border=3D0><A class=3Dt-db title=3D"View full width page format"=20
+href=3D"http://www.zytrax.com/books/dns/ch5/?pf=3Dyes"> printer =
+friendly</A></P>
+<P align=3Dcenter><A onclick=3D"window.print();return false;"=20
+href=3D"http://www.zytrax.com/books/dns/ch5/#"><IMG alt=3D"Print Page"=20
+src=3D"http://www.zytrax.com/images/print.gif" border=3D0></A></P>
+<P align=3Dcenter><A =
+href=3D"http://www.zytrax.com/security/spf.html"><IMG=20
+alt=3D"SPF Record Conformant Domain Logo"=20
+src=3D"http://www.zytrax.com/images/protectedbyspf_13a.gif"=20
+border=3D0></A></P></DIV><!-- pop-out tables only if Javascript =
+supported --><!-- add any number of row items to each sub-menu table =
+--><!-- IE specific -->
+<DIV class=3Dp-n-h id=3Dh0 onmouseout=3Dswapout()>
+<TABLE class=3Dn-p-n cellSpacing=3D0 cellPadding=3D0 width=3D130 =
+border=3D1>
+  <TBODY>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+    href=3D"http://www.zytrax.com/books/dns/ch5/">English</A></TD></TR>
+  <TR>
+    <TD>French</TD></TR></TBODY></TABLE></DIV>
+<DIV class=3Dp-n-h id=3Dh1 onmouseout=3Dswapout()>
+<TABLE class=3Dn-p-n cellSpacing=3D0 cellPadding=3D0 width=3D130 =
+border=3D1>
+  <TBODY>
+  <TR>
+    <TD><A href=3D"http://www.zytrax.com/press/">Press</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n href=3D"http://www.zytrax.com/press/">What's=20
+  New</A></TD></TR></TBODY></TABLE></DIV>
+<DIV class=3Dp-n-h id=3Dh2 onmouseout=3Dswapout()>
+<TABLE class=3Dn-p-n cellSpacing=3D0 cellPadding=3D0 width=3D130 =
+border=3D0>
+  <TBODY>
+  <TR>
+    <TD><A href=3D"http://www.zytrax.com/isp/">ISP =
+Services</A></TD></TR>
+  <TR>
+    <TD><A href=3D"http://www.zytrax.com/isp/support/">ISP =
+Support</A></TD></TR>
+  <TR>
+    <TD><A =
+href=3D"http://www.zytrax.com/isp/prices/">Pricing</A></TD></TR>
+  <TR>
+    <TD><A=20
+href=3D"http://www.zytrax.com/security/">Security</A></TD></TR></TBODY></=
+TABLE></DIV>
+<DIV class=3Dp-n-h id=3Dh3 onmouseout=3Dswapout()>
+<TABLE class=3Dn-p-n cellSpacing=3D0 cellPadding=3D0 width=3D130 =
+border=3D0>
+  <TBODY>
+  <TR>
+    <TD><A class=3Dn-p-n =
+href=3D"http://www.netwidget.net/">NetWidget</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n =
+href=3D"http://www.zytrax.net/">Air-Frame</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n href=3D"http://www.lite-eco.net/">Lite-Eco=20
+  (Solar)</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+    href=3D"http://www.zytrax.com/consulting">Consulting</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+  =
+href=3D"http://www.zytrax.com/training">Training</A></TD></TR></TBODY></T=
+ABLE></DIV>
+<DIV class=3Dp-n-h id=3Dh4 onmouseout=3Dswapout()>
+<TABLE class=3Dn-p-n cellSpacing=3D0 cellPadding=3D0 width=3D130 =
+border=3D0>
+  <TBODY>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+  href=3D"http://www.zytrax.com/features/">Overview</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+      =
+href=3D"http://www.zytrax.com/features/nat.htm">SuperNAT</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+      =
+href=3D"http://www.zytrax.com/features/lockbox.htm">Firewall</A></TD></TR=
+>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+      =
+href=3D"http://www.zytrax.com/features/multicast.htm">Multicasting</A></T=
+D></TR>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+      =
+href=3D"http://www.zytrax.com/features/management.htm">Diagnostics</A></T=
+D></TR>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+      =
+href=3D"http://www.zytrax.com/features/security.htm">Security</A></TD></T=
+R>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+  href=3D"http://www.zytrax.com/features/qos.htm">QoS</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+      =
+href=3D"http://www.zytrax.com/features/bandwidth.htm">Bandwidth</A></TD><=
+/TR>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+      =
+href=3D"http://www.zytrax.com/features/utilities.htm">Utilities</A></TD><=
+/TR></TBODY></TABLE></DIV>
+<DIV class=3Dp-n-h id=3Dh5 onmouseout=3Dswapout()>
+<TABLE class=3Dn-p-n cellSpacing=3D0 cellPadding=3D0 width=3D130 =
+border=3D0>
+  <TBODY>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+      href=3D"http://www.zytrax.com/Company/contacts.html">Contact =
+Us</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+  href=3D"http://www.zytrax.com/Company">Background</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+    href=3D"http://www.zytrax.com/Company/maps.html">Map</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n href=3D"http://www.zytrax.com/press/">Media=20
+  Center</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+    href=3D"http://www.zytrax.com/feedback.htm">Feedback</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n href=3D"http://www.zytrax.com/open/">Open=20
+  Source</A></TD></TR></TBODY></TABLE></DIV>
+<DIV class=3Dp-n-h id=3Dh9 onmouseout=3Dswapout()>
+<TABLE class=3Dn-p-n cellSpacing=3D0 cellPadding=3D0 width=3D100 =
+border=3D0>
+  <TBODY>
+  <TR>
+    <TD><A class=3Dn-p-n href=3D"http://www.zytrax.com/tech/">Tech =
+Info</A></TD>
+    <TD><IMG onmouseover=3D"pop(1,1,'h')" onmouseout=3Dswapout() =
+alt=3D""=20
+      src=3D"http://www.zytrax.com/images/more.gif" =
+border=3D0></A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n href=3D"http://www.zytrax.com/links/">Tech =
+Links</A></TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n href=3D"http://www.zytrax.com/books/">Open =
+Guides</A></TD>
+    <TD>&nbsp;</TD></TR></TBODY></TABLE></DIV>
+<DIV class=3Dp-n-h id=3Dh6 onmouseout=3Dswapout()>
+<TABLE class=3Dn-p-n cellSpacing=3D0 cellPadding=3D0 width=3D130 =
+border=3D0>
+  <TBODY>
+  <TR>
+    <TD><A class=3Dn-p-n =
+href=3D"http://www.zytrax.com/download/">All</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+      =
+href=3D"http://www.zytrax.com/download/dnWarp2.htm">WarpTwo</A></TD></TR>=
+
+  <TR>
+    <TD><A class=3Dn-p-n=20
+  href=3D"http://www.zytrax.com/download/web.htm">Web</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+      =
+href=3D"http://www.zytrax.com/download/dncoolfig.htm">CoolFig</A></TD></T=
+R>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+      =
+href=3D"http://www.zytrax.com/download/dnzing.htm">Zing</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+      =
+href=3D"http://www.zytrax.com/download/dncs.htm">ControlServer</A></TD></=
+TR>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+      =
+href=3D"http://www.zytrax.com/download/dnWarp1.htm">WarpOne</A></TD></TR>=
+</TBODY></TABLE></DIV>
+<DIV class=3Dp-n-h id=3Dh7 onmouseout=3Dswapout()>
+<TABLE class=3Dn-p-n cellSpacing=3D0 cellPadding=3D0 width=3D130 =
+border=3D0>
+  <TBODY>
+  <TR>
+    <TD><A class=3Dn-p-n =
+href=3D"http://www.zytrax.com/support/">Products</A></TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n href=3D"http://www.zytrax.com/isp/support/">ISP =
+
+      Support</A></TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n =
+href=3D"http://www.zytrax.com/security/">Security</A></TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+      =
+href=3D"http://www.zytrax.com/help/user_man/troubleshoot/w2_troubleshoot.=
+htm">Troubleshoot</A></TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n href=3D"http://www.zytrax.com/help/">On-Line =
+Help</A></TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n =
+href=3D"http://www.zytrax.com/faqs/">FAQ</A></TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n =
+href=3D"http://www.zytrax.com/bugreport.htm">Bug=20
+      Reports</A></TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n href=3D"http://www.zytrax.com/tech/">Tech =
+Info</A></TD>
+    <TD><IMG onmouseover=3D"pop(1,1,'h')" onmouseout=3Dswapout() =
+alt=3D""=20
+      src=3D"http://www.zytrax.com/images/more.gif"=20
+border=3D0></A></TD></TR></TBODY></TABLE></DIV>
+<DIV class=3Dp-n-h id=3Dh8 onmouseout=3Dswapout()>
+<TABLE class=3Dn-p-n cellSpacing=3D0 cellPadding=3D0 width=3D130 =
+border=3D0>
+  <TBODY>
+  <TR>
+    <TD><A href=3D"http://www.zytrax.com/open/">Overview</A></TD></TR>
+  <TR>
+    <TD><A href=3D"http://www.zytrax.com/books/">Open =
+Guides</A></TD></TR>
+  <TR>
+    <TD><A =
+href=3D"http://www.zytrax.com/open/advocacy.html">Advocacy</A></TD></TR>
+  <TR>
+    <TD><A href=3D"http://www.zytrax.com/open/faq.html">Open=20
+  FAQ</A></TD></TR></TBODY></TABLE></DIV><!-- tertiary pop-outs -->
+<DIV class=3Dp-n-h id=3Dt1 onmouseout=3Dswapout()>
+<TABLE class=3Dn-p-n cellSpacing=3D0 cellPadding=3D0 width=3D120 =
+border=3D0>
+  <TBODY>
+  <TR>
+    <TD><A class=3Dn-p-n href=3D"http://www.zytrax.com/tech/web/">web=20
+  stuff</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n href=3D"http://www.zytrax.com/tech/dom/">dom=20
+  stuff</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n href=3D"http://www.zytrax.com/tech/css/">css=20
+  stuff</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n =
+href=3D"http://www.zytrax.com/tech/lang/">language=20
+      stuff</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n =
+href=3D"http://www.zytrax.com/tech/web/regex.htm">regex=20
+      stuff</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n href=3D"http://www.zytrax.com/tech/rfcs/">rfc=20
+  stuff</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n =
+href=3D"http://www.zytrax.com/tech/layer_1/">cable=20
+      stuff</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+      =
+href=3D"http://www.zytrax.com/tech/layer_1/cables/tech_lan.htm">lan=20
+      wiring</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+      =
+href=3D"http://www.zytrax.com/tech/layer_1/cables/tech_rs232.htm">rs232=20
+      stuff</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n =
+href=3D"http://www.zytrax.com/tech/protocols/">protocol=20
+      stuff</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n href=3D"http://www.zytrax.com/tech/pc/">pc=20
+stuff</A></TD></TR>
+  <TR>
+    <TD class=3Dn-p-n><A class=3Dn-p-n=20
+      href=3D"http://www.zytrax.com/tech/wireless/">wireless =
+stuff</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n =
+href=3D"http://www.zytrax.com/tech/codes.htm">ascii=20
+      codes</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n =
+href=3D"http://www.zytrax.com/tech/data_rates.htm">data=20
+      rate stuff</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n =
+href=3D"http://www.zytrax.com/tech/telephony/">telephony=20
+      stuff</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n =
+href=3D"http://www.zytrax.com/tech/mech/">mechanical=20
+      stuff</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n =
+href=3D"http://www.zytrax.com/tech/develop/">embedded=20
+      stuff</A></TD></TR>
+  <TR>
+    <TD><A class=3Dn-p-n=20
+      href=3D"http://www.zytrax.com/tech/electronics/">electronic=20
+  stuff</A></TD></TR></TBODY></TABLE></DIV></BODY></HTML>
+
+------=_NextPart_000_0000_01CA152A.28FC17E0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.zytrax.com/images/zytrax-open-dark-cut.gif
+
+R0lGODdhWwEsAPcAADMzZv///2ZmmczM/1lZjE1NgEBAc2NjloCAsz09cEZGeaam2TY2aVBQgzk5
+bGBgk1NThkNDdsLC9Vxcj1ZWiUlJfG1toK+v4nZ2qbm57Jycz4mJvPLy/5KSxeXl//z8//n5/wAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAABbASwA
+AAj/AAEIHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuX
+MGPKnEmzps2bOHPq3Mmzp0QGBioUGKrAAIOIDCIUgECgaYEKCXxKbVhAgNWrWLNiLQCAgNYDRxFS
+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
+
+------=_NextPart_000_0000_01CA152A.28FC17E0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.zytrax.com/images/zytrax-open-dark-i.gif
+
+R0lGODdhWwEIAPcAADMzZv///2ZmmczM/1lZjE1NgEBAc2NjloCAsz09cEZGeaam2TY2aVBQgzk5
+bGBgk1NThkNDdsLC9Vxcj1ZWiUlJfG1toK+v4nZ2qbm57Jycz4mJvPLy/5KSxeXl//z8//n5/wAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAABbAQgA
+AAhwAAMIHEiwoMGDCBMqXMiwocOHECNKnEixosWJHAZo9HCxo8ePIEOKHEmypMmTGTeeXMmypcuX
+MGPKTDmAo8ybOHPq3MnzI02bPYMKHUq0KMmfRpMqXcpUKdKmUKNKnXpUY02qWLNq3XrwA4evILgG
+BAA7
+
+------=_NextPart_000_0000_01CA152A.28FC17E0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.zytrax.com/images/go_up.gif
+
+R0lGODdhGwAUAPcAAAAAAICAgIAAAICAAACAAACAgAAAgIAAgICAQABAQACA/wBAgEAA/4BAAP//
+/8DAwP8AAP//AAD/AAD//wAA//8A////gAD/gID//4CA//8AgP+AQAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAbABQA
+AAhFAB0IHEiwoMGDCBMqXMiw4UAADhcCmBgR4cSLFQte3JhR4MaPGT+KjCiyZMOSKCWiTGlx5cqD
+LmNqjCmzo82bOHPqbBgQADs=
+
+------=_NextPart_000_0000_01CA152A.28FC17E0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.zytrax.com/super-net-s.gif
+
+R0lGODdhlgAnAPcAAAAAAIAAAACAAICAAAAAgIAAgACAgMDAwMDcwKbK8EAgAGAgAIAgAKAgAMAg
+AOAgAABAACBAAEBAAGBAAIBAAKBAAMBAAOBAAABgACBgAEBgAGBgAIBgAKBgAMBgAOBgAACAACCA
+AECAAGCAAICAAKCAAMCAAOCAAACgACCgAECgAGCgAICgAKCgAMCgAOCgAADAACDAAEDAAGDAAIDA
+AKDAAMDAAODAAADgACDgAEDgAGDgAIDgAKDgAMDgAODgAAAAQCAAQEAAQGAAQIAAQKAAQMAAQOAA
+QAAgQCAgQEAgQGAgQIAgQKAgQMAgQOAgQABAQCBAQEBAQGBAQIBAQKBAQMBAQOBAQABgQCBgQEBg
+QGBgQIBgQKBgQMBgQOBgQACAQCCAQECAQGCAQICAQKCAQMCAQOCAQACgQCCgQECgQGCgQICgQKCg
+QMCgQOCgQADAQCDAQEDAQGDAQIDAQKDAQMDAQODAQADgQCDgQEDgQGDgQIDgQKDgQMDgQODgQAAA
+gCAAgEAAgGAAgIAAgKAAgMAAgOAAgAAggCAggEAggGAggIAggKAggMAggOAggABAgCBAgEBAgGBA
+gIBAgKBAgMBAgOBAgABggCBggEBggGBggIBggKBggMBggOBggACAgCCAgECAgGCAgICAgKCAgMCA
+gOCAgACggCCggECggGCggICggKCggMCggOCggADAgCDAgEDAgGDAgIDAgKDAgMDAgODAgADggCDg
+gEDggGDggIDggKDggMDggODggAAAwCAAwEAAwGAAwIAAwKAAwMAAwOAAwAAgwCAgwEAgwGAgwIAg
+wKAgwMAgwOAgwABAwCBAwEBAwGBAwIBAwKBAwMBAwOBAwABgwCBgwEBgwGBgwIBgwKBgwMBgwOBg
+wACAwCCAwECAwGCAwICAwKCAwMCAwOCAwACgwCCgwECgwGCgwICgwKCgwMCgwOCgwADAwCDAwEDA
+wGDAwIDAwKDAwP/78KCgpICAgP8AAAD/AP//AAAA//8A/wD//////ywAAAAAlgAnAAAI/wDt/RtI
+sOA/ewgMKlzIsKHDhxAjSpxI0aHAhwcuVtzIsaPHjxQ1MrR3ICHIkyhTqmwo0qA9gfbqrZxJs2bF
+lgNfEoyZ0abPnz9x6sxJsh1OoEiTohw6FME9k0qjSpUokqlGe+3aTd3KdeHVi0NzHnjatSzXq0QV
+Or1ntm1UsDCPYh0l8oDbuzPB5hx5gJRRgQjs4h18Mu7BowedjkKAgKRgwpA5wtzr9V/gTaRK3usZ
+ufPEl3p3gmYcmFTmen5Lgka8crXnwjrD5mR8oN2BA5oi6YakO1Km3+OQavrN7jVI0IcVvgx8YByk
+59CjQyr+EwF0mcY9MvUKGvfzSOTI1f8bX+/2cqiMEZImDXM9e/eN/x2ADj+9eviW4Z9fD1h/Yv31
+sWZRaC7dxlgm0On222+ayDQKJOQQpNsBkfDWWyTj2JPbhRi2Y+FumtjDDnQafqjbOAdksltv49Sj
+IoftPMghOfZUyCE79rx44Tjt7PYhdhsRWJBjm/UoXXSZ1AiJVpbxNh8k47DDjiaQZOIhhuOEx05z
+kGjSDjvORYKAc10iUCE7WT0YYj3tIGhlOwiI0mWWWirJ45Rl8oZmO1SOMiKG4ZHDDmNfVjhKVgKy
+FFuBt9WzGWkHsEnOKBV2ac9zgs2XST0JVirld71pggCVOFaaIZVQzhcJQc4FNxCCrv7/Y+OOl0YS
+qY3tcBriQc6BCapuu1pWIZCSxQYWc2zec884vv3mm4+p8mYbl6L8uadt9jiniZTcIoCgXc4lqeR0
+I2pCEKk5PcfkpVByy055vL2EII4juloin5BUy61RAz0JVbFxIXTbwCXhhsjBiBwZonXPJfxcPdoq
+RCaSnIopLCS3XdeqhBgPxLBg40Ynioe7lhvndB5XeICc0iU50Igua3fQQSU1FpZjX365yba2pWdZ
+zar9/O9sBKsWtNCOZRSYRkeTFJ9YRb9UEtECH2szcwND5fRxM3et3HI137PY0HfZ444raLvijkmr
+VYUcUbK5NqRsMhs7UmNKx/jYYPZ4/1FFFV108Tcp8pliuOH32PPO4YZn5ArjpTgO+UuMm1JKohCF
+Rnda3fkVGQJVUNHKbX9f3gUVpbijekaht6L62u+EXsrsiZsi++wZ2c7F7KNj/hBclLlk0FqRxQ54
+4KEnHrrNgFXBBfP/vBJ6F510kvgBnQQu+OXvaP93Kwe5g7sruIvfSkL20H5AKWrfbNjv7RAOmfRU
+4B066YAbXkpgf3uivz22O14Xane47QHwcH97CgIG2AlSOK8TJamC0rDXhdlxwhWJq0paLNIX30mF
+OVCT2gFelxHHkFBqJMzICFdXwhW6wzwFc9rApCY15tBmai0BnkOcsrfs+DB4OxENSzhq88MiDkiI
+C0EAv4zoQ8RsTjlLZKJxBPTEgnBGiq/xYEMCg8UpHqeHXSSMFrc4xjC+BTZmjExAAAA7
+
+------=_NextPart_000_0000_01CA152A.28FC17E0
+Content-Type: image/jpeg
+Content-Transfer-Encoding: base64
+Content-Location: http://www.zytrax.com/images/dns_book_small.jpg
+
+/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQIBAQEBAQIBAQECAgICAgIC
+AgIDAwQDAwMDAwICAwQDAwQEBAQEAgMFBQQEBQQEBAT/2wBDAQEBAQEBAQIBAQIEAwIDBAQEBAQE
+BAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAT/wAARCACDAGQDASIA
+AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA
+AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3
+ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm
+p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA
+AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx
+BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK
+U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3
+uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD+DuW3
+sF8ZS22sPNBpi688WozWiET29v55WRo1IYhlXJAIPToa9/Twl+y6ZdKeD4w+OkW6bUTqxvvBBhbR
+Wiu4YtP2bN/2mOaBp53k+Ry0ez7Om7NfNusyF9Z1ORZBKJNVnczKpjEoLsdwUkkA9cEnr1NUAN2c
+Y5OcE1954geylx1nH1JKNP61W5UrWsqktFZyVktrSats2tTlwUX9Wg5dl+R9bal4Y/ZKsdMkfSfi
+r8Tdavo48Jpk/hOHSo55Y/OJIuNkoVD5UKo2xmIuNrBAp3VrDwh+zJPqtxBefGPxRp2lpqsdtY38
+ngaa7mFk1hHI915aISzi6DwGAiAKr+YuRGqP8tKMsD2AwfWrS4IAxk9TxnFfJnUfSzeFP2bV1pbG
+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
+1Kbeq6sIfChx6/gP5UUUV67lK71KP//Z
+
+------=_NextPart_000_0000_01CA152A.28FC17E0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.zytrax.com/images/somerights.gif
+
+R0lGODlhWAAfAMQAAGl6afT29HOEc+rs6n6Nft/j356qnr/Gv7S9tE5fTsnQyZSglG6CbqmzqdTZ
+1EdVR4mXif///wAAAF5xXgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAA
+AAAALAAAAABYAB8AAAX/oCSOZGmeaKqubOu+cCybUR1J9p3beC3muJ7vFuQBhbqhUTn8CZ/OEVEX
+pUqd1qqWNA1Gv93w1QsUk6G8Yg9ZTbuZybjW+MXaz8Q5fjs2c717altldHg+e2WDblhwT2GHS3kz
+k5SVlpeYlDubnJ2en6ChopwME6anqKmqq6ytrq+wrAmlsbW2rg0Nt7azu76xEDWmwr+vva4CuQ0G
+AqsCBg0EEwAQBADSANDSps8NEKbBEeAQAuTjAAAL3r/HqwQONQUDNQ7NpwY5CMEBAQ4EATYOTAhX
+IEKBBTnC4XMwgUCEAALm0fPVLhWEAAMMnMo2IMA2ATW8FThA0MA8CADg/xFo4GDBBHjqaqCsAUBY
+gwgHFERoAOBABI23Kp76dwCAKgAFPE5YiCpYgYYRBuSCp2ulA4AQwg0TpxNC15ANfDIMSitVgQJG
+VwEYwPDmWHARGO5zQNdBAwRRD5zUOkEYvgYY+8ati2CX0AkIvzW0V84UQgIIB4wLxhBkAKMra0Yw
+WjArMWE15xUG2KynPV5lTyGQjLQjAnzymgXQVZAtRoRjdRZAAHABwAM+I8yM61DcBJ0RpN2UOk8X
+WVV0l24WICBA4W0OBPYEqEDAu8LTVsd1CaGgAgQtJwBOHh2xAwWnGswrAPR5qug3T+1E9d4UNXPc
+ZGVPVv8ZJeBAKBGI4P9pWSlWYFanlIPSKocdUFkACigAXAGANSPVUgCFNAFeNuhSQ4hnnQiSQfEU
+9JB3LkZFQDghtpWDc6gchk8zK/EEQC7fgLRAdTuV5wBsC/gmXA0HKKmAkjdFgICTUMJD0nLh5FID
+SANkdcA2OabmH4auKBCAdE9N89JPptxE4jfwwLkTTWvKSeIpzX0WwYocKpbKYeqxuQo+LrnFn3Bt
+RoCcnHJGaUqca8Jj3JqOCraURFKqAugEPiGQln86gReZKTP65JypMtVJKTGQUkUnAADhY5ww32RD
+TJitrGcXSw/VN0FBu/ETTk4vptrqnMYde1dU8inKl0zMiqWpmKkkU5c9XZ+CWoMC0pS3rTR0SYOe
+uEe2N+6IR6o3z2zXtBedAS4WNW0x9NZrbwIJPKDvvvz26++/AAcs8MAEA5xACAA7
+
+------=_NextPart_000_0000_01CA152A.28FC17E0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.zytrax.com/images/facebook.gif
+
+R0lGODlhEgASAPcAAAAAAAAAgACAAACAgIAAAIAAgICAAMDAwMDcwPDKpgQEBMbw8AAHAA0AAAAA
+JCAdwggICAAOABsAAAAASQwMDAAUACgAAAAAbQgJK41OPxEREQAdADkAAAAAmw4OLBYWFgAlAEkA
+AAAAyBEROxwcHAAvAF0AABcXRSIiIgA6AHEAAAoF/0kRERwcUykpKQBFAAAW/ysA/yEhbFkUFDAw
+MABRAKAAAAAi/0MA/zE5AFYhHUcaahkyZzk5OQBhAL4AAAAx/2EA/2ooE1MgexZDZ0U+AS4u4kJC
+QgBwANwAAABA/38A/yJMZSZZFlFGBGguSUoyhQdSj2oYuJAjFU1NTQBT/6MA/2pKEnUzbEpBmiRf
+YDdlC6QsFYMfsU4s/yBRtghkklVVVQCQAP8OAP8ATQBh/74A/29WC4U5allDrShmdjZyEgJ3hTRI
++JYit7AzF19fXwChAP8fAP8AqABx/98A/3dfH4lHcWJPrDZue0R4I7BDHOnspbctfaUk4ACGlTZa
+7WlpaQCyAP8wAACC/3puI5RScHNWtUR1kEiENiafAAqUiSpv+axbAcwygqcu/tE/Mnd3dwDKAP9I
+AACa//8Y/4V9M6BieoNkv1aBn1aRSjp9/yKboiSqTKB5AMJYUsZDuuRBcIaGhgDjAP9hAAC0//8y
+/5WMQa9xi5F0zWORrmefWDiiySW3jDa8QnOpAdBvPOJZf9FTzpaWlv99AADP//9N/6CeVL2Dk6SD
+03iewXaucD+4zULPTWjKAampANmFPupwgSDTlY5eQi3/AP+UAAD/ewDm//9l/7GsWtGOo7OP7oGu
+0oC/eEbK20zcZ4nPC9+aPfmAgLKyslz/AP+sAP98/7Kk/7LBZt2cs4jIs/X2zUze4FHxabHQGP+a
+ZZH/AP/HADT///+Y/5TW2LDYgd/AgsPcN37skB0vvsf/AP/iAGn///+z/8jpauPj46L////Q//Hx
+8f//gND////n//D7/6SgoICAgAAA/wD/AAD///8AAP8A////AP///yH5BAEAAAAALAAAAAASABIA
+AAjRAAEIHEiwYEEUJ1C0OMHwRIuHD0mQGJgHzxc1gPKowVMRDyJAiFwMzKJmo5oveEBmUqXqkBoZ
+Al0wwaOGJE1Eqv7pzKSGh0AaTL6gPAlS5048IgEApQloIyI8OnUdoglTKck0TjPp0slMVaYvSWVi
+/ZImj1GjmfDQ+MmkJNOzO7MkXXqxaUqdqj6C/WmT5s2jiNS0YFsxz1NEiKI+Rco3UyZMjjOlipoq
+U56wWTIhcgw58b/IjJWGYcIkC+nSp02HSXqEhmsXrmnAfh3boG2DAQEAOw==
+
+------=_NextPart_000_0000_01CA152A.28FC17E0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.zytrax.com/images/technorati.gif
+
+R0lGODlhEgASAPcAAIG8PInASN/uztDmtufy2sDdnff786nRecjiqbDVhaHNbZnJYe/35////wAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAA0ALAAAAAASABIA
+AAh8ABsIHEiwoMGDCAsOOBAAAIAABwYgNLDAoUWLCgwUpOhQAQIBAhAocLhA48ACDhEYROCwAMGG
+CRAmeEjQoQCEAhzWBCDx4ACdAw88JGCQQMMDBI0+LMBAIIMCDQMQJfjz4sUAPQtatZigadGlIEEm
+bCAggcmxaNOqXUswIAA7
+
+------=_NextPart_000_0000_01CA152A.28FC17E0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.zytrax.com/images/digg.gif
+
+R0lGODlhEgASAPcAANvb2/n5+dfX1/Dw8O3t7dLS0tXV1c/Pz+np6dDQ0Pj4+Pb29szMzO7u7vX1
+9dbW1vLy8vv7++Xl5eLi4tjY2N7e3qioqP///5mZmf///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABcALAAAAAASABIA
+AAiZAC8IHEiwoMGDCBNaWLgQg0EMEAdaIOiQosAAFSc6ICChosCKAQZMwLDwAscKJCdecBhyggAM
+ESZKqPAAA4WKDkUKOIABI8SfNz9ecHmAAYYFFZJSWBr048+UJhFImIDSo1CBE6VSBWD16gWZW5sO
+/Il1aAULFAxY9ehwYgUAFgwUWKsAQoO2FwBQsFAgwdqnK5+STUi48MGAADs=
+
+------=_NextPart_000_0000_01CA152A.28FC17E0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.zytrax.com/images/delicious.gif
+
+R0lGODdhEgASAPcAAAAAAN3d3QAA/////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAASABIA
+AAhPAAcIHDhQgMGDBwkqRMhQIUGGCB0WhGhQokCKFS1iFGBxwMaOHzViBECyZMkAKFOmNMlSpUuW
+Jl2qhHlSJkqaJG3exKkzAE4APX8G5akzIAA7
+
+------=_NextPart_000_0000_01CA152A.28FC17E0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.zytrax.com/images/furl.gif
+
+R0lGODlhEgASAPcAAAAAAIAAAACAAICAAAAAgIAAgACAgMDAwMDcwKbK8EAgAGAgAIAgAKAgAMAg
+AOAgAABAACBAAEBAAGBAAIBAAKBAAMBAAOBAAABgACBgAEBgAGBgAIBgAKBgAMBgAOBgAACAACCA
+AECAAGCAAICAAKCAAMCAAOCAAACgACCgAECgAGCgAICgAKCgAMCgAOCgAADAACDAAEDAAGDAAIDA
+AKDAAMDAAODAAADgACDgAEDgAGDgAIDgAKDgAMDgAODgAAAAQCAAQEAAQGAAQIAAQKAAQMAAQOAA
+QAAgQCAgQEAgQGAgQIAgQKAgQMAgQOAgQABAQCBAQEBAQGBAQIBAQKBAQMBAQOBAQABgQCBgQEBg
+QGBgQIBgQKBgQMBgQOBgQACAQCCAQECAQGCAQICAQKCAQMCAQOCAQACgQCCgQECgQGCgQICgQKCg
+QMCgQOCgQADAQCDAQEDAQGDAQIDAQKDAQMDAQODAQADgQCDgQEDgQGDgQIDgQKDgQMDgQODgQAAA
+gCAAgEAAgGAAgIAAgKAAgMAAgOAAgAAggCAggEAggGAggIAggKAggMAggOAggABAgCBAgEBAgGBA
+gIBAgKBAgMBAgOBAgABggCBggEBggGBggIBggKBggMBggOBggACAgCCAgECAgGCAgICAgKCAgMCA
+gOCAgACggCCggECggGCggICggKCggMCggOCggADAgCDAgEDAgGDAgIDAgKDAgMDAgODAgADggCDg
+gEDggGDggIDggKDggMDggODggAAAwCAAwEAAwGAAwIAAwKAAwMAAwOAAwAAgwCAgwEAgwGAgwIAg
+wKAgwMAgwOAgwABAwCBAwEBAwGBAwIBAwKBAwMBAwOBAwABgwCBgwEBgwGBgwIBgwKBgwMBgwOBg
+wACAwCCAwECAwGCAwICAwKCAwMCAwOCAwACgwCCgwECgwGCgwICgwKCgwMCgwOCgwADAwCDAwEDA
+wGDAwIDAwKDAwP/78KCgpICAgP8AAAD/AP//AAAA//8A/wD//////yH5BAEAAP4ALAAAAAASABIA
+AAikAP0JHEiwoEEACBMqRFgQwL6HEH9I/PEQwEAALzJmPHHiFQIEB95ktOgPAMeTJw78W/nvDEeS
+JlF+WGnPy5uTMGWeWfnqA8qcHM+cesfzlMuXAmN+sMeS5SucSTl+OGWKpqlTPpGWPPnBy8p3Fz5k
+PQEz69SVWGWWFfvh1covbNmu/XCB6b+wcT/MnfnPHt64JEteGPyg8ODDFwInXcjYoOPHAQEAOw==
+
+------=_NextPart_000_0000_01CA152A.28FC17E0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.zytrax.com/images/stumbleupon.gif
+
+R0lGODlhEgASAPcAAAAAAP///wBJkgBKkgpMjQpIhxZJfmWBnVhwiFhtggBSmwdOkCFUgQBZpQBZ
+ogBWngBTnABUmwBUmABSlgBSlQFZpBZThwBiqgBepQBbowBcowBaogBcoAVdnwhZlmKFnwBuuABu
+twBorQBlqgNssgVlqQZmqgpuswBvuAButgFzu2ybuaLN5yB7raLO6KLN5gFuqAh3sg2HxBB2qBeD
+uRV4rR+AtE6bwqHS7J25yBF/tBeLwy+VxFOs11mx2W+32oOzyX/Q7a/j9pja7uP3/b/p8/j9/uz7
+/fb9/vX9/u38/fj+/vr+/vv+/vr9/fz+/urs7P3+/vn++9/x5fX++Or98M/73Ov98Or977/0yur9
+7sT4zGbcc3bhhILdjBPBIxS1Ihe7Jxq+KR/GLiLMMiHJMCHJMTzKShq6JyXGMSjANSzENg+2GCzF
+NQPJCCDaJDTyOTjfPdD20c/10ADSAADRAADQAADPAADBAAC8AAC7AQC0AQCzAACsAAHQAQHFAgGs
+AQLUAgK3AwO9BQXUBQnZCQvfDAvaCwrKDArCCwzFDA7fDhPoExnrGSjsKEfeR0PJQ3rbeoTrhHzO
+fHXCdf7+/v39/fz8/Pv7+/r6+vn5+fj4+Pf39/b29vLy8vHx8erq6unp6ejo6OXl5ePj4+Dg4N/f
+39bW1szMzMbGxsXFxcPDw8LCwq+vr66urqysrKmpqaioqJSUlJKSkpCQkIqKioiIiIeHh4aGhn5+
+fnFxcXBwcP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAEALAAAAAASABIA
+AAj/AAMIHEiwoEGBlS5p4tSp0yZMlQxiClBJjqQ4jAw9ikTqE8SClebAabSoUKA6dBChCqUpIsI5
+jg4R8mOnzp07eqawEpUJoZw3f76MMVOGjBs8ea7kWAVKoKVJg7IsOXJEyRMrgvZgeXEAlcBMkNpU
+6nGihIkbldD0qcKCwSuBmxKxoUJEiI8JLSqp6aPFBQVZAjkpApSmyxYmNWxUWsMHCw4JtgJTEhMG
+DJcoM2Ik8XJGyg8LtwRqgtLkyRMjQyo0CILESRESCGYJxDSKBw0dMCKMwCBCxg4OBXbBQvgJiIoQ
+KUCgCIHigoIFCGqlGqip1IoODzZoyOAAAgEEuVyZKRpYydMpVx88CBhgIIGuWq1OeSJ4yZMpVbFo
+4cI1C1YqU55cctCABAUEADs=
+
+------=_NextPart_000_0000_01CA152A.28FC17E0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.zytrax.com/images/reddit.gif
+
+R0lGODlhEgASAPcAAP///+jo6MrKyoODg6SkpKWlpYKCgszMzIqKinZ2dn19fXR0dPf394WFhZSU
+lJycnH9/f4aGhv39/VhYWG9vb8fHx6ampqurq5CQkIuLi4eHh66uru3t7cnJyXx8fIiIiPr6+ldX
+V8jIyGZmZv7+/v+CU729vfn5+ZGRkbGxsf+NZP+/p83NzS8vL+fn5//l3Ht7e9PT0/Hx8fz8/JOT
+k35+fsDAwJmZmf+JYmFhYdvb3P+JZM/Pz+/v73Nzc/9nL+Dg4P+JXcXFxWlpaf+piJqampeXl5ub
+m6Ghoerq6uHh4by8vLu7u+vr6zc3N21tbXh4eP8dAGRkZKCgoP+CWUdHR//m3bOzszg4OFZWVlRU
+VOnp6aenp56enl9fX1NTU1paWv/Swf/6+f/OvYSEhO7u7piYmEBAQNbW1jMzM46Ojnd3d8bGxnBw
+cFtbW/++p//+/l1dXU9PT2JiYsPDw93d3Xl5edzc3HV1dZ+fn5aWlmpqav8hAKqqqtLS0uPj4+Tk
+5P/Uw//RwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAAALAAAAAASABIA
+AAj5AAEIHDgQUAMLdVKEgCGDoEMACKAcSYCFg4INDweCoBBAYAI9XipkFBhjwcAeSAQ8PGGCxoA4
+choU4eGwSQ0KHp4kuOAnQIAOXXy0GbAHxQwyDxaA0THSxpk+Hwh4MLCABIAVOF4IDEQlDIAAcww4
+YNICCAAxP/gQEVgiShCBBJwoASBFIJw3KqwIFLRjjEABGQSuOTCSoJE8AoVMKAOAgRkRW1xcKSAQ
+zYQkAx+EYANAAAQ7eAbcAcDlC2GCLEa4KdDhgIAKN6oo+JMxh5YpHxBowGAhDYKMBLI4cChBwZAl
+xA0UwOCQQYQLgQmCiLBBjUMOEOhoGBgQADs=
+
+------=_NextPart_000_0000_01CA152A.28FC17E0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.zytrax.com/images/mail.gif
+
+R0lGODlhEgASAPcAALq6uu7u7urq6vf39/j4+OPj48rKytzc3M7OztjY2KampqKiovv7++/v7/7+
+/uLi4vDw8Ozs7NLS0svLy66ursDAwL+/v6Wlpfb29vHx8aysrOvr693d3c/Pz8LCwrW1tYaGhrS0
+tMPDw4+Pj8jIyMzMzI6OjuHh4ZSUlHl5eb29vZ+fn5ycnO3t7WhoaPn5+aioqNPT025ubru7u9ra
+2tfX105OTqenp7a2tpiYmNTU1N7e3i0tLUFBQbKysqurq9/f315eXlxcXNnZ2T8/P4CAgFdXVzAw
+MPT09HR0dLi4uPz8/KqqqsHBwTMzM+Tk5Ds7O8nJyV1dXcfHx1lZWTIyMi8vLy4uLoyMjPLy8mFh
+YeXl5fX19Y2Njefn50RERHFxcc3Nzebm5jo6OqGhoejo6FtbW4GBgZWVldDQ0FRUVL6+vlpaWmdn
+Z/39/f///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAG8ALAAAAAASABIA
+AAhGAN8IHEiwoMGDCBMqXHgQjsOHECPCEeiQYcU3EycmzEixY0OPGjEaDKkxpMiBJksWVEmQZUuT
+IBnGlOlyYUmJOC/K3IkwIAA7
+
+------=_NextPart_000_0000_01CA152A.28FC17E0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.zytrax.com/images/pf.gif
+
+R0lGODlhEgASAPcAALq6uu7u7urq6vf39/j4+OPj48rKytzc3M7OztjY2KampqKiovv7++/v7/7+
+/uLi4vDw8Ozs7NLS0svLy66ursDAwL+/v6Wlpfb29vHx8aysrOvr693d3c/Pz8LCwrW1tYaGhrS0
+tMPDw4+Pj8jIyMzMzI6OjuHh4ZSUlHl5eb29vZ+fn5ycnO3t7WhoaPn5+aioqNPT025ubru7u9ra
+2tfX105OTqenp7a2tpiYmNTU1N7e3i0tLUFBQbKysqurq9/f315eXlxcXNnZ2T8/P4CAgFdXVzAw
+MPT09HR0dLi4uPz8/KqqqsHBwTMzM+Tk5Ds7O8nJyV1dXcfHx1lZWTIyMi8vLy4uLoyMjPLy8mFh
+YeXl5fX19Y2Njefn50RERHFxcc3Nzebm5jo6OqGhoejo6FtbW4GBgZWVldDQ0FRUVL6+vlpaWmdn
+Z/39/f///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAG8ALAAAAAASABIA
+AAj/AN8IFOiAwIABGBIScDCw4Rs3Fxb4UADjhgYmK7I4FDjARYcEaWJISHBAy4GNbwiwQIkFCMoA
+KVCiOLFxQBEpKNto2AgAjAqUJoIwaLghCQ8XH1aQaPEBxQwhV0JwEUhDwYEaOwo8UWAjDIctHIZI
+YDHUQI4MEAJ4KfMAgIAAEQJkOGDixRsEIwxYsLCmQpQpHiyoqNBERJehHQCgdAiBQoM3JXAsfsOQ
+QYQFGSBTcNBAgIAWDRrA3bABSQEyEN4USLEAjRMiUKpYOdJjzBcNI0AIfHFBxxsPCADAUEBBBAkE
+SwxcGFhhgRkjVEAAUBJCBhs1Z37QFEhADAIDExIUCnjwQMKE8AIEBgQAOw==
+
+------=_NextPart_000_0000_01CA152A.28FC17E0
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: http://www.zytrax.com/images/feed-icon-14x14.png
+
+iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABGdBTUEAAK/INwWK6QAAABl0RVh0
+U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAJDSURBVHjajJJNSBRhGMd/887MzrQxRSLb
+FuYhoUhEKsMo8paHUKFLdBDrUIdunvq4RdClOq8Hb0FBSAVCUhFR1CGD/MrIJYqs1kLUXd382N35
+6plZFOrUO/MMz/vO83+e93n+f+1zF+kQBoOQNLBJg0CTj7z/rvWjGbEOIwKp9O7WkhtQc/wMWrlI
+kP8Kc1lMS8eyFHpkpo5SgWCCVO7Z5JARhuz1Qg29fh87u6/9VWL1/SPc4Qy6n8c0FehiXin6dcCQ
+aylDMhqGz8ydS2hKkmxNkWxowWnuBLHK6G2C8X6UJkBlxUmNqLYyNbzF74QLDrgFgh9LLE0NsPKx
+jW1Hz2EdPIubsOFdH2HgbwAlC4S19dT13o+3pS+vcSfvUcq9YnbwA6muW9hNpym/FWBxfh0CZkKG
+kPBZeJFhcWQAu6EN52QGZ/8prEKW+cdXq0039UiLXhUYzdjebOJQQI30UXp6mZn+Dtam32Afu0iy
+rgUvN0r+ZQbr8HncSpUVJfwRhBWC0hyGV8CxXBL5SWYf9sYBidYLIG2V87/ifVjTWAX6AlxeK2C0
+X8e58hOr/Qa2XJ3iLMWxB1h72tHs7bgryzHAN2o2gJorTrLxRHVazd0o4TXiyV2Yjs90uzauGvvp
+pmqcLjwmbZ3V7BO2HOrBnbgrQRqWUgTZ5+Snx4WeKfzCCrmb3axODKNH+vvUyWjqyK4DiKQ0eXSp
+FsgVvLJQWpH+xSpr4otg/HI0TR/t97cxTUS+QxIMRTLi/9ZYJPI/AgwAoc3W7ZrqR2IAAAAASUVO
+RK5CYII=
+
+------=_NextPart_000_0000_01CA152A.28FC17E0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.zytrax.com/images/print.gif
+
+R0lGODlhgwAoAPcAAMbGxk2FuNbk7ry8vFN4mPLy89jY2Ovr6xtZkqfD2uTk5BpXjpaWl7rQ4R9I
+bB5ko2iYxKOjpJi51OLs8yptq7PM3////zdmkXiiyHiRpuvx9qG/1dzn8PH1+czd6T17szR0rsDV
+5IGqzpezyfb3+RI7YIit0MbZ5mCFpI+dqfj6/B1gnRxdmMra5dHg6y1wrc/Pz5KpuYyx0np8fVyQ
+vjRvpY2wycPW5vz9/hdOfx9nqKusrLGyssPP2cDHywAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABYALAAAAACDACgA
+AAj/AC0IHEjQQgEPDRokSFChQYsDJCIWnEixosWLGDNq3MhxoosEEjZsWLhQpIQELQpI7MiypcuX
+MDkkGNkwxI2bN0I0qDAzgYsCKknAHEq0aEsXFU64EDBhgoanUJtycHEiKVChRrNq3XqjgQcOTjuQ
+UEG2LIkOGiZwQNjgwNWtcOOyROiCg4YOZfPqRTvBRQgMAwILHky4sOHDiBMrXszYcEUBIVw4HcuT
+pOWFA/CmddGAxuXPoEOLHk26tOnTCQZI6FBQQ4O6GsaSID2AAw4SGtZWRs27t+/fpDEUIHjihF28
+KmbXhho1NQcLyXOfsAG8uvXrpUcMdC3gLlnoqXHg/9BrIfUEC+M79FWIvb176y8UCGxhvANe9MpD
+QxhwHr90DO8FKOBp2lnw2gRjWRBCYKmJJpgEZKnngWg/VPjDdRZmiMGFvGU4IEk0FMCdBirgMIFl
+A6QlwIoraiDCACTdYAFanIX2w0kJcEiSBDp+1qNlNy5kwo854ghakBV+mEAAB3Bwg10lmuBcaiJ8
+hgFgNWamggaQ2ShlkacN6aWQRJL2w5dltsekC0+SKMBCJKYmQWEyADYBDjAOsGWXR6K5kIViblhB
+kjkSetmZZBZKEoeD/ohojn8aWugNHFp42gcHtBACUx2ckIAJaKV2F3P2ASbAbKmpV2OfDF04JIBi
+Kv866KdpPjqklBsCeOGGrDpaaaSQ/mkaCAq0UMFXGtyQ2gCADSCCCSJE+2yVg4kqgLE2WhgArYkG
+K2asPn4JLqKVEmnpopb2eGGGaV5GbAsJ3FAXe77V5kEIFH7ZbawcfluruDqSS9KsQOoLJo/BChsk
+ajUo4MIGDgnAE4yo5SlAVSOxSlKs/CbKq8bjSqnuoQaX2yqwAZvW8AEbVCDvxCzGLHPMJw3gVwVG
+HgogSR/z2nO55u78cY66Xlnhbn/ujC7C8VZIaaQ/IC0asQcsFIIHMM+s9Yo1I5SA0kqGLRrTvRGg
+wAE9QFxVahW07fbbcDeQJ8YEiG23jSP8RsABByj/MBK+wA2AL3V3F17oDxn7hoJbCqTd0G8DtL1B
+3YZXXl0Kbh1gAE1KLbX1zFQpBLblpJ/Ggg9A9Q3DSRWE0IIHLsQu++yxe9BCVwnY4EDpvJ+WgQIk
+FNC3AT6wHsIJsNM+uwcnhMDTCLv3Ln1oCKAAwwEWBK/6ACO03MDxr3sgvvj06VTBBrpPr/5lF2Rw
+PVbCK2AADNzT9P0NxeVv/kwZOOD///67gAAHSAACDPCACCRgAQuYwAY2cIEQjKAEJ0jBCqIgAzww
+AEQGoj0FwAAAA9hB9xYCt7bNJAYzSKEKZ8AABkRgBzwYDABA2JgZ2rAxhLGhDnfIwx768IcAgIEB
+4hQwnILEb34g3EEEYjCCkIhkAxIYQQpaSMUWvpAHQTTAEBVwNr71jYtgDCMYvUhGMZrRjGRMoxrX
+yMY2qlElFOkgEgfAgwjYkQEpmGIVrXjFAWTxbHCUiyAHaZAjfpCOSrRjBKqoyD7+0S1YIaQk4ZI6
++R0SkYls5A5gGJhHvmWSoMxK8I44Rzry4JSojKEfhThEtwQylLAkyii/qMUPzlCGM2QlF10ZyVj6
+Eiapo2UtYUBMYmpxi3wLyi+XOZRZfhGMxwxjMl/JzGq6ZJTCayNQqGnNbl4Tm9vc5kq8Sc6JBAQA
+Ow==
+
+------=_NextPart_000_0000_01CA152A.28FC17E0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.zytrax.com/images/protectedbyspf_13a.gif
+
+R0lGODlhMwAzAPcAAAAAADMAAGYAAJkAAMwAAP8AAAAzADMzAGYzAJkzAMwzAP8zAABmADNmAGZm
+AJlmAMxmAP9mAACZADOZAGaZAJmZAMyZAP+ZAADMADPMAGbMAJnMAMzMAP/MAAD/ADP/AGb/AJn/
+AMz/AP//AAAAMzMAM2YAM5kAM8wAM/8AMwAzMzMzM2YzM5kzM8wzM/8zMwBmMzNmM2ZmM5lmM8xm
+M/9mMwCZMzOZM2aZM5mZM8yZM/+ZMwDMMzPMM2bMM5nMM8zMM//MMwD/MzP/M2b/M5n/M8z/M///
+MwAAZjMAZmYAZpkAZswAZv8AZgAzZjMzZmYzZpkzZswzZv8zZgBmZjNmZmZmZplmZsxmZv9mZgCZ
+ZjOZZmaZZpmZZsyZZv+ZZgDMZjPMZmbMZpnMZszMZv/MZgD/ZjP/Zmb/Zpn/Zsz/Zv//ZgAAmTMA
+mWYAmZkAmcwAmf8AmQAzmTMzmWYzmZkzmcwzmf8zmQBmmTNmmWZmmZlmmcxmmf9mmQCZmTOZmWaZ
+mZmZmcyZmf+ZmQDMmTPMmWbMmZnMmczMmf/MmQD/mTP/mWb/mZn/mcz/mf//mQAAzDMAzGYAzJkA
+zMwAzP8AzAAzzDMzzGYzzJkzzMwzzP8zzABmzDNmzGZmzJlmzMxmzP9mzACZzDOZzGaZzJmZzMyZ
+zP+ZzADMzDPMzGbMzJnMzMzMzP/MzAD/zDP/zGb/zJn/zMz/zP//zAAA/zMA/2YA/5kA/8wA//8A
+/wAz/zMz/2Yz/5kz/8wz//8z/wBm/zNm/2Zm/5lm/8xm//9m/wCZ/zOZ/2aZ/5mZ/8yZ//+Z/wDM
+/zPM/2bM/5nM/8zM///M/wD//zP//2b//5n//8z//////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAPgALAAAAAAzADMA
+AAj/APEJHEiwoMGDCBMqXMiwocOHCwNJlAixokJErK5p3DiLVSCLIPEhujaLZMmTGkt+DNnQlKxW
+KaORjFbyGsySHlle5CizZkmYJFPOWqmzYKCZKFEGrQm0FdGi+DIqnSXzZk+b1wS1wvlUZ0agWEta
+qykr6CAXKa91DcnK57WyS2lek2tKwda5JbtAbRv35NWlLwalVVm0rUxPc+Z4yniNlafHe6Bdk+Ki
+1Cc9nj6VZaWX5dFretp4KsWGTcY5bPTMkTMHC4Eoc/JgyjNHKiCdI2exIYXT9DXUGlvNQeEidNCY
+FNmWnCO6FCu5qH9GUZDFE5uSckkmB4mXVZ7SqaHN/0KtmI6CF62+g9cTNNAVlkElzyqlh42n32xK
+lXKRAi0mNqawIiBe21nUFiv5bcTGHPjZ5AIBJAE3mFpcsCSIRqg5RwcSpTSYBQE1YMhGXNqt9dAh
+NrFCR2mKkYTYIAqgINgsiFHlUzRWmOhQKTUdt9Q1WBSAVlrHlSRLjl4dh8ULLgwCUysxZuEXU1gV
+CFIgJ7WSQowENDkICgtceFNKY9mEZGFYIdJKFi8Q4GZgbgFVUyBd6AhRIALKkh0N/REAU3YxdXRm
+USysgNGY1wxCgJRBtVImV1aCZAUAAJDQhYA2XpMIY3E2RqedD01KKQAr4OmjVW4hokedUIlK6Qox
+PHFxKVJkYuVRjqA65CqpVuS4BxcS+UUSK4dcgStU+Oy6Qq8G9bpqr8cim+yovFohLUTKMnutrtQu
+a+22DWX7LbgLiUsuQ+aeq1C66iLEbrvNdqstvPGO6i29B72LL0ErvDrvvgZVC/DABBds8MEIJwxR
+QAA7
+
+------=_NextPart_000_0000_01CA152A.28FC17E0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.zytrax.com/images/more.gif
+
+R0lGODlhBwANAPcAAAAAAIAAAACAAICAAAAAgIAAgACAgMDAwMDcwKbK8EAgAGAgAIAgAKAgAMAg
+AOAgAABAACBAAEBAAGBAAIBAAKBAAMBAAOBAAABgACBgAEBgAGBgAIBgAKBgAMBgAOBgAACAACCA
+AECAAGCAAICAAKCAAMCAAOCAAACgACCgAECgAGCgAICgAKCgAMCgAOCgAADAACDAAEDAAGDAAIDA
+AKDAAMDAAODAAADgACDgAEDgAGDgAIDgAKDgAMDgAODgAAAAQCAAQEAAQGAAQIAAQKAAQMAAQOAA
+QAAgQCAgQEAgQGAgQIAgQKAgQMAgQOAgQABAQCBAQEBAQGBAQIBAQKBAQMBAQOBAQABgQCBgQEBg
+QGBgQIBgQKBgQMBgQOBgQACAQCCAQECAQGCAQICAQKCAQMCAQOCAQACgQCCgQECgQGCgQICgQKCg
+QMCgQOCgQADAQCDAQEDAQGDAQIDAQKDAQMDAQODAQADgQCDgQEDgQGDgQIDgQKDgQMDgQODgQAAA
+gCAAgEAAgGAAgIAAgKAAgMAAgOAAgAAggCAggEAggGAggIAggKAggMAggOAggABAgCBAgEBAgGBA
+gIBAgKBAgMBAgOBAgABggCBggEBggGBggIBggKBggMBggOBggACAgCCAgECAgGCAgICAgKCAgMCA
+gOCAgACggCCggECggGCggICggKCggMCggOCggADAgCDAgEDAgGDAgIDAgKDAgMDAgODAgADggCDg
+gEDggGDggIDggKDggMDggODggAAAwCAAwEAAwGAAwIAAwKAAwMAAwOAAwAAgwCAgwEAgwGAgwIAg
+wKAgwMAgwOAgwABAwCBAwEBAwGBAwIBAwKBAwMBAwOBAwABgwCBgwEBgwGBgwIBgwKBgwMBgwOBg
+wACAwCCAwECAwGCAwICAwKCAwMCAwOCAwACgwCCgwECgwGCgwICgwKCgwMCgwOCgwADAwCDAwEDA
+wGDAwIDAwKDAwP/78KCgpICAgP8AAAD/AP//AAAA//8A/wD//////yH5BAEAAP8ALAAAAAAHAA0A
+AAgkAAH8G0gQgECC/wweHKhwYcODDwVGnJiwIUOFBQ0i1LgR4cCAADs=
+
+------=_NextPart_000_0000_01CA152A.28FC17E0
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://pagead2.googlesyndication.com/pagead/show_ads.js
+
+(function(){=0A=
+var i=3Dtrue,l=3Dnull,m=3Dfalse,n=3D(new =
+Date).getTime(),aa=3Dfunction(a){var b=3D(new =
+Date).getTime()-n,c=3D"&dtd=3D"+(b<1000?b:"M");return a+c};var =
+o=3Dthis,ba=3Dfunction(a,b,c){var d=3Da.split("."),e=3Dc||o;!(d[0]in =
+e)&&e.execScript&&e.execScript("var "+d[0]);for(var =
+f;d.length&&(f=3Dd.shift());)if(!d.length&&b!=3D=3Dundefined)e[f]=3Db;els=
+e e=3De[f]?e[f]:(e[f]=3D{})},p=3Dfunction(a){var b=3Dtypeof =
+a;if(b=3D=3D"object")if(a){if(a instanceof Array||!(a instanceof =
+Object)&&Object.prototype.toString.call(a)=3D=3D"[object Array]"||typeof =
+a.length=3D=3D"number"&&typeof a.splice!=3D"undefined"&&typeof =
+a.propertyIsEnumerable!=3D"undefined"&&!a.propertyIsEnumerable("splice"))=
+return"array";=0A=
+if(!(a instanceof =
+Object)&&(Object.prototype.toString.call(a)=3D=3D"[object =
+Function]"||typeof a.call!=3D"undefined"&&typeof =
+a.propertyIsEnumerable!=3D"undefined"&&!a.propertyIsEnumerable("call")))r=
+eturn"function"}else return"null";else if(b=3D=3D"function"&&typeof =
+a.call=3D=3D"undefined")return"object";return b},ca=3Dfunction(a){var =
+b=3Dp(a);return b=3D=3D"array"||b=3D=3D"object"&&typeof =
+a.length=3D=3D"number"},da=3Dfunction(a){return typeof =
+a=3D=3D"string"},ea=3Dfunction(a){var b=3Dp(a);return =
+b=3D=3D"object"||b=3D=3D"array"||b=3D=3D"function"};=0A=
+Math.floor(Math.random()*2147483648).toString(36);=0A=
+var fa=3Dfunction(a){var =
+b=3Dp(a);if(b=3D=3D"object"||b=3D=3D"array"){if(a.clone)return =
+a.clone.call(a);var c=3Db=3D=3D"array"?[]:{};for(var d in =
+a)c[d]=3Dfa(a[d]);return c}return a},ga=3Dfunction(a,b){var =
+c=3Da.u;if(arguments.length>2){var =
+d=3DArray.prototype.slice.call(arguments,2);c&&d.unshift.apply(d,c);c=3Dd=
+}b=3Da.w||b;a=3Da.v||a;var e,f=3Db||o;e=3Dc?function(){var =
+h=3DArray.prototype.slice.call(arguments);h.unshift.apply(h,c);return =
+a.apply(f,h)}:function(){return =
+a.apply(f,arguments)};e.u=3Dc;e.w=3Db;e.v=3Da;return =
+e},ha=3DDate.now||function(){return(new Date).getTime()},=0A=
+q=3Dfunction(a,b,c){ba(a,b,c)};function r(a,b){var =
+c=3DparseFloat(a);return isNaN(c)||c>1||c<0?b:c}function =
+ia(a,b){if(a=3D=3D"true")return i;if(a=3D=3D"false")return m;return =
+b}function t(a,b){var c=3D/^([\w-]+\.)+[\w-]{2,}(\:[0-9]+)?$/;return =
+c.test(a)?a:b};var =
+ja=3D"pagead2.googlesyndication.com",ka=3D"googleads.g.doubleclick.net",l=
+a=3D"pubads.g.doubleclick.net",ma=3D"securepubads.g.doubleclick.net",na=3D=
+"partner.googleadservices.com",v=3Dt("pagead2.googlesyndication.com",ja),=
+oa=3Dt("googleads.g.doubleclick.net",ka),pa=3Dt("pagead2.googlesyndicatio=
+n.com",ja);t("pubads.g.doubleclick.net",la);t("partner.googleadservices.c=
+om",na);t("securepubads.g.doubleclick.net",ma);function y(a){return =
+typeof =
+encodeURIComponent=3D=3D"function"?encodeURIComponent(a):escape(a)}functi=
+on qa(a,b,c){var =
+d=3Ddocument.createElement("script");d.type=3D"text/javascript";if(b)d.on=
+load=3Db;if(c)d.id=3Dc;d.src=3Da;var =
+e=3Ddocument.getElementsByTagName("head")[0];if(!e)return =
+m;window.setTimeout(function(){e.appendChild(d)},0);return i}function =
+ra(a,b){a.google_image_requests||(a.google_image_requests=3D[]);var =
+c=3Dnew Image;c.src=3Db;a.google_image_requests.push(c)}=0A=
+function sa(a){if(a in ta)return ta[a];return =
+ta[a]=3Dnavigator.userAgent.toLowerCase().indexOf(a)!=3D-1}var ta=3D{};=0A=
+function ua(){if(navigator.plugins&&navigator.mimeTypes.length){var =
+a=3Dnavigator.plugins["Shockwave Flash"];if(a&&a.description)return =
+a.description.replace(/([a-zA-Z]|\s)+/,"").replace(/(\s)+r/,".")}else =
+if(navigator.userAgent&&navigator.userAgent.indexOf("Windows =
+CE")>=3D0){for(var b=3D3,c=3D1;c;)try{c=3Dnew =
+ActiveXObject("ShockwaveFlash.ShockwaveFlash."+(b+1));b++}catch(d){c=3Dl}=
+return b.toString()}else if(sa("msie")&&!window.opera){c=3Dl;try{c=3Dnew =
+ActiveXObject("ShockwaveFlash.ShockwaveFlash.7")}catch(e){b=3D=0A=
+0;try{c=3Dnew =
+ActiveXObject("ShockwaveFlash.ShockwaveFlash.6");b=3D6;c.AllowScriptAcces=
+s=3D"always"}catch(f){if(b=3D=3D6)return b.toString()}try{c=3Dnew =
+ActiveXObject("ShockwaveFlash.ShockwaveFlash")}catch(h){}}if(c){b=3Dc.Get=
+Variable("$version").split(" ")[1];return =
+b.replace(/,/g,".")}}return"0"}function va(a){var =
+b=3Da.google_ad_format;if(b)return b.indexOf("_0ads")>0;return =
+a.google_ad_output!=3D"html"&&a.google_num_radlinks>0}function =
+z(a){return!!a&&a.indexOf("_sdo")!=3D-1}=0A=
+function Aa(a){return va(a)||z(a.google_ad_format)}function A(a,b){var =
+c=3DMath.random();if(c<b){var d=3DMath.floor(c/b*a.length);return =
+a[d]}return""};var =
+Ba=3D{google_ad_channel:"channel",google_ad_host:"host",google_ad_host_ch=
+annel:"h_ch",google_ad_host_tier_id:"ht_id",google_ad_region:"region",goo=
+gle_ad_section:"region",google_ad_type:"ad_type",google_adtest:"adtest",g=
+oogle_allow_expandable_ads:"ea",google_alternate_ad_url:"alternate_ad_url=
+",google_alternate_color:"alt_color",google_bid:"bid",google_city:"gcs",g=
+oogle_color_bg:"color_bg",google_color_border:"color_border",google_color=
+_line:"color_line",google_color_link:"color_link",google_color_text:"colo=
+r_text",=0A=
+google_color_url:"color_url",google_contents:"contents",google_country:"g=
+l",google_cust_age:"cust_age",google_cust_ch:"cust_ch",google_cust_gender=
+:"cust_gender",google_cust_id:"cust_id",google_cust_interests:"cust_inter=
+ests",google_cust_job:"cust_job",google_cust_l:"cust_l",google_cust_lh:"c=
+ust_lh",google_cust_u_url:"cust_u_url",google_disable_video_autoplay:"dis=
+able_video_autoplay",google_ed:"ed",google_encoding:"oe",google_feedback:=
+"feedback_link",google_flash_version:"flash",google_font_face:"f",=0A=
+google_font_size:"fs",google_gl:"gl",google_hints:"hints",google_kw:"kw",=
+google_kw_type:"kw_type",google_language:"hl",google_page_url:"url",googl=
+e_referrer_url:"ref",google_region:"gr",google_reuse_colors:"reuse_colors=
+",google_safe:"adsafe",google_tag_info:"gut",google_targeting:"targeting"=
+,google_ui_features:"ui",google_ui_version:"uiv",google_video_doc_id:"vid=
+eo_doc_id",google_video_product_type:"video_product_type"},Ca=3D{google_a=
+d_format:"format",google_ad_output:"output",google_ad_callback:"callback"=
+,=0A=
+google_ad_height:"h",google_ad_override:"google_ad_override",google_ad_sl=
+ot:"slotname",google_ad_width:"w",google_analytics_uacct:"ga_wpids",googl=
+e_correlator:"correlator",google_cpa_choice:"cpa_choice",google_ctr_thres=
+hold:"ctr_t",google_image_size:"image_size",google_last_modified_time:"lm=
+t",google_max_num_ads:"num_ads",google_max_radlink_len:"max_radlink_len",=
+google_num_radlinks:"num_radlinks",google_num_radlinks_per_unit:"num_radl=
+inks_per_unit",google_only_ads_with_video:"only_ads_with_video",=0A=
+google_page_location:"loc",google_rl_dest_url:"rl_dest_url",google_rl_fil=
+tering:"rl_filtering",google_rl_mode:"rl_mode",google_rt:"rt",google_skip=
+:"skip"},Da=3D{google_only_pyv_ads:"pyv",google_with_pyv_ads:"withpyv"};f=
+unction Ea(a){return Ba[a]||Ca[a]||Da[a]||l};var =
+C=3Ddocument,D=3Dnavigator,E=3Dwindow;=0A=
+function Fa(){var a=3DC.cookie,b=3DMath.round((new =
+Date).getTime()/1000),c=3DE.google_analytics_domain_name,d=3Dtypeof =
+c=3D=3D"undefined"?Ga("auto"):Ga(c),e=3Da.indexOf("__utma=3D"+d+".")>-1,f=
+=3Da.indexOf("__utmb=3D"+d)>-1,h=3Da.indexOf("__utmc=3D"+d)>-1,k,j=3D{},g=
+=3D!!E&&!!E.gaGlobal;if(e){k=3Da.split("__utma=3D"+d+".")[1].split(";")[0=
+].split(".");j.sid=3Df&&h?k[3]+"":g&&E.gaGlobal.sid?E.gaGlobal.sid:b+"";j=
+.vid=3Dk[0]+"."+k[1];j.from_cookie=3Di}else{j.sid=3Dg&&E.gaGlobal.sid?E.g=
+aGlobal.sid:b+"";j.vid=3Dg&&E.gaGlobal.vid?E.gaGlobal.vid:(Math.round(Mat=
+h.random()*=0A=
+2147483647)^Ha()&2147483647)+"."+b;j.from_cookie=3Dm}j.dh=3Dd;j.hid=3Dg&&=
+E.gaGlobal.hid?E.gaGlobal.hid:Math.round(Math.random()*2147483647);return=
+ E.gaGlobal=3Dj}=0A=
+function Ha(){var =
+a=3DC.cookie?C.cookie:"",b=3DE.history.length,c,d,e=3D[D.appName,D.versio=
+n,D.language?D.language:D.browserLanguage,D.platform,D.userAgent,D.javaEn=
+abled()?1:0].join("");if(E.screen)e+=3DE.screen.width+"x"+E.screen.height=
++E.screen.colorDepth;else =
+if(E.java){d=3Djava.awt.Toolkit.getDefaultToolkit().getScreenSize();e+=3D=
+d.screen.width+"x"+d.screen.height}e+=3Da;e+=3DC.referrer?C.referrer:"";f=
+or(c=3De.length;b>0;)e+=3Db--^c++;return Ia(e)}=0A=
+function Ia(a){var =
+b=3D1,c=3D0,d,e;if(!(a=3D=3Dundefined||a=3D=3D"")){b=3D0;for(d=3Da.length=
+-1;d>=3D0;d--){e=3Da.charCodeAt(d);b=3D(b<<6&268435455)+e+(e<<14);c=3Db&2=
+66338304;b=3Dc!=3D0?b^c>>21:b}}return b}function =
+Ga(a){if(!a||a=3D=3D""||a=3D=3D"none")return =
+1;if("auto"=3D=3Da){a=3DC.domain;if("www."=3D=3Da.substring(0,4))a=3Da.su=
+bstring(4,a.length)}return Ia(a.toLowerCase())};var =
+Ja=3Ddocument,Ka=3Dia("false",m),La=3Dia("false",m),Ma=3Dia("false",m);ia=
+("false",m);var =
+F=3Dwindow;document.URL&&(document.URL.indexOf("?google_debug")>0||docume=
+nt.URL.indexOf("&google_debug")>0);var Na=3Dfunction(a){return =
+a.replace(/^[\s\xa0]+|[\s\xa0]+$/g,"")},Ta=3Dfunction(a,b){if(b)return =
+a.replace(Oa,"&amp;").replace(Pa,"&lt;").replace(Qa,"&gt;").replace(Ra,"&=
+quot;");else{if(!Sa.test(a))return =
+a;if(a.indexOf("&")!=3D-1)a=3Da.replace(Oa,"&amp;");if(a.indexOf("<")!=3D=
+-1)a=3Da.replace(Pa,"&lt;");if(a.indexOf(">")!=3D-1)a=3Da.replace(Qa,"&gt=
+;");if(a.indexOf('"')!=3D-1)a=3Da.replace(Ra,"&quot;");return =
+a}},Oa=3D/&/g,Pa=3D/</g,Qa=3D/>/g,Ra=3D/\"/g,Sa=3D/[&<>\"]/,Wa=3Dfunction=
+(a){if(G(a,"&"))return"document"in o&&!G(a,"<")?=0A=
+Ua(a):Va(a);return a},Ua=3Dfunction(a){var =
+b=3Do.document.createElement("a");b.innerHTML=3Da;b.normalize&&b.normaliz=
+e();a=3Db.firstChild.nodeValue;b.innerHTML=3D"";return =
+a},Va=3Dfunction(a){return =
+a.replace(/&([^;]+);/g,function(b,c){switch(c){case "amp":return"&";case =
+"lt":return"<";case "gt":return">";case =
+"quot":return'"';default:if(c.charAt(0)=3D=3D"#"){var =
+d=3DNumber("0"+c.substr(1));if(!isNaN(d))return =
+String.fromCharCode(d)}return b}})},Xa=3Dfunction(a,b){for(var =
+c=3Db.length,d=3D0;d<c;d++){var e=3Dc=3D=3D1?b:b.charAt(d);=0A=
+if(a.charAt(0)=3D=3De&&a.charAt(a.length-1)=3D=3De)return =
+a.substring(1,a.length-1)}return a},G=3Dfunction(a,b){return =
+a.indexOf(b)!=3D-1},Za=3Dfunction(a,b){for(var =
+c=3D0,d=3DNa(String(a)).split("."),e=3DNa(String(b)).split("."),f=3DMath.=
+max(d.length,e.length),h=3D0;c=3D=3D0&&h<f;h++){var =
+k=3Dd[h]||"",j=3De[h]||"",g=3Dnew RegExp("(\\d*)(\\D*)","g"),u=3Dnew =
+RegExp("(\\d*)(\\D*)","g");do{var =
+w=3Dg.exec(k)||["","",""],x=3Du.exec(j)||["","",""];if(w[0].length=3D=3D0=
+&&x[0].length=3D=3D0)break;var =
+s=3Dw[1].length=3D=3D0?0:parseInt(w[1],10),S=3Dx[1].length=3D=3D=0A=
+0?0:parseInt(x[1],10);c=3DYa(s,S)||Ya(w[2].length=3D=3D0,x[2].length=3D=3D=
+0)||Ya(w[2],x[2])}while(c=3D=3D0)}return =
+c},Ya=3Dfunction(a,b){if(a<b)return-1;else if(a>b)return 1;return =
+0};ha();var =
+H=3Dfunction(a){this.t=3Da;this.i=3D[];this.p=3Dthis.h=3D0;this.d=3D[];th=
+is.n=3Dm};H.prototype.s=3Dfunction(a,b){var =
+c=3Dthis.t[b],d=3Dthis.i;this.t[b]=3Dfunction(e){if(e&&e.length>0){var =
+f=3De.length>1?e[1].url:l;d.push([a,Wa(e[0].url),f])}c(e)}};H.prototype.r=
+=3Dfunction(){this.h++};H.prototype.o=3Dfunction(){if(!this.n){qa("http:/=
+/"+v+"/pagead/osd.js");this.n=3Di}};H.prototype.j=3Dfunction(a){if(this.h=
+>0)for(var =
+b=3Ddocument.getElementsByTagName("iframe"),c=3D0;c<b.length;c++)b.item(c=
+).name=3D=3D"google_ads_frame"&&a(b.item(c),b.item(c).src)};=0A=
+H.prototype.k=3Dfunction(a){var b=3Dthis.i;if(b.length>0)for(var =
+c=3Ddocument.getElementsByTagName("a"),d=3Dfunction(g,u){return =
+g.innerHTML.indexOf(u)>0},e=3D0;e<c.length;e++)for(var =
+f=3D0;f<b.length;f++)if(c.item(e).href=3D=3Db[f][1]){var =
+h=3Dc.item(e).parentNode;if(b[f][2])for(var =
+k=3Dh,j=3D0;j<4;j++){if(d(k,b[f][2])){h=3Dk;break}k=3Dk.parentNode}a(h,b[=
+f][0]);b.splice(f,1);break}};H.prototype.e=3Dfunction(a){this.k(a);this.j=
+(a)};H.prototype.a=3Dfunction(a){this.p=3Da};H.prototype.g=3Dfunction(){r=
+eturn this.p};=0A=
+H.prototype.f=3Dfunction(){return =
+this.i.length+this.h};H.prototype.b=3Dfunction(a){this.d=3Da};H.prototype=
+.q=3Dfunction(a,b){if(this.d.length>0){for(var =
+c=3D0;c<this.d.length;c++)if(this.d[c]=3D=3Da)if(a=3D=3D"js")this.s(b,"go=
+ogle_ad_request_done");else a=3D=3D"html"&&this.r();this.o()}};var =
+$a=3Dfunction(){window.__google_ad_urls||(window.__google_ad_urls=3Dnew =
+H(window));return =
+window.__google_ad_urls};q("Goog_AdSense_getAdAdapterInstance",$a);q("Goo=
+g_AdSense_OsdAdapter",H);=0A=
+q("Goog_AdSense_OsdAdapter.prototype.numBlocks",H.prototype.f);q("Goog_Ad=
+Sense_OsdAdapter.prototype.findBlocks",H.prototype.e);q("Goog_AdSense_Osd=
+Adapter.prototype.getOsdMode",H.prototype.g);function ab(a,b){try{return =
+a.top.document.URL=3D=3Db.URL}catch(c){}return m}function =
+bb(a,b,c,d){var =
+e=3Dc||a.google_ad_width,f=3Dd||a.google_ad_height;if(ab(a,b))return =
+m;var h=3Db.documentElement;if(e&&f){var =
+k=3D1,j=3D1;if(a.innerHeight){k=3Da.innerWidth;j=3Da.innerHeight}else =
+if(h&&h.clientHeight){k=3Dh.clientWidth;j=3Dh.clientHeight}else =
+if(b.body){k=3Db.body.clientWidth;j=3Db.body.clientHeight}if(j>2*f||k>2*e=
+)return m}return i}function cb(a,b){for(var c in b)a["google_"+c]=3Db[c]}=0A=
+function db(a,b){if(!b)return a.URL;return a.referrer}function =
+eb(a,b){if(!b&&a.google_referrer_url=3D=3Dl)return"0";else =
+if(b&&a.google_referrer_url=3D=3Dl)return"1";else =
+if(!b&&a.google_referrer_url!=3Dl)return"2";else =
+if(b&&a.google_referrer_url!=3Dl)return"3";return"4"}function =
+fb(a,b,c,d){a.page_url=3Ddb(c,d);a.page_location=3Dl}function =
+gb(a,b,c,d){a.page_url=3Db.google_page_url;a.page_location=3Ddb(c,d)||"EM=
+PTY"}=0A=
+function hb(a,b){var =
+c=3D{},d=3Dbb(a,b,a.google_ad_width,a.google_ad_height);c.iframing=3Deb(a=
+,d);a.google_page_url?gb(c,a,b,d):fb(c,a,b,d);c.last_modified_time=3Db.UR=
+L=3D=3Dc.page_url?Date.parse(b.lastModified)/1000:l;c.referrer_url=3Dd?a.=
+google_referrer_url:a.google_page_url&&a.google_referrer_url?a.google_ref=
+errer_url:b.referrer;return c}function ib(a){var =
+b=3D{},c=3Da.URL.substring(a.URL.lastIndexOf("http"));b.iframing=3Dl;b.pa=
+ge_url=3Dc;b.page_location=3Da.URL;b.last_modified_time=3Dl;b.referrer_ur=
+l=3Dc;return b}=0A=
+function jb(a,b){var c=3Dkb(a,b);cb(a,c)}function kb(a,b){var c;return =
+c=3Da.google_page_url=3D=3Dl&&lb[b.domain]?ib(b):hb(a,b)}var =
+lb=3D{};lb["ad.yieldmanager.com"]=3Di;var mb=3Dfunction(a,b,c){var =
+d=3Dga(b,o,a),e=3Dwindow.onerror;window.onerror=3Dd;try{c()}catch(f){var =
+h=3Df.toString(),k=3D"";if(f.fileName)k=3Df.fileName;var =
+j=3D-1;if(f.lineNumber)j=3Df.lineNumber;var g=3Dd(h,k,j);if(!g)throw =
+f;}window.onerror=3De};q("google_protectAndRun",mb);=0A=
+var ob=3Dfunction(a,b,c,d){if(Math.random()<0.01){var =
+e=3DJa,f=3D["http://",v,"/pagead/gen_204","?id=3Djserror","&cb=3D",Ka?1:0=
+,"&cd=3D",La?1:0,"&context=3D",y(a),"&msg=3D",y(b),"&file=3D",y(c),"&line=
+=3D",y(d.toString()),"&url=3D",y(e.URL.substring(0,512)),"&ref=3D",y(e.re=
+ferrer.substring(0,512))];f.push(nb());ra(F,f.join(""))}return!Ma};q("goo=
+gle_handleError",ob);=0A=
+var nb=3Dfunction(){var =
+a=3D["&client=3D",y(F.google_ad_client),"&format=3D",y(F.google_ad_format=
+),"&slotname=3D",y(F.google_ad_slot),"&output=3D",y(F.google_ad_output),"=
+&ad_type=3D",y(F.google_ad_type)];return a.join("")};var =
+pb=3Dfunction(a,b,c){if(a.forEach)a.forEach(b,c);else =
+if(Array.forEach)Array.forEach(a,b,c);else for(var =
+d=3Da.length,e=3Dda(a)?a.split(""):a,f=3D0;f<d;f++)f in =
+e&&b.call(c,e[f],f,a)},qb=3Dfunction(a){if(p(a)=3D=3D"array")return =
+a.concat();else{for(var =
+b=3D[],c=3D0,d=3Da.length;c<d;c++)b[c]=3Da[c];return b}};var =
+I=3Dfunction(a,b){this.x=3Da!=3D=3Dundefined?a:0;this.y=3Db!=3D=3Dundefin=
+ed?b:0};I.prototype.clone=3Dfunction(){return new =
+I(this.x,this.y)};I.prototype.toString=3Dfunction(){return"("+this.x+", =
+"+this.y+")"};var =
+J=3Dfunction(a,b){this.width=3Da;this.height=3Db};J.prototype.clone=3Dfun=
+ction(){return new =
+J(this.width,this.height)};J.prototype.toString=3Dfunction(){return"("+th=
+is.width+" x =
+"+this.height+")"};J.prototype.ceil=3Dfunction(){this.width=3DMath.ceil(t=
+his.width);this.height=3DMath.ceil(this.height);return =
+this};J.prototype.floor=3Dfunction(){this.width=3DMath.floor(this.width);=
+this.height=3DMath.floor(this.height);return this};=0A=
+J.prototype.round=3Dfunction(){this.width=3DMath.round(this.width);this.h=
+eight=3DMath.round(this.height);return =
+this};J.prototype.scale=3Dfunction(a){this.width*=3Da;this.height*=3Da;re=
+turn this};var rb=3Dfunction(a,b,c){for(var d in =
+a)b.call(c,a[d],d,a)};var =
+K,tb,yb,zb,Ab,Bb,Cb,Db,Eb,Fb,Gb=3Dfunction(){return =
+o.navigator?o.navigator.userAgent:l},Hb=3Dfunction(){return =
+o.navigator},Ib=3Dfunction(){Bb=3DAb=3Dzb=3Dyb=3Dtb=3DK=3Dm;var =
+a;if(a=3DGb()){var =
+b=3DHb();K=3Da.indexOf("Opera")=3D=3D0;tb=3D!K&&a.indexOf("MSIE")!=3D-1;z=
+b=3D(yb=3D!K&&a.indexOf("WebKit")!=3D-1)&&a.indexOf("Mobile")!=3D-1;Bb=3D=
+(Ab=3D!K&&!yb&&b.product=3D=3D"Gecko")&&b.vendor=3D=3D"Camino"}};Ib();=0A=
+var L=3DK,M=3Dtb,Jb=3DAb,N=3Dyb,Kb=3Dzb,Lb=3Dfunction(){var =
+a=3DHb();return =
+a&&a.platform||""},Mb=3DLb(),Nb=3Dfunction(){Cb=3DG(Mb,"Mac");Db=3DG(Mb,"=
+Win");Eb=3DG(Mb,"Linux");Fb=3D!!Hb()&&G(Hb().appVersion||"","X11")};Nb();=0A=
+var Ob=3DCb,Pb=3DDb,Qb=3DEb,Rb=3Dfunction(){var =
+a=3D"",b;if(L&&o.opera){var c=3Do.opera.version;a=3Dtypeof =
+c=3D=3D"function"?c():c}else{if(Jb)b=3D/rv\:([^\);]+)(\)|;)/;else =
+if(M)b=3D/MSIE\s+([^\);]+)(\)|;)/;else =
+if(N)b=3D/WebKit\/(\S+)/;if(b){var =
+d=3Db.exec(Gb());a=3Dd?d[1]:""}}return =
+a},Sb=3DRb(),Tb=3D{},O=3Dfunction(a){return =
+Tb[a]||(Tb[a]=3DZa(Sb,a)>=3D0)};var Ub;var Vb=3Dfunction(a){return =
+da(a)?document.getElementById(a):a},Wb=3DVb,Yb=3Dfunction(a,b){rb(b,funct=
+ion(c,d){if(d=3D=3D"style")a.style.cssText=3Dc;else =
+if(d=3D=3D"class")a.className=3Dc;else =
+if(d=3D=3D"for")a.htmlFor=3Dc;else if(d in =
+Xb)a.setAttribute(Xb[d],c);else =
+a[d]=3Dc})},Xb=3D{cellpadding:"cellPadding",cellspacing:"cellSpacing",col=
+span:"colSpan",rowspan:"rowSpan",valign:"vAlign",height:"height",width:"w=
+idth",usemap:"useMap",frameborder:"frameBorder",type:"type"},Zb=3Dfunctio=
+n(a){var b=3Da.document;if(N&&!O("500")&&!Kb){if(typeof a.innerHeight=3D=3D=0A=
+"undefined")a=3Dwindow;var =
+c=3Da.innerHeight,d=3Da.document.documentElement.scrollHeight;if(a=3D=3Da=
+.top)if(d<c)c-=3D15;return new J(a.innerWidth,c)}var =
+e=3Db.compatMode=3D=3D"CSS1Compat"&&(!L||L&&O("9.50"))?b.documentElement:=
+b.body;return new J(e.clientWidth,e.clientHeight)},$b=3Dfunction(a){var =
+b=3D!N&&a.compatMode=3D=3D"CSS1Compat"?a.documentElement:a.body;return =
+new I(b.scrollLeft,b.scrollTop)},bc=3Dfunction(){return =
+ac(document,arguments)},ac=3Dfunction(a,b){var =
+c=3Db[0],d=3Db[1];if(M&&d&&(d.name||d.type)){var e=3D["<",c];d.name&&=0A=
+e.push(' name=3D"',Ta(d.name),'"');if(d.type){e.push(' =
+type=3D"',Ta(d.type),'"');d=3Dfa(d);delete =
+d.type}e.push(">");c=3De.join("")}var =
+f=3Da.createElement(c);if(d)if(da(d))f.className=3Dd;else =
+Yb(f,d);if(b.length>2){function =
+h(g){if(g)f.appendChild(da(g)?a.createTextNode(g):g)}for(var =
+k=3D2;k<b.length;k++){var =
+j=3Db[k];ca(j)&&!(ea(j)&&j.nodeType>0)?pb(cc(j)?qb(j):j,h):h(j)}}return =
+f},dc=3Dfunction(a,b){a.appendChild(b)},ec=3Dfunction(a){return =
+a&&a.parentNode?a.parentNode.removeChild(a):l},fc=3Dfunction(a,b){var =
+c=3Db.parentNode;=0A=
+c&&c.replaceChild(a,b)},gc=3DN&&O("522"),hc=3Dfunction(a,b){if(typeof =
+a.contains!=3D"undefined"&&!gc&&b.nodeType=3D=3D1)return =
+a=3D=3Db||a.contains(b);if(typeof =
+a.compareDocumentPosition!=3D"undefined")return =
+a=3D=3Db||Boolean(a.compareDocumentPosition(b)&16);for(;b&&a!=3Db;)b=3Db.=
+parentNode;return b=3D=3Da},P=3Dfunction(a){return =
+a.nodeType=3D=3D9?a:a.ownerDocument||a.document},cc=3Dfunction(a){if(a&&t=
+ypeof a.length=3D=3D"number")if(ea(a))return typeof =
+a.item=3D=3D"function"||typeof a.item=3D=3D"string";else =
+if(p(a)=3D=3D"function")return typeof a.item=3D=3D=0A=
+"function";return =
+m},Q=3Dfunction(a){this.c=3Da||o.document||document};Q.prototype.createEl=
+ement=3Dfunction(a){return =
+this.c.createElement(a)};Q.prototype.createTextNode=3Dfunction(a){return =
+this.c.createTextNode(a)};Q.prototype.m=3Dfunction(){return =
+this.c.compatMode=3D=3D"CSS1Compat"};Q.prototype.l=3Dfunction(){return =
+$b(this.c)};Q.prototype.appendChild=3Ddc;Q.prototype.removeNode=3Dec;Q.pr=
+ototype.replaceNode=3Dfc;Q.prototype.contains=3Dhc;var =
+ic,jc,kc,lc,mc,nc,oc=3Dfunction(){nc=3Dmc=3Dlc=3Dkc=3Djc=3Dic=3Dm;var =
+a=3DGb();if(a)if(a.indexOf("Firefox")!=3D-1)ic=3Di;else =
+if(a.indexOf("Camino")!=3D-1)jc=3Di;else =
+if(a.indexOf("iPhone")!=3D-1||a.indexOf("iPod")!=3D-1)kc=3Di;else =
+if(a.indexOf("Android")!=3D-1)lc=3Di;else =
+if(a.indexOf("Chrome")!=3D-1)mc=3Di;else =
+if(a.indexOf("Safari")!=3D-1)nc=3Di};oc();var pc=3Dfunction(a,b){var =
+c=3DP(a);if(c.defaultView&&c.defaultView.getComputedStyle){var =
+d=3Dc.defaultView.getComputedStyle(a,"");if(d)return d[b]}return =
+l},R=3Dfunction(a,b){return =
+pc(a,b)||(a.currentStyle?a.currentStyle[b]:l)||a.style[b]},qc=3Dfunction(=
+a){var b;b=3Da?a.nodeType=3D=3D9?a:P(a):document;if(M&&!(b?new =
+Q(P(b)):Ub||(Ub=3Dnew Q)).m())return b.body;return =
+b.documentElement},rc=3Dfunction(a){var =
+b=3Da.getBoundingClientRect();if(M){var =
+c=3Da.ownerDocument;b.left-=3Dc.documentElement.clientLeft+c.body.clientL=
+eft;=0A=
+b.top-=3Dc.documentElement.clientTop+c.body.clientTop}return =
+b},sc=3Dfunction(a){if(M)return a.offsetParent;for(var =
+b=3DP(a),c=3DR(a,"position"),d=3Dc=3D=3D"fixed"||c=3D=3D"absolute",e=3Da.=
+parentNode;e&&e!=3Db;e=3De.parentNode){c=3DR(e,"position");d=3Dd&&c=3D=3D=
+"static"&&e!=3Db.documentElement&&e!=3Db.body;if(!d&&(e.scrollWidth>e.cli=
+entWidth||e.scrollHeight>e.clientHeight||c=3D=3D"fixed"||c=3D=3D"absolute=
+"))return e}return l},tc=3Dfunction(a){var =
+b,c=3DP(a),d=3DR(a,"position"),e=3DJb&&c.getBoxObjectFor&&!a.getBoundingC=
+lientRect&&d=3D=3D"absolute"&&(b=3D=0A=
+c.getBoxObjectFor(a))&&(b.screenX<0||b.screenY<0),f=3Dnew =
+I(0,0),h=3Dqc(c);if(a=3D=3Dh)return =
+f;if(a.getBoundingClientRect){b=3Drc(a);var k=3D(c?new =
+Q(P(c)):Ub||(Ub=3Dnew Q)).l();f.x=3Db.left+k.x;f.y=3Db.top+k.y}else =
+if(c.getBoxObjectFor&&!e){b=3Dc.getBoxObjectFor(a);var =
+j=3Dc.getBoxObjectFor(h);f.x=3Db.screenX-j.screenX;f.y=3Db.screenY-j.scre=
+enY}else{var =
+g=3Da;do{f.x+=3Dg.offsetLeft;f.y+=3Dg.offsetTop;if(g!=3Da){f.x+=3Dg.clien=
+tLeft||0;f.y+=3Dg.clientTop||0}if(N&&R(g,"position")=3D=3D"fixed"){f.x+=3D=
+c.body.scrollLeft;f.y+=3Dc.body.scrollTop;=0A=
+break}g=3Dg.offsetParent}while(g&&g!=3Da);if(L||N&&d=3D=3D"absolute")f.y-=
+=3Dc.body.offsetTop;for(g=3Da;(g=3Dsc(g))&&g!=3Dc.body&&g!=3Dh;){f.x-=3Dg=
+.scrollLeft;if(!L||g.tagName!=3D"TR")f.y-=3Dg.scrollTop}}return =
+f};Jb&&O("1.9");=0A=
+var uc=3Dfunction(a,b,c,d){if(/^\d+px?$/.test(b))return =
+parseInt(b,10);else{var =
+e=3Da.style[c],f=3Da.runtimeStyle[c];a.runtimeStyle[c]=3Da.currentStyle[c=
+];a.style[c]=3Db;var =
+h=3Da.style[d];a.style[c]=3De;a.runtimeStyle[c]=3Df;return =
+h}},vc=3Dfunction(a){var b=3DP(a),c=3D"";if(b.createTextRange){var =
+d=3Db.body.createTextRange();d.moveToElementText(a);c=3Dd.queryCommandVal=
+ue("FontName")}if(!c){c=3DR(a,"fontFamily");if(L&&Qb)c=3Dc.replace(/ =
+\[[^\]]*\]/,"")}var e=3Dc.split(",");if(e.length>1)c=3De[0];return =
+Xa(c,"\"'")},wc=3Dfunction(a){var b=3D=0A=
+a.match(/[^\d]+$/);return =
+b&&b[0]||l},xc=3D{cm:1,"in":1,mm:1,pc:1,pt:1},yc=3D{em:1,ex:1},zc=3Dfunct=
+ion(a){var b=3DR(a,"fontSize"),c=3Dwc(b);if(b&&"px"=3D=3Dc)return =
+parseInt(b,10);if(M)if(c in xc)return uc(a,b,"left","pixelLeft");else =
+if(a.parentNode&&a.parentNode.nodeType=3D=3D1&&c in yc){var =
+d=3Da.parentNode,e=3DR(d,"fontSize");return =
+uc(d,b=3D=3De?"1em":b,"left","pixelLeft")}var =
+f=3Dbc("span",{style:"visibility:hidden;position:absolute;line-height:0;p=
+adding:0;margin:0;border:0;height:1em;"});dc(a,f);b=3Df.offsetHeight;ec(f=
+);=0A=
+return b};var T=3D{};function Ac(a){if(a=3D=3D1)return =
+i;return!T[a]}function =
+U(a,b){if(a)if(b=3D=3D1)if(T[b])T[b]+=3D","+a;else T[b]=3Da;else =
+T[b]=3Da}function Bc(){var a=3D[];for(var b in T)a.push(T[b]);return =
+a.join(",")}function Cc(a,b){if(a&&a instanceof Array)for(var =
+c=3D0;c<a.length;c++)a[c]&&typeof a[c]=3D=3D"string"&&U(a[c],b)}var =
+Dc=3Dm;=0A=
+function Ec(a,b){var =
+c=3D"script";(Dc=3DFc(a,b))||(a.google_allow_expandable_ads=3Dm);var =
+d=3D!Gc();Dc&&d&&b.write("<"+c+' =
+src=3D"http://'+v+'/pagead/expansion_embed.js"></'+c+">");var =
+e=3DHc(a,b,r("1",0.01)),f=3Dd||e;f&&sa("msie")&&!window.opera?b.write("<"=
++c+' =
+src=3D"http://'+v+'/pagead/render_ads.js"></'+c+">"):b.write("<"+c+'>goog=
+le_protectAndRun("ads_core.google_render_ad", google_handleError, =
+google_render_ad);</'+c+">")}function V(a){return a!=3Dl?'"'+a+'"':'""'}=0A=
+function W(a,b){if(a&&b)window.google_ad_url+=3D"&"+a+"=3D"+b}function =
+X(a){var b=3Dwindow,c=3DEa(a),d=3Db[a];W(c,d)}function =
+Y(a,b){b!=3Dl&&W(a,y(b))}function Z(a){var =
+b=3Dwindow,c=3DEa(a),d=3Db[a];Y(c,d)}function $(a,b){var =
+c=3Dwindow,d=3DEa(a),e=3Dc[a];if(d&&e&&typeof =
+e=3D=3D"object")e=3De[b%e.length];W(d,e)}=0A=
+function Ic(a){var b=3Da.screen,c=3Dnavigator.javaEnabled(),d=3D-(new =
+Date).getTimezoneOffset();if(b){W("u_h",b.height);W("u_w",b.width);W("u_a=
+h",b.availHeight);W("u_aw",b.availWidth);W("u_cd",b.colorDepth)}W("u_tz",=
+d);W("u_his",history.length);W("u_java",c);navigator.plugins&&W("u_nplug"=
+,navigator.plugins.length);navigator.mimeTypes&&W("u_nmime",navigator.mim=
+eTypes.length)}function =
+Jc(a){if(a){a=3Da.toLowerCase();if(a.substring(0,3)!=3D"ca-")a=3D"ca-"+a}=
+return a}=0A=
+function =
+Kc(a){if(a){a=3Da.toLowerCase();if(a.substring(0,9)!=3D"dist-aff-")a=3D"d=
+ist-aff-"+a}return a}function Lc(a){var =
+b=3D"google_unique_id";if(a[b])++a[b];else a[b]=3D1;return a[b]}function =
+Mc(){var =
+a=3DM&&O("6"),b=3DJb&&O("1.8.1"),c=3DN&&O("525");if(Pb&&(a||b||c))return =
+i;else if(Ob&&(c||b))return i;else if(Qb&&b)return i;return m}function =
+Gc(){return(typeof ExpandableAdSlotFactory=3D=3D"function"||typeof =
+ExpandableAdSlotFactory=3D=3D"object")&&typeof =
+ExpandableAdSlotFactory.createIframe=3D=3D"function"}=0A=
+function =
+Fc(a,b){if(a.google_allow_expandable_ads=3D=3D=3Dm||!b.body||a.google_ad_=
+output!=3D"html"||bb(a,b)||Aa(a)||isNaN(a.google_ad_height)||isNaN(a.goog=
+le_ad_width)||!Mc())return m;return i}function Nc(){var =
+a;if(F.google_ad_output=3D=3D"html"&&!Aa(F)&&Ac(0)){var =
+b=3D["6083035","6083034"];a=3DA(b,r("0",0));U(a,0)}return =
+a=3D=3D"6083035"}=0A=
+function =
+Oc(a,b){if((a.google_unique_id||0)=3D=3D0&&a.google_ad_output=3D=3D"html"=
+&&document.body&&typeof =
+b.body.getBoundingClientRect=3D=3D"function")return =
+A(["36812001","36812002"],r("0.01",0));return""}=0A=
+function Pc(a){var =
+b=3D"";if((a.google_unique_id||0)=3D=3D0&&(a.google_ad_output=3D=3D"js"||=
+a.google_ad_output=3D=3D"html")){Aa(a)||(b=3DA(["36813001","36813002","36=
+813003","36813004"],r("0.008",0)));if(b=3D=3D"")b=3DA(["36813005","368130=
+06"],r("0.008",0))}return b}function Qc(a,b){switch(a){case =
+"36813002":b.a(1);b.b(["js"]);break;case =
+"36813003":b.a(1);b.b(["html"]);break;case =
+"36813004":b.a(2);b.b(["html","js"]);break;case =
+"36813006":b.a(0);b.b(["html","js"]);break}}=0A=
+function Rc(a){if(a.body)try{return Zb(window)}catch(b){return new =
+J(-12245933,-12245933)}else return new J(-1,-1)}=0A=
+function Sc(a,b,c,d){var =
+e=3DLc(a);c=3Dc.substring(0,1992);c=3Dc.replace(/%\w?$/,"");var =
+f=3D"script";if((a.google_ad_output=3D=3D"js"||a.google_ad_output=3D=3D"j=
+son_html")&&(a.google_ad_request_done||a.google_radlink_request_done))b.w=
+rite("<"+f+' language=3D"JavaScript1.1" =
+src=3D'+V(aa(c))+"></"+f+">");else =
+if(a.google_ad_output=3D=3D"html")if(Dc&&Gc()){var =
+h=3Da.google_container_id||d||l;a["google_expandable_ad_slot"+e]=3DExpand=
+ableAdSlotFactory.createIframe("google_ads_frame"+e,aa(c),a.google_ad_wid=
+th,a.google_ad_height,=0A=
+h)}else{var k=3D'<iframe name=3D"google_ads_frame" =
+width=3D'+V(a.google_ad_width)+" height=3D"+V(a.google_ad_height)+" =
+frameborder=3D"+V(a.google_ad_frameborder)+" src=3D"+V(aa(c))+' =
+marginwidth=3D"0" marginheight=3D"0" vspace=3D"0" hspace=3D"0" =
+allowtransparency=3D"true" =
+scrolling=3D"no"></iframe>';a.google_container_id?Tc(a.google_container_i=
+d,b,k):b.write(k)}}function Uc(a,b,c){if(!a)return m;if(!b)return =
+i;return c}=0A=
+function Vc(a){for(var b in Ba)a[b]=3Dl;for(b in =
+Ca)b=3D=3D"google_correlator"||(a[b]=3Dl);for(b in =
+Da)a[b]=3Dl;a.google_allow_expandable_ads=3Dl;a.google_container_id=3Dl;a=
+.google_tag_info=3Dl;a.google_eids=3Dl}=0A=
+function Wc(a,b){var =
+c=3Dl,d=3Dwindow,e=3Ddocument,f=3Dn,h=3Dd.google_ad_format,k=3DXc(d),j;if=
+(d.google_cpa_choice!=3Dc){d.google_ad_url=3Dk+"/cpa/ads?";j=3Descape(Jc(=
+d.google_ad_client));d.google_ad_region=3D"_google_cpa_region_";X("google=
+_cpa_choice");if(typeof =
+e.characterSet!=3D"undefined")Y("oe",e.characterSet);else typeof =
+e.charset!=3D"undefined"&&Y("oe",e.charset)}else =
+if(z(h)){d.google_ad_url=3Dk+"/pagead/sdo?";j=3Descape(Kc(d.google_ad_cli=
+ent))}else{d.google_ad_url=3DNc()?k+"/pagead/render_iframe_ads.html#":k+"=
+/pagead/ads?";=0A=
+j=3Descape(Jc(d.google_ad_client))}d.google_ad_url+=3D"client=3D"+j;X("go=
+ogle_ad_host");X("google_ad_host_tier_id");var =
+g=3Dd.google_num_slots_by_client,u=3Dd.google_num_slots_by_channel,w=3Dd.=
+google_prev_ad_formats_by_region,x=3Dd.google_prev_ad_slotnames_by_region=
+;if(d.google_ad_region=3D=3Dc&&d.google_ad_section!=3Dc)d.google_ad_regio=
+n=3Dd.google_ad_section;var =
+s=3Dd.google_ad_region=3D=3Dc?"":d.google_ad_region;if(z(h)){d.google_num=
+_sdo_slots=3Dd.google_num_sdo_slots?d.google_num_sdo_slots+1:1;if(d.googl=
+e_num_sdo_slots>4)return m}else if(va(d)){d.google_num_0ad_slots=3D=0A=
+d.google_num_0ad_slots?d.google_num_0ad_slots+1:1;if(d.google_num_0ad_slo=
+ts>3)return m}else =
+if(d.google_cpa_choice=3D=3Dc){d.google_num_ad_slots=3Dd.google_num_ad_sl=
+ots?d.google_num_ad_slots+1:1;if(d.google_num_slots_to_rotate){w[s]=3Dc;x=
+[s]=3Dc;if(d.google_num_slot_to_show=3D=3Dc)d.google_num_slot_to_show=3Df=
+%d.google_num_slots_to_rotate+1;if(d.google_num_slot_to_show!=3Dd.google_=
+num_ad_slots)return m}else if(d.google_num_ad_slots>6&&s=3D=3D"")return =
+m}W("dt",n);X("google_language");d.google_country?X("google_country"):=0A=
+X("google_gl");X("google_region");Z("google_city");Z("google_hints");X("g=
+oogle_safe");X("google_encoding");X("google_last_modified_time");Z("googl=
+e_alternate_ad_url");X("google_alternate_color");X("google_skip");X("goog=
+le_targeting");var =
+S=3Dd.google_ad_client;if(g[S])g[S]+=3D1;else{g[S]=3D1;g.length+=3D1}if(w=
+[s])if(!z(h)){Y("prev_fmts",w[s].toLowerCase());g.length>1&&W("slot",g[S]=
+)}x[s]&&Y("prev_slotnames",x[s].toLowerCase());if(Uc(h,d.google_ad_slot,d=
+.google_override_format)){Y("format",h.toLowerCase());=0A=
+z(h)||(w[s]=3Dw[s]?w[s]+","+h:h)}else =
+if(d.google_ad_slot)x[s]=3Dx[s]?x[s]+","+d.google_ad_slot:d.google_ad_slo=
+t;X("google_max_num_ads");W("output",d.google_ad_output);X("google_adtest=
+");X("google_ad_callback");X("google_ad_slot");Z("google_correlator");d.g=
+oogle_new_domain_checked=3D=3D1&&d.google_new_domain_enabled=3D=3D0&&W("d=
+blk",1);if(d.google_ad_channel){Z("google_ad_channel");for(var =
+sb=3D"",ub=3Dd.google_ad_channel.split(Yc),wa=3D0;wa<ub.length;wa++){var =
+xa=3Dub[wa];if(u[xa])sb+=3Dxa+"+";else u[xa]=3D1}Y("pv_ch",=0A=
+sb)}if(d.google_ad_host_channel){Z("google_ad_host_channel");var =
+dd=3DZc(d.google_ad_host_channel,d.google_viewed_host_channels);Y("pv_h_c=
+h",dd)}Z("google_page_url");$("google_color_bg",f);$("google_color_text",=
+f);$("google_color_link",f);$("google_color_url",f);$("google_color_borde=
+r",f);$("google_color_line",f);d.google_reuse_colors?W("reuse_colors",1):=
+W("reuse_colors",0);X("google_font_face");X("google_font_size");X("google=
+_kw_type");Z("google_kw");Z("google_contents");X("google_num_radlinks");X=
+("google_max_radlink_len");=0A=
+X("google_rl_filtering");X("google_rl_mode");X("google_rt");Z("google_rl_=
+dest_url");X("google_num_radlinks_per_unit");X("google_ad_type");X("googl=
+e_image_size");X("google_ad_region");Cc(d.google_eids,1);var =
+ya;if(Ac(0)){ya=3DA(["36814001","36814002"],r("0",0));U(ya,0)}Y("eid",Bc(=
+));var =
+vb=3Dd.google_allow_expandable_ads;if(vb!=3Dl)vb?W("ea","1"):W("ea","0");=
+Ka&&W("cb",1);La&&W("cd",1);X("google_feedback");Z("google_referrer_url")=
+;Z("google_page_location");W("frm",d.google_iframing);=0A=
+X("google_bid");X("google_ctr_threshold");X("google_cust_age");X("google_=
+cust_gender");X("google_cust_interests");X("google_cust_id");X("google_cu=
+st_job");X("google_cust_u_url");X("google_cust_l");X("google_cust_lh");X(=
+"google_cust_ch");X("google_ed");X("google_video_doc_id");X("google_video=
+_product_type");Z("google_ui_features");Z("google_ui_version");Z("google_=
+tag_info");Z("google_only_ads_with_video");Z("google_only_pyv_ads");Z("go=
+ogle_with_pyv_ads");Z("google_disable_video_autoplay");var wb=3Dm;=0A=
+if(a){Y("dff",vc(a));Y("dfs",zc(a));var B;if(b)if(typeof =
+a.getBoundingClientRect=3D=3D"function"){var =
+xb=3Da.getBoundingClientRect();B=3D{x:xb.left,y:xb.top}}else{B=3D{};B.x=3D=
+"-252738";B.y=3D"-252738"}else =
+try{B=3Dtc(a)}catch(sd){B=3D{};B.x=3D"-252738";B.y=3D"-252738"}if(B){wb=3D=
+i;Y("adx",B.x);Y("ady",B.y)}}if(wb||ya=3D=3D"36814002"){var =
+za=3DRc(e);if(za){Y("biw",za.width);Y("bih",za.height)}}Fa();W("ga_vid",d=
+.gaGlobal.vid);W("ga_sid",d.gaGlobal.sid);W("ga_hid",d.gaGlobal.hid);W("g=
+a_fc",d.gaGlobal.from_cookie);Z("google_analytics_uacct");=0A=
+X("google_ad_override");X("google_flash_version");W("w",d.google_ad_width=
+||-1);W("h",d.google_ad_height||-1);Ic(d);return i}function =
+Zc(a,b){for(var c=3Da.split("|"),d=3D-1,e=3D[],f=3D0;f<c.length;f++){var =
+h=3Dc[f].split(Yc);b[f]||(b[f]=3D{});for(var =
+k=3D"",j=3D0;j<h.length;j++){var =
+g=3Dh[j];if(!(g=3D=3D""))if(b[f][g])k+=3D"+"+g;else =
+b[f][g]=3D1}k=3Dk.slice(1);e[f]=3Dk;if(k!=3D"")d=3Df}var =
+u=3D"";if(d>-1){for(f=3D0;f<d;f++)u+=3De[f]+"|";u+=3De[d]}return u}=0A=
+function $c(){var =
+a=3Dwindow,b=3Ddocument,c=3D$a(),d=3Da.google_enable_osd,e=3D"";if(d=3D=3D=
+=3Di){e=3D"36813006";Qc(e,c)}else =
+if(d!=3D=3Dm&&Ac(0)){e=3DA(["68120011","68120021","68120031","68120041"],=
+r("0",0));if(e=3D=3D""){e=3DOc(a,b);if(e=3D=3D""){e=3DPc(a);e!=3D""&&Qc(e=
+,c)}}}U(e,0);var f,h=3Dm,k=3Dm,j=3Dm;switch(e){case =
+"68120031":j=3Di;case "68120021":k=3Di;case "68120041":h=3Di;break;case =
+"36812002":if(!window.google_atf_included){window.google_atf_included=3Di=
+;qa("http://"+v+"/pagead/atf.js")}break}if(h){var g=3D"google_temp_span";=0A=
+f=3Da.google_container_id&&Wb(a.google_container_id)||Wb(g);if(!f&&!a.goo=
+gle_container_id){b.write("<span id=3D"+g+"></span>");f=3DWb(g)}}var =
+u=3Dm;u=3Dk?Wc(f,j):Wc();f&&f.id=3D=3Dg&&ec(f);if(u){c.q(a.google_ad_outp=
+ut,a.google_ad_url);Sc(a,b,a.google_ad_url);Vc(a)}}function =
+ad(a,b,c,d){var e=3Dob(a,b,c,d);Ec(window,document);return e}=0A=
+function bd(){var =
+a=3Dwindow,b=3Dl;if(a.google_ad_frameborder=3D=3Db)a.google_ad_frameborde=
+r=3D0;if(a.google_ad_output=3D=3Db)a.google_ad_output=3D"html";if(z(a.goo=
+gle_ad_format)){var =
+c=3Da.google_ad_format.match(/^(\d+)x(\d+)_.*/);if(c){a.google_ad_width=3D=
+parseInt(c[1],10);a.google_ad_height=3DparseInt(c[2],10);a.google_ad_outp=
+ut=3D"html"}}if(a.google_ad_format=3D=3Db&&a.google_ad_output=3D=3D"html"=
+)a.google_ad_format=3Da.google_ad_width+"x"+a.google_ad_height;jb(a,docum=
+ent);if(a.google_num_slots_by_channel=3D=3Db)a.google_num_slots_by_channe=
+l=3D=0A=
+[];if(a.google_viewed_host_channels=3D=3Db)a.google_viewed_host_channels=3D=
+[];if(a.google_num_slots_by_client=3D=3Db)a.google_num_slots_by_client=3D=
+[];if(a.google_prev_ad_formats_by_region=3D=3Db)a.google_prev_ad_formats_=
+by_region=3D[];if(a.google_prev_ad_slotnames_by_region=3D=3Db)a.google_pr=
+ev_ad_slotnames_by_region=3D[];if(a.google_correlator=3D=3Db)a.google_cor=
+relator=3Dn;if(a.google_adslot_loaded=3D=3Db)a.google_adslot_loaded=3D{};=
+if(a.google_adContentsBySlot=3D=3Db)a.google_adContentsBySlot=3D{};if(a.g=
+oogle_flash_version=3D=3Db)a.google_flash_version=3D=0A=
+ua();if(a.google_new_domain_checked=3D=3Db)a.google_new_domain_checked=3D=
+0;if(a.google_new_domain_enabled=3D=3Db)a.google_new_domain_enabled=3D0}f=
+unction cd(a){for(var =
+b=3D{},c=3Da.split("?"),d=3Dc[c.length-1].split("&"),e=3D0;e<d.length;e++=
+){var =
+f=3Dd[e].split("=3D");if(f[0])try{b[f[0].toLowerCase()]=3Df.length>1?wind=
+ow.decodeURIComponent?decodeURIComponent(f[1].replace(/\+/g," =
+")):unescape(f[1]):""}catch(h){}}return b}=0A=
+function ed(){var =
+a=3Dwindow,b=3Dcd(document.URL);if(b.google_ad_override){a.google_ad_over=
+ride=3Db.google_ad_override;a.google_adtest=3D"on"}}function =
+Tc(a,b,c){if(a){var =
+d=3Db.getElementById(a);if(d&&c&&c.length!=3D""){d.style.visibility=3D"vi=
+sible";d.innerHTML=3Dc}}}var Yc=3D/[+, =
+]/;window.google_render_ad=3D$c;var =
+fd=3D{google:1,googlegroups:1,gmail:1,googlemail:1,googleimages:1,googlep=
+rint:1};function gd(a){var =
+b=3Da.google_page_location||a.google_page_url;if(!b)return =
+m;b=3Db.toString();if(b.indexOf("http://")=3D=3D0)b=3Db.substring(7,b.len=
+gth);else =
+if(b.indexOf("https://")=3D=3D0)b=3Db.substring(8,b.length);var =
+c=3Db.indexOf("/");if(c=3D=3D-1)c=3Db.length;var =
+d=3Db.substring(0,c),e=3Dd.split("."),f=3Dm;if(e.length>=3D3)f=3De[e.leng=
+th-3]in fd;if(e.length>=3D2)f=3Df||e[e.length-2]in fd;return f}=0A=
+function Hc(a,b,c){if(gd(a)){a.google_new_domain_checked=3D1;return =
+m}if(a.google_new_domain_checked=3D=3D0){var =
+d=3DMath.random();if(d<=3Dc){var =
+e=3D"http://"+oa+"/pagead/test_domain.js",f=3D"script";b.write("<"+f+' =
+src=3D"'+e+'"></'+f+">");a.google_new_domain_checked=3D1;return =
+i}}return m}function =
+Xc(a){if(!gd(a)&&a.google_new_domain_enabled=3D=3D1)return"http://"+oa;re=
+turn"http://"+pa};var =
+hd=3D["30143070","30143071","30143075"],id=3Dtypeof =
+window.postMessage=3D=3D"function"||typeof =
+window.postMessage=3D=3D"object"||typeof =
+document.postMessage=3D=3D"function",kd=3Dfunction(a,b){a.google_allow_ex=
+pandable_ads=3Dm;typeof =
+A1_googleCreateSlot=3D=3D"function"?A1_googleCreateSlot(a.google_ad_clien=
+t):jd(a,b)},md=3Dfunction(){if(!ld())return m;return =
+i},nd=3Dfunction(a){if(Aa(a))return m;var =
+b=3Da.google_ad_output;if(b&&b!=3D"html")return m;var =
+c=3Da.google_ad_client;if(typeof =
+c!=3D"string"||c.substring(0,4)!=3D"pub-"&&c.substring(0,=0A=
+7)!=3D"ca-pub-")return m;return i},pd=3Dfunction(a){if(typeof =
+a.google_a1_eid=3D=3D"string")return a.google_a1_eid;var =
+b=3Dr("0.001",0);a.google_a1_eid=3Dod(hd,b);return =
+a.google_a1_eid},jd=3Dfunction(a,b){if(!a.google_included_a1_script){var =
+c=3D"script",d=3D"/pagead/show_ads_sra3.js?v\x3d1";b.write("<"+c+' =
+src=3D"http://'+v+d+'"></'+c+">");a.google_included_a1_script=3Di}},ld=3D=
+function(){if(M&&O("8"))return m;return id||!N},od=3Dfunction(a,b){var =
+c=3DMath.random();if(c<b){var d=3DMath.floor(c/b*a.length);return =
+a[d]}return""};function =
+qd(){ed();mb("show_ads.google_init_globals",ad,bd);Ec(window,document)}fu=
+nction rd(){if(!md(window)||!nd(window))qd();else =
+if(Ma&&window.google_use_a1=3D=3D=3Di)kd(window,document);else{var =
+a=3Dpd(window);a&&U(a,0);!a||a=3D=3D"30143070"?qd():kd(window,document)}}=
+mb("show_ads.main",ob,rd);=0A=
+})()=0A=
+
+------=_NextPart_000_0000_01CA152A.28FC17E0--

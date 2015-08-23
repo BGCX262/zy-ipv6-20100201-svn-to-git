@@ -1,0 +1,418 @@
+IPv6 configuration guide for FreeBSD users
+$Id: freebsd-ipv6-config-guide.txt,v 1.1 2002/05/24 05:43:11 suz Exp $
+suz@freebsd.org
+
+This document is for those who would like to configure IPv6 on FreeBSD.
+If you want a generic information about IPv6, please refer to the following
+pages.
+	NetBSD IPv6 Networking
+		http://www.netbsd.org/Documentation/network/ipv6
+
+1. Generic Guide
+1.1 Which version is required?
+IPv6 feature has been merged at FreeBSD from KAME Project since 4.0 RELEASE.
+If you are to use prior version, please visit KAME's web site (http://www.kame.net).  KAME has stopped supporting FreeBSD 2-RELEASE and 3-RELEASE, but you
+can get old KAME snapshots for these OS's.
+
+1.2 How FreeBSD machines works in IPv6 world?
+A FreeBSD machine works as a router or a host in IPv6 world.  
+Router is a machine to forward packets, and the other machine is regarded
+as Host.
+
+1.3 Configuration files
+Most of the configuration information is given in /etc/rc.conf and
+obtained automatically via network.  Of cource, application-specific
+information has to be written in that application-specific configuration
+files (e.g. DNS record information should be written in DNS record 
+configuration files.)
+
+
+2. Host Part
+2.1. how to enable IPv6 on this machine
+IPv6 prefix will automatically assigned by router-advertisement, so all
+you have to do is just to enable IPv6.
+
+[Mandatory]
+-------/etc/rc.conf---------
+	ipv6_enable="YES"
+		# by default it's "NO" 
+----------------------------
+
+[Optional]
+You can use the following option to limit the interface to enable IPv6.
+By default it's "auto", meaning to enable IPv6 on all the interfaces.
+Since IPv6 protocol assumes host has only one interface, its configuration
+is recommended for hosts with multiple interfaces.
+-------/etc/rc.conf---------
+	ipv6_network_interface="fxp0"
+		# by default it's "auto" 
+----------------------------
+
+2.2 how to configure IPv6 address
+you don't have to configure anything but 2.1, since IPv6 address is 
+automatically given by the router advertisements from the neighboring routers.
+
+[Mandatory]
+(nothing)
+
+[Optional]
+If you want to create a non-EUI-64-based IPv6 address on host,
+then you can configure in either of the following manners.
+
+method 1) completely static configuration like IPv4
+Linklocal prefix (fe80:....) is automatically generated, so you 
+don't have to configure it.
+-------/etc/rc.conf---------
+	ipv6_network_interfaces="fxp0"
+	ipv6_ifconfig_fxp0="3ffe:501:ffff:2::1 prefixlen 64"
+	ipv6_ifconfig_fxp0_alias0="2001:ffff:0:2::2 prefixlen 64"
+	ipv6_defaultrouter="fe80::1%fxp0"
+----------------------------
+
+method 2) semi-automatic configuration using router-advertisement
+In this case, you only have to configure the latter 64 bits of IPv6 address;
+remaining information is automatically configured by router advertisement.
+-------/etc/rc.conf---------
+	ipv6_network_interface="fxp0"
+	ipv6_network_interface_non_eui64="fxp0"
+	interface_ipv6_ifid_fxp0="::1"
+----------------------------
+
+--- rc.network6	Mon Apr 22 15:19:32 2002
++++ rc.network6.new	Mon Apr 22 15:16:30 2002
+@@ -516,6 +516,21 @@
+ }
+ 
+ network6_getladdr() {
++	# first searches non-eui64 if-id.
++	for i in $ipv6_network_interface_non_eui64; do
++		if [ $1 != $i ]; then
++			continue;
++		fi
++		eval lladdr=\$interface_ipv6_ifid_$i
++		if [ $lladdr ]; then
++			sysctl -w net.inet6.ip6.auto_linklocal=0
++			echo fe80$lladdr%$i
++			return
++		fi
++		# no non-EUI64 if-id specified
++		break;
++	done
++
+ 	ifconfig $1 2>/dev/null | while read proto addr rest; do
+ 		case ${proto} in
+ 		inet6)
+
+2.3 how to configure IPv6 host entry
+Write an entry on /etc/hosts in the same manner as IPv4, except 
+for the IP address format.  Below is an example.
+Please take care that scoped address (e.g. fe80::1%fxp0) is not 
+supported now in this file.
+
+--------/etc/hosts----------
+	3ffe:501:4819:1000:5054:ff:feda:cfc7    banana
+----------------------------
+
+
+3. Router Part
+3.1 How to enable IPv6 routing on this machine
+By default, IPv6 routing is disabled.  So you have to configure the following
+options to enable IPv6 packet forwarding on this machine.
+[Mandatory]
+-------/etc/rc.conf---------
+	ipv6_enable="YES"
+		# enable IPv6
+	ipv6_gateway_enable="YES"
+		# enable IPv6 routing. By default it's "NO".
+----------------------------
+
+[Optional]
+Theoretically you can operate IPv6 router only with IPv6 linklocal addresses,
+however it is often convenient to assign site local or global addresses to routers.  
+
+method 1) specify just the first 64 bits of IPv6 address
+Latter 64 bits will be calculated automatically.
+-------/etc/rc.conf---------
+	ipv6_network_interfaces="ed0 ep0"
+		# specifies interfaces to assign IPv6 prefix
+	ipv6_prefix_ed0="fec0:0000:0000:0001 fec0:0000:0000:0002"
+	ipv6_prefix_ep0="fec0:0000:0000:0003 fec0:0000:0000:0004"
+		# gives the first 64 bits of the IPv6 address
+----------------------------
+
+method 2) specify the whole part of IPv6 address
+Quite same as IPv4.
+-------/etc/rc.conf---------
+	ipv6_network_interfaces="ed0 ep0"
+		# specifies interfaces to assign IPv6 address
+	ipv6_ifconfig_ed0="fec0:0:0:5::1 prefixlen 64"
+	ipv6_ifconfig_ed0_alias0="fec0:0:0:5::2 prefixlen 64"
+----------------------------
+
+
+3.2. How to enable IPv6 routing protocols on this machine 
+3.2.1. Unicast routing protocols
+you can use IPv6-enabled routing software (e.g. route6d, zebra) to configure 
+IPv6 routing protocols.
+
+[Mandatory]
+-------/etc/rc.conf---------
+	ipv6_router_enable="YES"
+		# enable an IPv6 routing daemon. By default it's "NO".
+	ipv6_router="/usr/sbin/route6d"
+		# Name of IPv6 routing daemon (in this case, RIPng)
+----------------------------
+
+[optional]
+You can give arguments to routing daemon with the following option.
+	ipv6_router_flags="-l"		
+		# route6d option to exchange site local prefix
+
+You can write some number of static routers with the following option.
+-------/etc/rc.conf---------
+	ipv6_static_routes="foo bar baz"
+	ipv6_route_foo="fec0:0000:0000:0006:: -prefixlen 64 ::1"
+	ipv6_route_bar="fec0:0000:0000:0007:: -prefixlen 64 ::1"
+	ipv6_route_baz="fec0:0000:0000:0008:: -prefixlen 64 ::1"
+----------------------------
+
+3.2.2. Router-advertisement
+In IPv6, IPv6 router should distribute its prefix to the downstream hosts via
+router advertisement.  You can control the behavior of rtadvd (FreeBSD's router advertisement daemon) using the following options.  If you would like to send router-advertisement via some other IPv6 routing daemons (e.g. zebra), you don't need to enable it.
+
+[Mandatory]
+-------/etc/rc.conf---------
+	rtadvd_enable="YES"
+		# By default it's "NO".
+----------------------------
+
+[Optional]
+Normally router-advertisement will be announced on all the IPv6-ready 
+interfaces, however you can restrict this advertisement using the following
+options.
+-------/etc/rc.conf---------
+	rtadvd_interfaces="fxp0"
+		# by default it's "auto", enable router-advertisement
+		# on all interfaces
+----------------------------
+
+3.2.3 multicast routing
+By default IPv6 multicast routing is disabled, so you have to explicitly 
+configure it in rc.conf.  
+
+Currently there are two IPv6 multicast routing daemons available in
+package or ports (pim6sd = PIM-SM and pim6dd = PIM-DM), but please keep 
+in mind that they are not installed in FreeBSD-RELEASE by default due to its 
+licensing issue.
+
+[Mandatory]
+-------/etc/rc.conf---------
+	mroute6d_enable="YES"		
+		# Do IPv6 multicast routing.  By default it's "NO".
+	mroute6d_program="/usr/local/sbin/pim6sd"
+		# Name of IPv6 multicast routing daemon.  
+		# You need to install it from package or port.
+----------------------------
+
+[Optional]
+You can give arguments to IPv6 multicast routing daemon.  Normally
+nothing is required.
+-------/etc/rc.conf---------
+	mroute6d_flags="-d pim"
+		# debugging option for pim6sd
+----------------------------
+
+
+4. Others
+4.1. How to configure static IPv6 over IPv4 tunnel
+You have to specify the following three items to use static 
+IPv6 over IPv4 tunnel.
+	- tunnel device name (gifXXX)
+	- local IPv4 address
+		must be a remote IPv4 address of the remote host
+	- remote IPv4 address
+		must be a local IPv4 address of the remote host
+
+In the following example, IPv6 over IPv4 tunnels is configured.
+	   10.1.1.1          10.1.10.2
+	machine-----------------------tunnel server1
+	    +-------------------------tunnel server2
+                             10.1.20.2	     
+[Mandatory]
+-------/etc/rc.conf---------
+	gif_interfaces="gif0 gif1"		
+		# List of GIF tunnels to be configured
+	gifconfig_gif0="10.1.1.1 10.1.10.2"
+		# to tunnel server1
+	gifconfig_gif1="10.1.1.1 10.1.20.2"	
+		# to tunnel server2
+----------------------------
+
+
+4.2. How to configure 6to4 tunnel
+You have to specify the following two items to use 6to4 interface.
+	- IPv4 local address of 6to4 interface
+		(its IPv6 address will automatically created)
+	- IPv6 default router via 6to4 interface
+		ipv6_defaultrouter="2002:c058:6301::"
+		(corresponding IPv4 address is c0586301 = 192.88.99.1)
+
+[Mandatory]
+-------/etc/rc.conf---------
+	stf_interface_ipv4addr="192.168.0.1"
+		# Local IPv4 address for 6to4 tunneling interface. 
+		# its IPv6 address will be "2002:c0a0:0001::1"
+	ipv6_defaultrouter="2002:c058:6301::"
+		RFC3068 suggests anycast IPv4 address 192.88.99.1
+		for 6to4 routers, but you can use other IPv4 address
+		according to the site-adminitrator configuration.
+----------------------------
+
+[Optional]
+Using the following options, you can specify prefix length for 6to4 
+interface to limit 6to4 peer.  By default it's 0 (i.e. all 6to4 machine 
+is accepted).  Effective value is 0-31.
+	stf_interface_ipv4plen="16"
+
+By default, IPv6 interface-id for 6to4 interface is "::1",  so
+the IPv6 address of 6to4 interface is "2002:(IPv4address)::1".
+However you can use EUI-64-based interface-id (using "AUTO" keyword) or 
+other static interface-id.
+-------/etc/rc.conf---------
+	stf_interface_ipv6_ifid="1234:5678:9abc:def0"
+		# By default, it is "::1"
+----------------------------
+
+Normally 49-64th bit of IPv6 address on 6to4 interface is zero, i.e.
+IPv6 Site Level Aggregator for 6to4 interface is 0.  If you like, you
+can specify some appropriate value (it's not necessary at all in normal
+cases, though).
+-------/etc/rc.conf---------
+	stf_interface_ipv6_slaid="0001"	
+		# By default, it is "0"
+----------------------------
+
+
+4.3. how to configure IPv4-IPv6 translator
+There are many technologies to translate traffic between IPv4 and IPv6.
+By default FreeBSD include transport relay translator called FAITH (RFC3142),
+which translates TCP traffic from IPv6 to IPv4.  
+
+[Mandatory]
+You need to specify two things to enable FAITH; FAITH prefix and protocols
+to be translated
+
+To enable a FAITH translator,  you must define FAITH prefix.
+If you'd like to disable FAITH, please specify "NO" here.
+-------/etc/rc.conf---------
+	ipv6_faith_prefix="3ffe:501:ffff:ffff::"
+		# By default, it's "NO"
+----------------------------
+
+The above configuration creates a routing entry on this machine
+to forward packets for 3ffe:501:ffff:ffff::/96 to faith interface.
+When you use FAITH from other machine, you must control routing 
+to lead packets for 3ffe:501:ffff:ffff::/96 to this machine by some way
+(e.g. by RIPng).
+
+
+By default no protocol is tranlated via faith even when 
+the above configuration is given.  So you have to specify the protocols
+to be translated in either of the following manner:
+
+method 1) invoke faithd manually
+Writes the following statement in /etc/rc.local or
+/usr/local/etc/rc.d/faithd.sh etc.
+-------/etc/rc.local--------
+	/usr/sbin/faithd http
+		# translates HTTP traffic
+	/usr/sbin/faithd ftp /usr/libexec/ftpd ftpd -l
+		# translates FTP traffic unless bound for myself
+----------------------------
+
+method 2) invoke faithd via inetd
+adds the following statement in /etc/inetd.conf
+This is dedicated for the cases where translation is required for 
+traffic not for myself and traffic bound for myself would be handled 
+normally.
+-------/etc/inetd.conf------
+	ftp     stream  tcp6/faith  nowait  root  /usr/sbin/faithd  ftpd -l
+----------------------------
+
+[Optional]
+you can set an faith-specific access control list to prevent malicious 
+access with /etc/faithd.conf.  If you configured FAITH on /etc/inetd.conf,
+you can use a tcpwrapper to control access to FAITH as normal inetd control.
+
+Below is an example access control list using /etc/faithd.conf.
+------/etc/faithd.conf------
+	3ffe:501:ffff::/64 deny 3ffe:501:ffff:ffff::192.168.0.0/112
+		# deny translation from 3ffe:501:ffff:0::/64 to 192.168.0.0/16
+	3ffe:501:ffff::/64 permit 3ffe:501:ffff:ffff::10.0.0.0/104
+		# all ther other traffic from 3ffe:501:ffff::/64 is translated
+	# unmatched traffic won't be translated.
+----------------------------
+
+
+4.4 how to control IPv4-mapped IPv6 address
+IPv4-mapped IPv6 address is used to let IPv6-only programs speaks IPv4
+on its IPv6 sockets.  
+
+Normally this feature is not required as there are not many IPv6-only 
+programs (as far as I know only mozilla make use of this) and can be 
+a security hole (you have to configure IPv6 filter to block IPv4 
+traffic.  How awkard...)
+
+[Mandatory]
+-------/etc/rc.conf---------
+	ipv6_ipv4mapping=""
+		# Leave empty to disable IPv4 mapped IPv6 addr communication. 
+		# (like ::ffff:a.b.c.d).  By default it's enabled.
+----------------------------
+
+
+4.5. how to configure IPv6 firewall
+FreeBSD provides an IPv6 packet filter called "ip6fw".  Here its usage is described.
+
+[Mandatory]
+By default it's disabled and removed from GENERIC kernel, so you have to 
+  - rebuild kernel with the following options
+-------kernel-config--------
+	options IPV6FIREWALL
+	#options IPV6FIREWALL_VERBOSE
+	#options IPV6FIREWALL_VERBOSE_LIMIT=100
+	#options IPV6FIREWALL_DEFAULT_TO_ACCEPT
+----------------------------
+
+ - enable it on /etc/rc.conf
+-------/etc/rc.conf---------
+	ipv6_firewall_enable="YES"
+----------------------------
+
+When you define IPv6 firewall, you should define its type, too.
+Valid values are listed below:
+	open     - will allow anyone in
+	client   - will try to protect just this machine
+	simple   - will try to protect a whole network
+	closed   - totally disables IP services except via lo0 interface
+	UNKNOWN  - disables the loading of firewall rules.
+	filename - will load the rules in the given filename 
+		   (full path required)
+For ``client'' and ``simple'' the optional entries should be 
+customized appropriately.
+-------/etc/rc.conf---------
+	ipv6_firewall_type="simple"
+----------------------------
+
+[Optional]
+-------/etc/rc.conf---------
+	ipv6_firewall_quiet="YES"
+		# suppress rule display. (By default, it's NO)
+	ipv6_firewall_logging="YES"	
+		# enable events logging. (By default, it's NO)
+	ipv6_firewall_flags=""
+		# Flags passed to ip6fw when type is a "filename"
+----------------------------
+
+5 how to configure IPv6 IPsec.
+To be written...

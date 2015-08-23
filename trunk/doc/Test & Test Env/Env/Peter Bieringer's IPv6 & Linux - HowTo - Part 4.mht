@@ -1,0 +1,1693 @@
+From: <ÓÉ Microsoft Internet Explorer 5 ±£´æ>
+Subject: Peter Bieringer's IPv6 & Linux - HowTo - Part 4
+Date: Wed, 29 Jul 2009 14:13:31 +0800
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_000F_01CA1056.C0A74520"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_000F_01CA1056.C0A74520
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-4.html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Peter Bieringer's IPv6 & Linux - HowTo - Part =
+4</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3DIPv6 name=3Dsubject>
+<META content=3D"MSHTML 6.00.2900.5659" name=3DGENERATOR>
+<META content=3D"Peter Bieringer" name=3DAuthor>
+<META content=3D"How to implement IPv6 on a LINUX system" =
+name=3DDescription>
+<META=20
+content=3D"ipv6, linux, ipng, internet protocol version 6, internet =
+protocol next generation"=20
+name=3DKeyWords>
+<META content=3D"Dr. Peter Bieringer" name=3Dauthor>
+<META content=3D"IPv6 &amp; Linux HowTo Part4, Additional Applications"=20
+name=3Ddescription></HEAD>
+<BODY>&nbsp;=20
+<TABLE cellSpacing=3D0 cellPadding=3D0 width=3D"100%">
+  <TBODY>
+  <TR>
+    <TD><FONT size=3D-1><A=20
+      =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO.html">St=
+art</A>=20
+      | <A=20
+      =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-3.html">=
+Previous</A>=20
+      | <A=20
+      =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-5.html">=
+Next</A></FONT></TD>
+    <TD><B><FONT size=3D-1><A=20
+      =
+href=3D"http://www.bieringer.de/linux/IPv6/index.html">IPv6</A></FONT></B=
+></TD>
+    <TD align=3Dright><FONT size=3D-1><A=20
+      =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO.html">Ma=
+in</A>=20
+      | <A=20
+      =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-0.html">=
+General</A>=20
+      | <A=20
+      =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-1.html">=
+Overview</A>=20
+      | <A=20
+      =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-2.html">=
+Basic=20
+      Softw</A> | <A=20
+      =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-3.html">=
+Important=20
+      App</A> | Additional App | <A=20
+      =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-5.html">=
+Network=20
+      Conf</A> | <A=20
+      =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-6.html">=
+Changes+Testing</A>=20
+      | <A=20
+      =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-7.html">=
+Obsolete</A>=20
+      | <A=20
+      =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-8.html">=
+Firewalling</A></FONT></TD></TR></TBODY></TABLE>
+<HR width=3D"100%" SIZE=3D4>
+
+<H1>IPv6 &amp; Linux - HowTo - Part 4</H1>Version: 3.24 from =
+2003-03-16<BR>
+<HR width=3D"100%">
+<BR>(P) &amp; (C) 1997-2003 by Peter Bieringer &lt;<A=20
+href=3D"mailto:pb@bieringer.de">pb@bieringer.de</A>&gt;, see <A=20
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO.html#cop=
+yright-notice">copyright=20
+notice</A> for more details <BR>Original site of publishing: <A=20
+href=3D"http://www.bieringer.de/linux/IPv6/">http://www.bieringer.de/linu=
+x/IPv6/</A>=20
+; suggestions, comments and improvements are welcome!=20
+<HR width=3D"100%" SIZE=3D4>
+
+<H2>Additional Applications</H2>If you miss hint for the old inet6-apps =
+based=20
+stuff, please goto <A=20
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-7.html">=
+Obsoletes</A>=20
+<BR>This section is now in building progress again, using glibc-2.1 =
+based=20
+software...growing slowly (depending on given time) <BR>For quickstart, =
+look at=20
+given URLs on the <A=20
+href=3D"http://www.bieringer.de/linux/IPv6/status/IPv6+Linux-status-apps.=
+html">status=20
+page</A>=20
+<H3>Contents</H3>
+<UL>
+  <LI><FONT color=3D#000000>Electronic mail (SMTP &amp; POP)</FONT>=20
+  <UL>
+    <LI><FONT color=3D#000000>Sendmail (now natively supported), see <A=20
+    =
+href=3D"http://www.bieringer.de/linux/IPv6/status/IPv6+Linux-status-apps.=
+html#e-mail">IPv6-Status/Application</A>=20
+    for details</FONT>=20
+    <LI><FONT color=3D#000000>POP+IMAP+SMTP:</FONT><FONT =
+color=3D#000000> try=20
+    package <I>imap</I> or <I>courier-mail</I>, see <A=20
+    =
+href=3D"http://www.bieringer.de/linux/IPv6/status/IPv6+Linux-status-apps.=
+html#e-mail">IPv6-Status/Application</A>=20
+    for details, both are supporting IPv6 now</FONT> </LI></UL>
+  <LI><FONT color=3D#000000>World Wide Web (HTTP)</FONT>=20
+  <UL>
+    <LI><FONT color=3D#000000>Server:</FONT>=20
+    <UL>
+      <LI><FONT color=3D#000000><A=20
+      =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-4.html#a=
+pache">apache</A></FONT>=20
+
+      <LI><FONT color=3D#000000><A=20
+      =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-4.html#t=
+httpd">thttpd</A></FONT>=20
+      </LI></UL>
+    <LI><FONT color=3D#000000>Proxy</FONT>=20
+    <UL>
+      <LI><FONT color=3D#000000><A=20
+      =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-4.html#s=
+quid">Squid</A></FONT>=20
+      </LI></UL>
+    <LI><FONT color=3D#000000>Client</FONT>=20
+    <UL>
+      <LI><FONT color=3D#000000><A=20
+      =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-4.html#m=
+ozilla">Mozilla</A></FONT>=20
+      </LI></UL></LI></UL>
+  <LI>SMTP=20
+  <UL>
+    <LI>Server=20
+    <UL>
+      <LI><A=20
+      =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-4.html#p=
+ostfix">Postfix</A><BR></LI></UL></LI></UL>
+  <LI>Network autoconfiguration=20
+  <UL>
+    <LI><FONT color=3D#000000>&nbsp;</FONT><A=20
+    =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-4.html#r=
+advd">Router=20
+    ADVertisement Daemon</A> </LI></UL>
+  <LI>Secure shell for protected connection over the Internet=20
+  <UL>
+    <LI><FONT color=3D#000000>&nbsp;</FONT><A=20
+    =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-4.html#s=
+sh">SSH</A>=20
+    </LI></UL>
+  <LI>Point-to-Point-Protocol=20
+  <UL>
+    <LI><FONT color=3D#000000>&nbsp;</FONT><A=20
+    =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-4.html#p=
+pp">PPP=20
+    daemon and client</A> </LI></UL>
+  <LI>TCP Network throughput measurements=20
+  <UL>
+    <LI><FONT color=3D#000000>&nbsp;</FONT><A=20
+    =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-4.html#t=
+tcp">TTCP</A>=20
+
+    <LI><FONT color=3D#000000>&nbsp;</FONT><A=20
+    =
+href=3D"http://www.bieringer.de/linux/IPv6/IPv6-HOWTO/IPv6-HOWTO-4.html#p=
+tcp">PTCP</A>=20
+    </LI></UL></LI></UL>
+<P><BR></P>
+<HR width=3D"100%">
+
+<H3><A name=3Dapache></A>apache|apache2 (HTTP server)</H3>
+<H4>Why?</H4><TT>apache</TT> is a widely used HTTP server=20
+<UL>
+  <LI>Versions 1.3.x are IPv6-enabled by the <A=20
+  href=3D"http://www.kame.net/">KAME</A> project (no longer recommended) =
+
+  <LI>Versions 2.0.x are IPv6-enabled by maintainers, (since 2.0.35 now =
+in=20
+  <I>General Availability</I> state), compiles normally clean with =
+native IPv6=20
+  support (<B><FONT color=3D#33cc00>recommended now</FONT></B>) =
+</LI></UL>
+<H4>URLs:</H4>
+<UL>
+  <LI>Homepage: <A =
+href=3D"http://www.apache.org/">http://www.apache.org/</A>=20
+  <LI>IPv6 enabling patch: <A=20
+  =
+href=3D"ftp://ftp.kame.net/pub/kame/misc/">ftp://ftp.kame.net/pub/kame/mi=
+sc/</A>=20
+
+  <LI>Spec file for RPM building: <A=20
+  =
+href=3D"ftp://ftp.bieringer.de/pub/linux/IPv6/apache/">ftp://ftp.bieringe=
+r.de/pub/linux/IPv6/apache/</A>=20
+  </LI></UL>
+<H4>By me tested version and filename:</H4>
+<UL>
+  <LI>1.3.14:&nbsp; (<B><FONT color=3D#ff0000>do not use this because =
+versions=20
+  below 1.3.26 </FONT></B><FONT color=3D#ff0000>[except backpatched =
+ones]<B> are=20
+  remote exploitable</B></FONT>)=20
+  <UL>
+    <LI>SRPMS from Red Hat 6.2 Updates: <A=20
+    =
+href=3D"http://www.redhat.com/apps/download/">apache-1.3.14-2.6.2.src.rpm=
+</A>=20
+    <LI>KAME IPv6 enabling patch: <A=20
+    =
+href=3D"ftp://ftp.kame.net/pub/kame/misc/">apache-1.3.14-v6-20010115a.dif=
+f.gz</A>=20
+
+    <LI>By me created SPEC file for building new packages: <A=20
+    =
+href=3D"ftp://ftp.bieringer.de/pub/linux/IPv6/apache/">apache+IPv6-RH6.2.=
+spec</A>=20
+
+    <LI>Additional information: patch and configure options for EAPI are =
+
+    disabled because of interferences with the IPv6 enabling patch =
+</LI></UL>
+  <LI>1.3.19: (<B><FONT color=3D#ff0000>do not use this because versions =
+below=20
+  1.3.26 </FONT></B><FONT color=3D#ff0000>[except backpatched ones] =
+<B>are remote=20
+  exploitable</B></FONT>)=20
+  <UL>
+    <LI>SRPMS from Red Hat 7.1: apache-1.3.19-5.src.rpm=20
+    <LI>KAME IPv6 enabling patch: <A=20
+    =
+href=3D"ftp://ftp.kame.net/pub/kame/misc/">apache-1.3.19-v6-20010309a.dif=
+f.gz</A>=20
+
+    <LI>By me created SPEC file for building new packages: <A=20
+    =
+href=3D"ftp://ftp.bieringer.de/pub/linux/IPv6/apache/">apache-1.3.19+IPv6=
+.spec</A>=20
+    </LI></UL>
+  <UL>
+    <LI>Additional information: patch and configure options for EAPI and =
+SSL are=20
+    disabled because of interferences with the IPv6 enabling patch =
+</LI></UL>
+  <LI>2.0.43:&nbsp; (<B><FONT color=3D#33cc00>recommended now, =
+</FONT><FONT=20
+  color=3D#ff0000>versions below contain security holes</FONT></B>)=20
+  <UL>
+    <LI>SRPMS from falsehope&nbsp; <A=20
+    =
+href=3D"ftp://ftp.falsehope.net/home/gomez/apache2/">ftp://ftp.falsehope.=
+net/home/gomez/apache2/</A>=20
+    </LI></UL></LI></UL>
+<H4>Contents:</H4>After rebuild a complete apache package=20
+<H4>Rebuilding of packet, installation</H4>
+<UL>
+  <LI>Install SRPMS (destination is normally =
+<TT>/usr/src/redhat/SOURCES/</TT>=20
+  ):=20
+  <UL>
+    <LI><TT>rpm -ihv apache-<I>version</I>-<I>release</I>.src.rpm</TT> =
+</LI></UL>
+  <LI>Copy the IPv6 enabling patch also to source directory:=20
+  <UL>
+    <LI><TT>cp =
+<B><I>pathto</I></B>/apache-<I>version</I>-v6-<I>ipv6-release</I>=20
+    .diff.gz /usr/src/redhat/SOURCES/</TT> </LI></UL>
+  <LI>Copy the new SPEC fileMove into the source directory:=20
+  <UL>
+    <LI><TT>cd <B><I>pathto</I></B>/apache-<I>specfile-version</I>.spec=20
+    /usr/src/redhat/SPECS/</TT> </LI></UL>
+  <LI>Rebuild package (good luck!)=20
+  <UL>
+    <LI><TT>rpm -ba=20
+    /usr/src/redhat/SPECS/apache-<I>specfile-version</I>.spec</TT>=20
+    <UL>
+      <LI>You should get 3 new packages afterwards (stored in=20
+      <TT>/usr/src/redhat/RPMS/i386/</TT> )=20
+      <UL>
+        <LI><TT>apache-<I>version</I>-<I>release</I>+IPv6.i386.rpm</TT>=20
+        =
+<LI><TT>apache-devel-<I>version</I>-<I>release</I>+IPv6.i386.rpm</TT>=20
+        =
+<LI><TT>apache-manual-<I>version</I>-<I>release</I>+IPv6.i386.rpm</TT>=20
+        </LI></UL></LI></UL></LI></UL>
+  <LI>Make a backup of your existing apache configuration=20
+  <UL>
+    <LI><TT>tar czf /root/httpd-conf-`date +'%Y%m%d-%H%M%S'`=20
+    /etc/httpd/conf/</TT> </LI></UL>
+  <LI>Install (be sure what to do):=20
+  <UL>
+    <LI>Replace existing package=20
+    <UL>
+      <LI><TT>rpm -Fhv=20
+      /usr/src/redhat/RPMS/i386/apache-<I>version</I>-<I>release</I>=20
+      +IPv6.i386.rpm</TT> </LI></UL>
+    <LI>Install on a native system=20
+    <UL>
+      <LI><TT>rpm -ihv=20
+      /usr/src/redhat/RPMS/i386/apache-<I>version</I>-<I>release</I>=20
+      +IPv6.i386.rpm</TT> </LI></UL></LI></UL>
+  <LI>Configure and restart the service (you should know how to do =
+this...)=20
+</LI></UL>
+<H4>Configuration</H4>Be sure to enable only the really needed modules =
+in=20
+/<TT>etc/httpd/conf/httpd.conf</TT> . Each more module can be a =
+potential=20
+security hole. For normal run, only following modules are needed:=20
+<BLOCKQUOTE>config_log_module, agent_log_module, referer_log_module,=20
+  mime_module, negotiation_module, includes_module, =
+autoindex_module,&nbsp;=20
+  dir_module, alias_module, access_module, auth_module,=20
+setenvif_module</BLOCKQUOTE>Here is an example of a configuration shown =
+for an=20
+IPv6 only listening virtual webserver:=20
+<BLOCKQUOTE><PRE>&lt;VirtualHost =
+3ffe:400:100::1&gt;<BR>&nbsp;&nbsp;&nbsp; =
+ServerAdmin&nbsp;&nbsp;&nbsp;&nbsp; =
+webmaster@bieringer.de<BR>&nbsp;&nbsp;&nbsp; =
+ServerName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =
+www.ipv6.bieringer.de<BR>&nbsp;&nbsp;&nbsp; =
+DocumentRoot&nbsp;&nbsp;&nbsp; /somewhere/pub<BR>&nbsp;&nbsp;&nbsp; =
+CustomLog&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =
+"/somewhere/logs/www.ipv6.bieringer.de-log"&nbsp; =
+combined<BR>&nbsp;&nbsp;&nbsp; =
+ErrorLog&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =
+"/somewhere/logs/www.ipv6.bieringer.de-error"<BR><BR>&nbsp;&nbsp;&nbsp; =
+&lt;Directory =
+"/somewhere/pub"&gt;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =
+AllowOverride AuthConfig =
+Limit<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Options =
+None<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Order =
+allow,deny<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Allow from =
+all<BR>&nbsp;&nbsp;&nbsp; =
+&lt;/Directory&gt;<BR>&lt;/VirtualHost&gt;</PRE></BLOCKQUOTE>
+<HR width=3D"100%">
+
+<H3><A name=3Dthttpd></A>thttpd (HTTP server)</H3><FONT =
+color=3D#ff0000>Section=20
+outdated!</FONT><BR>
+<H4>Why?</H4><TT>thttpd</TT> is a native IPv6 supporting HTTP server =
+(not=20
+fullfeatured like <A href=3D"http://www.apache.org/">apache</A>, but has =
+native=20
+IPv6 support and can be configured to be very secure!)=20
+<H4>URLs:</H4>
+<UL>
+  <LI>Homepage: <A=20
+  =
+href=3D"http://www.acme.com/software/thttpd/">http://www.acme.com/softwar=
+e/thttpd/</A>=20
+
+  <LI>Online manpage: <A=20
+  =
+href=3D"http://www.acme.com/software/thttpd/thttpd_man.html">http://www.a=
+cme.com/software/thttpd/thttpd_man.html</A>=20
+  </LI></UL>
+<H4>By me latest tested version and filename:</H4><FONT =
+color=3D#ff0000><B>Sure=20
+old and unsecure, so please use latest available =
+version!</B></FONT><BR><A=20
+href=3D"http://www.acme.com/software/thttpd/thttpd-2.20.tar.gz">http://ww=
+w.acme.com/software/thttpd/thttpd-2.20.tar.gz</A>=20
+
+<H4>Contents:</H4>
+<TABLE border=3D1>
+  <TBODY>
+  <TR>
+    <TD vAlign=3Dtop><B>Application</B></TD>
+    <TD vAlign=3Dtop><B>Path</B></TD>
+    <TD vAlign=3Dtop><B>Description</B></TD></TR>
+  <TR>
+    <TD vAlign=3Dtop><TT>thttpd</TT></TD>
+    <TD vAlign=3Dtop><TT>/usr/local/sbin/thttpd</TT></TD>
+    <TD vAlign=3Dtop>HTTP server</TD></TR></TBODY></TABLE>
+<H4>Unpacking, configuration and installation</H4>Similar to other =
+software=20
+packages described here <BR>Source package contains <TT>configure</TT>,=20
+therefore no special hints are needed. <BR>See included <TT>INSTALL</TT> =
+and=20
+<TT>README</TT> for details=20
+<UL>
+  <LI>Move into the source directory:=20
+  <UL>
+    <LI><TT>cd /usr/src</TT> </LI></UL>
+  <LI>Unpack the new source:=20
+  <UL>
+    <LI><TT>tar xzf =
+<B><I>pathto</I></B>/thttpd-<B><I>version.</I></B>tar.gz -C=20
+    /usr/src</TT> </LI></UL>
+  <LI>Move into the source directory:=20
+  <UL>
+    <LI><TT>cd /usr/src/thttpd-<B><I>version</I></B></TT> </LI></UL>
+  <LI>Run configure=20
+  <UL>
+    <LI><TT>./configure</TT> </LI></UL>
+  <LI>Now compile:=20
+  <UL>
+    <LI><TT>make clean; make</TT> <BR>You should get no errors! =
+</LI></UL>
+  <LI>And install:=20
+  <UL>
+    <LI><TT>make installthis; make install-man</TT> <BR>Manual and =
+binary are=20
+    copied (normally) to the directories in <TT>/usr/local</TT>=20
+</LI></UL></LI></UL>See online manpage for further details.=20
+<H4><B>Hints:</B></H4>
+<UL>
+  <LI>By specifying an IPv6 address for binding to (e.g. with option =
+"<TT>=20
+  -h</TT>"), <TT>thttpd</TT> will bind only to that and not to other =
+IPv4=20
+  addresses. So you can setup an IPv6 only HTTP server!=20
+  <LI>You cannot bind to an IPv6 only port, if this port is already bind =
+by an=20
+  IPv4 application with "bind option *"=20
+  <UL>
+    <LI>I got this in the case of a running IPv4 apache on the same host =
+
+    <LI>Solution: change apache binding to a dedicated IPv4 address=20
+    <UL>
+      <LI>old: Listen *:80=20
+      <LI>new: Listen 192.168.1.1:80 </LI></UL></LI></UL></LI></UL>
+<HR width=3D"100%">
+
+<H3><A name=3Dsquid></A>Squid (HTTP proxy)</H3>
+<H4>Why?</H4>Nowadays most modern browsers like mozilla, konqueror or =
+netscape6=20
+already allow IPv6 connections on IPv6 enabled systems. Unfortunately =
+using a=20
+proxy (e.g. for filtering issues) they cannot decide between IPv4 or =
+IPv6=20
+connections. Therefore an IPv6 enabled proxy is needed.=20
+<P>Good news: the Squid developers have already IPv6 enabled the current =
+
+developer version 2.5 </P>
+<H4>ToDo</H4>
+<TABLE border=3D1 nosave=3D"">
+  <TBODY>
+  <TR nosave=3D"">
+    <TH nosave=3D"">Distribution</TH>
+    <TH nosave=3D"">RHL 6.2</TH>
+    <TH nosave=3D"">RHL 7.1</TH>
+    <TH nosave=3D"">RHL 7.2</TH>
+    <TH vAlign=3Dtop>RHL 7.3<BR></TH></TR>
+  <TR align=3Dmiddle nosave=3D"">
+    <TD align=3Dleft nosave=3D"">ToDo</TD>
+    <TD>not recommended<BR>update to RHL 7.3 first</TD>
+    <TD>not tested<BR>update to RHL 7.3 first</TD>
+    <TD>compiling and install<BR>CVS version 20011113<BR>now=20
+      outdated<BR>update to RHL 7.3 first<BR></TD>
+    <TD vAlign=3Dtop>compiling and install<BR>CVS version=20
+  20021114<BR></TD></TR></TBODY></TABLE>
+<H4>URLs:</H4>
+<UL>
+  <LI>URLs: <A=20
+  href=3D"http://www.squid-cache.org/">http://www.squid-cache.org/</A>=20
+  <LI>Information: <A=20
+  =
+href=3D"http://devel.squid-cache.org/ipv6/">http://devel.squid-cache.org/=
+ipv6/</A>=20
+
+  <LI>Some helper files: <A=20
+  =
+href=3D"ftp://ftp.bieringer.de/pub/linux/IPv6/squid/">ftp://ftp.bieringer=
+.de/pub/linux/IPv6/squid/</A>=20
+  </LI></UL>
+<H4>By me tested version:</H4>
+<UL>
+  <LI>CVS snapshot taken 20011113, known bugs: connection to IPv6 only =
+sites=20
+  only work with a patch (<A=20
+  =
+href=3D"ftp://ftp.bieringer.de/pub/linux/IPv6/squid/squid-2.5.CVS-2001111=
+3/squid-2.5-ipv6onlyrequestbug.patch">=20
+  ipv6onlyrequestbug.patch</A>), some other options won't work, still in =
+
+  progress: http://[fec0::1]/ style URLs and IPv6 EPRT FTP </LI></UL>
+<UL>
+  <LI>CVS snapshot taken 20021114: known bugs:&nbsp;http://[fec0::1]/ =
+style URLs=20
+  not supported, perhaps more </LI></UL>
+<H4>Requires:</H4>
+<UL>
+  <LI>cvs, openldap-devel, pam-devel (installed from distribution)=20
+  <LI><U>automake &gt;=3D 1.5</U> (Red Hat Linux 7.3 users have to =
+install=20
+  additional RPM <I>automake15-<B>$version</B>.noarch.rpm</I> and patch=20
+  <TT>bootstrap.sh</TT>, see below for more) </LI></UL>
+<H4>Source: get from CVS</H4>
+<OL>
+  <LI>Create a CVS directory=20
+  <UL>
+    <LI><TT>$ mkdir <B><I>somewhere</I></B>/cvs</TT> </LI></UL>
+  <LI>Log into CVS server=20
+  <UL>
+    <LI><TT>$ cvs -d =
+:pserver:anonymous@cvs.devel.squid-cache.org/cvsroot/squid=20
+    login</TT> </LI></UL>
+  <LI>Get current tagged version (IPv6 enabled squid)=20
+  <UL>
+    <LI><TT>$ cvs -z 9 -d=20
+    :pserver:anonymous@cvs.devel.squid-cache.org/cvsroot/squid co -r =
+ipv6 -d=20
+    squid-ipv6 squid</TT> </LI></UL>
+  <LI>Create tar-ball for backup and RPM issues=20
+  <UL>
+    <LI><TT>$ mv squid-ipv6 squid-ipv6-<B>$DATE</B>cvs</TT>=20
+    <LI><TT>$ tar czf squid-ipv6-<B>$DATE</B>cvs.tgz=20
+    squid-ipv6-<B>$DATE</B>cvs</TT> </LI></UL></LI></OL>
+<H4>Tar-Ball: Unpacking, compilation and installation</H4>
+<OL>
+  <LI>Move into the source directory, create a main directory and change =
+into it=20
+
+  <UL>
+    <LI><TT>$ cd /usr/src; mkdir squid; cd squid</TT> </LI></UL>
+  <LI>Unpack the new source:=20
+  <UL>
+    <LI><TT>$ tar xzf squid-ipv6-<B>$DATE</B>cvs.tgz</TT> </LI></UL>
+  <LI>Move into the source directory:=20
+  <UL>
+    <LI><TT>$ cd squid-ipv6-<B>$DATE</B>cvs</TT> </LI></UL>
+  <LI>Patch <TT>bootstrap.sh</TT> file for usage with automake-1.5 on =
+RHL 7.3=20
+  <UL>
+    <LI><TT>$ diff -u bootstrap.sh.orig bootstrap.sh<BR>---=20
+    bootstrap.sh.orig&nbsp;&nbsp; Thu Nov 14 20:30:30 2002<BR>+++=20
+    bootstrap.sh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Thu Nov 14 =
+20:30:53=20
+    2002<BR>@@ -20,9 +20,9 @@<BR>&nbsp;mkdir -p cfgaux<BR><BR>&nbsp;# =
+Bootstrap=20
+    the autotool subsystems<BR><B>-bootstrap aclocal<BR>+bootstrap=20
+    aclocal-1.5</B><BR>&nbsp;bootstrap autoheader<BR><B>-bootstrap =
+automake=20
+    --foreign --add-missing<BR>+bootstrap automake-1.5 --foreign=20
+    --add-missing</B><BR>&nbsp;bootstrap autoconf<BR>&nbsp;echo =
+"Autotool=20
+    bootstrapping complete."</TT><BR></LI></UL>
+  <LI>Run bootstrap=20
+  <UL>
+    <LI><TT>./bootstrap.sh</TT> </LI></UL>
+  <LI>Configure the compile options:=20
+  <UL>
+    <LI>cvs-20011113 (based on squid 2.4 included in Red Hat Linux 7.2) =
+</LI></UL>
+  <UL>
+    <UL>
+      <LI><TT><FONT color=3D#000000>$ ./configure --exec_prefix=3D/usr=20
+      --bindir=3D/usr/sbin --libexecdir=3D/usr/lib/squid =
+--localstatedir=3D/var=20
+      --sysconfdir=3D/etc/squid --enable-poll =
+--enable-removal-policies=3D"heap,lru"=20
+      --enable-storeio=3D"aufs,diskd,ufs" --enable-carp--with-pthreads=20
+      --enable-basic-auth-helpers=3D"LDAP,NCSA,PAM,SMB,MSNT"=20
+      --enable-ipv6</FONT></TT> </LI></UL>
+    <UL>
+      <LI>Information: currently not working configure options (mostly =
+missing=20
+      IPv6 support):&nbsp; <FONT=20
+      color=3D#993399><TT>--enable-storeio=3D"coss"--enable-delay-pools=20
+      --enable-htcp</TT> <TT>--enable-linux-netfilter =
+--enable-snmp</TT></FONT>=20
+      </LI></UL></UL>
+  <UL>
+    <LI>cvs-20021114 (based on squid 2.4 included in Red Hat Linux 7.3): =
+
+</LI></UL>
+  <OL>
+    <UL>
+      <LI><TT>$ ./configure --exec_prefix=3D/usr --bindir=3D/usr/sbin=20
+      --libexecdir=3D/usr/lib/squid --localstatedir=3D/var =
+--sysconfdir=3D/etc/squid=20
+      --enable-poll --enable-removal-policies=3D"heap,lru" =
+<BR>--with-pthreads=20
+      --enable-storeio=3D"aufs,diskd,ufs" --enable-ipv6=20
+      =
+--enable-basic-auth-helpers=3D"LDAP,NCSA,PAM,SMB,MSNT"</TT><TT><FONT=20
+      color=3D#000000> </FONT><FONT color=3D#000000>&nbsp;</FONT></TT>=20
+      <LI>Information: currently not working configure options (mostly =
+missing=20
+      IPv6 support):&nbsp; <FONT=20
+      color=3D#993399><TT>--enable-storeio=3D"coss"--enable-delay-pools=20
+      </TT><TT>--enable-linux-netfilter --enable-snmp</TT></FONT> =
+</LI></UL></OL>
+  <LI>Now compile:=20
+  <UL>
+    <LI><TT>$ make clean; make</TT> <BR>You should get no errors! =
+</LI></UL>
+  <LI>And install:=20
+  <UL>
+    <LI>Be careful, if already a squid proxy is running =
+</LI></UL></LI></OL>
+<H4>RPM: build an IPv6 enabled squid-RPM from CVS</H4><FONT =
+color=3D#ff6600>Note:=20
+squid developers don't want to see any squid RPM from CVS source in the =
+wild -=20
+therefore keep source and binary packages private - please!</FONT> =
+<BR><TT></TT>
+<H5>cvs20011113 (outdated)</H5>
+<OL>
+  <LI>Copy CVS tar-ball to =
+<TT>/usr/src/<I>distribution</I>/SOURCES/</TT>=20
+  <LI>Copy additional patches given at <A=20
+  =
+href=3D"ftp://ftp.bieringer.de/pub/linux/IPv6/squid/">ftp://ftp.bieringer=
+.de/pub/linux/IPv6/squid/</A>=20
+  also to <TT>/usr/src/<I>distribution</I>/SOURCES/</TT>=20
+  <LI>Copy spec file given at <A=20
+  =
+href=3D"ftp://ftp.bieringer.de/pub/linux/IPv6/squid/">ftp://ftp.bieringer=
+.de/pub/linux/IPv6/squid/</A>=20
+  to <TT>/usr/src/<I>distribution</I>/SPECS/</TT>=20
+  <LI>Build source and binary packages=20
+  <UL>
+    <LI><TT>rpm -ba =
+/usr/src/<I>distribution</I>/SPECS/squid-ipv6-<I>version</I>=20
+    .spec</TT> </LI></UL>
+  <LI>Install package </LI></OL>
+<H5>cvs20021114</H5>
+<OL>
+  <LI>Install RHL 7.3 squid source RPM (from RHL updates)=20
+  <UL>
+    <LI><TT>$ rpm -ihv=20
+    =
+/path/to/redhat/updates/7.3/en/os/SRPMS/squid-2.4.STABLE6-6.7.3.src.rpm</=
+TT>=20
+    </LI></UL>
+  <LI>Copy CVS tar-ball<TT></TT>=20
+  <UL>
+    <LI><TT>$&nbsp;</TT> <TT>cp /path/to/squid-ipv6-<B>$DATE</B>cvs.tgz=20
+    %{_topdir}</TT><TT>/SOURCES/</TT> </LI></UL>
+  <LI>Copy additional patches given at <A=20
+  =
+href=3D"ftp://ftp.bieringer.de/pub/linux/IPv6/squid/">ftp://ftp.bieringer=
+.de/pub/linux/IPv6/squid/</A>=20
+  also=20
+  <UL>
+    <LI><TT>$&nbsp;</TT> <TT>cp /path/to/squid-*.patch=20
+    %{_topdir}</TT><TT>/SOURCES/</TT> </LI></UL>
+  <LI>Copy spec file given at <A=20
+  =
+href=3D"ftp://ftp.bieringer.de/pub/linux/IPv6/squid/">ftp://ftp.bieringer=
+.de/pub/linux/IPv6/squid/</A>&nbsp;=20
+
+  <UL>
+    <LI><TT>$&nbsp;</TT> <TT>cp /path/to/squid-*.spec=20
+    %{_topdir}</TT><TT>/SPECS/</TT> </LI></UL>
+  <LI>Build binary package=20
+  <UL>
+    <LI><TT>$ rpm -bb=20
+    =
+</TT><TT>%{_topdir}</TT><TT>/SPECS/</TT><TT>squid-ipv6-<B>$version</B>.sp=
+ec</TT>=20
+    </LI></UL>
+  <LI value=3D5>Install package (probably as root) </LI></OL>See =
+configuration=20
+issues below now before starting, this adaptions still not done by =
+building=20
+process (too lazy...).<BR>
+<H4>Configuration issues</H4>You have to adjust IPv4 only addresses to =
+IPv6 ones=20
+like=20
+<UL>
+  <LI>Binding of addresses=20
+  <UL><TT>udp_outgoing_address ::</TT> <BR><TT>udp_incoming_address =
+::</TT>=20
+    <BR><TT>tcp_outgoing_address ::</TT> </UL>
+  <LI>ACLs=20
+  <UL><TT>acl localhost src ::ffff:127.0.0.1 ::1</TT> <BR><TT>acl =
+to_localhost=20
+    dst ::ffff:127.0.0.1 ::1</TT> <BR><TT>acl all src ::/0</TT> =
+<BR><TT>acl=20
+    sitelocalsrc src fec0::/48</TT> <BR><TT>acl linklocalsrc src =
+fe80::/64</TT>=20
+    <BR><TT>acl globaldst dst 3ffe::/16 2000::/3</TT> <BR><TT>acl =
+ipv4src src=20
+    ::ffff:0:0/96</TT> <BR><TT>acl ipv4dst dst ::ffff:0:0/96</TT> </UL>
+  <LI>Disable WCCP=20
+  <UL><TT>wccp_router ::</TT> </UL></LI></UL>
+<HR width=3D"100%">
+
+<H3><A name=3Dmozilla></A>mozilla (HTTP client/browser)</H3>
+<H4>Why?</H4><TT>mozilla</TT> is a native IPv6 supporting HTTP browser=20
+<H4>ToDo</H4>
+<TABLE border=3D1 nosave=3D"">
+  <TBODY>
+  <TR nosave=3D"">
+    <TH nosave=3D"">Distribution</TH>
+    <TH nosave=3D"">RHL 6.2</TH>
+    <TH nosave=3D"">RHL 7.1, 7.2</TH>
+    <TH nosave=3D"">RHL 7.3, 8.0</TH></TR>
+  <TR align=3Dmiddle nosave=3D"">
+    <TD align=3Dleft nosave=3D"">ToDo</TD>
+    <TD>install newest available binary</TD>
+    <TD>update to RHL 7.3</TD>
+    <TD>install from distribution/updates</TD></TR></TBODY></TABLE>
+<H4>URLs:</H4>
+<UL>
+  <LI>Homepage:&nbsp; <A=20
+  href=3D"http://www.mozilla.org/">http://www.mozilla.org/</A> =
+</LI></UL>
+<H4>By me tested version and filename:</H4>mozilla-1.0.1-2.7.3 from RHL =
+7.3=20
+<H4></H4>
+<H4>Known issues:</H4>The automatic proxy configuration script doesn't =
+take care=20
+of IPv6 addresses, so in case of using a local proxy for remote IPv4 =
+hosts, this=20
+proxy is also used for remote IPv6 hosts. There is no switch available =
+like "do=20
+not use proxy for IPv6 connection", therefore you have to enable your =
+proxy for=20
+IPv6 or disable proxy usage completly or per URL.<BR>
+<H4>Contents:</H4>If you build a new version from source:<BR><BR>
+<TABLE border=3D1>
+  <TBODY>
+  <TR>
+    <TD vAlign=3Dtop><B>Application</B></TD>
+    <TD vAlign=3Dtop><B>Path</B></TD>
+    <TD vAlign=3Dtop><B>Description</B></TD></TR>
+  <TR>
+    <TD vAlign=3Dtop><TT>mozilla</TT></TD>
+    <TD vAlign=3Dtop><TT>/opt/mozilla</TT></TD>
+    <TD vAlign=3Dtop>HTTP browser</TD></TR></TBODY></TABLE>
+<H4>Unpacking, configuration and installation</H4>Perhaps additional =
+needed RPM=20
+packages for compiling: <I>glib-devel</I>, <I>gtk+-devel</I>, =
+<I>ORBit-devel</I>=20
+<BR>If "<TT>configure</TT>" informed you that there are missing also =
+other=20
+things, try my utility <A=20
+href=3D"http://www.bieringer.de/linux/tools/index.html#rpmfsu">rpmfsu</A>=
+ to find=20
+the relating RPM package.=20
+<P><FONT color=3D#000000>Similar to other software packages described =
+here</FONT>=20
+<BR><FONT color=3D#000000>Source package contains <TT>configure</TT>, =
+therefore no=20
+special hints are needed.</FONT> <BR><FONT color=3D#000000>See included=20
+<TT>INSTALL</TT> and <TT>README</TT> for details</FONT> </P>
+<P><FONT color=3D#000000>Hint: for compiling this tarball, you need =
+about <U>1.3=20
+GByte</U> disk space (and in my case don't run afterwards).</FONT> </P>
+<P><FONT color=3D#000000>But don't be worry, the available binary =
+tarball is=20
+already IPv6 enabled. Unpack the binary package somewhere and run=20
+"<TT>mozilla</TT>" in the binary directory.</FONT> </P>
+<OL>
+  <LI>Change to directory <TT>/opt</TT>=20
+  <UL>
+    <LI><TT>cd /opt</TT> </LI></UL>
+  <LI>Unpack tarball=20
+  <UL>
+    <LI><TT>tar xzf=20
+    <B><I>pathto</I></B>/mozilla-i686-pc-linux-gnu-<B><I>version</I></B> =
+
+    .tar.gz</TT> </LI></UL>
+  <LI>Rename created directory=20
+  <UL>
+    <LI><TT>mv package mozilla</TT> </LI></UL>
+  <LI>Run mozilla=20
+  <UL>
+    <LI><TT>cd /opt/mozilla; mozilla</TT> </LI></UL></LI></OL><FONT =
+color=3D#000000>A=20
+list of sites for testing IPv6 HTTP transport is available at IPv6.org: =
+<A=20
+href=3D"http://www.ipv6.org/v6-www.html">http://www.ipv6.org/v6-www.html<=
+/A></FONT>=20
+<BR><FONT color=3D#000000>You can also try my server at home, perhaps =
+I'm online,=20
+dynamic tunnel is up and my IPv6 only webserver is running: <A=20
+href=3D"http://gate.muc.ipv6.bieringer.de/">http://gate.muc.ipv6.bieringe=
+r.de/</A></FONT>=20
+
+<H3><FONT color=3D#000000><A=20
+href=3D"http://gate.muc.ipv6.bieringer.de/"></A></FONT></H3>
+<HR width=3D"100%" SIZE=3D2>
+
+<H3></H3>
+<H3><A name=3Dpostfix></A>SMTP server Postfix</H3>IPv6 extension is =
+currently=20
+maintained by Dean Strik &lt;dean at ipnet6 dot org&gt;=20
+<H4>Why?</H4>Postfix isn't IPv6-enabled out of the box=20
+<H4>ToDo</H4>
+<TABLE border=3D1 nosave=3D"">
+  <TBODY>
+  <TR nosave=3D"">
+    <TH nosave=3D"">Distribution</TH>
+    <TH nosave=3D"">RHL 6.2</TH>
+    <TH nosave=3D"">RHL 7.1, 7.2</TH>
+    <TH nosave=3D"">RHL 7.3, 8.0</TH></TR>
+  <TR align=3Dmiddle nosave=3D"">
+    <TD align=3Dleft nosave=3D"">ToDo</TD>
+    <TD><I>untested</I></TD>
+    <TD>update to RHL 7.3</TD>
+    <TD>see now<BR></TD></TR></TBODY></TABLE>
+<H4>URLs:</H4>
+<UL>
+  <LI>Postfix main site:&nbsp;<A=20
+  href=3D"http://www.postfix.org/">http://www.postfix.org/</A><A=20
+  href=3D"http://v6web.litech.org/radvd/"></A>=20
+  <LI>Postfix IPv6+TLS patch:&nbsp;<A=20
+  =
+href=3D"http://www.ipnet6.org/postfix.html">http://www.ipnet6.org/postfix=
+.html</A>=20
+
+  <LI>Modified and extended spec file for RPM rebuilding: <A=20
+  =
+href=3D"ftp://ftp.bieringer.de/pub/linux/IPv6/postfix/">ftp://ftp.biering=
+er.de/pub/linux/IPv6/postfix/</A>=20
+  (creation was sponsored by <A =
+href=3D"http://www.aerasec.de/">AERAsec</A>)=20
+  <BR></LI></UL>
+<H4>Version and filename of the packet:</H4>Latest version I have tested =
+is=20
+postfix 1.1.11 snapshot 20021029 with IPv6+TLS=20
+tls+ipv6-1.7pre3-pf-1.1.11-20021029.patch (soon without pre available)=20
+<H4></H4>
+<H4>Package: Rebuilding and installation</H4>
+<OL>
+  <LI>Get files=20
+  <UL>
+    <LI>src rpm from RHL 8.0 from CD or RHL mirror =
+(postfix-1.1.11-5.src.rpm)=20
+    </LI></UL>
+  <UL>
+    <LI>latest snapshot tarball from postfix mirror=20
+    (postfix-1.1.11-20021029.tar.gz) </LI></UL>
+  <UL>
+    <LI>latest TLS+IPv6 patch (IPv6+TLS=20
+    tls+ipv6-1.7pre3-pf-1.1.11-20021029.patch) </LI></UL>
+  <UL>
+    <LI>modified and extended spec file=20
+    (postfix-1.1.11.20021029-5.AERAsec.6.spec)<BR></LI></UL>
+  <LI>Change to your favorite package rebuild user (optional, but=20
+  recommended)<BR>
+  <LI>Install source rpm=20
+  <UL>
+    <LI><TT>rpm -ihv=20
+    path/to/postfix-<B>$version</B>-<B>$release</B>.src.rpm</TT> =
+</LI></UL>
+  <LI>Copy latest snapshot tarball into %_topdir/SOURCES (%_topdir is =
+ususally=20
+  /usr/src/redhat)=20
+  <UL>
+    <LI><TT>cp=20
+    =
+</TT><TT>path/to/</TT><TT>postfix-<B>$version</B>-<B>$snapshot</B>.tar.gz=
+=20
+    <B>%_topdir</B>/SOURCES</TT><BR></LI></UL>
+  <LI>Copy TLS+IPv6 patch &nbsp;into %_topdir/SOURCES=20
+  <UL>
+    <LI><TT>cp=20
+    =
+</TT><TT>path/to/</TT><TT>tls+ipv6-<B>$patchversion</B>-pf-<B>$version</B=
+>-<B>$snapshot</B>.patch=20
+    <B>%_topdir</B>/SOURCES</TT><BR></LI></UL>
+  <LI>Copy spec file into %_topdir/SPECS=20
+  <UL>
+    <LI><TT>cp=20
+    =
+</TT><TT>path/to/</TT><TT>postfix-<B>$version</B>.<B>$snapshot</B>-<B>$re=
+lease</B>.AERAsec.<B>$specversion</B>.spec=20
+    <B>%_topdir</B>/SPECS</TT><BR></LI></UL>
+  <LI>Build binary package=20
+  <UL>
+    <LI><TT>rpm=20
+    =
+--bb&nbsp;</TT><TT><B>%_topdir</B>/SPECS</TT>/<TT>postfix-<B>$version</B>=
+.<B>$snapshot</B>-<B>$release</B>.AERAsec.<B>$specversion</B>.spec</TT><B=
+R></LI></UL>
+  <LI>Install/freshen package =
+(postfix-1.1.11.20021029-5.7.3.AERAsec.6.i386.rpm)=20
+
+  <UL>
+    <LI><TT>service postfix stop</TT><BR></LI></UL>
+  <UL>
+    <LI><TT>rpm -i|F -hv=20
+    =
+</TT><TT><B>%_topdir</B>/</TT><TT>RPMS/<B>$target</B>/postfix-<B>$version=
+.$snapshot</B>-<B>$release</B>.<B>$rhlrelease</B>.AERAsec.<B>$specversion=
+</B>.<B>$target</B>.rpm</TT>=20
+
+    <LI><TT>service postfix start</TT><BR></LI></UL></LI></OL>
+<H4>Check</H4>
+<UL>
+  <LI>IPv6 portbinding=20
+  <UL>
+    <LI><TT># netstat -nlptu |grep=20
+    master<BR>tcp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=20
+    0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0=20
+    =
+:::587&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=20
+    =
+:::*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=20
+    LISTEN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=20
+    29023/master<BR>tcp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=20
+    0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0=20
+    =
+:::465&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=20
+    =
+:::*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=20
+    LISTEN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=20
+    29023/master<BR>tcp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=20
+    0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0=20
+    =
+:::25&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=20
+    =
+:::*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=20
+    LISTEN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 29023/master</TT><BR></LI></UL>
+  <LI>Logging=20
+  <UL>
+    <LI>Your mail log, usually /var/log/maillog should now contain=20
+    <UL>
+      <LI>example for a loopback IPv4 connect:<BR></LI></UL>
+    <UL>
+      <UL>
+        <LI><TT>postfix/smtpd[<B>$pid</B>]: connect from=20
+        localhost[::ffff:127.0.0.1]</TT> </LI></UL>
+      <LI>example for a remote IPv6 relay:=20
+      <UL>
+        <LI><TT>postfix/smtp[<B>$pid</B>]: <B>$qid</B>:=20
+        to=3D&lt;someone@domain.example&gt;,=20
+        relay=3Dmx.domain.example[3ffe:ffff::1], delay=3D3, =
+status=3Dsent=20
+        =
+(<B>$mxresponse</B>)</TT><BR></LI></UL></LI></UL></LI></UL></LI></UL>
+<HR width=3D"100%" SIZE=3D2>
+
+<H3><A name=3Dradvd></A>Router ADVertisement Daemon</H3>Maintained by =
+Nathan=20
+Lutchansky &lt;lutchann at litech dot org&gt; and Pekka Savola =
+&lt;pekkas at=20
+netcore dot fi&gt;=20
+<H4>Why?</H4>If you want to test IPv6 subnet autoconfiguration =
+initialized by=20
+Linux routers therefore you need the router advertisement daemon.=20
+<H4>ToDo</H4>
+<TABLE border=3D1 nosave=3D"">
+  <TBODY>
+  <TR nosave=3D"">
+    <TH nosave=3D"">Distribution</TH>
+    <TH nosave=3D"">RHL 6.2</TH>
+    <TH nosave=3D"">RHL 7.1, 7.2</TH>
+    <TH nosave=3D"">RHL 7.3, 8.0</TH></TR>
+  <TR align=3Dmiddle nosave=3D"">
+    <TD align=3Dleft nosave=3D"">ToDo</TD>
+    <TD>rebuild SRPMS</TD>
+    <TD>update to RHL 7.3</TD>
+    <TD>install from distribution</TD></TR></TBODY></TABLE>
+<H4>URLs:</H4>
+<UL>
+  <LI>Main site: <A=20
+  =
+href=3D"http://v6web.litech.org/radvd/">http://v6web.litech.org/radvd/</A=
+>=20
+  <LI>Additional information at <A=20
+  =
+href=3D"http://www.linuxhq.com/IPv6/radvd.html">http://www.linuxhq.com/IP=
+v6/radvd.html</A>=20
+  </LI></UL>
+<H4>Version and filename of the packet:</H4>Latest version I have tested =
+is=20
+0.7.1-1 from RHL 7.3=20
+<H4>Additional information:</H4>
+<LI>The version distributed with RH 7.1 powertools has a bug in the =
+startup=20
+script:=20
+<UL>
+  <LI>Fix: <BR><TT>-[ x${NETWORKING_IPV6} =3D "xyes" ] &amp;&amp; exit =
+0</TT>=20
+  <BR><TT>+[ x${NETWORKING_IPV6} =3D "xyes" ] || exit 0</TT> </LI></UL>
+<H4>Contents:</H4>
+<TABLE border=3D1>
+  <TBODY>
+  <TR>
+    <TD vAlign=3Dtop><B>Application</B></TD>
+    <TD vAlign=3Dtop><B>Path</B></TD>
+    <TD vAlign=3Dtop><B>Description</B></TD></TR>
+  <TR>
+    <TD vAlign=3Dtop><TT>radvd</TT></TD>
+    <TD vAlign=3Dtop><TT>/usr/sbin/radvd</TT></TD>
+    <TD vAlign=3Dtop>Router advertisement daemon</TD></TR>
+  <TR>
+    <TD vAlign=3Dtop><TT>radvdump</TT></TD>
+    <TD vAlign=3Dtop><TT>/usr/sbin/radvdump</TT></TD>
+    <TD vAlign=3Dtop>Router advertisement dump =
+(debug)</TD></TR></TBODY></TABLE>
+<H4>Package: Rebuilding and installation</H4>
+<OL>
+  <LI>Rebuild package=20
+  <UL>
+    <LI><TT>rpm --rebuild=20
+    <B><I>your-path</I></B>/radvd-<B><I>version</I></B>.src.rpm</TT> =
+</LI></UL>
+  <LI>Install package=20
+  <UL>
+    <LI><TT>rpm -ihv=20
+    =
+/usr/src/redhat/RPMS/<B><I>target</I></B>/radvd-<B><I>version</I></B>.<B>=
+<I>target</I></B>.rpm</TT>=20
+    </LI></UL></LI></OL>
+<H4>Tar-Ball: Unpacking, compilation and installation <FONT =
+color=3D#ff6600>(last=20
+review on 0.7.0)</FONT></H4>
+<OL>
+  <LI>Unpack the source:=20
+  <UL>
+    <LI><TT>tar xzf=20
+    <B><I>your-path</I></B>/radvd-<B><I>version</I></B>.tar.gz</TT> =
+<BR>This=20
+    will create directory radvd-version in your current directory. =
+</LI></UL>
+  <LI>Move into the source directory:=20
+  <UL>
+    <LI><TT>cd radvd-<B><I>version</I></B></TT> </LI></UL>
+  <LI>Configure the compile options:=20
+  <UL>
+    <LI><TT>./configure --sysconfdir=3D/etc=20
+    --with-pidfile=3D/var/run/radvd/radvd.pid</TT> </LI></UL>
+  <LI>Now compile:=20
+  <UL>
+    <LI><TT>make clean; make</TT> <BR>You should get no errors! =
+</LI></UL>
+  <LI>And install:=20
+  <UL>
+    <LI><TT>make install</TT> <BR>Manuals and binaries are installed to =
+the=20
+    subdirectories in <TT>/usr/local</TT> </LI></UL>
+  <LI>Copy the <TT>radvd.conf</TT> sample into the config directory:=20
+  <UL>
+    <LI><TT>cp radvd.conf.example /etc/radvd.conf</TT> </LI></UL>
+  <LI>Install the startup script file, an example you can get from the=20
+  <TT>redhat</TT> subdirectory of the source tree=20
+  <UL>
+    <LI><TT>cp radvd /etc/rc.d/init.d/</TT>=20
+    <LI><TT>chmod 0755 /etc/rc.d/init.d/radvd</TT> </LI></UL>
+  <LI>Check given values in the startup script file=20
+  <TT>/etc/rc.d/init.d/radvd</TT>=20
+  <UL><TT># Location of radvd binary</TT>=20
+    <BR><TT>BINRADVD=3D"/usr/local/sbin/radvd"</TT> <BR><TT># Location =
+of radvd=20
+    config file</TT> <BR><TT>CONFRADVD=3D"/etc/radvd.conf"</TT> =
+<BR><TT>#=20
+    Additional RADVD options (see manpage for more details)</TT>=20
+    =
+<BR><TT>OPTIONSRADVD=3D""&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=20
+    # No additional option</TT> </UL></LI></OL>
+<H4>General: Configuring and starting</H4>
+<OL>
+  <LI>Set proper values by editing the config file =
+<TT>/etc/radvd.conf</TT> .=20
+  See the manual pages for information on configuration directives.=20
+  <LI>Try starting=20
+  <UL>
+    <LI><TT>/etc/rc.d/init.d/radvd start</TT> </LI></UL>
+  <LI>If ok, take a look into the syslog (where <TT>radvd</TT> normally =
+logs=20
+  events)=20
+  <UL>
+    <LI><TT>tail -f /var/log/messages</TT> or <TT>tail -f =
+/var/log/daemon</TT>=20
+    (depending on the settings in your syslog config file=20
+    <TT>/etc/syslog.conf</TT> ) </LI></UL></LI></OL>
+<HR width=3D"100%">
+
+<H3><A name=3Dssh></A>Secure SHell (OpenSSH)</H3>IPv6-enabled by the =
+maintainers=20
+<H4>Why?</H4>The original ssh can't handle IPv6 addresses and can't be =
+used in a=20
+mixed environment. So a ported version is needed.=20
+<H4>ToDo</H4>
+<TABLE border=3D1 nosave=3D"">
+  <TBODY>
+  <TR nosave=3D"">
+    <TH nosave=3D"">Distribution</TH>
+    <TH nosave=3D"">RHL 6.2</TH>
+    <TH nosave=3D"">RHL 7.1, 7.2</TH>
+    <TH nosave=3D"">RHL 7.2</TH></TR>
+  <TR align=3Dmiddle nosave=3D"">
+    <TD align=3Dleft nosave=3D"">ToDo</TD>
+    <TD>rebuild SRPMS</TD>
+    <TD>update to 7.3</TD>
+    <TD>install from distribution</TD></TR></TBODY></TABLE>
+<H4>URLs</H4>
+<UL>
+  <LI>Main site: <A =
+href=3D"http://www.openssh.com/">http://www.openssh.com/</A>=20
+  <LI>RedHat <B><U>RPM packages</U></B>=20
+  <UL>
+    <LI>for 6.2 the OpenSSL as binary at=20
+    ftp://ftp.redhat.com/redhat/updates/6.2/=20
+    <LI>for 7.0 and later: included in distribution </LI></UL></LI></UL>
+<H4>Additional information:</H4><FONT color=3D#ff0000>Because of a major =
+security=20
+issue, you should update to versions 3.1 (backpatched) or up from 3.4=20
+immediately!</FONT>=20
+<H4>Version and filename of the packet:</H4>Latest version I've tested =
+for IPv6=20
+is 3.1p1-6 from RHL 7.3<FONT color=3D#ff0000></FONT>=20
+<H4>Installation:</H4>
+<UL>
+  <LI>Download RPM packages, remove existing ssh-RPMs (if already =
+installed) and=20
+  install openssl and openssh packages </LI></UL>
+<H4>Configuration:</H4>
+<OL>
+  <LI><FONT color=3D#000000>For enabling option to bind on IPv6 port =
+edit the=20
+  configuration file: <TT>/etc/ssh/sshd_config</TT></FONT>=20
+  <UL>
+    <LI><TT><FONT color=3D#000000>#ListenAddress 0.0.0.0</FONT></TT>=20
+    <LI><TT><FONT color=3D#000000>ListenAddress ::</FONT></TT> =
+</LI></UL>
+  <LI><FONT color=3D#000000>Add "<TT>-6</TT>" in startup script to =
+enable IPv6:=20
+  <TT>/etc/rc.d/init.d/sshd</TT></FONT>=20
+  <UL>
+    <LI><TT><FONT color=3D#000000>/usr/sbin/sshd <B>-6</B> &amp;&amp; =
+success=20
+    "sshd startup" || failure "sshd startup</FONT></TT> =
+</LI></UL></LI></OL>
+<H4>Usage:</H4>
+<UL>
+  <LI>Test, if <TT>sshd</TT> listen on IPv6 port:=20
+  <UL><TT>[root@gate i386]# netstat -A inet6 -ln | grep 22</TT>=20
+    <BR><TT>tcp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=20
+    0&nbsp;&nbsp;&nbsp;&nbsp; 0=20
+    =
+:::22&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=20
+    =
+:::*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=20
+    LISTEN</TT> </UL>
+  <LI>Client using IPv6:=20
+  <UL>
+    <LI><TT>ssh -6 <I>ipv6address</I></TT>=20
+    <LI><TT>ssh -6 <I>hostname.ipv6.domain.net</I></TT> </LI></UL>
+  <LI>Hint: don't worry, if you see no listening IPv4 port, an connect =
+over IPv4=20
+  will work, too, client using IPv4:=20
+  <UL>
+    <LI><TT>ssh <I>ipv4address</I></TT> </LI></UL></LI></UL>
+<H4></H4>
+<UL>
+  <UL>
+    <UL></UL></UL></UL>
+<HR width=3D"100%">
+
+<H3><A name=3Dppp></A>PPP</H3>IPv6-enabled by the maintainers=20
+<H4>Why?</H4>The original ppp binary package distributed by Red Hat =
+isn't IPv6=20
+enabled.=20
+<H4>ToDo</H4>First, test your installed pppd, perhaps it is already IPv6 =
+
+enabled: <TT>strings `which pppd` | grep ipv6</TT> should show e.g. IPv6 =
+options=20
+which are mentioned in the man page. <BR>&nbsp;=20
+<TABLE border=3D1 nosave=3D"">
+  <TBODY>
+  <TR nosave=3D"">
+    <TH nosave=3D"">Distribution</TH>
+    <TH nosave=3D"">RHL 6.2</TH>
+    <TH nosave=3D"">RHL 7.1</TH>
+    <TH nosave=3D"">RHL 7.2</TH></TR>
+  <TR align=3Dmiddle nosave=3D"">
+    <TD align=3Dleft nosave=3D"">ToDo</TD>
+    <TD><I>untested</I></TD>
+    <TD><I>untested</I></TD>
+    <TD>rebuild source RPM with IPv6 enabling =
+patches</TD></TR></TBODY></TABLE>
+<H4>URLs</H4>
+<UL>
+  <LI>IPv6 enabling patches (for version 2.4.1)=20
+  <UL>
+    <LI><A=20
+    =
+href=3D"ftp://ftp.bieringer.de/pub/linux/IPv6/ppp/">ftp://ftp.bieringer.d=
+e/pub/linux/IPv6/ppp/</A>=20
+    </LI></UL></LI></UL>
+<H4>Version and filename of the packet:</H4>Latest version I've tested =
+for IPv6=20
+is 2.4.1-2 (IPv6-enabled rebuild on a RHL 7.2 system)=20
+<H4>IPv6 enabled rebuild and installation:</H4>
+<UL>
+  <LI>Download (or copy from CD) source RPM package=20
+  <LI>Install source RPM (will be stored at SOURCES and SPEC)=20
+  <UL>
+    <LI><TT>rpm -ihv =
+ppp-<I>version</I>-<I>release</I>.<B>src</B>.rpm</TT>=20
+  </LI></UL>
+  <LI>Copy given patches to subdirectory SOURCES=20
+  <LI>Copy given spec file to subdirectory SPECS (or apply diff)=20
+  <LI>Build binary package=20
+  <UL>
+    <LI><TT>rpm -bb =
+ppp-<I>version</I>-<I>release</I>.ipv6.<I>subrelease</I>=20
+    .spec</TT> </LI></UL>
+  <LI>Update existing version=20
+  <UL>
+    <LI><TT>rpm -Fhv =
+ppp-<I>version</I>-<I>release</I>.ipv6.<I>subrelease</I>=20
+    .i386.rpm</TT> </LI></UL></LI></UL>
+<H4>Configuration and use:</H4>See <A=20
+href=3D"http://www.deepspace6.net/projects/initscripts-ipv6.html">initscr=
+ipts-ipv6</A><A=20
+href=3D"http://www.deepspace6.net/projects/initscripts-ipv6.html"></A> =
+for=20
+details.<BR>
+<HR width=3D"100%">
+
+<H3><A name=3Dttcp></A>TTCP</H3><FONT color=3D#ff0000>Section outdated, =
+use <A=20
+href=3D"http://dast.nlanr.net/Projects/Iperf/">Iperf</A></FONT><FONT=20
+color=3D#ff0000> instead</FONT>.<BR><BR>IPv6-ported some time ago by =
+Marc Mosthav,=20
+minor glibc-2.1 fix by Peter Bieringer &lt;pb at bieringer dot de&gt;=20
+<H4>Why?</H4>It's for measuring the TCP network throughput from one host =
+to=20
+another. <BR>The original software can't handle IPv6 addresses and can't =
+be used=20
+in a mixed environment. So a ported version is needed.=20
+<H4>Version and filename of the packet:</H4>Current IPv6 enabled release =
+is <A=20
+href=3D"ftp://ftp.bieringer.de/pub/linux/IPv6/ttcp/ttcp+ipv6-2.tar.bz2">t=
+tcp/ttcp+ipv6-2.tar.bz2</A>=20
+
+<H4>Contents:</H4>
+<TABLE border=3D1>
+  <TBODY>
+  <TR>
+    <TD vAlign=3Dtop><B>Application</B></TD>
+    <TD vAlign=3Dtop><B>Path</B></TD></TR>
+  <TR>
+    <TD vAlign=3Dtop><TT>ttcp6</TT></TD>
+    <TD =
+vAlign=3Dtop><TT>/usr/local/bin/ttcp6</TT></TD></TR></TBODY></TABLE>
+<H4>Unpacking, configuration and installation</H4>
+<OL>
+  <LI>Move into the source directory, create a main directory and change =
+into it=20
+
+  <UL>
+    <LI><TT>cd /usr/src; mkdir ttcp; cd ttcp</TT> </LI></UL>
+  <LI>Unpack the new source:=20
+  <UL>
+    <LI><TT>tar xIf=20
+    <B><I>your-path</I></B>/ttcp-<B><I>version.</I></B>tar.bz2</TT> =
+</LI></UL>
+  <LI>Move into the source directory:=20
+  <UL>
+    <LI><TT>cd ttcp-<B><I>version</I></B></TT> </LI></UL>
+  <LI>Now compile:=20
+  <UL>
+    <LI><TT>make clean; make</TT> <BR>You should get no errors! =
+</LI></UL>
+  <LI>And install:=20
+  <UL>
+    <LI><TT>make install</TT> <BR>The binary is copied to the directory=20
+    <TT>/usr/local/bin</TT> </LI></UL></LI></OL>
+<H4>Usage:</H4>
+<UL>
+  <LI>Server: <TT>ttcp6 -r</TT>=20
+  <LI>Client: <TT>ttcp6 -t <I>HOSTNAME</I></TT> </LI></UL>Try also =
+<TT>ttcp6=20
+{-?|-h}</TT> for more information.=20
+<P></P>
+<HR width=3D"100%">
+
+<H3><A name=3Dptcp></A>PTCP</H3><FONT color=3D#ff0000>Section outdated, =
+use <A=20
+href=3D"http://dast.nlanr.net/Projects/Iperf/">Iperf</A></FONT><FONT=20
+color=3D#ff0000> instead</FONT>.<BR><BR>IPv6-ported some time ago by =
+Marc Mosthav,=20
+minor glibc-2.1 fix by Peter Bieringer &lt;pb at bieringer dot de&gt;=20
+<H4>Why?</H4>It's for measuring the TCP network throughput by =
+roundtrips.=20
+<BR>The original software can't handle IPv6 addresses and can't be used =
+in a=20
+mixed environment. So a ported version is needed.=20
+<H4>Version and filename of the packet:</H4>Current IPv6 enabled release =
+
+is&nbsp; <A=20
+href=3D"ftp://ftp.bieringer.de/pub/linux/IPv6/ptcp/ptcp+ipv6-2.tar.bz2">f=
+tp://ftp.bieringer.de/pub/linux/IPv6/ptcp/ptcp+ipv6-2.tar.bz2</A>=20
+
+<H4>Contents:</H4>
+<TABLE border=3D1>
+  <TBODY>
+  <TR>
+    <TD vAlign=3Dtop width=3D"25%"><B>Application</B></TD>
+    <TD vAlign=3Dtop width=3D"32%"><B>Path</B></TD></TR>
+  <TR>
+    <TD vAlign=3Dtop width=3D"25%"><TT>ptcp6</TT></TD>
+    <TD vAlign=3Dtop=20
+width=3D"32%"><TT>/usr/local/bin/ptcp6</TT></TD></TR></TBODY></TABLE>
+<H4>Unpacking, configuration and installation</H4>
+<OL>
+  <LI>Move into the source directory, create a main directory and change =
+into it=20
+
+  <UL>
+    <LI><TT>cd /usr/src; mkdir ptcp; cd ptcp</TT> </LI></UL>
+  <LI>Unpack the new source:=20
+  <UL>
+    <LI><TT>tar xIf=20
+    <B><I>your-path</I></B>/ptcp-<B><I>version.</I></B>tar.bz2</TT> =
+</LI></UL>
+  <LI>Move into the source directory:=20
+  <UL>
+    <LI><TT>cd ptcp-<B><I>version</I></B></TT> </LI></UL>
+  <LI>Now compile:=20
+  <UL>
+    <LI><TT>make clean; make</TT> <BR>You should get no errors! =
+</LI></UL>
+  <LI>And install:=20
+  <UL>
+    <LI><TT>make install</TT> <BR>The binary is copied to the directory=20
+    <TT>/usr/local/bin</TT> </LI></UL></LI></OL>
+<H4>Usage:</H4>
+<UL>
+  <LI>Server: <TT>ptcp6 -s</TT>=20
+  <LI>Client: <TT>ptcp6 -c <I>HOSTNAME</I></TT> </LI></UL>Try also =
+<TT>ptcp6=20
+{-?|-h}</TT> for more information.=20
+<P></P>
+<HR width=3D"100%" SIZE=3D4>
+<BR><BR><BR><BR><BR><!-- footer starts here --><!-- donation toogle -->
+<P>
+<HR SIZE=3D4>
+
+<TABLE width=3D"100%" border=3D0>
+  <TBODY>
+  <TR>
+    <TD align=3Dleft><FONT face=3D"Helvetica, Arial, sans-serif" =
+size=3D-1>Your=20
+      connection is via: <STRONG>IPv4</STRONG> <BR><FONT=20
+      face=3D"Helvetica, Arial, sans-serif" size=3D-2>Your address: =
+218.104.52.178=20
+      </FONT></FONT></TD>
+    <TD align=3Dmiddle><A=20
+      =
+href=3D"http://6bone.informatik.uni-leipzig.de/ipv6/stats/stats.php3"><IM=
+G=20
+      alt=3D"IPv6 Ready"=20
+      =
+src=3D"http://6bone.informatik.uni-leipzig.de/ipv6/stats/log.php3?URL=3Dw=
+ww.bieringer.de&amp;ImageId=3D1&amp;AltV4=3D2"=20
+      border=3D0></A> </TD>
+    <TD align=3Dmiddle><FONT face=3D"Helvetica, Arial, sans-serif"=20
+      size=3D-2>Interest in sending a<BR><A=20
+      =
+href=3D"http://www.bieringer.de/pb/donations_en.html">donation</A><BR>to =
+the=20
+      <A href=3D"http://www.bieringer.de/pb/">author</A>? </FONT></TD>
+    <TD align=3Dmiddle><FONT face=3D"Helvetica, Arial, sans-serif" =
+size=3D-2><A=20
+      =
+href=3D"http://www.bieringer.de/">http://www.bieringer.de/</A><BR>is=20
+      maintained by<BR>webmaster at bieringer dot de <BR>(<A=20
+      href=3D"http://www.bieringer.de/impressum.html">Impressum</A>) =
+</FONT></TD>
+    <TD align=3Dmiddle><FONT face=3D"Helvetica, Arial, sans-serif" =
+size=3D-2><A=20
+      href=3D"http://www.apache.org/"><IMG height=3D30 alt=3D"powered by =
+Apache2"=20
+      src=3D"http://www.bieringer.de/cliparts/apache_pb2.gif" =
+width=3D150=20
+      border=3D0></A> </FONT></TD>
+    <TD align=3Dmiddle><FONT face=3D"Helvetica, Arial, sans-serif" =
+size=3D-2><A=20
+      href=3D"http://www.linux.org/"><IMG height=3D60 alt=3D"powered by =
+Linux"=20
+      src=3D"http://www.bieringer.de/cliparts/littlelo-small.png" =
+width=3D55=20
+      border=3D0></A> </FONT></TD>
+    <TD align=3Dmiddle><FONT face=3D"Helvetica, Arial, sans-serif"=20
+      size=3D-2>Webhosting is provided by<BR><A =
+href=3D"http://www.aerasec.de/"><IMG=20
+      alt=3DAERAsec=20
+      =
+src=3D"http://www.bieringer.de/cliparts/AERAsecLogo-150x45-BGtrans.gif"=20
+      border=3D0></A> </FONT></TD>
+    <TD align=3Dmiddle><FONT face=3D"Helvetica, Arial, sans-serif" =
+size=3D-2>IPv6=20
+      connectivity is provided by<BR><A =
+href=3D"http://www.m-net.de/"><IMG=20
+      alt=3DM-Net src=3D"http://www.bieringer.de/cliparts/logo_mnet.gif" =
+
+      border=3D0></A> </FONT></TD></TR></TBODY></TABLE>
+<P></P><!-- footer ends here --></LI></BODY></HTML>
+
+------=_NextPart_000_000F_01CA1056.C0A74520
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: base64
+Content-Location: http://6bone.informatik.uni-leipzig.de/ipv6/stats/log.php3?URL=www.bieringer.de&ImageId=1&AltV4=2
+
+R0lGODlhUgAiAPcAAAAAAP/////MZicADbJOTyYNDrNFSqU2Pa87QYkwOF0aIZFBSaEmOYMlM5gr
+P7E1TIQcMIwgNqosRKU1S6QaOVMNHZgaNXQXK3waM5EcO6giR6UiRqYtTp8ON6clSiUADHgKLo0Q
+OYYcPY8fQnkhPNaZrZgAM5cAMpUAMpMAMZEAMI4AL4wAL4oALokALogALYYALYUALIMALIIAK4EA
+K34AKn0AKnwAKXoAKXkAKHcAKHUAJ3MAJnEAJnAAJW4AJWwAJGsAJGkAI2YAImUAImQAIWIAIWAA
+IF0AH1oAHlkAHlgAHVYAHVUAHFMAHFIAG1AAG04AGkoAGUkAGEYAF0QAF0AAFTwAFDkAEzUAEjIA
+ETAAEC4AECwADyoADiYADSMADCEACxoACZkBNI4BMHsBKpcCNJoDNZgDNIMDLpsENpgENXsDK5kF
+NpUFNZIFNJsGOHcFK5wHOZkHN4AGL34GLpwIOZ0JOpMJN4MIMZ0KO5sKOp0LPGcHJ24IKp0MPY0L
+NpgMO2MIJp4NPZMNOZ8PP50PPoYNNXwMMXMLLp8QQJkPPaARQZwRP24MLaASQZ8SQZMRPGkMK6ET
+QnYOMWUMKqEUQ4EQNm4OLqEVRKIWRaEWRJ0VQ4YSOWkOLY0UPXcRM58XRJgWQZMWQKMZR6IZR3oT
+NaMaSJ8ZRmgRLqQbSaQcSaUdSpobRaIdSXwWOKUeS4kZPqUfTJUdRXUXNqYiTqAhS6cjT6gmUakp
+VKstV6UtVawwWa0xWq40Xa83X34oRbE8Y7NAZrNCaLRDabVFarVHbLZJbbhNcbpSdbtVd7xYeb1a
+e75dfcBhgcFkg8Nph8RsisZwjcdzj8h2kcl4k8p6lct8lsx/mc2Cm86Fnc+IoNGKotGMo9KOpdOQ
+ptOSqNSUqdWVqtWWq9ecsNqjtvnBZPbAY+20X/C0YPK2YueoXducV9+fW+GbWLqASeafXdOSVcOA
+TN6SWs2GU1MzINV/VLlqScpzU6hWRbxXTJNEPcBbUnMvKqRJRP///yH5BAEAAP8ALAAAAABSACIA
+AAj/AEuUG0hunDhxyWpNK1dCXLhv4MB58wYunDdt0pxVA/fNG7dt3cKJPEhynMmTJkuoXGlxm0ts
+y5JZCydO5bVk0K5l2xauxDhu0pT9UsStJ7lwLpmZqLVt3DZt2aJKxRY12rFl155ms2Ztp8ttH7mJ
+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
+lE7ZlAEBADs=
+
+------=_NextPart_000_000F_01CA1056.C0A74520
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.bieringer.de/cliparts/apache_pb2.gif
+
+R0lGODlhAwEgAPcAAAAAACEYGDEA/1paWmMA/2tra3Nzc4SEhJwA/6Wlpb1SEL29xs7Oxs7Oztal
+zt573t6thOdK7+eEnO8A/+9KjO9SY++cQv8AGP8AY/8AnP8xAP9CGP+EAP/OAP/OGP//////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////yH5BAEAAA0ALAAAAAADASAA
+AAj+ABsIHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypckE
+MGG6bLBAJsGaCWbqTJgAgM+fQH3abAgzKNChDBckXMC0YoCgA1oO8FlwKoCdWAf2NMpVKNGuQXMS
+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
+u+ANr3jHS97ymve86E0vRAICADs=
+
+------=_NextPart_000_000F_01CA1056.C0A74520
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: http://www.bieringer.de/cliparts/littlelo-small.png
+
+iVBORw0KGgoAAAANSUhEUgAAADcAAAA8CAMAAAD1wtK3AAADAFBMVEUAAAAAAAgIAAAICAAICAgI
+CBQQCAAQEAAQEBAQEBgYEAAYEBQYGBAYGBgYGCQgGAAgIAAgICAgICgkJDQoGAAoIAAoKCAoKCgw
+IAAwKAAwMCgwMDAwMDgwMEA0JAg4KAA4MAA4ODg4OEhAKABAMABANBRAOABAQEBAQFBIMABIOABI
+QABISEhMTFhQMABQOABQQABQQDhQUFBUVHRYOABYQABYSABgPABgSABgUABgYGBoQABoTABoWABo
+aGhoaHxwSAhwTABwWABwYAB0VAh0YDx4UAB4VBR4WAB4YAB4aAB4eICAWACAWAiAYAiAaAiAfHCA
+gJSIWAiIaAiIcAiIiIiQZAiQcAiQeAiQiIiQkJCQkJiQkKSUXACYcACYeAiYgAigbAigcACgeAig
+eDygfBiggAigiAigiGCgkGCgoKCgoKikaACkfBCknJSocACoeAiogAiojAiokGComHiooKCoqKCo
+qKioqLiweACweAiwgAiwiAiwkAiwmAiwsLC0tMC4eAC4gAi4iAi4kAi4mAi4oAi4qIC4uLC4uLi8
+kBy8mFC8sKTAgADAhAjAiADAkAjAmAjAoAjAwMDEmDzEpGTIiADIiAjIkADIkAjIlBzImAjIoAjI
+oFDIqAjIqFDIyMjIyNDMzNjQkADQmADQmAjQoAjQqAjQqBzQrFDQsAjQsDDQuAjQ0NDUjAjUmCDU
+tBzUuIDUwKzYmADYmAjYmBDYoADYoAjYqAjYsAjYsDDYsEjYuAjYwAjYzMjY2NjgoADgoAjgqADg
+qAjgqBzgsAjguAjguDzgwAjg2Nzg4Njg4ODg4OjksBzkyDzk2Kzk2NDoqAjosAjouAjowAjowBzo
+yAjo0Ajo5ODo6Ojo6PDwsAjwuAjwuBDwuCTwwAjwyAjwzCTw0Ajw0BDw1EDw2Ajw4JTw6Ojw8Ojw
+8PDw8Pj48OT48Pj4+PD/AAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAB+T5BYAAABAHRSTlP/////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////AP//////////////////////74k+CQAA
+BlNJREFUeJzV1/9PG2UYAPDntQd2hDpxmloXoUyCikyNDqQ4YYElGzGDxbmx0EW2iHXRyBw/MMOX
+Mdst2RrDrpCl4XpbcIa7joW1WVxoSZXgRm22gClSGmS3tlQ0cxn9F3zea2kLlJj96HME0vf6uee5
+933vfQ9Y3iCOAKjPbHRyeRk2aH8OCABse1IHcijzyPgTORJ3edVqkmp8lB4Z3ZE4A1UeA6pka6eR
+hslkNVutXEa3BdIi2Wo0GHp7OUMvZ2ZZNqMDwuQBMMAUokt2qrGlF6XZzDayrCWzy2ovVQLT1HNw
+E8BrSWfqzcoiTxHCbOiqB2MMtMd6xpVphRp7e98se76srLyI5WwZ3cvtWVWFWwdzVac+THMms8Fk
+1prMrMZi4TO7KshvazvOQPXBVc5qNjUSIJs3cu8qL0mh4J+RczdhlevCZCcr6m0cl3kcvtw1GgpH
+/pqb8+1Mc1YOWSepqTFwvJDZfXJbik7PBafvFKW7szhw+XtrbLk8n7nOb17qDEV8n/8uXS4l1bkr
+k9uKw23RfqbTKWy8PaObr7wwNBMK/Xpm/DxsK135CsuxrM3MADTyGzhSNXLz0qXvvp+PxdRY6DMJ
+x3IWy1cHsEheyHh/25m7sfMXbo4/jMVi87RHRxJugLOVl/B8gyBkytcP+xHICkOZHAqLxcLxbwPD
+ZIv2TI7A41gq6MjDJtpu42w2fm9RUXGuKGZwm6CUpkqkm38oP0x0cqPC2NPcbBfF4XVOD9Daj2ie
+qpH+/pFCFXYh/CHnQwa1do1LdK9zRKW4mlZmbGQeGLxHJXU87ygW6uzE5XKtc8AcjK2KkVeVNOPy
+Mhbp4A8QQjR297p829UQWxP31OqtAJXLgiDwQl9bebPbvd6Bcn+8P9IgVknHgheuiGJduehE5lnj
+rioT6VY7DNKP+USxy979gnZynSN5GRwuNXQoeLtddLVlE8UH7knvalcJW9XrnQpU6LJwlojO7md1
+vNPjXeMIVL4T/+7DNFcIuCoCg7PE6bQ4D2cxU2sdo2Cq1nYn5lPSkdgiukSXvQGgpM+71hlCM+q1
++R7fpVWCervLJTqdDX2TmG2Ne+SXHsyo/lnt/FEdbjPK8ojocuEQ4LhjPt8qd2MhJIU+JSOrqvRL
+dHHaHA5PUlbecO6o0udLc79xA3ckKRQK5UBPGuu/4zfufmX3D1LI5Xa6p0qwxvJAIOUcU9J9RAgF
+gNI0x82MDgwMYfuUe8o5dRTr1Pp8s0l3C42cLhQqg7Q5Onji9ozfP0MvOeHxeLx9dacDGEnHSXIy
+GgFGnXKlLb+sXE+SnDpFrS8wG5idSznskwd4LoK/R1MsL9s4k2AYgqJY4aEsnLq/BSkSv2hImjqe
+UD0AORcnqZOv6WjDCocDR+fmUvlu+aX7Eq0ID9chVevgqUq6dsKL7ExITihNXPe14WKmUDDhSCrf
+LevQ6IR/Qb720KHs5Pb+unECr7bg5372ej1tJW9g5ISD0bRxH2zp6DBaJxb8Q1/vQqfMYvBHkX/C
+OjTx48X65b9xtH0BH9Y4F43K7trllejYt+9YR8exj3a0XBsbuz42NvbTWP2+Y98aT+gi09OIZhGF
+wxSiG+80GOTXkrPcWdbC6Xa9V8YJdBMQ8Qlwu3U7dr5fj08cTUeTUbYoO3wtMZvw4Di65XA2B124
+5FVh2O124WoSoE8AThJMF46GkS0lnMGwp6bGynLa+gGOw3VS4K+jsot2nJP06fZijfFskWg4HI3f
+H813owKsrIklOXQxx/WORyQvXG7PpFeGMgvThIvRpegSdV34FlQBdDc92Wzjmx0HrgjCx6LY3U1r
+dCLyeH2zAbkjg9Ho4uIShuyMVlMZdTYosQFpziFCI4g8qXGR4rrDXrlPZhP9Lxe5tETny7gJ37nQ
+4W5KSjgCQjGIJ0F0kRp3I+jiRaYY1ogs7kwsWwG4LaLj0RUR6pxQ65kERu5KuSexS7BIOVvcsayZ
+OlsFByUOdCUgtoFFhFrv025S7MXnBvOFabpEkXE3gmPWlZ+v0WjeKtA0azSGAk35cMHm0wUardar
+1fYFZn2BgMwwm1xkMBiM5+MsXHw3dfAiBvajvHnERy7JVrIFg3PU3Wtqam1q1dOjSa/X4wf6R9/a
+pJcP+ok24NlW/RF9+xc0Nvw/4L/i/+L+BQF565S5f1qzAAAAAElFTkSuQmCC
+
+------=_NextPart_000_000F_01CA1056.C0A74520
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.bieringer.de/cliparts/AERAsecLogo-150x45-BGtrans.gif
+
+R0lGODlhlgAtAKEAAHqWwgICAv7+/v///yH+KkFFUkFzZWMgTG9nbyAxNTB4NDUgQmFja2dyb3Vu
+ZCB0cmFuc3BhcmVudAAh+QQBCgADACwAAAAAlgAtAAAC/pyPqcvtD6OctNqLs968+w+G4kiW5omm
+6sq27gvH8kzX9h0D+l7t/g8M8oTEogboElKKzOCgCeVdlCyqJBp9YqFT58p43TK1YvCS+EWHy0q2
+efI2NdfSSOCOz+vvdF1vjPJjIBiBJLGHmNcH8CdFKEdo+CAJkWi5eAagyUi2ebKpiQDKOTk6gSeQ
+GpAqsKrKV2gKBypKWzJK2hlaamt31wqMuoqHWTwoK4KroOzA7Dv8K6wY28vrmeAMkn1cvYD7zSwN
+PQ4Lsd1wfs6hrpu7DA7PiarKSh5g3IyMrd/Bzs4dL1yeYNHyBIRH7dq7bhv+tUN3UKCwVgXxRPxm
+jt8+xYYZHP67KGviOIoWQSrMx/GAw0wnGfjT2EAkSYIBTO6ydhNiSpY2Ya5EMA8YvVf3AO5E2RMm
+z6Q5VSpdYCnRxqMumT5NaLXlw0NR9yykOjVr06VZv46N2VWPN4xYxWIQy9YpWJzuzGq1C7fL3LDu
+4NL6CY6uhZ923+rz64lw4Kp7Cy81XA1xKMLtzm4dfNUxZIWSGVGu3PTz2saiNXe+3PZkab74Nu86
+XRohatd1cdi+jTu37t28e/v+DTy48OHEixs/7qIAADs=
+
+------=_NextPart_000_000F_01CA1056.C0A74520
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.bieringer.de/cliparts/logo_mnet.gif
+
+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
+
+------=_NextPart_000_000F_01CA1056.C0A74520--

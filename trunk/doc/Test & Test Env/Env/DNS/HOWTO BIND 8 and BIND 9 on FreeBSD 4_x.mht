@@ -1,0 +1,3330 @@
+From: <ÓÉ Microsoft Internet Explorer 5 ±£´æ>
+Subject: HOWTO: BIND 8 and BIND 9 on FreeBSD 4.x
+Date: Tue, 4 Aug 2009 17:37:10 +0800
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_002B_01CA152A.31E5BD70"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_002B_01CA152A.31E5BD70
+Content-Type: text/html;
+	charset="gb2312"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>HOWTO: BIND 8 and BIND 9 on FreeBSD 4.x</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; charset=3Dgb2312">
+<META content=3DINDEX,FOLLOW name=3Drobots>
+<META content=3D"HOWTO: BIND 8 and BIND 9 on FreeBSD 4.x" =
+name=3Ddescription>
+<META=20
+content=3D"tuxweb.net, BIND, FreeBSD, chroot, install, installing, =
+setup, named.conf, rndc, ndc, DNS"=20
+name=3Dkeywords>
+<META content=3D"MSHTML 6.00.2900.5659" name=3DGENERATOR></HEAD>
+<BODY bgColor=3D#ffffff><FONT size=3D+2><B>HOWTO: BIND 8 and BIND 9 on =
+FreeBSD=20
+4.x</B></FONT>
+<P><FONT size=3D-1>Glenn Sidman<BR><IMG alt=3D"email address"=20
+src=3D"http://www.tuxweb.net/img/email.gif" border=3D0><BR>Updated: =
+April 22,=20
+2005<BR></FONT><BR><BR><B>Note: This HOWTO is way out of date.</B> =
+Though the=20
+DNS specific information still applies today, the setup of BIND covered =
+in this=20
+HOWTO no longer applies. Beginning with FreeBSD 5.3, BIND9 has replaced =
+BIND8 as=20
+the default DNS server and comes installed to run in a chroot =
+environment as=20
+user bind. Very briefly: With FreeBSD 5.3 and latter, simply run the=20
+"<TT>make-localhost</TT>" script from the <TT>/etc/namedbd</TT> =
+directory. Then=20
+enable BIND9 by adding <TT>named_enable=3D"YES"</TT> to the =
+<TT>/etc/rc.conf</TT>=20
+file. You can then start named with the command: <TT>/etc/rc.d/named =
+start</TT>.=20
+This will give you a caching-only DNS server that listens on the =
+localhost=20
+interface. You can now configure "<TT>named.conf</TT>" to suite your =
+needs, and=20
+DNS zone files if applicable. Perhaps someday I will finish the updated =
+HOWTO,=20
+but know that this one will always remain posted for archival purposes.=20
+<BR><BR></P>
+<UL>
+  <LI>1 - <A=20
+  =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#1">About =
+This=20
+  HOWTO</A>=20
+  <LI>2 - <A=20
+  href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#2">Some =
+Theory:=20
+  How Does A Client Resolve Names?</A>=20
+  <UL>
+    <LI>2.1 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#2-1">Cachi=
+ng=20
+    And Forwarding Name Servers</A>=20
+    <LI>2.2 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#2-2">Maste=
+r vs.=20
+    Slave Name Server</A> </LI></UL>
+  <LI>3 - <A=20
+  =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#3">Install=
+ing=20
+  BIND</A>=20
+  <UL>
+    <LI>3.1 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#3-1">Repla=
+cing=20
+    The Base System's BIND</A>=20
+    <LI>3.2 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#3-2">Using=
+ The=20
+    Default Installation For BIND</A>=20
+    <LI>3.3 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#3-3">Confi=
+guring=20
+    rndc For BIND 9</A>=20
+    <LI>3.4 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#3-4">Old =
+Tools=20
+    Vs. New Tools</A> </LI></UL>
+  <LI>4 - <A=20
+  =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#4">Configu=
+ring=20
+  BIND</A>=20
+  <UL>
+    <LI>4.1 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#4-1">Our=20
+    foobar.example domain</A>=20
+    <LI>4.2 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#4-2">Overv=
+iew=20
+    of zone data files</A>=20
+    <LI>4.3 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#4-3">local=
+host.rev=20
+    (Localhost Reverse Lookup Zone)</A>=20
+    <LI>4.4 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#4-4">db.fo=
+obar.example=20
+    (forward Lookup zone)</A>=20
+    <LI>4.5 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#4-5">db.1.=
+168.192=20
+    (Reverse Lookup Zone)</A>=20
+    <LI>4.6 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#4-6">named=
+.root=20
+    (Root Hints File)</A>=20
+    <LI>4.7a - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#4-7a">name=
+d.conf=20
+    For Master Name Server</A>=20
+    <LI>4.7b - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#4-7b">name=
+d.conf=20
+    For Caching-Only Name Server</A>=20
+    <LI>4.8 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#4-8">Confi=
+guring=20
+    Forwarding and Forward Only</A> </LI></UL>
+  <LI>5 - <A=20
+  =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#5">Startin=
+g=20
+  BIND</A>=20
+  <UL>
+    <LI>5.1 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#5-1">BIND =
+8=20
+    Only: Starting And Controlling named</A>=20
+    <LI>5.2 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#5-2">BIND =
+9=20
+    Only: Starting And Controlling named</A>=20
+    <LI>5.3 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#5-3">Testi=
+ng=20
+    BIND (Both versions)</A>=20
+    <LI>5.4 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#5-4">Start=
+ing=20
+    BIND (named) At Boot</A> </LI></UL>
+  <LI>6 - <A=20
+  =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#6">Securin=
+g BIND=20
+  with chroot</A>=20
+  <LI>7 - <A=20
+  =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#7">Updatin=
+g=20
+  named.root (Root server list)</A>=20
+  <LI>8 - <A=20
+  =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#8">Trouble=
+shooting=20
+  and Testing BIND</A>=20
+  <UL>
+    <LI>8.1 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#8-1">Troub=
+leshooting=20
+    Syntax And Other Configuration Errors</A>=20
+    <LI>8.2 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#8-2">Testi=
+ng=20
+    Forward Name Resolution</A>=20
+    <LI>8.3 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#8-3">Testi=
+ng=20
+    Reverse Name Resolution</A>=20
+    <LI>8.4 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#8-4">Testi=
+ng=20
+    External Name Resolution</A>=20
+    <LI>8.5 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#8-5">What =
+
+    Interface Is BIND Listening On?</A>=20
+    <LI>8.6 - <A=20
+    =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#8-6">What =
+
+    Version of BIND Is Running?</A> </LI></UL>
+  <LI>9 - <A=20
+  =
+href=3D"http://www.tuxweb.net/howto/dns/bsd/bind-89-bsd4x.html#9">Additio=
+nal=20
+  Resources</A> </LI></UL><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><BR>
+<H2><A name=3D1>1.0 About This HOWTO </A></H2><A name=3D1>BIND, which is =
+the=20
+Berkeley Internet Name Domain, is by far the most popular and best =
+documented=20
+Domain Name System (DNS) server used on the Internet. The Domain Name =
+System=20
+allows us to access other nodes by name rather than their IP addresses. =
+It is=20
+obviously easier to remember a name rather than an IP address, but the =
+biggest=20
+benefit of DNS is its ability lead us to the same node even if its IP =
+address=20
+changes. There are currently two maintained branches of BIND--BIND 8 and =
+BIND 9.=20
+BIND version 9 is a rewrite of version 8 intended to provide new =
+features and=20
+improved security. This HOWTO covers both BIND 8 and BIND 9. Any =
+differences in=20
+configuration will be noted.</A>
+<P><A name=3D1>While BIND's security reputation has been less than =
+perfect,=20
+particularly with version 4, it has improved greatly and can be secured=20
+reasonably well. With a plethora of documentation available for BIND, =
+you will=20
+probably want to learn with BIND and then consider securing it with =
+'chroot' or=20
+'jail' or even using a different name server if security is an issue. =
+Most=20
+importantly, if you do not intend to provide external name resolution =
+(for=20
+outsiders), do not allow BIND to listen for queries from the Internet =
+which is=20
+covered later in this HOWTO. I will also cover chrooting BIND into it's =
+own=20
+virtual environment (sandbox) as well as running BIND with least=20
+privileges.</A></P>
+<P><A name=3D1>BIND 8.3 is included with the base system for FreeBSD 4.x =
+and 5.0.=20
+It is recommended that you upgrade to the latest version whether it be =
+the BIND=20
+8 branch or the BIND 9 branch. Upgrading to BIND 9 requires only =
+slightly more=20
+effort than upgrading the base system of BIND 8 (this assumes you do not =
+already=20
+have an infrastructure build on BIND 8 and/or NT/2000 name servers). =
+Also, BIND=20
+9 is much simpler to chroot than BIND 8.</A></P>
+<P><A name=3D1>Before you proceeded, be sure you have a current backup =
+of your=20
+system and any existing BIND configuration and zone files. Be aware that =
+this=20
+HOWTO does not cover adequate security for a public DNS server. This =
+HOWTO will=20
+help you build a DNS server for a private network to resolve local and =
+external=20
+(Internet) names, but does not allow external client queries.</A></P>
+<P><A name=3D1>The following versions were used for this HOWTO:</A></P>
+<P></P>
+<UL><A name=3D1>
+  <LI>FreeBSD 4.7 (All versions after 4.5 including 5.0 should work =
+without=20
+  changes).=20
+  <LI>bind9-9.2.2 and/or bind8-8.4.1 (Be sure to use the latest =
+release.)=20
+  </A></LI></UL>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D1><BR></A></P>
+<H2><A name=3D1></A><A name=3D2>2.0 Some Theory: How Does A Client =
+Resolve Names?=20
+</A></H2><A name=3D2>There are many good tutorials explaining how the =
+Domain Name=20
+System functions. One of which is available at </A><A=20
+href=3D"http://www.cs.colorado.edu/~tor/sadocs/dns/dns.html"=20
+target=3D_blank>www.cs.colorado.edu/~tor/sadocs/dns/dns.html</A>. Rather =
+than echo=20
+the same words, we will begin our look at name resolution from a =
+client's=20
+perspective. After all that is the ultimate goal.
+<P>Before our client can retrieve www.google.com, our web browser must =
+know the=20
+IP address of the 'www' node at 'google.com.' Both Unix-like and Windows =
+clients=20
+will query the name in similar fashion in the order listed below.</P>
+<P></P>
+<OL>
+  <LI>Check the local machine's DNS cache for the address of =
+www.google.com.=20
+  <UL>
+    <LI>Stored in memory. </LI></UL><BR>
+  <LI>Check the local machine's host file for the address of =
+www.google.com.=20
+  <UL>
+    <LI>Unix-like: /etc/hosts=20
+    <LI>98/ME: C:\Windows\hosts=20
+    <LI>2000/XP: C:\WINNT\system32\drivers\etc\hosts </LI></UL><BR>
+  <LI>Check the primary name server (1st listed DNS server) for the =
+address of=20
+  www.google.com.=20
+  <UL>
+    <LI>Unix-like: /etc/resolv.conf=20
+    <LI>Windows: Look for TCP/IP Properties </LI></UL><BR>
+  <LI>Check the secondary name servers if the primary name server fails =
+to=20
+  respond.=20
+  <UL>
+    <LI>Unix-like: /etc/resolv.conf=20
+    <LI>Windows: Look for TCP/IP Properties </LI></UL></LI></OL>Steps 3 =
+and 4 are=20
+why we are here. By the way, step 4 is very important! If we receive a =
+negative=20
+answer from the first name server, "host not found," our client will =
+never check=20
+the additional name servers. Why should it, we received an answer. =
+Additional=20
+name servers are only queried when the primary name server does not =
+return an=20
+answer. Also, if you are using Windows machines, be aware that they can =
+resolve=20
+NETBIOS names via broadcasts on the local subnet, or even a WINS server =
+if one=20
+is configured. Even Windows 2000/XP without NetBEUI (NETBIOS) installed =
+will use=20
+NetBEUI over TCP/IP (enabled by default) if DNS queries fail. This can =
+really=20
+fool you.
+<P>Just as clients, the name servers themselves can also cache DNS data. =
+This is=20
+controlled by the TTL (Time to Live) specified in the SOA (Start of =
+Authority)=20
+record of a Zone's data. The TTL could be minutes for hosts that change =
+IP=20
+addresses frequently, or several hours (or days) for hosts that rarely =
+change.=20
+Keep this in mind when DNS changes are not immediately evident.</P>
+<P>Now lets assume we are trying to access www.cool-lint.org and neither =
+our=20
+client nor the name servers along the path have cached data. Our client =
+machine=20
+first contacts it's primary DNS server, provided the name is not cached =
+or=20
+listed in a host file. This is known as a recursive query. The name =
+server will=20
+do all the work. Our client expects a complete answer, whether it is the =
+IP=20
+address of www.cool-lint.org or the bad news that no records exist for=20
+www.cool-lint.org.</P>
+<P>The primary name server receives the query from our client, but does =
+not have=20
+information about cool-lint.org. The primary name server, as it does not =
+have=20
+"zone data" and is not authoritative for cool-lint.org, will need to =
+start=20
+searching from the top of the DNS tree. The top is fittingly known as =
+the "root"=20
+domain and is specified by "." (dot). Note that 'www.cool-lint.org' is =
+actually=20
+'www.cool-lint.org.' Notice the dot at the end of org? Go ahead, try =
+adding a=20
+dot to the end of www.google.com.</P>
+<P>Remember that our client made a recursive query to our primary name =
+server=20
+expecting the name server to do all the work? Now, our name server does =
+not have=20
+it so easy. Our name server must plug away with iterative =
+(non-recursive)=20
+queries until it can find an answer. Our name server will first query =
+one of the=20
+"root" domain name servers for the addresses of the "org" name servers. =
+Next,=20
+our name server will query one of the "org" name server for the =
+addresses of the=20
+"cool-lint.org" name servers. Finally, our name server contacts one of =
+the=20
+"cool-lint.org" name servers for the IP address of the "www" node at=20
+"cool-lint.org".</P>
+<P>Our name server has used several iterative queries to answer our =
+client's=20
+recursive query for www.cool-lint.org. I hope there was something good =
+there at=20
+cool-lint. Our name server will also keep this information around for as =
+long as=20
+the TTL will allow. This includes the "org" and the "cool-lint" name =
+server=20
+addresses as well as www.cool-lint.org address.</P>
+<P>There is at least one exception to the above scenario. If our name =
+server had=20
+been configured as a "forwarder", it would have simply passed the duties =
+of name=20
+resolution off to another name server. When a forwarder does not have an =
+answer,=20
+it simply makes a recursive query to another name server on the client's =
+behalf.=20
+This can help reduce Internet DNS traffic as the upstream name server =
+(normally=20
+an ISP) will maintain a fairly populated cache.</P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><BR></P>
+<H2><A name=3D2-1>2.1 Caching And Forwarding Name Servers </A></H2><A =
+name=3D2-1>A=20
+caching-only name server does exactly that, caches answers and only =
+seeks new=20
+answers when the cache does not have the answer. There are two primary=20
+advantages to a caching-only name server (aka: hint name server). First, =
+it is=20
+simple to configure as it is not authoritative for any zones and thus =
+zone=20
+database files do not have to be maintained or loaded. (Actually, a =
+caching-name=20
+server still loads a hint file and reverse lookup zone for its loopback=20
+interface. These are explained later.) Second, it does not need to =
+transfer zone=20
+data between other servers such as master or slave name servers would. =
+This can=20
+be beneficial for preserving bandwidth to remote sites on a slow =
+link.</A>
+<P><A name=3D2-1>Large environments will often use caching-only name =
+servers to=20
+distribute DNS load while forwarding non-cashed queries to a single name =
+server=20
+capable of resolving internal and/or external queries. There is one =
+primary=20
+disadvantage of caching-only name servers. They cannot be authoritative =
+for any=20
+zone. If you need to resolve names on your local network, you will need =
+at least=20
+one master name server. If you do not need to resolve DNS names on your =
+local=20
+network, but still need to resolve names on the Internet, then a =
+cashing-only=20
+name server would make good sense.</A></P>
+<P><A name=3D2-1>Forwarding is a feature that can be added to any name =
+server=20
+configuration whether it be caching-only, master, or even a slave =
+server. There=20
+are two primary reasons we might want to use forwarding. First, you can =
+improve=20
+DNS performance by taking advantage of a larger DNS cache on an upstream =
+name=20
+server. (Typically your ISP, or even a name server in your DMZ). This =
+assumes=20
+that your upstream name server(s) are reliable. Second, you can add a =
+layer of=20
+security by controlling whom your internal name servers converse with. =
+This=20
+allows for much tighter firewall configurations.</A></P>
+<P><A name=3D2-1>A "forward only=A1=B1 name server will make recursive =
+queries directly=20
+to specified name servers. Whereas iterative (non-recursive) queries, =
+without=20
+using forwarding, will plug away at many different name servers. If we =
+allow our=20
+internal name server(s) to perform iterative queries, we must also open =
+our=20
+firewall to allow anyone and everyone to send answers back to our =
+internal name=20
+server(s). With "forward only=A1=B1 configured, we can close off all =
+external DNS=20
+traffic while allowing only responses from two or three "trusted=A1=B1 =
+upstream name=20
+servers.</A></P>
+<P><A name=3D2-1>There is a catch however, in order to benefit from this =
+added=20
+layer of security we must disallow all iterative queries from our =
+internal=20
+network. This is known as forwarding-only as apposed to the default =
+behavior of=20
+forward first. With "forward only=A1=B1, if our upstream name server(s) =
+go down, we=20
+go down. Whereas with "forward first=A1=B1, our internal name server =
+will sigh for a=20
+moment and then proceeded on its own with iterative queries until if =
+finds an=20
+answer. In other words, we have the more secure option of always =
+forwarding=20
+queries to specified name servers. Or, the less secure option of only =
+forwarding=20
+queries to said servers if they are responding, otherwise go get the =
+answer=20
+ourselves from strangers.</A></P>
+<P><A name=3D2-1>The options to configure forwarding are relatively =
+simple and=20
+will be covered later in "4.8 - Configuring Forwarding and Forward =
+Only=A1=B1.=20
+Configuring a caching-only name server is even simpler as we simply omit =
+zone=20
+statements from <I>named.conf</I> that would otherwise load local zone=20
+databases. The configuration you ultimately chose will depend on the =
+reliability=20
+of your upstream name server(s), your firewall configuration and =
+security needs,=20
+and whether or not you need a DNS zone for your internal =
+network.</A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D2-1><BR></A></P>
+<H2><A name=3D2-1></A><A name=3D2-2>2.2 Master vs. Slave Name Server =
+</A></H2><A=20
+name=3D2-2>This HOWTO focuses only on setting up a single master name =
+server.=20
+However, slave name servers are simple to implement in small to medium =
+size=20
+environments. Note that it is possible for a single name server to be =
+both a=20
+master for one zone while being a slave for another zone. Do not confuse =
+a=20
+master name server with a primary name server. The term "primary name =
+server=A1=B1=20
+typically refers to the client's primary name server which is the first =
+name=20
+server in the client's list. Additional name servers on the client's =
+list are=20
+referred to as secondaries. A primary name server for the client can be =
+either a=20
+master name server or a slave name server.</A>
+<P><A name=3D2-2>Simply put, a primary name server loads its zone data =
+from a zone=20
+configuration file while a slave name server contains a read-only copy =
+of the=20
+zone data retrieved from its master name server. The slave name server =
+will keep=20
+a copy of the zone data in a [zone_name].bak file in the event that it =
+is=20
+restarted and cannot immediately contact the master name server to =
+retrieve zone=20
+data.</A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D2-2><BR></A></P>
+<H2><A name=3D2-2></A><A name=3D3>3.0 Installing BIND </A></H2><A =
+name=3D3>All=20
+versions of FreeBSD from 4.3 to 5.1 include BIND version 8.3 or lower =
+with the=20
+base distribution. I would recommend upgrading to either the latest =
+version of=20
+the BIND 8 branch (8.4.1 at this writing.) or the latest version of the =
+BIND 9=20
+branch (9.2.2 at the writing). If you prefer to use the base package you =
+can=20
+skip the remainder of this section.</A>
+<P><A name=3D3>There are two paths to upgrade whether you are going with =
+BIND 8 or=20
+BIND 9. The easiest method is to leave the base system's BIND in tact =
+and=20
+install the new version in its default location. Some drawbacks would =
+include=20
+the chance of starting the incorrect version if you do not have things=20
+configured correctly, configuring things correctly can be more =
+confusing, and=20
+lastly you are left with out-of-date software (including the BIND tools) =
+laying=20
+around on your system. The advantage is a simpler installation and the =
+ability=20
+to easily revert back to the old version of BIND.</A></P>
+<P><A name=3D3>The more involved method is to replace the existing base =
+system's=20
+BIND with the new version. The real benefit is a less confusion when you =
+are=20
+looking for the correct configuration files. The drawback is that you =
+should=20
+remove the base system's BIND and then you must tell the new version to =
+compile=20
+and install with the base system's defaults. Also, if something goes =
+wrong, you=20
+no longer have the old version to fall back on. I have not yet used this =
+second=20
+method, thus I only provide hints to get you started.</A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D3><BR></A></P>
+<H2><A name=3D3></A><A name=3D3-1>3.1 Replacing The Base System's BIND =
+(which I have=20
+not attempted as of yet) </A></H2><A name=3D3-1>The prefix for the base =
+system's=20
+BIND is <I>/usr</I>, and the configuration files are stored in=20
+<I>/etc/namedb</I>. This puts the binaries primary in <I>/usr/sbin</I>. =
+When=20
+installing form the ports collection, you should be able to replace the =
+base=20
+build with extra options for make: (May also need to add =
+<I>PREFIX=3D/usr</I>=20
+DESTETC=3D/etc/namedb if the below fails to do the trick.)</A>
+<P><A name=3D3-1><TT><FONT color=3D#cc0000># cd /usr/ports/dns/bind9 =
+(previously=20
+/usr/ports/net/bind9)<BR># make PORT_REPLACES_BASE_BIND9=3Dyes install=20
+</FONT></TT></A></P>
+<P><A name=3D3-1>If you are building from the tar, you will need to =
+configure with=20
+<I>--prefix=3D/usr</I> and <I>--sysconfdir=3D/etc/namedb</I>. Also, if =
+you plan on=20
+upgrading your base system, add <TT>"NO_BIND=3D true"</TT> to=20
+<I>/etc/make.conf</I> to keep <TT>'buildworld'</TT> from blowing away =
+your=20
+current BIND install.</A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D3-1><BR></A></P>
+<H2><A name=3D3-1></A><A name=3D3-2>3.2 Using The Default Installation =
+For BIND 8 or=20
+9 </A></H2><A name=3D3-2>For this method, we will leave the base =
+system's BIND=20
+alone and install BIND 9.2.2 (or BIND 8.4.1) using the default prefix of =
+
+<I>/usr/local</I>. This will place the binaries in =
+<I>/usr/local/sbin</I> and=20
+<I>/usr/local/bin</I>. Version 9.2.2 will look for <I>named.conf</I> in=20
+<I>/usr/local/etc</I>. If your version differs, it will tell you exactly =
+where=20
+<I>named.conf</I> should be the first time you attempt to start it.</A>
+<P><A name=3D3-2>Moving on, we now have two more options (This excludes =
+building=20
+from the tarball): Install the precompiled package with <I>pkg_add</I> =
+or=20
+installing from the ports collection. Both are covered below though I =
+prefer=20
+using the ports collection. For more information, check out the </A><A=20
+href=3D"http://www.freebsd.org/">FreeBSD handbook</A>: "Chapter 4 =
+Installing=20
+Applications: Packages and Ports"</P>
+<P><B>Installing the BIND 9 package with <I>pkg_add</I>:</B> Grab the =
+latest=20
+BIND 9 (or BIND 8) package from the <A=20
+href=3D"http://www.freebsd.org/ports/index.html">FreeBSD ported =
+applications</A>=20
+or a mirror. From the directory you dropped the package, issue the=20
+following:</P>
+<P><TT><FONT color=3D#cc0000>pkg_add bind9-9.x.x </FONT></TT></P>
+<P>Obviously, adjust the version to match your package. You can verify=20
+installation by issuing <TT>pkg_info</TT>.</P>
+<P><B>Installing via the FreeBSD ports collection:</B> You may want to =
+check out=20
+HOWTO: <A=20
+href=3D"http://www.tuxweb.net/howto/cvsup/bsd/cvsup-bsd4x.html">Installin=
+g CVSup=20
+and the Ports Collection on FreeBSD 4.x</A>. Be sure you have the latest =
+port or=20
+that you have updated your ports collection with CVSup. You can issue =
+the=20
+following to locate the BIND 9 port. Look for the "Path:". It should be=20
+<I>/usr/ports/dns/bind9</I> (Previously =
+<I>/usr/ports/<B>net</B>/bind9</I>).</P>
+<P><TT><FONT color=3D#cc0000>make search name=3Dbind9 </FONT></TT></P>
+<P>Installation is quite simple. Change to the 'bind9' (or 'bind84') =
+directory=20
+and <TT>make install</TT>. Running <TT>make install</TT> will download =
+the=20
+source files, compile, and install. Use <TT>make clean</TT> if you want =
+to=20
+delete the source tree when you are done. Note: Some folks use <TT>make =
+all=20
+install</TT>. I have not found "all" necessary and quite honestly do not =
+
+understand how it effects the ports build.</P>
+<P><TT><FONT color=3D#cc0000>cd /usr/ports/net/bind9<BR>make install=20
+</FONT></TT></P>
+<P>If you are installing BIND version 8, then you are done and can skip =
+the=20
+'rndc' configuration below. If you are using one of the FreeBSD default =
+c-shells=20
+you will need to issue 'rehash' before the BIND installation is =
+recognized.=20
+(Newbie Note: Issue 'set | grep shell' (without the quotes) to discover =
+which=20
+shell you are using. Result will be something like /bin/csh. csh is our =
+shell.)=20
+</P>
+<P><TT><FONT color=3D#cc0000>rehash </FONT></TT></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><BR></P>
+<H2><A name=3D3-3>3.3 Configuring rndc For BIND 9 </A></H2><A =
+name=3D3-3>Bind 8=20
+comes with 'ndc', name daemon control program, which allows us to easily =
+send=20
+control signals to BIND that will restart the server, reload zones, etc. =
+There=20
+is nothing to configure for 'ndc' thus you can skip this section if you =
+are=20
+using BIND 8. BIND 9 uses 'rndc' which is the remote name daemon control =
+
+program. As the name implies, rndc can send control signals to BIND from =
+a=20
+remote machine. By default BIND listens for rndc signals on port 953. By =
+now you=20
+are probably thinking that there must be some authentication mechanism=20
+configured for rndc to work? Yes, and we will cover a very basic =
+configuration=20
+of rndc. You can gain some added security by changing the default key =
+name,=20
+location, and using 256 bit encoding. Also, FreeBSD 4.x's random number=20
+generator can be improved greatly through entropy gathering. You may =
+want to=20
+visit: </A><A =
+href=3D"http://people.freebsd.org/~dougb/randomness.html">How to=20
+prep the /dev/random device in FreeBSD 4</A>.
+<P>Below is an outline of what we need to configure. I will use the BIND =
+9.2.2=20
+default prefix of <I>/usr/local</I> and the default key names:</P>
+<P></P>
+<UL>
+  <LI>/usr/local/etc/rndc.key (secret key)=20
+  <LI>/usr/local/etc/rndc.conf (config file for rndc)=20
+  <LI>/usr/local/etc/named.conf (named config file that we will cover =
+later.)=20
+  </LI></UL>BIND 9.2.2 includes 'rndc-confgen' to create the rndc secret =
+key. With=20
+previous versions of BIND 9 it was necessary to generate the key with =
+'mmencode'=20
+or 'dnssec-keygen'. Lets proceed with creating the default key for BIND =
+9.2.2:=20
+(Check the rndc-confgen man page if you would like to change any of the=20
+defaults--<TT>man rndc-confgen</TT>.)
+<P><TT><FONT color=3D#cc0000>rndc-confgen =A8Ca </FONT></TT></P>
+<P>You will now find 'rndc.key' in <I>/usr/local/etc</I>. Note: if=20
+<TT>rndc-confgen</TT> is not recognized, run 'rehash' and try again. Now =
+lets=20
+look at <I>/usr/local/etc/rndc.key</I>:</P>
+<P><TT><FONT color=3D#cc0000>more /usr/local/etc/rndc.key =
+</FONT></TT></P>
+<P><FONT color=3Dnavy><PRE>	key "rndc-key" {
+	        algorithm hmac-md5;
+	        secret "Sk1vCuEoa193gfj=3Dyour-key-will-vary";
+	};
+	</PRE></FONT>
+<P></P>
+<P>The "key" statement defines our key name which defaults to =
+"rndc-key". The=20
+only algorithm support at this time is "hmac-md5". Our randomly =
+generated=20
+"secret" is "Sk1vCuEoa193gfjFQoZshw=3D=3D".</P>
+<P>That was simple. Now lets configure <I>rndc.conf</I>. You should =
+already have=20
+either a <I>rndc.conf</I> or a <I>rndc.conf.sample</I> file in=20
+<I>/usr/local/etc</I>. We will not use either one, though you may want =
+to look=20
+at the sample file. If you have <I>rndc.conf</I> just move it to=20
+<I>rndc.conf.old</I> (<TT>mv rndc.conf rndc.conf.old</TT>). The below =
+method=20
+will allow us to create <I>rndc.conf</I> without having to type out the =
+secret=20
+string.</P>
+<P><TT><FONT color=3D#cc0000>cd /usr/local/etc<BR>cp rndc.key =
+rndc.conf<BR>ee=20
+rndc.conf</FONT></TT> (Use the text editor of your choice. I use 'ee' =
+here as it=20
+is simple.) </P>
+<P>Now we just need to add the "options" statement to our new =
+<I>rndc.conf</I>=20
+file. The "key" statement is already there. The sample file contains an=20
+"options" statement as well as a "server localhost" default key. We will =
+not=20
+need the "server localhost" default key, but you may use it if you wish. =
+It's=20
+intended for use when connecting to other BIND servers. Below is the =
+basic=20
+<I>rndc.conf</I> file we will be creating. Yours should match assuming =
+your key=20
+name is "rndc-key".</P>
+<P><FONT color=3Dnavy></FONT></P><PRE><FONT color=3Dnavy>	options {
+	        default-server localhost;
+	        default-key "rndc-key";
+	};
+
+	key "rndc-key" {
+	        algorithm hmac-md5;
+	        secret "Sk1vCuEoa193gfj=3Dyour-key-will-vary";
+	};
+	</FONT></PRE><FONT color=3Dnavy></FONT>
+<P><FONT color=3Dnavy></FONT>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff>WATCH OUT: If you are not running IPv6 (Most =
+of us=20
+      still only use IPv4) and your <I>/etc/hosts</I> file has an IPv6 =
+entry for=20
+      localhost such as: "<TT>::1 localhost</TT>", then rndc will fail =
+with=20
+      "<TT>connection refused</TT>" when you use "<TT>default-server=20
+      localhost;</TT>" in the <I>rndc.conf</I> file. This is because =
+rndc will=20
+      attempt to connect to IPv6 and will never try your real IPv4 =
+address of=20
+      127.0.0.1. Either remove the line starting with "<TT>::1</TT>" =
+from your=20
+      <I>/etc/hosts</I> file, or change "<TT>default-server =
+localhost;</TT>" to=20
+      "<TT>default-server 127.0.0.1;</TT>" in <I>rndc.conf</I>.
+      <P>. </P></TD></TR></TBODY></TABLE>Lastly, we need to configure=20
+<I>named.conf</I>--the named configuration file--though this might be a =
+little=20
+difficult as you may not have one yet. Not to worry, I will explain how =
+to=20
+modify <I>named.conf</I> here, and then include the needed statements =
+later when=20
+we setup the real <I>named.conf</I>. First, we need a "controls" =
+statement:</P>
+<P><FONT color=3Dnavy></FONT></P><PRE><FONT color=3Dnavy>	controls {
+	        inet 127.0.0.1 allow { localhost; } keys { "rndc-key"; };
+	};
+	</FONT></PRE><FONT color=3Dnavy></FONT>
+<P><FONT color=3Dnavy></FONT>The "inet 127.0.0.1" tells named to only =
+listen on=20
+the 127.0.0.1 interface and default port (TCP 953). The "allow { =
+localhost; }"=20
+tells named to only accept connections from the local machine. The =
+"rndc-key"=20
+must match your key name in the "key" statement.</P>
+<P>Second, we need to add a "key" statement. By default =
+<I>named.conf</I> is=20
+often world readable which is no big deal until we insert our secret =
+key. Rather=20
+than trust ourselves to change permissions on <I>named.conf</I>, we will =
+use an=20
+include statement to add the "key" statement. The beauty of this lies in =
+the=20
+fact that our secret key, <I>rndc.key</I>, just happens to have the =
+exact "key"=20
+statement we need to include in <I>named.conf</I>. So assuming your =
+secret key=20
+is the default <I>/usr/local/etc/rndc.key</I>, we just need to include =
+that path=20
+in <I>named.conf</I>:</P>
+<P><TT><FONT color=3Dnavy>include "/usr/local/etc/rndc.key"; =
+</FONT></TT></P>
+<P>Now we just need to ensure <I>rndc.key</I>, and <I>rndc.conf</I> are =
+owned by=20
+root and only readable by root. (If you are running BIND under a =
+different user,=20
+then that user should also have read access. This is covered later when =
+we=20
+chroot BIND.) (Check the FreeBSD handbook if you are not familiar with =
+setting=20
+permissions and/or changing owner/group.)</P>
+<P><TT><FONT color=3D#cc0000>cd /usr/local/etc<BR>chmod 600 =
+rndc.conf<BR>chmod 600=20
+rndc.key<BR></FONT></TT></P>
+<P>Now lets list the <I>/usr/local/etc</I> directory to verify:</P>
+<P><TT><FONT color=3D#cc0000>ls =A8Cla </FONT></TT></P>
+<P></P><PRE>	-rw-r--r--  1 root  wheel   806 Sep 22 22:48 named.conf
+	drwxr-xr-x  2 root  wheel   512 Aug 17 21:47 rc.d
+	-rw-------  1 root  wheel   143 Sep 22 22:16 rndc.conf
+	-r--r--r--  1 root  wheel  1195 Sep 20 23:59 rndc.conf.sample
+	-rw-------  1 root  wheel    77 Sep 21 21:30 rndc.key
+	</PRE>
+<P>Here we see that <I>rndc.conf</I> and <I>rndc.key</I> are readable =
+and=20
+writeable only by the owner who happens to be root.</P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><BR></P>
+<H2><A name=3D3-4>3.4 Old Tools Vs. New Tools </A></H2><A name=3D3-4>One =
+caveat of=20
+installing a newer version of BIND without replacing the base system's =
+BIND is=20
+that you will still be using the old version of tools such as =
+'nslookup',=20
+'host', and 'dig'. This is not an immediate problem, but rather a =
+potential=20
+problem. This occurs from the fact that the base system's tools are =
+typically=20
+found earlier in the path variable. If you specify 'dig' without =
+specifying the=20
+full path, you will be using the old version. For example: The old =
+version of=20
+'dig' is located in <I>/usr/bin</I>, while the new version is located in =
+
+<I>/usr/local/bin</I>.</A>
+<P><A name=3D3-4>A typical path variable is shown below:</A></P>
+<P><A name=3D3-4><TT><FONT color=3D#cc0000>% set | grep path=20
+</FONT></TT><BR><TT>path (/sbin /bin /usr/sbin /usr/bin /usr/local/sbin=20
+/usr/local/bin ......)</TT></A></P>
+<P><A name=3D3-4>Below are the locations of BIND's two most popular =
+tools: </A>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff>/usr/sbin/nslookup (location of old=20
+      'nslookup')<BR>/usr/local/sbin/nslookup (location of new =
+'nslooklup')=20
+      [This has moved to /usr/local/bin/nslookup]<BR>/usr/bin/dig =
+(location of=20
+      old 'dig')<BR>/usr/local/bin/dig (location of new=20
+'dig')<BR></TD></TR></TBODY></TABLE></P>
+<P><A name=3D3-4>There are several solutions. For one, just specify the =
+full path=20
+every time you use the tool, or change the order of your path variable. =
+If you=20
+are daring simply delete the old versions. Below, I will simply move the =
+old=20
+tools to [name]-8.3.</A></P>
+<P><A name=3D3-4><TT><FONT color=3D#cc0000>cd /usr/sbin<BR>mv nslookup=20
+nslookup-8.3</FONT></TT></A></P>
+<P><A name=3D3-4><TT><FONT color=3D#cc0000>cd /usr/bin<BR>mv dig=20
+dig-8.3<BR></FONT></TT><BR></A></P>
+<P><A name=3D3-4>Incidentally, the new version of 'nslooklup' will warn =
+you that:=20
+"nslookup is deprecated and may be removed from future releases. =
+Consider using=20
+the `dig' or `host' programs instead." Though 'dig' is more powerful, I =
+will use=20
+'nslookup' for this HOWTO as its output is simpler. Also, if you just =
+ran=20
+'nslookup', type "exit" to get out of interactive mode. We will cover =
+'nslookup'=20
+in greater detail later.</A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D3-4><BR></A></P>
+<H2><A name=3D3-4></A><A name=3D4>4.0 Configuring BIND </A></H2><A =
+name=3D4>Before you=20
+begin configuring, you will need to decide what you want your BIND =
+server to do.=20
+We began covering the options earlier in "Caching And Forwarding Name =
+Servers=A1=B1.=20
+This HOWTO will focus on what I will simply call a "master name =
+server.=A1=B1 This=20
+configuration will allow us to maintain a database of local addresses as =
+well as=20
+resolve Internet addresses. I will also cover the necessary =
+configuration for a=20
+caching-only name server. If you are interested in forwarding, simply =
+proceed=20
+with the configuration of your master or caching-only name server and =
+then we=20
+will add the forwarding options. If you are unsure and want to learn =
+DNS, then=20
+setup a master name server. The configuration options presented here are =
+just=20
+the basics. There are many other options you may want to explore, =
+especially for=20
+BIND 9. For clarity (I hope), I will use a mock "foobar.example=A1=B1 =
+domain for all=20
+examples.</A>
+<P><A name=3D4>Some confusion may arise in distinguishing between the =
+BIND=20
+configuration file and the DNS zone database files. Try to remember that =
+
+<I>named.conf</I> is the configuration file for 'named' which is the =
+BIND=20
+daemon. The <I>named.conf</I> file uses a structure specific to BIND =
+while the=20
+zone database files are RFC compliant and can often be used on other =
+flavors of=20
+name servers. Below is a list of files we will configure.</A></P>
+<P>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><B>Master Name=20
+      Server:</B><BR>&nbsp;&nbsp;&nbsp;<TT>named.conf</TT> (Main =
+configuration=20
+      file for BIND's 'named' =
+daemon)<BR>&nbsp;&nbsp;&nbsp;<TT>named.root</TT>=20
+      (List of Internet root servers. AKA: db.cache or=20
+      root.hints)<BR>&nbsp;&nbsp;&nbsp;<TT>localhost.rev</TT> (Localhost =
+reverse=20
+      lookup zone for =
+127.0.0.1)<BR>&nbsp;&nbsp;&nbsp;<TT>db.foobar.example</TT>=20
+      (Forward lookup zone. This example name of "db.foobar.example" is=20
+      explained below.)<BR>&nbsp;&nbsp;&nbsp;<TT>db.1.168.192</TT> =
+(Reverse=20
+      lookup zone. AKA: in-addr.arpa. This example name is explained =
+below.)
+      <P><B>Caching-Only Name=20
+      Server:</B><BR>&nbsp;&nbsp;&nbsp;<TT>named.root</TT> (List of =
+Internet=20
+      root servers. AKA: db.cache or=20
+      root.hints)<BR>&nbsp;&nbsp;&nbsp;<TT>named.conf</TT> (Main =
+configuration=20
+      file for BIND's 'named'=20
+      daemon)<BR>&nbsp;&nbsp;&nbsp;<TT>localhost.rev</TT> (Localhost =
+reverse=20
+      lookup zone for 127.0.0.1)<BR></P></TD></TR></TBODY></TABLE></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D4><BR></A></P>
+<H2><A name=3D4></A><A name=3D4-1>4.1 Our foobar.example domain =
+</A></H2><A=20
+name=3D4-1>I will use the following example for our configuration. This =
+is a duel=20
+homed machine running NAT (Network Address Translation) with one =
+internal=20
+(friendly) interface and one external (hostile) interface. Our internal =
+domain,=20
+foobar.example, is private and we intend to keep it that way. (RFC2606 =
+actually=20
+reserves ".example" as a top level domain name for documentation. You =
+can use=20
+any name you want for your internal domain, even <I>hello.world</I> if =
+you so=20
+choose.) This is our only name server for foobar.example, thus it is a =
+master=20
+name server. We will not allow zone transfers to slave servers.</A>
+<P>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff>
+      <P><B>Internal Domain Name:</B> foobar.example</P>
+      <P><B>Internal Interface:</B> 192.168.1.1<BR><B>Internal =
+Network:</B>=20
+      192.168.1.0/24 (aka: 192.168.1.0/255.255.255.0)</P>
+      <P><B>External Interface:</B> BIND doesn't care for our=20
+      example.<BR><B>External Network:</B> BIND doesn't care for our=20
+example.</P>
+      <P><B>Name Server:</B> ns1.foobar.example 192.168.1.1<BR><B>Host =
+One:</B>=20
+      host1.foobar.example 192.168.1.100<BR><B>Host Two:</B>=20
+      host2.foobar.example 192.168.1.200<BR></P>
+      <P><FONT color=3Dred><B>IMPORTANT:</B></FONT> The location of=20
+      <I>named.conf</I> will vary depending on how you installed BIND =
+(if you=20
+      installed BIND). The base system's BIND is kept in =
+<I>/etc/namedb</I>=20
+      while the default location after installing a new version of BIND =
+(without=20
+      replacing the base system's BIND) will be =
+<I>/usr/local/etc</I>.</P>
+      <P>/etc/namedb (the assumed location of zone files for this=20
+      HOWTO.)<BR>/etc/namedb/named.conf (default location for the base =
+system=20
+      BIND.)<BR>/usr/local/etc/named.conf (default location after =
+installing=20
+      BIND.) </P></TD></TR></TBODY></TABLE></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D4-1><BR></A></P>
+<H2><A name=3D4-1></A><A name=3D4-2>4.2 Overview of zone data files =
+</A></H2><A=20
+name=3D4-2>Assuming you also need to resolve internal names, there are =
+normally at=20
+least four zone data files: A forward lookup zone to map names to =
+addresses, a=20
+reverse lookup zone to map addresses to names, a root zone for the =
+Internet root=20
+name servers, and a special zone for our loopback (127.0.0.1) interface. =
+Zone=20
+data files are loaded when called from <I>named.conf</I>. You can name =
+the zone=20
+data files anything you choose so long as they match your entries in=20
+<I>named.conf.</I></A>
+<P><A name=3D4-2><B>Forward lookup zones</B> are commonly named after =
+the domain=20
+for which they hold authoritative data. We will name our forward lookup =
+zone=20
+"db.foobar.example" for our foobar.example domain. Below are the most =
+commonly=20
+used resource records for a forward lookup zone. There are many others, =
+happily,=20
+they are rarely needed. The official IANA list is available </A><A=20
+href=3D"ftp://ftp.is.co.za/internet/in-notes/iana/assignments/dns-paramet=
+ers">here</A>.</P>
+<P>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><B>SOA</B> (Start of Authority record) =
+Provides=20
+      information about this zone. Boring, but important.
+      <P><B>NS</B> (Name Server record) List of name servers for this =
+zone. At a=20
+      minimum, you will need the name of the name server that is loading =
+this=20
+      zone. This may seem absurd, but it is required and does make sense =
+once=20
+      you have a better understanding of DNS.</P>
+      <P><B>A</B> (Address) Name to Address mapping</P>
+      <P><B>CNAME</B> (Conical name or aliases name) This is used for =
+mapping=20
+      additional names to the same address.</P>
+      <P><B>MX</B> (Mail Exchanger) Yes, used by mail servers to locate =
+mail=20
+      servers.</P>
+      <P></P></TD></TR></TBODY></TABLE><BR><B>Reverse lookup zones</B> =
+are commonly=20
+named after the address for which they hold authoritative data. To stay =
+hip with=20
+the reverse lookup theme, a zone for 192.168.1/24 is normally named in =
+reverse:=20
+db.1.168.192 or 1.168.192.in-addr.arpa. (I suspect that in-addr.arpa =
+stands for=20
+inverse address ARPA as DNS originated in the ARPAnet days, though I =
+have yet to=20
+verified this.) The reverse lookup (in-addr.arpa) zones are an odd thing =
+but=20
+required by certain applications, such as nslookup and mail, along with =
+some=20
+authentication mechanisms. In other words, some things will not work if =
+you do=20
+not configure you in-addr.arpa zones. Reverse lookups are beyond the =
+scope of=20
+this HOWTO. At this time, you just need to know that your in-addr.arpa =
+zones map=20
+addresses to names. A reverse lookup zone contains the following =
+resource=20
+records:</P>
+<P>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><B>SOA</B> (Start of Authority record) =
+Provides=20
+      information about this zone.
+      <P><B>NS</B> (Name Server record) You guessed it. This is the =
+address to=20
+      name mapping for your name server(s).</P>
+      <P><B>PTR</B> (address to name 'pointer record') Address to name =
+mappings:=20
+      Each address or interface on your network should have one of =
+these.</P>
+      <P></P></TD></TR></TBODY></TABLE></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><BR></P>
+<H2><A name=3D4-3>4.3 localhost.rev (Localhost Reverse Lookup Zone) =
+</A></H2><A=20
+name=3D4-3>Easy, just use the <I>make-localhost</I> script provided with =
+BIND to=20
+create the localhost zone. This will create the following two files in=20
+<I>/etc/namedb</I>: <I>localhost.rev</I> and <I>localhost-v6.rev</I>. IP =
+version=20
+4 and IP version 6 respectively. We need not do anything with the =
+version 6 file=20
+unless you are actually using version 6. Remember, the examples in this =
+HOWTO=20
+will assume you are using <I>/etc/namedb</I> for all zone files no =
+matter how=20
+you installed BIND. It is a simple task to move them latter if =
+needed.</A>
+<P><A name=3D4-3><FONT color=3D#cc0000><TT>cd /etc/namedb<BR>sh =
+make-localhost=20
+</TT></FONT></A></P>
+<P><A name=3D4-3><FONT color=3D#cc0000><TT></TT></FONT>That is it for =
+localhost.rev!=20
+If you would like, you can view it with the following:</A></P>
+<P><A name=3D4-3><FONT color=3D#cc0000><TT>more localhost.rev =
+</TT></FONT></A></P>
+<P><A name=3D4-3><FONT color=3D#cc0000><TT></TT></FONT>Your output will =
+be similar,=20
+but not necessarily identical to the below:</A></P>
+<P></P>
+<HR>
+
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><FONT color=3Dnavy><PRE>;	From: =
+@(#)localhost.rev	5.1 (Berkeley) 6/30/90
+; $FreeBSD: src/etc/namedb/PROTO.localhost.rev,v 1.6 2000/01/10 15:31:40 =
+peter Exp $
+;
+; This file is automatically edited by the `make-localhost' script in
+; the /etc/namedb directory.
+;
+
+$TTL	3600
+
+@	IN	SOA	ns1.foobar.example. root.foobar.example.  (
+				1	; Serial
+				3600	; Refresh
+				900	; Retry
+				3600000	; Expire
+				3600 )	; Minimum
+	IN	NS	ns1.foobar.example.
+1	IN	PTR	localhost.ns1.foobar.example.
+</PRE></FONT></TD></TR></TBODY></TABLE>
+<HR>
+
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D4-3><BR></A></P>
+<H2><A name=3D4-3></A><A name=3D4-4>4.4 db.foobar.example (forward =
+Lookup zone)=20
+</A></H2><A name=3D4-4>If you are building a caching-only name server =
+you may skip=20
+this step, otherwise, you will need to create your own forward-lookup =
+zone file.=20
+Use what ever method you prefer. (Newbie note: If you use a Windows text =
+editor=20
+on an ASCII file--any Unix text file--you will need to remove the ^M's =
+from the=20
+end of each line. If you insist on using a Windows editor, you can =
+usually strip=20
+the ^M by FTPing it back to the BSD box so long as you use ASCII or text =
+
+mode.)</A>
+<P><A name=3D4-4>For this example, we will copy <I>localhost.rev</I> to=20
+<I>db.foobar.example</I> and then add the records we need. Remember to=20
+substitute <I>db.foobar.example</I> for your domain name. Change =
+directory to=20
+<I>/etc/namedb</I> if you are not already there.</A></P>
+<P><A name=3D4-4><TT><FONT color=3D#cc0000>cd /etc/namedb<BR>cp =
+localhost.rev=20
+db.foobar.example<BR>ee db.foobar.example </FONT></TT>(Use the text =
+editor of=20
+your choice. I use 'ee' here as it is simple.) </A></P>
+<P><A name=3D4-4>You can delete the comments if you choose. Delete the =
+PTR record=20
+and update the NS and A records as shown below. The CNAME records are =
+optional=20
+and shown only for examples. Remember to use names appropriate for your=20
+domain.</A></P>
+<P></P>
+<HR>
+
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><FONT color=3Dnavy><PRE>$TTL	3600
+
+@	IN	SOA	ns1.foobar.example.  root.foobar.example.   (
+				1	; Serial
+				3600	; Refresh
+				900	; Retry
+				3600000	; Expire
+				3600 )	; Minimum
+
+@	IN	NS	ns1.foobar.example.
+
+; Machine Names
+host1		IN	A	192.168.1.100
+host2		IN	A	192.168.1.200
+ns1		IN	A	192.168.1.1
+
+; Aliases
+h1		IN	CNAME	host1
+h2		IN	CNAME	host2
+</PRE></FONT></TD></TR></TBODY></TABLE>
+<HR>
+
+<P><A name=3D4-4>As of this may seem a bit cryptic if you are new to DNS =
+so I will=20
+try to briefly explain. But first, there are some things you should know =
+about=20
+DNS zone file syntax:</A></P>
+<P>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff>A semicolon designates a one-line comment much =
+like=20
+      REM for DOS, or # for many other Unix configuration files.
+      <P>The "@" is a shortcut character specifying the current domain =
+or=20
+      origin. You could replace this with foobar.example. (with the =
+trailing=20
+      dot) and it would have the same effect.</P>
+      <P>The "." (dot) at the end of a name designates the name as being =
+fully=20
+      qualified. Any name without a dot will have the origin "@" =
+appended. For=20
+      example, BIND would read foobar.example (without the dot) as=20
+      foobar.example.foobar.example. Not the desired effect. The name, =
+host1,=20
+      without the dot would be host1.foobar.example. A desirable effect. =
+
+      However, include the dot on host1 and you have just indicated that =
+host1=20
+      is a top-level domain completely separate form foobar.example.</P>
+      <P></P></TD></TR></TBODY></TABLE></P>
+<P><A name=3D4-4><FONT color=3Dnavy><TT>$TTL 3600</TT></FONT> - This =
+control=20
+statement specifies the maximum time a name server can cache records =
+from this=20
+zone. Ours is set for 3600 seconds or 1 hour. We could also write this =
+as "1h".=20
+You can set your TTL to anything you want. Incidentally, both BIND 8 and =
+9=20
+understand the TTL, however, BIND 9 requires it.</A></P>
+<P><A name=3D4-4><FONT color=3Dnavy><TT>IN</TT></FONT> =A8C Specifies =
+the Internet=20
+Record class. There are other classes, but you will likely never need=20
+them.</A></P>
+<P><A name=3D4-4><FONT color=3Dnavy><TT>SOA</TT></FONT> =A8C Start of =
+Authority record=20
+for @ (foobar.example.). This is the authoritative record for =
+foobar.example.=20
+indicating that this is the end of the line for queries. If the answer =
+is not=20
+here; it does not exist. </A></P>
+<P><A name=3D4-4><FONT color=3Dnavy><TT>ns1.foobar.example.</TT></FONT> =
+=A8C Master=20
+name server for foobar.example. The trailing dot must be =
+included.</A></P>
+<P><A name=3D4-4><FONT color=3Dnavy><TT>root.foobar.example.</TT></FONT> =
+=A8C Email=20
+address indicating the responsible person of this zone. Again, include =
+the=20
+trailing dot. The dot between root and foo is translated to "@", thus=20
+root@foobar.example. Inserting the actual "@" symbol here would likely =
+have some=20
+ill effects.</A></P>
+<P><A name=3D4-4><FONT color=3Dnavy><TT>( )</TT></FONT> - The opening =
+and closing=20
+parentheses allow a line to be extended until the closing parentheses =
+are=20
+encountered. Thus the next five values are actually all on the same line =
+as the=20
+SOA record and are part of the SOA record. BIND 9 requires that the =
+opening=20
+parenthesis is on the same line as SOA.</A></P>
+<P><A name=3D4-4><FONT color=3Dnavy><TT>serial, refresh, retry, expire,=20
+minimum</TT></FONT> - These values effect how this zone should be cached =
+and/or=20
+handled by slave name servers. We really don't need to change these for =
+our=20
+simple name server and they would take a while to explain. If you are =
+employing=20
+slave servers, you will need to update the serial number before they =
+will pull=20
+down new zone data. We have simply set ours at "1" though the common =
+format is=20
+yyyymmdd## where "#" represents daily zone updates.</A></P>
+<P><A name=3D4-4><FONT color=3Dnavy><TT>NS</TT></FONT> =A8C List of =
+authoritative name=20
+servers for this zone. We have one.</A></P>
+<P><A name=3D4-4><FONT color=3Dnavy><TT>A</TT></FONT> =A8C Hosts in our =
+zone. Notice=20
+that host1 and host2 do not have dots appended to their names. We could =
+have=20
+written these as host1.foobar.example. and host2.foobar.example. if we =
+appended=20
+the dots. </A></P>
+<P><A name=3D4-4><FONT color=3Dnavy><TT>CNAME</TT></FONT> =A8C This is =
+an alias for h1=20
+to host1. We would see the same address if we pinged both h1 and =
+host1.</A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D4-4><BR></A></P>
+<H2><A name=3D4-4></A><A name=3D4-5>4.5 db.1.168.192 (Reverse Lookup =
+Zone)=20
+</A></H2><A name=3D4-5>If you are building a caching-only name server =
+you may skip=20
+this step, otherwise, you will need to create an address to name mapping =
+zone=20
+file. For this example, we will copy <I>localhost.rev</I> to =
+<I>db.1.168.192</I>=20
+and then add the records we need.</A>
+<P><A name=3D4-5><TT><FONT color=3D#cc0000>cd /etc/namedb<BR>cp =
+localhost.rev=20
+db.1.168.192<BR>ee db.foobar.example<BR></FONT></TT></A></P>
+<P><A name=3D4-5>You can delete the comments if you choose. Add the =
+appropriate=20
+PTR records for your domain. Our example domain looks like the=20
+following:</A></P>
+<P></P>
+<HR>
+
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><FONT color=3Dnavy></FONT><PRE><FONT =
+color=3Dnavy>$TTL	3600
+
+@	IN	SOA	ns1.foobar.example. root.foobar.example.  (
+				20021111	; Serial
+				3600	; Refresh
+				900	; Retry
+				3600000	; Expire
+				3600 )	; Minimum
+	IN	NS	ns1.foobar.example.
+
+; Machine Names
+100	IN	PTR	host1.foobar.example.
+200	IN	PTR	host2.foobar.example.
+1	IN	PTR	ns1.foobar.example.
+</FONT></PRE><FONT color=3Dnavy></FONT></TD></TR></TBODY></TABLE>
+<HR>
+
+<P><A name=3D4-5>Our origin is '1.168.192.in-addr.arpa' thus we only =
+need to list=20
+the host portion of host1 and host2's addresses. Alternatively, we could =
+have=20
+listed them as '<B>100</B>.1.168.192.in-addr.arpa.' and=20
+'<B>200</B>.1.168.192.in-addr.arpa.' respectively (with the trailing =
+dots). We=20
+could have also included "@" at the beginning of our NS record, however, =
+the "@"=20
+is implied and not needed. Again, do not forget the trailing =
+dots.</A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D4-5><BR></A></P>
+<H2><A name=3D4-5></A><A name=3D4-6>4.6 named.root (Root Hints File) =
+</A></H2><A=20
+name=3D4-6>The <I>named.root</I> file contains the list of DNS servers =
+for the=20
+root domain. Both caching-only and master name servers will need this. =
+You will=20
+be glad to know that you need not create, or even edit, a =
+<I>named.root</I>=20
+file. One will be included in your <I>/etc/namedb</I> directory. You may =
+want to=20
+take a look at it. You can get an updated <I>named.root</I> file from=20
+ftp.rs.internic.net, however, the recommended approach is to use 'dig'. =
+Dig is=20
+simple and explained in "Updating named.root". Don't try it now though, =
+as our=20
+server must be running before we can use dig. As with other zones,=20
+<I>named.root</I> can be named anything you choose so long as it matches =
+your=20
+entry in <I>named.conf.</I> In fact, <I>named.root</I> is most commonly =
+known as=20
+<I>db.cache</I> or <I>root.hints</I>, however, I will stick with the =
+default=20
+name of <I>named.root</I> for this tutorial.</A>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D4-6><BR></A></P>
+<H2><A name=3D4-6></A><A name=3D4-7a>4.7a named.conf For Master Name =
+Server=20
+</A></H2><A name=3D4-7a>This section covers <I>named.conf</I> for a =
+master name=20
+server. If you are building a caching-only name server, please refer to =
+section=20
+4.7b. The <I>named.conf</I> file is the main configuration file for =
+BIND. Its=20
+primary function is to control which zones are loaded and which =
+interfaces and=20
+ports to listen on. I should note that the syntax of <I>named.root</I> =
+is=20
+completely different from the syntax of <I>named.boot</I> in BIND 4 and =
+earlier.=20
+Fortunately, BIND 8 and BIND 9 use the same syntax. The =
+<I>named.root</I> file=20
+will accept the following characters as comments.</A>
+<P><A name=3D4-7a>// Single line comment<BR>/* Begin multiple-line =
+comment. End a=20
+multiple-line comment with */<BR># Another single line comment.<BR>You =
+cannot=20
+use a semicolon for comments within <I>named.conf</I>. The semicolon is =
+used to=20
+end control statements.</A></P>
+<P><A name=3D4-7a>Below is the <I>named.conf</I> we will be using for =
+our=20
+foobar.example domain. Look it over and then I will explain. After that, =
+we will=20
+move on to creating the real thing.</A></P>
+<P></P>
+<HR>
+
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><FONT color=3Dnavy></FONT><PRE><FONT =
+color=3Dnavy># /etc/namedb/named.conf - for base system's BIND 8 or 9
+# /usr/local/etc/named.conf - for default install of BIND 8 or 9
+
+options {
+	directory "/etc/namedb";
+	allow-query { 192.168.1/24; 127.0.0.1; };
+	listen-on { 192.168.1.1; 127.0.0.1; };
+	};
+
+
+
+/* Remove comments and this sentence for BIND 9
+
+controls {
+            inet 127.0.0.1 allow { localhost; } keys { "rndc-key"; };
+	};
+
+include "/usr/local/etc/rndc.key";
+
+*/=20
+
+
+zone "." {
+	type hint;
+	file "named.root";
+	};
+
+
+zone "0.0.127.IN-ADDR.ARPA" {
+	type master;
+	file "localhost.rev";
+	};
+
+
+zone "foobar.example" {
+	type master;
+	file "db.foobar.example";
+	allow-transfer { none; };
+	};
+
+
+zone "1.168.192.in-addr.arpa" {
+	type master;
+	file "db.1.168.192";
+	allow-transfer { none; };
+	};
+</FONT></PRE><FONT color=3Dnavy></FONT></TD></TR></TBODY></TABLE>
+<HR>
+
+<P><A name=3D4-7a>Remember that there are two thing we need to do with=20
+<I>named.conf</I>=A1=AAset our options and load zones. Lets look at the =
+options=20
+statement first:</A></P>
+<P>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><FONT color=3Dnavy></FONT><PRE><FONT =
+color=3Dnavy>options {
+	directory "/etc/namedb";
+	allow-query { 192.168.1/24; 127.0.0.1; };
+	listen-on { 192.168.1.1; 127.0.0.1; };
+};
+</FONT></PRE><FONT color=3Dnavy></FONT></TD></TR></TBODY></TABLE></P>
+<P><A name=3D4-7a>First thing we do is to declare the options statement. =
+It is=20
+very important to remember the opening and closing brackets, and to end =
+the=20
+options statement with a semicolon. </A></P>
+<P><A name=3D4-7a><TT>options { ...Control statements go here. We can =
+list each=20
+one on a new line for clarity.. };</TT></A></P>
+<P><A name=3D4-7a>The following are our option control statements. =
+Remember to end=20
+each control statement with a semicolon.</A></P>
+<P><A name=3D4-7a><FONT color=3Dnavy><TT>directory=20
+"path_to_named_directory";</TT></FONT> (BIND will change to this =
+directory, thus=20
+we do not need to include the full path when we call our zone files. We =
+will be=20
+using <I>/etc/namedb</I> for our zone files no matter which BIND version =
+or=20
+install method we used.)</A></P>
+<P><A name=3D4-7a><FONT color=3Dnavy><TT>allow-query {=20
+list_of_networks_or_specific_addresses };</TT></FONT> (This determines =
+which=20
+networks or addressed BIND is allowed to answer queries for. You can =
+disregard=20
+this if you only have one network card, or intend to allow external =
+users to=20
+lookup names on your network. Our example uses a duel homed machine. For =
+that=20
+reason, we will only allow BIND to answer queries from our internal =
+network=20
+(192.168.1/24) and from the loopback interface (27.0.0.1). Note that our =
+network=20
+is written as 192.168.1/24 rather than 192.168.1.0/24.)</A></P>
+<P><A name=3D4-7a><FONT color=3Dnavy><TT>listen-on { list_of_interfaces=20
+};</TT></FONT> (Again, we only want BIND to answer queries for our =
+internal=20
+network and our loopback. This tells BIND to not even bother listening =
+on our=20
+external interface.)</A></P>
+<P><A name=3D4-7a>NOTE: By default, BIND 4.9 and later will provide it's =
+version=20
+information to anyone who asks. (<TT>dig txt chaos version.bind</TT>). =
+You can=20
+tell BIND to return a text string in place of the version record. This =
+helps=20
+keep the bad guys, and worms, guessing a bit should they have access to =
+query=20
+your name server. Adding the below option would cause BIND to return the =
+text=20
+string "unavailable":</A></P>
+<P><A name=3D4-7a><FONT color=3Dnavy><TT>version "unavailable"; =
+</TT></FONT></A></P>
+<P><A name=3D4-7a></A>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><B>BIND 9 Only:</B> You will need to remove =
+the=20
+      comments ( /* and */ ) for BIND 9. Remember from earlier that the=20
+      "controls" statement and "include" are used to configure BIND 9's =
+rndc. Be=20
+      sure that "include" contains the correct path to your =
+<I>rndc.key</I>=20
+file.
+      <P></P><PRE><FONT color=3Dnavy>
+controls {
+            inet 127.0.0.1 allow { localhost; } keys { "rndc-key"; };
+	};
+
+include "/usr/local/etc/rndc.key";
+	</FONT>
+	</PRE></TD></TR></TBODY></TABLE></P>
+<P><A name=3D4-7a>Next, we need to load our four zones. This should be =
+fairly=20
+self-explanatory after looking over the <I>named.conf</I> file a few =
+times. It=20
+goes as follows:</A></P>
+<P><A name=3D4-7a><TT>zone "origin_of_zone" { =A1=ADzone control=20
+statements=A1=AD.};</TT></A></P>
+<P><A name=3D4-7a>The first zone we load is "." (the root zone.) This is =
+our list=20
+of Internet root name servers in <I>named.root</I>. This zone type is =
+'hint' and=20
+the file containing the hints is <I>named.root</I>. BIND will look in =
+the=20
+directory specified earlier by the 'directory' option. </A></P>
+<P>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><FONT color=3Dnavy><PRE>zone "." {
+	type hint;
+	file "named.root";
+	};
+</PRE></FONT></TD></TR></TBODY></TABLE></P>
+<P><A name=3D4-7a>The next zone we load is our localhost or loopback =
+zone. Its=20
+origin is '0.0.127.IN-ADDR.ARPA', the zone type is master, and the zone=20
+information is in the <I>localhost.rev</I> file we created earlier with =
+the=20
+<I>make-localhost</I> script.</A></P>
+<P>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><FONT color=3Dnavy><PRE>zone =
+"0.0.127.IN-ADDR.ARPA" {
+	type master;
+	file "localhost.rev";
+};
+
+</PRE></FONT></TD></TR></TBODY></TABLE></P>
+<P><A name=3D4-7a>Moving on, we now load the foobar.example zone file. =
+The only=20
+new control statement here is 'allow-transfer'. If we had slave name =
+servers, we=20
+would list them here. As we have no salve servers we will allow =
+transfers to=20
+'none'. (NOTE: Change 'none;' to your local subnet or specific addresses =
+if you=20
+need to list records with nslookup.) </A></P>
+<P>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><FONT color=3Dnavy><PRE>zone "foobar.example" =
+{
+	type master;
+	file "db.foobar.example";
+	allow-transfer { none; };
+
+	};
+</PRE></FONT></TD></TR></TBODY></TABLE></P>
+<P><A name=3D4-7a>By this time things should seem very redundant. The =
+last zone we=20
+load is our network's reverse lookup zone.</A></P>
+<P>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><FONT color=3Dnavy><PRE>zone =
+"1.168.192.in-addr.arpa" {
+	type master;
+	file "db.1.168.192";
+	allow-transfer { none; };
+=09
+	};
+</PRE></FONT></TD></TR></TBODY></TABLE></P>
+<P><A name=3D4-7a>There are many more control statements available =
+(especially for=20
+BIND 9), but we will not need them. You may, however, need to add the =
+following=20
+to your 'options' section if you are going through a firewall:</A></P>
+<P><A name=3D4-7a><TT><FONT color=3Dnavy>query-source address =
+[your_address] port=20
+[your_port]; </FONT></TT></A></P>
+<P><A name=3D4-7a>The following would send queries out any interface via =
+port=20
+53:</A></P>
+<P><A name=3D4-7a><TT><FONT color=3Dnavy>query-source address * port 53; =
+
+</FONT></TT></A></P>
+<P><A name=3D4-7a>By default BIND 8 and BIND 9 will send queries to =
+other name=20
+servers from an unprivileged port (ports 1024 and above). The query will =
+come=20
+from our port [1024+] to port 53 on the external name server. The =
+response from=20
+that name server will come back to our port [1024+]. If you never =
+receive=20
+answers from the root name servers, investigate 'query-source'. The =
+sample=20
+<I>named.conf</I> suggests setting this to port 53. You will need to =
+work with=20
+your "firewall engineer" to determine your best approach. </A></P>
+<P><A name=3D4-7a>Now that we know what <I>named.conf</I> does, how do =
+we create=20
+it? BIND does come with an <I>/etc/namedb/named.conf</I> file, however, =
+I find=20
+it easer to just create a new one and keep a copy of the original around =
+for=20
+reference.</A></P>
+<P><A name=3D4-7a><TT><FONT color=3D#cc0000>cd /etc/namedb =
+</FONT></TT>(default=20
+location for the base system BIND.)<BR><TT><FONT color=3D#cc0000>cd =
+/usr/local/etc=20
+</FONT></TT>(default location after installing BIND.)<BR><TT><FONT=20
+color=3D#cc0000>mv named.conf named.conf.ori<BR>ee =
+named.conf</FONT></TT> (start=20
+typing) </A></P>
+<P><A name=3D4-7a>Alternatively you can edit the original. It is up to =
+you. The=20
+most common mistake is to have one too few or too many semicolons or =
+braces.=20
+Thankfully BIND will help you find syntax errors the first time you =
+start it=20
+up.</A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D4-7a><BR></A></P>
+<H2><A name=3D4-7a></A><A name=3D4-7b>4.7b named.conf For Caching-Only =
+Name Server=20
+</A></H2><A name=3D4-7b>This section covers <I>named.conf</I> for a =
+caching-only=20
+name server. If you are not building a caching-only name server, please =
+refer to=20
+section 4.7a. The <I>named.conf</I> file is the main configuration file =
+for=20
+BIND. Its primary function is to control which zones are loaded and =
+which=20
+interfaces and ports to listen on. I should note that the syntax of=20
+<I>named.root</I> is completely different from the syntax of =
+<I>named.boot</I>=20
+in BIND 4 and earlier. Fortunately, BIND 8 and BIND 9 use the same =
+syntax. The=20
+<I>named.root</I> file will accept the following characters as =
+comments.</A>
+<P><A name=3D4-7b>// Single line comment<BR>/* Begin multiple-line =
+comment. End a=20
+multiple-line comment with */<BR># Another single line comment.<BR>You =
+cannot=20
+use a semicolon for comments within <I>named.conf</I>. The semicolon is =
+used to=20
+end control statements.</A></P>
+<P><A name=3D4-7b>Below is the <I>named.conf</I> we will be using for =
+our=20
+foobar.example domain. Look it over and then I will explain. After that, =
+we will=20
+move on to creating the real thing.</A></P>
+<P></P>
+<HR>
+
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><FONT color=3Dnavy></FONT><PRE><FONT =
+color=3Dnavy># /etc/namedb/named.conf - for base system's BIND 8 or 9
+# /usr/local/etc/named.conf - for default install of BIND 8 or 9
+
+options {
+	directory "/etc/namedb";
+	allow-query { 192.168.1/24; 127.0.0.1; };
+	listen-on { 192.168.1.1; 127.0.0.1; };
+	};
+
+
+
+/* Remove comments and this sentence for BIND 9
+
+controls {
+            inet 127.0.0.1 allow { localhost; } keys { "rndc-key"; };
+	};
+
+include "/usr/local/etc/rndc.key";
+
+*/=20
+
+
+zone "." {
+	type hint;
+	file "named.root";
+	};
+
+
+zone "0.0.127.IN-ADDR.ARPA" {
+	type master;
+	file "localhost.rev";
+	};
+
+
+
+</FONT></PRE><FONT color=3Dnavy></FONT></TD></TR></TBODY></TABLE>
+<HR>
+
+<P><A name=3D4-7b>Remember that there are two thing we need to do with=20
+<I>named.conf</I>=A1=AAset our options and load zones. Lets look at the =
+options=20
+statement first:</A></P>
+<P>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><FONT color=3Dnavy></FONT><PRE><FONT =
+color=3Dnavy>options {
+	directory "/etc/namedb";
+	allow-query { 192.168.1/24; 127.0.0.1; };
+	listen-on { 192.168.1.1; 127.0.0.1; };
+};
+</FONT></PRE><FONT color=3Dnavy></FONT></TD></TR></TBODY></TABLE></P>
+<P><A name=3D4-7b>First thing we do is to declare the options statement. =
+It is=20
+very important to remember the opening and closing brackets, and to end =
+the=20
+options statement with a semicolon. </A></P>
+<P><A name=3D4-7b><TT>options { ...Control statements go here. We can =
+list each=20
+one on a new line for clarity.. };</TT></A></P>
+<P><A name=3D4-7b>The following are our option control statements. =
+Remember to end=20
+each control statement with a semicolon.</A></P>
+<P><A name=3D4-7b><FONT color=3Dnavy><TT>directory=20
+"path_to_named_directory";</TT></FONT> (BIND will change to this =
+directory, thus=20
+we do not need to include the full path when we call our zone files. We =
+will be=20
+using <I>/etc/namedb</I> for our zone files no matter which BIND version =
+or=20
+install method we used.)</A></P>
+<P><A name=3D4-7b><FONT color=3Dnavy><TT>allow-query {=20
+list_of_networks_or_specific_addresses };</TT></FONT> (This determines =
+which=20
+networks or addressed BIND is allowed to answer queries for. You can =
+disregard=20
+this if you only have one network card, or intend to allow external =
+users to=20
+lookup names on your network. Our example uses a duel homed machine. For =
+that=20
+reason, we will only allow BIND to answer queries from our internal =
+network=20
+(192.168.1/24) and from the loopback interface (27.0.0.1). Note that our =
+network=20
+is written as 192.168.1/24 rather than 192.168.1.0/24.)</A></P>
+<P><A name=3D4-7b><FONT color=3Dnavy><TT>listen-on { list_of_interfaces=20
+};</TT></FONT> (Again, we only want BIND to answer queries for our =
+internal=20
+network and our loopback. This tells BIND to not even bother listening =
+on our=20
+external interface.)</A></P>
+<P><A name=3D4-7b>NOTE: By default, BIND 4.9 and later will provide it's =
+version=20
+information to anyone who asks. (<TT>dig txt chaos version.bind</TT>). =
+You can=20
+tell BIND to return a text string in place of the version record. This =
+helps=20
+keep the bad guys, and worms, guessing a bit should they have access to =
+query=20
+your name server. Adding the below option would cause BIND to return the =
+text=20
+string "unavailable":</A></P>
+<P><A name=3D4-7b><FONT color=3Dnavy><TT>version "unavailable"; =
+</TT></FONT></A></P>
+<P><A name=3D4-7b></A>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><B>BIND 9 Only:</B> You will need to remove =
+the=20
+      comments ( /* and */ ) for BIND 9. Remember from earlier that the=20
+      "controls" statement and "include" are used to configure BIND 9's =
+rndc. Be=20
+      sure that "include" contains the correct path to your rndc.key =
+file.
+      <P></P><PRE><FONT color=3Dnavy>
+controls {
+            inet 127.0.0.1 allow { localhost; } keys { "rndc-key"; };
+	};
+
+include "/usr/local/etc/rndc.key";
+	</FONT>
+	</PRE></TD></TR></TBODY></TABLE></P>
+<P><A name=3D4-7b>Next, we need to load our four zones. This should be =
+fairly=20
+self-explanatory after looking over the <I>named.conf</I> file a few =
+times. It=20
+goes as follows:</A></P>
+<P><A name=3D4-7b><TT>zone "origin_of_zone" { =A1=ADzone control=20
+statements=A1=AD.};</TT></A></P>
+<P><A name=3D4-7b>The first zone we load is "." (the root zone.) This is =
+our list=20
+of Internet root name servers in <I>named.root</I>. This zone type is =
+'hint' and=20
+the file containing the hints is <I>named.root</I>. BIND will look in =
+the=20
+directory specified earlier by the 'directory' option. </A></P>
+<P>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><FONT color=3Dnavy><PRE>zone "." {
+	type hint;
+	file "named.root";
+	};
+</PRE></FONT></TD></TR></TBODY></TABLE></P>
+<P><A name=3D4-7b>The next zone we load is our localhost or loopback =
+zone. Its=20
+origin is '0.0.127.IN-ADDR.ARPA', the zone type is master, and the zone=20
+information is in the <I>localhost.rev</I> file we created earlier with =
+the=20
+<I>make-localhost</I> script.</A></P>
+<P>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><FONT color=3Dnavy><PRE>zone =
+"0.0.127.IN-ADDR.ARPA" {
+	type master;
+	file "localhost.rev";
+};
+
+</PRE></FONT></TD></TR></TBODY></TABLE></P>
+<P><A name=3D4-7b>That is it for a caching-only name server. If we were =
+building a=20
+master name server, we would include additional zones for each domain =
+our server=20
+would be authoritative for.</A></P>
+<P><A name=3D4-7b>There are many more control statements available =
+(especially for=20
+BIND 9), but we will not need them. You may, however, need to add the =
+following=20
+to your 'options' section if you are going through a firewall:</A></P>
+<P><A name=3D4-7b><TT><FONT color=3Dnavy>query-source address =
+[your_address] port=20
+[your_port]; </FONT></TT></A></P>
+<P><A name=3D4-7b>The following would send queries out any interface via =
+port=20
+53:</A></P>
+<P><A name=3D4-7b><TT><FONT color=3Dnavy>query-source address * port 53; =
+
+</FONT></TT></A></P>
+<P><A name=3D4-7b>By default BIND 8 and BIND 9 will send queries to =
+other name=20
+servers from an unprivileged port (ports 1024 and above). The query will =
+come=20
+from our port [1024+] to port 53 on the external name server. The =
+response from=20
+that name server will come back to our port [1024+]. If you never =
+receive=20
+answers from the root name servers, investigate 'query-source'. The =
+sample=20
+<I>named.conf</I> suggests setting this to port 53. You will need to =
+work with=20
+your "firewall engineer" to determine your best approach. </A></P>
+<P><A name=3D4-7b>Now that we know what <I>named.conf</I> does, how do =
+we create=20
+it? BIND does come with an <I>/etc/namedb/named.conf</I> file, however, =
+I find=20
+it easer to just create a new one and keep a copy of the original around =
+for=20
+reference.</A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D4-7b><BR></A></P>
+<H2><A name=3D4-7b></A><A name=3D4-8>4.8 Configuring Forwarding and =
+Forward Only=20
+</A></H2><A name=3D4-8>As touched on earlier in "2.1 Caching And =
+Forwarding Name=20
+Servers=A1=B1, Forwarding provides advantages in speed and security for =
+your name=20
+server by forwarding queries to an upstream name server. Forwarding can =
+be added=20
+to master, slave, and caching-only name servers. We can specify the =
+option of=20
+"forward only=A1=B1, or use the default option of "forward first.=A1=B1 =
+The later--forward=20
+first--provides a fall back in the event that the upstream name servers =
+are=20
+down, but requires a "Swiss-cheese=A1=B1 firewall configuration.</A>
+<P><A name=3D4-8>Enable forwarding by adding the "forwarding=A1=B1 =
+substatement to your=20
+list of option statements. You must also provide a semicolon-separated =
+list of=20
+name servers to forward queries to. Typically, this will be a list of =
+your ISP's=20
+name servers. Alternately, it could be name servers in your DMZ if you =
+have one.=20
+(The addresses shown here are bogus.)</A></P>
+<P>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><FONT color=3Dnavy></FONT><PRE><FONT =
+color=3Dnavy>options {
+	directory "/etc/namedb";
+	allow-query { 192.168.1/24; 127.0.0.1; };
+	listen-on { 192.168.1.1; 127.0.0.1; };
+	<B>forwarders { 10.1.2.3; 172.16.1.2; };</B>
+	};
+</FONT></PRE></TD></TR></TBODY></TABLE></P>
+<P><A name=3D4-8>You might be wondering what will happen when you =
+attempt to=20
+resolve local host names? Well, those queries will also be sent to your =
+upstream=20
+name servers which most likely do not have information about your local =
+network=20
+and will fail. To prevent local name queries from being forwarded, =
+simply add a=20
+null forwarders statement to each zone that you do not want to =
+forward.</A></P>
+<P>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><FONT color=3Dnavy></FONT><PRE><FONT =
+color=3Dnavy>zone "foobar.example" {
+	type master;
+	file "db.foobar.example";
+	allow-transfer { none; };
+	<B>forwarders { };</B>
+	};
+
+zone "1.168.192.in-addr.arpa" {
+	type master;
+	file "db.1.168.192";
+	allow-transfer { none; };
+	<B>forwarders { };</B>
+	};
+</FONT></PRE></TD></TR></TBODY></TABLE></P>
+<P><A name=3D4-8>The above "forward first=A1=B1 examples will tell BIND =
+to: First=20
+forward queries to upstream name servers. Second, in the event that none =
+of the=20
+upstream name servers respond, then revert to iterative (non-recursive) =
+queries.=20
+If you prefer that BIND only use forwarding, then simply add "forward =
+only;=A1=B1 to=20
+your list of options statements.</A></P>
+<P>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><FONT color=3Dnavy></FONT><PRE><FONT =
+color=3Dnavy>options {
+	directory "/etc/namedb";
+	allow-query { 192.168.1/24; 127.0.0.1; };
+	listen-on { 192.168.1.1; 127.0.0.1; };
+	forwarders { 10.1.2.3; 172.16.1.2; };
+	<B>forward only;</B>
+	};
+</FONT></PRE></TD></TR></TBODY></TABLE></P>
+<P><A name=3D4-8>In reality, your firewall will determine whether or not =
+BIND is=20
+free to partake in iterative queries with other name servers. However, =
+using=20
+"forward only=A1=B1 will eliminate unnecessary traffic, excessive =
+timeouts, and is=20
+just more professional.</A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D4-8><BR></A></P>
+<H2><A name=3D4-8></A><A name=3D5>5.0 Starting BIND </A></H2><A =
+name=3D5>Still with=20
+me? Good. Now for the fun part--provided we completed the last sections=20
+correctly. First, we will need to add our localhost =
+address--127.0.0.1--to=20
+<I>resolv.conf</I> before our name server will query itself for domain =
+names.=20
+This is not required, but it would be rare for a DNS server to not use =
+itself=20
+for name resolution.</A>
+<P><A name=3D5><TT><FONT color=3D#cc0000>ee /etc/resolv.conf =
+</FONT></TT></A></P>
+<P><A name=3D5>Replace your current 'nameserver' with 127.0.0.1. If you =
+want to=20
+add additional name servers, add them to the list below 127.0.0.1. Our=20
+ns1.foobar.example <I>resolv.conf</I> looks like this:</A></P>
+<P><A name=3D5><TT><FONT color=3Dnavy>domain =
+foobar.example<BR>nameserver=20
+127.0.0.1</FONT></TT></A></P>
+<P><A name=3D5>The domain part is the "search domain" which allows you =
+to lookup=20
+'ns1' rather than using the fully qualified name of =
+'ns1.foobar.example'. (NOTE:=20
+Alternately you can use 'search' in place of 'domain'. Just don't use =
+them=20
+both.)</A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D5><BR></A></P>
+<H2><A name=3D5></A><A name=3D5-1>5.1 BIND 8 Only: Starting And =
+Controlling named=20
+</A></H2><A name=3D5-1>First, we will need to start 'named' which is the =
+BIND=20
+daemon. We will use 'ndc', the name daemon control program, to control =
+BIND 8=20
+and we could use 'ndc' to start BIND 8. The problem with starting BIND 8 =
+with=20
+'ndc' is that 'ndc' will start the first 'named' executable it finds. =
+This is a=20
+bad idea if you have multiple 'named' versions on your system. So, we =
+will start=20
+'named' by specifying the path as shown below. The location of 'named' =
+is=20
+dependent on how you installed BIND. If you are using the base system's =
+BIND, or=20
+you replaced the base system's BIND, 'named' will be in =
+<I>/usr/sbin</I>. If you=20
+installed a new version of BIND with the default options, then 'named' =
+will be=20
+in <I>/usr/local/sbin</I>. As 'named' is executable, simply type the =
+path to=20
+'named':</A>
+<P><A name=3D5-1><TT><FONT color=3D#cc0000>/usr/sbin/named =
+</FONT></TT>(default=20
+location for the base system's BIND.)<BR><TT><FONT=20
+color=3D#cc0000>/usr/local/sbin/named </FONT></TT>(default location =
+after=20
+installing BIND) </A></P>
+<P><A name=3D5-1>BIND (specifically 'named') will immediately inform you =
+of any=20
+syntax errors in your config files. Check out the "Troubleshooting and =
+Testing=20
+BIND" section if you are having issues. If all is well we can move on to =
+using=20
+'ndc'. Happily 'ndc' does not require any configuration unlike 'rndc' of =
+BIND=20
+9.</A></P>
+<P><A name=3D5-1>You can check the status of BIND 8 with "ndc =
+status".</A></P>
+<P><A name=3D5-1>You can use "ndc reload" to reload you zone files. You =
+will need=20
+to do this anytime you make a change such as adding or removing a host=20
+address.</A></P>
+<P><A name=3D5-1>You can use "ndc restart" to restart named. This will =
+be required=20
+before any changes to <I>named.conf</I> will be effective. You can also =
+stop=20
+named with "ndc stop". (As "ndc restart" sends a signal directly to the =
+running=20
+'named' process, it will always restart the correct 'named' version =
+unlike "ndc=20
+start".)</A></P>
+<P><A name=3D5-1>By the way, if you find yourself stuck in an =
+interactive session=20
+with 'ndc', simply type "/h" for help or "/e" to exit.</A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D5-1><BR></A></P>
+<H2><A name=3D5-1></A><A name=3D5-2>5.2 BIND 9 Only: Starting And =
+Controlling named=20
+</A></H2><A name=3D5-2>First we will need to start 'named' which is the =
+BIND=20
+daemon. We use 'rndc', the remote name daemon control program, to =
+control BIND 9=20
+much as we use 'ndc' to control BIND 8. Some configuration of 'rndc' is=20
+necessary before it will work. This was covered earlier in "Configuring =
+rndc For=20
+BIND 9". Note that we can NOT use 'rndc' to start BIND 9 as 'rndc' =
+requires BIND=20
+9 to be running. Unfortunately the error is a bit misleading: <TT>"rndc: =
+connect=20
+failed: connection refused"</TT>.</A>
+<P><A name=3D5-2>Remember that the base system's BIND will use=20
+<I>/usr/sbin/named</I>. Use this only if you have replaced your base =
+system's=20
+BIND. Otherwise you will be starting BIND 8.3.x. Start BIND 9 with one =
+of the=20
+following unless you have installed with something other than the =
+default=20
+prefix:</A></P>
+<P><A name=3D5-2><TT><FONT color=3D#cc0000>/usr/sbin/named =
+</FONT></TT>(default=20
+location for the base system BIND.)<BR><TT><FONT=20
+color=3D#cc0000>/usr/local/sbin/named </FONT></TT>(default location =
+after=20
+installing BIND.) </A></P>
+<P><A name=3D5-2>If everything started correctly you will be quietly =
+returned to=20
+the command prompt. If not, BIND (specifically 'named') is usually quite =
+verbose=20
+in telling you where you went wrong. Check out the "Troubleshooting and =
+Testing=20
+BIND" section if you are having issues.</A></P>
+<P><A name=3D5-2>If you are familiar with BIND 8's 'ndc' you will find =
+that BIND=20
+9's 'rndc' uses options a little differently. For one, you cannot start =
+'named'=20
+with 'rndc'. For another, restart" is not yet implemented in 'rndc.' The =
+good=20
+news is that "ndc reload" not only reloads zones but also forces 'named' =
+to=20
+reread <I>named.conf</I>.</A></P>
+<P><A name=3D5-2>You can check the status of BIND 9 with "rndc status", =
+and you=20
+can clear the cache with "rndc flush".</A></P>
+<P><A name=3D5-2>You can use "rndc reload" to reload you zone files and =
+force=20
+'named' to reread is configuration file--<I>named.conf</I>. You will =
+need to do=20
+this anytime you make a change to a zone file or <I>named.conf</I>. You =
+can also=20
+use "rndc reconfig" to reread <I>named.conf</I> and only load zones =
+which have=20
+changed. Remember, you cannot use 'rndc' to start BIND 9, however you =
+can stop=20
+it with "rndc stop".</A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D5-2><BR></A></P>
+<H2><A name=3D5-2></A><A name=3D5-3>5.3 Testing BIND (Both versions) =
+</A></H2><A=20
+name=3D5-3>Assuming BIND is up-and-running, we will now run a couple =
+simple checks=20
+to ensure BIND can resolve names. We will use 'nslookup' though other =
+tools are=20
+available such as 'dig'. In the following examples "%" represents the =
+command=20
+prompt (you will see a "#" if you are still logged in as root.) The =
+output from=20
+our example domain will be listed below the command.</A>
+<P><A name=3D5-3>Lets see if BIND will answer an internal query.</A></P>
+<P></P><PRE><A name=3D5-3><FONT color=3D#cc0000>% nslookup ns1</FONT> =
+(replace 'ns1' with the name of your server.)
+
+Server:  localhost.foobar.example
+Address:  127.0.0.1
+
+Name:    ns1.foobar.example
+Address:  192.168.1.1
+</A></PRE>
+<P><A name=3D5-3>Hey, look at that. Our server resolved its own address. =
+Notice=20
+that "Server" and its corresponding address is the name server we =
+connected to=20
+for name resolution. "Name" and its corresponding address is the answer =
+to our=20
+query. You can also try this for any other hosts entries you may have =
+added. If=20
+this did not work, try using your servers fully qualified name, ie:=20
+'ns1.foobar.example'. If the fully qualified name works, then you may =
+want to=20
+set your 'domain' in <I>/etc/resolv.conf</I>.</A></P>
+<P><A name=3D5-3>Lets see if we can resolve and external name:</A></P>
+<P></P><PRE><A name=3D5-3><FONT color=3D#cc0000>% nslookup =
+www.google.com</FONT>
+
+Server:  localhost.foobar.example
+Address:  127.0.0.1
+
+Name:    www.google.com
+Address:  216.239.39.99
+</A></PRE>
+<P><A name=3D5-3>If this failed with a "Non-existent domain" error, =
+check out the=20
+"Troubleshooting and Testing BIND" section. This means that you are not =
+able to=20
+contact the domain root servers=A1=AAor google has vanished.</A></P>
+<P><A name=3D5-3>Now lets check our reverse lookup zone. You will need =
+to use the=20
+IP address of one of your hosts.</A></P>
+<P></P><PRE><A name=3D5-3><FONT color=3D#cc0000>% nslookup =
+192.168.1.100</FONT> (This is our 'host1' address. Use one of your real =
+addresses here.)
+
+Server:  localhost.foobar.example
+Address:  127.0.0.1
+
+Name:    host1.foobar.example
+Address: 192.168.1.100
+</A></PRE>
+<P><A name=3D5-3>Worked? Good! Otherwise check out the "Troubleshooting =
+and=20
+Testing BIND" section. Your in-addr.arpa zone is not loading or does not =
+have=20
+correct data.</A></P>
+<P><A name=3D5-3>One last thing. You should also check which version of =
+BIND you=20
+are actually running. This is covered in more detail in "Troubleshooting =
+and=20
+Testing BIND", however, the following will give you the version when run =
+from a=20
+console on your name server. (Don't use "named =A8Cv" as this will not =
+necessarily=20
+give you the version of BIND that is actually running.)</A></P>
+<P><A name=3D5-3><TT><FONT color=3D#cc0000>%dig txt chaos version.bind =
+@localhost=20
+</FONT></TT></A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D5-3><BR></A></P>
+<H2><A name=3D5-3></A><A name=3D5-4>5.4 Starting BIND (named) At Boot =
+</A></H2><A=20
+name=3D5-4>Both BIND version 8 and version 9 can be started from=20
+<I>/etc/rc.conf</I>. The only variation will be how you installed =
+BIND.</A>
+<P><A name=3D5-4><B>Base system's BIND:</B> If you are using the base =
+system's=20
+BIND or have replaced the base system's BIND with a newer version, =
+simply add=20
+<TT>named_enable=3D"YES"</TT> to <I>/etc/rc.conf</I>:</A></P>
+<P><A name=3D5-4><TT><FONT color=3D#cc0000>cd /etc<BR>cp rc.conf =
+rc.conf.ori=20
+</FONT></TT>(always backup the original.)<BR><TT><FONT =
+color=3D#cc0000>ee=20
+rc.conf<BR></FONT></TT>Add <FONT =
+color=3Dnavy><TT>named_enable=3D"YES"</TT></FONT>=20
+anywhere in <I>rc.conf</I> provided it is not already there.</A></P>
+<P><A name=3D5-4><B>Default installation of BIND:</B> If you have =
+installed a=20
+newer version of BIND and did not replace the base system's BIND, you =
+will need=20
+to add the path to <I>named</I> and add <TT>named_enable=3D"YES"</TT> to =
+
+<I>/etc/rc.conf</I>. (Note: I do not recommend editing=20
+<I>/etc/defaults/rc.conf</I>)</A></P>
+<P><A name=3D5-4><TT><FONT color=3D#cc0000>cd /etc<BR>cp rc.conf =
+rc.conf.ori=20
+</FONT></TT>(always backup the original.)<BR><TT><FONT =
+color=3D#cc0000>ee=20
+rc.conf<BR></FONT></TT>Add <FONT =
+color=3Dnavy><TT>named_enable=3D"YES"</TT></FONT>=20
+anywhere in <I>rc.conf</I> provided it is not already there.<BR>Add =
+<FONT=20
+color=3Dnavy><TT>named_program=3D"/usr/local/sbin/named"</TT></FONT> =
+anywhere in=20
+<I>rc.conf</I></A></P>
+<P><A name=3D5-4>That is it. If needed, you can now configure your =
+clients to use=20
+your new name server as their primary DNS server. You can also use =
+'nslookup'=20
+from a command prompt on Windows NT/2000/XP hosts. Whenever you make a =
+change to=20
+one of your zone files, remember to issue '<TT>ndc reload</TT>' for BIND =
+8 or=20
+'<TT>rndc reload</TT>' for BIND 9. Whenever you make a change to=20
+<I>named.conf</I>, remember to issue '<TT>ndc restart</TT>' for BIND 8 =
+or=20
+'<TT>rndc reload</TT>' for BIND 9. Be sure to use 'netstat =A8Cn' if you =
+want to=20
+check which interfaces BIND is listening on. More information is =
+available in=20
+the "Troubleshooting and Testing BIND" section.</A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D5-4><BR></A></P>
+<H2><A name=3D5-4></A><A name=3D6>6.0 Securing BIND with chroot =
+</A></H2><A=20
+name=3D6>By default, BIND runs with root permissions on FreeBSD. BIND is =
+also a=20
+popular target for malicious hackers. If you are at all concerned about=20
+security, you will want run BIND as an unprivileged user. Additionally, =
+you can=20
+configure BIND to chroot to a new environment for additional protection. =
+(This=20
+is sometimes referred to as a jail, though not technically correct. Jail =
+is=20
+another utility which can imprison processes. You can reference chroot =
+and jail=20
+in the man pages for more information.) Using chroot to change BIND's=20
+environment is often referred to as running BIND in a sandbox. =
+(Technically,=20
+just running BIND as an unprivileged user qualifies as a sandbox to some =
+
+extent.) A sandbox, as I refer to it here, is directory created solely =
+for BIND=20
+containing all necessary configuration files, device nodes, libraries, =
+and=20
+binaries for BIND to operate. Once BIND is sent to its sandbox, it is =
+difficult=20
+(though not impossible) for a malicious hacker or virus to access any =
+part of=20
+our system that BIND was not specifically granted access to.</A>
+<P><A name=3D6>The following will describe how to run BIND as an =
+unprivileged user=20
+and use chroot to place BIND in a sandbox where it cannot see our "real" =
+file=20
+system. I will focus here on BIND 9 though the majority of this section =
+will=20
+apply to BIND 8. There are a couple exceptions for BIND 8 which have =
+been noted.=20
+You may also want to reference the FreeBSD hand book, especially if you =
+are=20
+working with BIND 8.</A></P>
+<P><A name=3D6>First we need an unprivileged user account and group to =
+run BIND.=20
+It just so happens that FreeBSD already provides us with a user and =
+group both=20
+named "bind=A1=B1. Another popular name for the BIND user is =
+"named.=A1=B1 If you need or=20
+want to create a new user account, be sure that the new user does not =
+have a=20
+real logon shell.</A></P>
+<P><A name=3D6>Now we will need to create the directory structure. I =
+prefer to use=20
+<I>/var/chroot/named</I>, though you can build the sandbox anywhere you =
+wish.=20
+You can even use <I>/etc/namedb</I>. The "tmp" directory should not be =
+needed,=20
+but I create it anyway. I prefer to keep my master and slave zones in =
+separate=20
+directories because user 'bind' will need write access to the "slave" =
+directory=20
+to create the [domain].bak files, but not the 'master' directory. The =
+user=20
+'bind' will also require write access to <I>var/run</I> to create the =
+pid file,=20
+thus we will make 'bind' the owner of these directories only. Remember =
+that the=20
+'bind' user account could be compromised so we want to restrict it's =
+access as=20
+much as possible. Warning: Remember that you are working in a mock root=20
+directory of 'named'. If you accidentally append '/' to var or another =
+directory=20
+when you really meant /var/chroot/named/var then you have just modified =
+your=20
+real var directory.</A></P>
+<P><A name=3D6><TT><FONT color=3D#cc0000>mkdir -p =
+/var/chroot/named<BR>chgrp bind=20
+/var/chroot/named<BR>cd /var/chroot/named<BR>mkdir -p etc dev tmp =
+var/run master=20
+slave<BR>chmod 750 *<BR>chown bind:bind slave =
+var/run<BR></FONT></TT></A></P>
+<P><A name=3D6>Now we need to create some device nodes. As long as you =
+have=20
+already generated the rndc.key, you probably don't need the 'random' =
+node, but=20
+we will create it anyway. Also, some versions of BIND 9 may require the =
+'zero'=20
+node, so will create it. You must have the 'null' device node otherwise =
+'bind'=20
+will not be able to take out the garbage. User 'bind' will need write =
+access, so=20
+we will make 'bind' the owner and group as well. Again, be absolutely =
+sure you=20
+are in the correct directory.</A></P>
+<P><A name=3D6><TT><FONT color=3D#cc0000>cd dev<BR>mknod null c 2 =
+2<BR>mknod zero c=20
+2 12<BR>mknod random c 2 3<BR>chown bind:bind *<BR></FONT></TT></A></P>
+<P><A name=3D6>Now lets copy over the needed system file(s). For BIND 9 =
+we just=20
+need <I>localtime</I> for logging. If you are having issues with syslog, =
+you may=20
+need to copy <I>syslog.conf</I> to your etc directory. (If you are using =
+BIND 8=20
+and performing zone transfers, you will need to deal with building a =
+statically=20
+linked copy of <I>named-xfer</I> and copying it over as well.)</A></P>
+<P><A name=3D6><TT><FONT color=3D#cc0000>cp /etc/localtime =
+/var/chroot/named/etc=20
+</FONT></TT></A></P>
+<P><A name=3D6>Now lets copy over the BIND configuration file, rndc.key, =
+and zone=20
+files. I will assume your zone files are in the default location of=20
+<I>/etc/namedb</I> and that you performed a default installation on BIND =
+9 which=20
+placed your <I>named.conf</I> file in <I>/usr/local/etc</I>. You can =
+copy the=20
+entire <I>/etc/namedb</I> directory over with <TT>cp -R /etc/namedb=20
+/var/chmod/named</TT>, however, I will demonstrate by copying each =
+required file=20
+separately. I am using our earlier 'foobar.example' zone files. (HINT: =
+If your=20
+zone files begin with "db", you can save some typing with: <FONT=20
+color=3D#cc0000><TT>cp db* /var/chroot/named/master</TT></FONT>)</A></P>
+<P><A name=3D6><TT><FONT color=3D#cc0000>cd /etc/namedb<BR>cp =
+db.1.168.192=20
+/var/chroot/named/master<BR>cp db.foobar.example =
+/var/chroot/named/master<BR>cp=20
+localhost.rev /var/chroot/named/master<BR>cp named.root=20
+/var/chroot/named/master<BR>chmod 640=20
+/var/chroot/named/master/*<BR></FONT></TT></A></P>
+<P><A name=3D6><TT><FONT color=3D#cc0000>cd /usr/local/etc<BR>cp =
+named.conf=20
+/var/chroot/named/etc<BR>cp rndc.key /var/chroot/named/etc<BR>cd=20
+/var/chroot/named/etc<BR>chmod 640 named.conf =
+rndc.key<BR></FONT></TT></A></P>
+<P><A name=3D6>We will need to update our directory paths in =
+<I>named.conf</I> to=20
+suit our new environment. Since we will be telling BIND to chroot to=20
+<I>/var/chroot/named</I> and run as user 'bind', the user 'bind' will =
+think that=20
+<I>/var/chroot/named</I> is the "real" root directory. When you tell =
+user 'bind'=20
+to look in "/", 'bind' will actually be looking in =
+<I>/var/chroot/named</I>. An=20
+attacker who has taken control of BIND will also be unable to access our =
+"real"=20
+root. (Provided he or she is not able to brake out of our chroot =
+environment.)=20
+Below is our 'foobar.example' <I>named.conf</I> from earlier. Changes =
+are in=20
+bold.</A></P>
+<P></P>
+<HR>
+
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><FONT color=3Dnavy></FONT><PRE><FONT =
+color=3Dnavy># /etc/namedb/named.conf - for base system's BIND 8 or 9
+# /usr/local/etc/named.conf - for default install of BIND 8 or 9
+
+options {
+	<B>directory "/";</B>
+	allow-query { 192.168.1/24; 127.0.0.1; };
+	listen-on { 192.168.1.1; 127.0.0.1; };
+	};
+
+
+
+/* Remove comments and this sentence for BIND 9
+
+controls {
+            inet 127.0.0.1 allow { localhost; } keys { "rndc-key"; };
+	};
+
+<B>include "etc/rndc.key";</B>
+
+*/=20
+
+
+zone "." {
+	type hint;
+	<B>file "master/named.root";</B>
+	};
+
+
+zone "0.0.127.IN-ADDR.ARPA" {
+	type master;
+	<B>file "master/localhost.rev";</B>
+	};
+
+
+zone "foobar.example" {
+	type master;
+	<B>file "master/db.foobar.example";</B>
+	allow-transfer { none; };
+	};
+
+
+zone "1.168.192.in-addr.arpa" {
+	type master;
+	<B>file "master/db.1.168.192";</B>
+	allow-transfer { none; };
+	};
+</FONT></PRE><FONT color=3Dnavy></FONT></TD></TR></TBODY></TABLE>
+<HR>
+
+<P><A name=3D6>Now it is time to make BIND chroot to the new =
+environment. For=20
+FreeBSD, the best method is through <I>/etc/rc.conf</I>. You can always =
+refer to=20
+<I>/etc/defaults/rc.conf</I> for more information about <I>rc.conf</I> =
+options.=20
+Your changes, however, should always be made in <I>/etc/rc.conf</I> =
+rather than=20
+the defaults file in <I>/etc/defaults</I>. The first two options were =
+covered=20
+earlier and do not change. We simply pass additional parameters to BIND =
+through=20
+<TT>named_flags</TT>. The "-u" indicates which user BIND will change to. =
+
+Initially, BIND will start as root, bind to the privileged DNS socket, =
+and then=20
+change to the specified user. (Note: BIND 9 does not use the "-g" =
+(group) option=20
+as did BIND 8. BIND 9 uses the primary group of the specified "-u" user. =
+You=20
+would add "-u bind" for BIND 8 only.) The "-t" options tells BIND to =
+chroot to=20
+<I>/var/chroot/named</I>. The "-c" options tells BIND where the =
+configuration=20
+file is in reference to the chroot environment. (Our configuration file =
+is=20
+actually in <I>/var/chroot/named/etc/</I>, however, BIND has already =
+chroot'd to=20
+<I>/var/chroot/named</I> and will see this as the root directory.) Our=20
+<I>/etc/rc.conf</I> looks like this:</A></P>
+<P><A name=3D6><FONT=20
+color=3Dnavy><TT>named_enable=3D"YES"<BR>named_program=3D"/usr/local/sbin=
+/named"<BR>named_flags=3D"-u=20
+bind -t /var/chroot/named -c /etc/named.conf"<BR></TT></FONT></A></P>
+<P><A name=3D6>One last thing. When BIND is chroot'd, it cannot access =
+the=20
+system's syslogd socket and thus we will need to create a new socket =
+just for=20
+BIND. Once BIND starts, the <I>log</I> socket will be created in=20
+<I>/var/chroot/named/dev/</I> and you should see messages from BIND =
+logged to=20
+<I>/var/log/messages</I>. We do this by passing additional parameters to =
+syslogd=20
+through <I>/etc/rc.conf</I>. Specifically "-l" (ell) and the path to our =
+new log=20
+socket. Since we will be overriding the default <TT>syslogd_flags</TT> =
+we will=20
+need to include "-s" or "-ss". The default for FreeBSD seems to always =
+be "-s"=20
+which allows syslogd to listen for remote logging, whereas "-ss" will =
+tell=20
+syslogd to not bind to an inet socket. I prefer the "-ss" options as I =
+do not=20
+need to listen for remote logging.</A></P>
+<P><A name=3D6><FONT color=3Dnavy><TT>syslogd_flags=3D"-ss -l=20
+/var/chroot/named/dev/log" </TT></FONT></A></P>
+<P><A name=3D6>You may want to test BIND prior to rebooting. If so, we =
+just need=20
+to restart syslogd and named manually with the following:</A></P>
+<P><A name=3D6><TT><FONT color=3D#cc0000>killall =
+syslogd<BR>/usr/sbin/syslogd -ss -l=20
+/var/chroot/named/dev/log<BR></FONT></TT></A></P>
+<P><A name=3D6><TT><FONT color=3D#cc0000>rndc stop (or ndc for BIND=20
+8)<BR>/usr/local/sbin/named -u bind -t /var/chroot/named -c=20
+/etc/named.conf<BR></FONT></TT></A></P>
+<P><A name=3D6>Hopefully your chroot experience was a good one. If not, =
+most=20
+issues are usually related to a path or permissions issues and named =
+will=20
+normally tell you exactly where the problem is. Also, you can use "ps =
+-aux" to=20
+verify that named is now running under "bind" rather than =
+"root".</A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D6><BR></A></P>
+<H2><A name=3D6></A><A name=3D7>7.0 Updating named.root (The root server =
+list)=20
+</A></H2><A name=3D7>The <I>named.root</I> file provides a list of the =
+Internet's=20
+root servers. These servers rarely change, however, you should probably =
+update=20
+this file at least once. Take comfort in the fact that BIND will =
+continue to=20
+function even if most of the root servers change. Though updating might =
+prevent=20
+some query delays and will prevent annoying named messages such as:=20
+"<TT>check_hints: A records for A.ROOT-SERVERS.NET class 1 do not match =
+hint=20
+records</TT>". You can quickly display your current <I>named.root</I> =
+file by=20
+using 'dig' with no options:</A>
+<P><A name=3D7><TT><FONT color=3D#cc0000>% dig </FONT></TT></A></P>
+<P>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><PRE>; &lt;&lt;&gt;&gt; DiG 9.2.2 =
+&lt;&lt;&gt;&gt;
+;; global options:  printcmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 47731
+;; flags: qr rd ra; QUERY: 1, ANSWER: 13, AUTHORITY: 0, ADDITIONAL: 13
+
+;; QUESTION SECTION:
+;.                              IN      NS
+
+;; ANSWER SECTION:
+.                       490152  IN      NS      I.ROOT-SERVERS.NET.
+.                       490152  IN      NS      J.ROOT-SERVERS.NET.
+.                       490152  IN      NS      K.ROOT-SERVERS.NET.
+.                       490152  IN      NS      L.ROOT-SERVERS.NET.
+.                       490152  IN      NS      M.ROOT-SERVERS.NET.
+.                       490152  IN      NS      A.ROOT-SERVERS.NET.
+.                       490152  IN      NS      B.ROOT-SERVERS.NET.
+.                       490152  IN      NS      C.ROOT-SERVERS.NET.
+.                       490152  IN      NS      D.ROOT-SERVERS.NET.
+.                       490152  IN      NS      E.ROOT-SERVERS.NET.
+.                       490152  IN      NS      F.ROOT-SERVERS.NET.
+.                       490152  IN      NS      G.ROOT-SERVERS.NET.
+.                       490152  IN      NS      H.ROOT-SERVERS.NET.
+
+;; ADDITIONAL SECTION:
+A.ROOT-SERVERS.NET.     599366  IN      A       198.41.0.4
+B.ROOT-SERVERS.NET.     599366  IN      A       128.9.0.107
+C.ROOT-SERVERS.NET.     577232  IN      A       192.33.4.12
+D.ROOT-SERVERS.NET.     577232  IN      A       128.8.10.90
+E.ROOT-SERVERS.NET.     599366  IN      A       192.203.230.10
+F.ROOT-SERVERS.NET.     577232  IN      A       192.5.5.241
+G.ROOT-SERVERS.NET.     599366  IN      A       192.112.36.4
+H.ROOT-SERVERS.NET.     599366  IN      A       128.63.2.53
+I.ROOT-SERVERS.NET.     577232  IN      A       192.36.148.17
+J.ROOT-SERVERS.NET.     576552  IN      A       192.58.128.30
+K.ROOT-SERVERS.NET.     577232  IN      A       193.0.14.129
+L.ROOT-SERVERS.NET.     577232  IN      A       198.32.64.12
+M.ROOT-SERVERS.NET.     577232  IN      A       202.12.27.33
+
+;; Query time: 19 msec
+;; SERVER: 127.0.0.1#53(127.0.0.1)
+;; WHEN: Wed Oct  1 18:43:16 2003
+;; MSG SIZE  rcvd: 436
+</PRE></TD></TR></TBODY></TABLE><A name=3D7>Notice that the output is =
+conveniently=20
+formatted for a <I>named.root</I> file. Remember that semicolons are =
+comments.=20
+Now change to the same directory that you store your <I>named.root</I> =
+file.=20
+Backup your current <I>named.root</I> file. Then select any one of the =
+Internet=20
+root servers from the list and issue the following: (We are using=20
+F.ROOT-SERVERS.NET as an example.)</A></P>
+<P><A name=3D7><TT><FONT color=3D#cc0000>cd /etc/namedb<BR>cp named.root =
+
+named.root.old</FONT></TT></A></P>
+<P><A name=3D7><TT><FONT color=3D#cc0000>dig f.root-servers.net &gt;=20
+named.root</FONT></TT></A></P>
+<P><A name=3D7><TT><FONT color=3D#cc0000></FONT></TT></A></P>
+<P><A name=3D7>You will need to restart BIND before the changes become =
+effective.=20
+That would be '<TT>ndc restart</TT> for BIND 8 and '<TT>rndc =
+reload</TT>' for=20
+BIND 9. </A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D7><BR></A></P>
+<H2><A name=3D7></A><A name=3D8>8.0 Troubleshooting and Testing BIND =
+</A></H2><A=20
+name=3D8>I will focus on using 'nslookup' for most of these tests. As =
+far as I=20
+know, all distributions of BSD and Linux come with 'nslookup' as well as =
+Windows=20
+NT/2000/XP, however, it is missing from Windows 95/98. ('dig' is a =
+better tool,=20
+though you will not find it on Windows and 'nslookup' is easier for =
+quick=20
+testing anyway.) The below examples use our 'foobar.example' domain =
+noted=20
+earlier. Note that typing <TT>nslookup</TT> without options will land =
+you in=20
+interactive mode much like ftp and telnet will. If you find yourself in=20
+interactive mode you can exit with <TT>exit</TT> or type <TT>help</TT> =
+for help.=20
+The below examples will all use non-interactive mode. The syntax for =
+nslookup is=20
+noted below:</A>
+<P><A name=3D8><TT>nslookup [question] [name_server_to_ask]</TT></A></P>
+<P><A name=3D8>The 'question' will typically be the name or address of a =
+host, and=20
+'name_server_to_ask' will be the address of the name server you are =
+checking.=20
+You can omit the name server address so long as the name server you wish =
+to=20
+query is the ONLY name server in your DNS list.</A></P>
+<P><A name=3D8>Note that you may need to clear the DNS cache on Windows =
+clients=20
+for DNS changes to take immediate effect. This should not effect =
+nslookup, but=20
+if all else fails, clear the cache or reboot. On Windows 2000/XP use=20
+'<TT>ipconfig /flushdns</TT>'. Other Windows clients will need to be =
+rebooted.=20
+Remember that you must use "ndc reload" for BIND 8 and "rndc reload" for =
+BIND 9=20
+before any zone files changes will be realized. Also, BIND must be =
+restarted=20
+with "ndc restart" for BIND 8 and "rndc reload" for BIND 9 before =
+changes to the=20
+main configuration file, <I>named.conf</I>, will be effective.</A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D8><BR></A></P>
+<H2><A name=3D8></A><A name=3D8-1>8.1 Troubleshooting Syntax And Other =
+Configuration=20
+Errors </A></H2><A name=3D8-1>Thankfully BIND is very helpful in =
+locating syntax=20
+errors. The best way to check, is by starting BIND and watching for =
+error=20
+messages. If you are receiving the errors on boot, you can check the =
+boot=20
+messages with the following:</A>
+<P><A name=3D8-1><TT><FONT color=3D#cc0000>grep named /var/log/messages=20
+</FONT></TT></A></P>
+<P><A name=3D8-1>The most common mistake is the misuse of semicolons or =
+braces "{=20
+}" in <I>named.conf</I>. Remember that in <I>named.conf</I> semicolons =
+end=20
+control statements and cannot be used as comments. However, semicolons =
+ARE used=20
+as comments in zone data files. (This is due to the fact that zone files =
+are RFC=20
+compliant while <I>named.conf</I> is specific to BIND). Remember that =
+braces are=20
+used to contain control statements. Global control statements go within=20
+<TT><FONT color=3Dnavy>options { control_statement; };</FONT></TT> and =
+zone=20
+control statements go within <FONT color=3Dnavy><TT>zone "name_of_zone" =
+{=20
+control_statement; };</TT></FONT>. Make sure you have set the =
+<TT>directory</TT>=20
+option correctly in <I>named.conf</I>. The default location of the named =
+
+directory on a non-jailed FreeBSD BIND is <I>/etc/named<B>b</B></I>, NOT =
+
+<I>/etc/named</I>.</A></P>
+<P><A name=3D8-1>When configuring your zone data, remember that any name =
+ending=20
+with "." (a dot) signifies an absolute name. For example: host1. (with =
+the dot)=20
+will resolve to host1, whereas host1 (without the dot) will have the =
+origin=20
+domain appended and resolve to host1.foobar.example. Remember that the =
+"@"=20
+symbol is a shortcut for the origin. In our example, using "@" in our =
+zone file=20
+is the same as using 'foobar.example'. Never us the "@" symbol for the=20
+administrative email address, instead use a dot.</A></P>
+<P><A name=3D8-1>The following are examples of some =
+shortcuts:<BR></A></P><PRE><A name=3D8-1>Long:  foobar.example.  IN  SOA =
+ ns1.foobar.example.  root.ns1.foobar.example.
+Short: @                IN  SOA  ns1.foobar.example.  =
+root.ns1.foobar.example.
+</A></PRE><PRE><A name=3D8-1>Long:  host1.foobar.example.   IN   A   =
+192.168.1.100
+Short: host1                   IN   A   192.168.1.100
+</A></PRE>
+<P><A name=3D8-1>There are also some shortcuts for our reverse lookup=20
+zone:<BR></A></P><PRE><A name=3D8-1>Long:  1.168.192.in-addr.arpa. IN  =
+SOA  ns1.foobar.example.  root.ns1.foobar.example.
+Short: @                       IN  SOA  ns1.foobar.example.  =
+root.ns1.foobar.example.
+</A></PRE><PRE><A name=3D8-1>Long:  100.1.168.192.in-addr.arpa.  IN  PTR =
+ host1.foobar.example.
+Short: 100                          IN  PTR  host1.foobar.example.
+</A></PRE><A name=3D8-1>Below is the correct and incorrect way to =
+specify the=20
+administrative address:<BR></A><PRE><A name=3D8-1>Correct:    @  IN  SOA =
+ ns1.foobar.example.  root.ns1.foobar.example.
+Incorrect:  @  IN  SOA  ns1.foobar.example.  root@ns1.foobar.example.
+</A></PRE><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D8-1><BR></A>
+<H2><A name=3D8-1></A><A name=3D8-2>8.2 Testing Forward Name Resolution =
+</A></H2><A=20
+name=3D8-2>We will start testing directly form the console of our name =
+server.=20
+First, lets jump right in and try resolving a name for our own private =
+internal=20
+network. Ensure that the server you are connecting to is 127.0.0.1. If =
+not, then=20
+you will need to either configure <I>/etc/resolv.conf</I> with =
+"nameserver=20
+127.0.0.1" or append 127.0.0.1 to the end of your nslookup command as =
+explained=20
+earlier. In the following examples "%" represents the command prompt =
+(you will=20
+see a "#" if you are still logged in as root.).</A>
+<P></P><PRE><A name=3D8-2><FONT color=3D#cc0000>% nslookup host1</FONT> =
+(replace 'host1' with a real name in your zone file.)
+
+Server:  localhost.foobar.example
+Address:  127.0.0.1
+
+Name:    host1.foobar.example
+Address:  192.168.1.100
+</A></PRE><A name=3D8-2>If this failed with "Non-existent domain" or =
+"NXDOMAIN"=20
+then the most obvious problem may be that the hostname you attempted to =
+lookup=20
+is not in your forward lookup zone file. If you are sure that your =
+forward zone=20
+contains the correct name, you may need to reload the zone or try using =
+your=20
+client's fully qualified name, i. e. 'host1.foobar.example'. If the =
+fully=20
+qualified name works, then you may want to set your 'domain' in=20
+<I>/etc/resolv.conf</I>. Below is an example. Alternatively you will =
+need to use=20
+the fully qualified domain name for each lookup.</A>
+<P></P><PRE><A name=3D8-2>domain       foobar.example
+nameserver   127.0.0.1
+</A></PRE><A name=3D8-2>If you receive error "Can't find server name for =
+address=20
+127.0.0.1......" Then your name server is either not running or not =
+listening on=20
+127.0.0.1. Check that named is running with the following: (You will =
+need to run=20
+ps as root.)</A>
+<P><A name=3D8-2><TT><FONT color=3D#cc0000>ps ax | grep named =
+</FONT></TT></A></P>
+<P><A name=3D8-2>This should return the process ID and path to named. =
+(Note:=20
+sometimes, instead of the path to named =
+"<TT>/usr/local/sbin/named</TT>", you=20
+will receive "<TT>grep named</TT>". This is not named running but rather =
+the=20
+grep command.) If this is ok, check which interface BIND is listening on =
+with=20
+'netstat' as explained below in "Test which interfaces BIND is listening =
+on".=20
+</A></P>
+<P><A name=3D8-2>If you are still receiving "Non-existent domain" error, =
+then make=20
+sure you have entered the name correctly in your forward lookup zone. =
+Use a=20
+trailing dot only when you use the fully qualified domain name for a =
+host. If=20
+you make changes to <I>named.conf</I> you will need to issue 'ndc =
+restart' for=20
+BIND 8 and 'rndc restart' for BIND 9 before the changes take effect. If =
+you make=20
+changes to any of your zone files, you will need to issue 'ndc reload' =
+for BIND=20
+8 and 'rndc restart' for BIND 9 before changes take effect.</A></P>
+<P><A name=3D8-2>Now lets try resolving names from a client. We can use =
+nslookup=20
+to test our name server from any Unix or Windows NT/2000/XP client =
+connected to=20
+your network. For this example we will be using a Windows command prompt =
+from=20
+'host2' to resolve the address of 'host1'. We will append our name =
+server=20
+address to the end of nslookup to ensure we are querying the correct =
+name=20
+server.</A></P>
+<P></P><PRE><A name=3D8-2><FONT color=3D#cc0000>C:\&gt;nslookup =
+host1.foobar.example 192.168.1.1</FONT> (replace 192.168.1.1 with the IP =
+of your name server)=20
+
+Server:  ns1.foobar.example
+Address:  192.168.1.1
+
+Name:    host1.foobar.example
+Address:  192.168.1.100
+</A></PRE><A name=3D8-2>You are in good shape if your results were =
+similar to the=20
+above example. If instead you received something similar to "<TT>*** =
+Can't find=20
+server name for address 192.168.1.1: No response from server (or Time=20
+out:)</TT>" then your name server is not listening to you. We know it is =
+running=20
+because we tested that earlier. First try to ping your name server:</A>
+<P><A name=3D8-2><TT><FONT color=3D#cc0000>ping 192.168.1.1 =
+</FONT></TT></A></P>
+<P><A name=3D8-2>If, from a Windows machine, you received =
+"<TT>Destination host=20
+unreachable</TT>" then you most likely have a networking issue on your =
+local=20
+machine. If you received "<TT>Request timed out</TT>" then your name =
+server is=20
+either not at the address you thought is was, your link to the server is =
+broken,=20
+or your server is not returning ICMP ping requests. In any case you will =
+need to=20
+endeavor in some basic network troubleshooting.</A></P>
+<P><A name=3D8-2>If on the other hand, you are receiving ping replies =
+from your=20
+server then you know your DNS is either broken or blocked. You will need =
+to=20
+ensure that a firewall on your server, a router, or even your host is =
+not=20
+blocking UDP/TCP ports 53 out from your client and into the server. Also =
+be=20
+aware that DNS responses will almost always come back on a port above =
+1024=20
+(usually UDP). You will also need to ensure that your name server is =
+listening=20
+on the correct interface and ports. This is covered in more detail=20
+later.</A></P>
+<P><A name=3D8-2>Note that you may need to clear the DNS cache on =
+Windows clients=20
+for DNS changes to take immediate effect. This should not effect =
+nslookup, but=20
+if all else fails, clear the cache or reboot. On Windows 2000/XP use=20
+'<TT>ipconfig /flushdns</TT>'. Other Windows clients will need to be=20
+rebooted.</A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D8-2><BR></A></P>
+<H2><A name=3D8-2></A><A name=3D8-3>8.3 Testing Reverse Name Resolution =
+</A></H2><A=20
+name=3D8-3>This is essentially the same as testing forward name =
+resolution, with=20
+the obvious exception that we are using a host's IP address rather than =
+the=20
+host's name. The following tests are intended to be run from our name =
+server's=20
+console and assume your forward name resolution works. Choose an address =
+of one=20
+of your own hosts and attempt to look it up: </A><PRE><A =
+name=3D8-3><FONT color=3D#cc0000>% nslookup 192.168.1.100</FONT>
+
+Server:  ns1.foobar.example
+Address:  127.0.0.1
+
+Name:    host1.foobar.example
+Address:  192.168.1.100
+</A></PRE>
+<P><A name=3D8-3>If this fails, ensure your reverse lookup zone =
+(in-addr.arpa) is=20
+configured correctly and loaded from your <I>named.conf</I> file. Ensure =
+your=20
+host's name and address have been added correctly. Any other issues are =
+likely=20
+to have shown up during our forward name resolution testing =
+earlier.</A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D8-3><BR></A></P>
+<H2><A name=3D8-3></A><A name=3D8-4>8.4 Testing External Name Resolution =
+</A></H2><A=20
+name=3D8-4>Now lets see if we can resolve the name to address mapping =
+for an=20
+external address--www.freebsd.org. I will assume you are working form a =
+console=20
+on the name server and that forward and reverse name resolution was =
+successful.=20
+If you are not working from your name server console, you may need to =
+append the=20
+address of your name server to the end of your nslookup command.</A>
+<P></P><PRE><A name=3D8-4><FONT color=3D#cc0000>% nslookup =
+www.freebsd.org</FONT>
+
+Server:  ns1.foobar.example
+Address:  192.168.1.1
+
+Name:    www.freebsd.org
+Address:  216.136.204.117
+</A></PRE>
+<P><A name=3D8-4>If you received something such as the following: "***=20
+ns1.foobar.example can't find www.freebsd.org: Non-existent host/domain" =
+ensure=20
+that you have a "hints" file listing the Internet root servers and that =
+it is=20
+being loading from <I>named.conf</I>. The "hints" file is installed by =
+BIND 8=20
+and BIND 9 as <I>/etc/namedb/named.root</I>. The name of the file does =
+not=20
+matter so long as it matches your entry in <I>named.conf</I>. The =
+following=20
+section form <I>named.conf</I> would load a hints file named =
+<I>named.root</I>=20
+form the directory specified by the <TT>directory</TT> option in=20
+<I>named.conf</I>.</A></P>
+<P></P><PRE><A name=3D8-4>zone "." {
+	type hint;
+	file "named.root";
+};
+</A></PRE>
+<P><A name=3D8-4>If you are using "forwarders=A1=B1 in your =
+<I>named.conf</I>, then=20
+make cretin that those name servers (probably your ISP's) are =
+accessible. The=20
+quickest was to check is to simply append your IPS's name server=20
+(123.123.123.123 for this example) to the end of your 'nslookup' =
+command:=20
+</A></P><PRE><A name=3D8-4><FONT color=3D#cc0000>% nslookup =
+www.freebsd.org 123.123.123.123</FONT>
+
+Server:  name-server-at.myisp.net
+Address:  123.123.123.123
+
+Name:    www.freebsd.org
+Address:  216.136.204.117
+</A></PRE>
+<P><A name=3D8-4>Also be aware that a forwarding name server still =
+requires a=20
+hints file. If you have included the "forward only;=A1=B1 option, you =
+will probably=20
+not need a hints file. If you are still having issues, ensure that your =
+queries=20
+are not being dropped by a firewall and that you have Internet=20
+connectivity=A1=ADDuh.</A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D8-4><BR></A></P>
+<H2><A name=3D8-4></A><A name=3D8-5>8.5 What Interface Is BIND Listening =
+On?=20
+</A></H2><A name=3D8-5>We will use the 'netstat' command to list which =
+ports are=20
+listening on each interface. Remember that the loopback 127.0.0.1 is an=20
+interface and should almost always be listening for DNS queries. We will =
+through=20
+the "-n=A1=B1 option at 'netstat' to display the ports and addresses as =
+numbers. If=20
+you leave the "-n=A1=B1 off, 'netstat' will instead list interfaces by =
+name and the=20
+DNS port as "domain=A1=B1. I find this confusing, but you may like it. =
+Now lets look=20
+for open UDP/TCP ports 53 which are the standard DNS ports.</A>
+<P><A name=3D8-5><TT><FONT color=3D#cc0000>netstat =A8Cn =
+</FONT></TT></A></P>
+<P><A name=3D8-5>The output from our ns1.foobar.example name server =
+includes the=20
+following:</A></P>
+<P></P><PRE><A name=3D8-5>tcp4    0    0  127.0.0.1.53         *.*       =
+ LISTEN
+tcp4    0    0  192.168.1.1.53       *.*        LISTEN
+udp4    0    0  127.0.0.1.53         *.*
+udp4    0    0  192.168.1.1.53       *.*
+</A></PRE>
+<P><A name=3D8-5>Using the first line as an example, the important =
+things to note=20
+here is that <TT>tcp4</TT> indicates TCP version 4 as apposed to version =
+6 (most=20
+everyone still uses version 4). The "127.0.0.1.53=A1=B1 indicates that =
+local address=20
+127.0.0.1 is listening on TCP port 53. If instead we had and entry such =
+as=20
+"*.53=A1=B1 then we would be listening for DNS queries on all =
+interfaces. Notice also=20
+that UDP is a connectionless protocol and does not show as =
+"LISTENING=A1=B1 for=20
+connections like TCP. In case you are wondering, almost all DNS queries =
+use UDP.=20
+In some cases, however, TCP will be used if the data is too large for =
+UDP=20
+packets such as during complete zone transfers. So, if your server is =
+not=20
+listening on the correct interfaces, or is listening on too many =
+interfaces, you=20
+will want to look at <I>named.conf</I>. Below are the option statements =
+which=20
+effect this behavior:</A></P>
+<P></P><PRE><A name=3D8-5>options {
+	allow-query { 192.168.1/24; 127.0.0.1; };
+	listen-on { 192.168.1.1; 127.0.0.1; };
+	};
+</A></PRE>
+<P><A name=3D8-5>If all else fails, don't forget about firewalls. Ensure =
+that a=20
+firewall on your server, a router, or even your host is not blocking =
+UDP/TCP=20
+ports 53 out from your client and in to your server. Also be aware that =
+DNS=20
+responses will almost always come back on a port above 1024 (usually =
+UDP). By=20
+the way, if you want to be fancy, you can also use 'sockstat' instead of =
+
+'netstat'. In the below example "-4=A1=B1 indicates TCP version 4 and we =
+will pipe=20
+the output to grep filtering for "named=A1=B1.</A></P>
+<P><A name=3D8-5><TT><FONT color=3D#cc0000>sockstat =A8C4 | grep named=20
+</FONT></TT></A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D8-5><BR></A></P>
+<H2><A name=3D8-5></A><A name=3D8-6>8.6 What Version of BIND Is Running? =
+</A></H2><A=20
+name=3D8-6>Now lets check which version of BIND we are running. I will =
+cover=20
+several different options all of which will be run from a console on the =
+name=20
+server. The easiest way to check the version is to use 'dig' as shown =
+below. (If=20
+you added "<TT>version "some_text";</TT> to your 'options' statement in=20
+<I>named.conf</I>, you will receive "some_text" rather than the =
+version.) The=20
+below example shows the version information for BIND 9.2.2. in bold. =
+Don't be=20
+fooled by "&lt;&lt;&gt;&gt; DiG 9.2.2 &lt;&lt;&gt;&gt;", this is the =
+version of=20
+our tool, not our name server.</A>
+<P><A name=3D8-6><TT><FONT color=3D#cc0000>%dig txt chaos version.bind =
+@localhost=20
+</FONT></TT></A></P>
+<P>
+<TABLE bgColor=3D#ffffff border=3D0><!-- Indent Table-->
+  <TBODY>
+  <TR>
+    <TD noWrap bgColor=3D#ffffff>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</TD>
+    <TD bgColor=3D#ffffff><PRE>; &lt;&lt;&gt;&gt; DiG 9.2.2 =
+&lt;&lt;&gt;&gt; txt chaos version.bind
+;; global options:  printcmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 51001
+;; flags: qr aa rd; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0
+
+;; QUESTION SECTION:
+;version.bind.                  CH      TXT
+
+;; ANSWER SECTION:
+<B>version.bind.           0       CH      TXT     "9.2.2"</B>
+
+;; Query time: 3 msec
+;; SERVER: 127.0.0.1#53(127.0.0.1)
+;; WHEN: Wed Oct  1 21:52:30 2003
+;; MSG SIZE  rcvd: 48
+</PRE></TD></TR></TBODY></TABLE></P>
+<P><A name=3D8-6>Also, you can simply pass the "-v" option to 'named' to =
+ask for=20
+the version. If, however, you have more than one 'named' on your server, =
+you=20
+will need to ask the question carefully. First, lets find the location =
+of the=20
+'named' that is running on our server:</A></P>
+<P><A name=3D8-6><TT><FONT color=3D#cc0000>%ps -ax | grep named=20
+</FONT></TT><BR><TT>74 ?? Ss 0:00.08 /usr/local/sbin/named</TT></A></P>
+<P><A name=3D8-6>Now lets ask <I>/usr/local/sbin/named</I> which version =
+it=20
+is:</A></P>
+<P><A name=3D8-6><TT><FONT color=3D#cc0000>%/usr/local/sbin/named -v=20
+</FONT></TT><BR><TT>BIND 9.2.2</TT></A></P>
+<P><A name=3D8-6>Now we know BIND 9.2.2 is running. Just for fun, lets =
+not specify=20
+the path to 'named':</A></P>
+<P><A name=3D8-6><TT><FONT color=3D#cc0000>%named -v =
+</FONT></TT><BR></A></P><PRE><A name=3D8-6>named 8.3.3-REL Wed Oct  9 =
+12:19:59 GMT 2002
+        root@builder.freebsdmall.com:/usr/obj/usr/src/usr.sbin/named
+</A></PRE>
+<P><A name=3D8-6>Oops, looks like the old 'named' is found earlier in =
+our path=20
+variable. Luckily it is not the version that is currently running. If =
+you run a=20
+tight ship, you will want to get this old version off you machine or at =
+least=20
+make it non-executable.</A></P>
+<P><!-- =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D --><A name=3D8-6><BR></A></P>
+<H2><A name=3D8-6></A><A name=3D9>9.0 Additional Resources </A></H2><A =
+name=3D9>I do=20
+hope you found this HOWTO helpful, though be aware that there is a lot =
+more to=20
+DNS than what we have covered here. You will likely find the following =
+resources=20
+beneficial if you would like to learn more, particularly in the area of=20
+security.</A>
+<P><A name=3D9>Internet Software consortium (The home of =
+BIND):<BR></A><A=20
+href=3D"http://www.isc.org/products/BIND/"=20
+target=3D_blank>www.isc.org/products/BIND/</A></P>
+<P>BIND specific links on bind9.net<BR><A =
+href=3D"http://www.bind9.net/links"=20
+target=3D_blank>www.bind9.net/links</A></P>
+<P>General DNS links on bind9.net<BR><A =
+href=3D"http://www.bind9.net/dns-links"=20
+target=3D_blank>www.bind9.net/dns-links</A></P>
+<P>Ask Mr. DNS (Be sure to check the Ask Mr. DNS Archive)<BR><A=20
+href=3D"http://www.acmebw.com/askmrdns/"=20
+target=3D_blank>www.acmebw.com/askmrdns/</A></P>
+<P>Upgrading to BIND 9: The Top Nine Gotchas: by Cricket Liu<BR><A=20
+href=3D"http://sysadmin.oreilly.com/news/dnsandbind_0401.html"=20
+target=3D_blank>http://sysadmin.oreilly.com/news/dnsandbind_0401.html</A>=
+</P>
+<P>DNS Resources Directory on DNS.net<BR><A =
+href=3D"http://www.dns.net/dnsrd/"=20
+target=3D_blank>www.dns.net/dnsrd/</A></P>
+<P>Secure BIND Template: by Rob Thomas<BR><A=20
+href=3D"http://www.cymru.com/Documents/secure-bind-template.html"=20
+target=3D_blank>www.cymru.com/Documents/secure-bind-template.html</A></P>=
+
+<P>Chroot-BIND HOWTO: by Scott Wunsch<BR><A=20
+href=3D"http://www.linuxsecurity.com/docs/LDP/Chroot-BIND-HOWTO.html"=20
+target=3D_blank>www.linuxsecurity.com/docs/LDP/Chroot-BIND-HOWTO.html</A>=
+</P>
+<P>Dual chrooted BIND/DNS servers: by Dave Lugo<BR><A=20
+href=3D"http://www.etherboy.com/dns/chrootdns.html"=20
+target=3D_blank>www.etherboy.com/dns/chrootdns.html</A></P>
+<P></P>
+<HR width=3D"60%">
+<BR>Please feel free to contact me with corrections or comments.
+<P><FONT size=3D-1>Glenn Sidman<BR><IMG alt=3D"email address"=20
+src=3D"http://www.tuxweb.net/img/email.gif" border=3D0><BR></FONT></P>
+<P><FONT size=3D-1><BR><BR><BR><BR><BR></FONT></P></BODY></HTML>
+
+------=_NextPart_000_002B_01CA152A.31E5BD70
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.tuxweb.net/img/email.gif
+
+R0lGODlhdAAUAPcAAAAAAP//////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////ywAAAAAdAAUAAAI/AADCBxI
+sKDBgwgTKlzIsKHDhxAjSpxIsaLFixgzatzIsaPHjwcBiBQJMmTJkwJJEgSwsiTLiy9RGoxZMCbN
+jjcn5pzJ8mVPnzRHDvw5NCVJnwGEJi26NGXTp0BtJt1JdKhKpQiBGt3aVOpUp0i5hoVadKxUr1d5
+OiX7NCtTr23Xno0bFu5csEvNro3LFu1Cv3ttKp0b9C3TtoV7dh2pt+Zbxnvdyj3cmHBLtpgV49Wc
+Ey7lyKBniv28OHBeq6ZTnybd9zBpwAqPqhbctazRn0EFp529UuVU33at0m64k2JxvjI/esbY+Xhy
+nL43Mo7+vLr169iza9/O/XlAAAA7
+
+------=_NextPart_000_002B_01CA152A.31E5BD70--

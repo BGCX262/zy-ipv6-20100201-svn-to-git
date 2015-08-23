@@ -1,0 +1,529 @@
+From: <¨®¨¦ Microsoft Internet Explorer 5 ¡À¡ê¡ä?>
+Subject: IPv6 DNS settings
+Date: Fri, 31 Jul 2009 14:06:43 +0800
+MIME-Version: 1.0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.isi.edu/~bmanning/v6DNS.html
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>IPv6 DNS settings</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3DISO-8859-1">
+<META content=3D"Bertrand Buclin &amp; Yuji Sekiya" name=3DAuthor>
+<META content=3D"Microsoft FrontPage 2.0" name=3DFORMATTER>
+<META content=3D"MSHTML 6.00.2900.5659" name=3DGENERATOR></HEAD>
+<BODY text=3D#000000 link=3D#0000ff bgColor=3D#ffffff>
+<H1><IMG height=3D126 alt=3D"6bone logo" src=3D"" width=3D172 =
+align=3Dright></H1>
+<H1>IPv6 DNS Setup Information</H1>
+<P>Setting up correctly DNS with IPv4 is already somewhat complex, but =
+don't=20
+worry, doing it for IPv6 is not rocket science, ... but close.</P>
+<P>This page gives some guidelines on how to properly setup DNS in =
+support of=20
+IPv6. Within the examples, the important items are hyperlinked to the =
+relevant=20
+portion of text explaining them. </P>
+<H2>Table of Contents</H2>
+<BLOCKQUOTE>
+  <P><A=20
+  =
+href=3D"http://www.isi.edu/~bmanning/v6DNS.html#Introduction">Introductio=
+n</A><BR><A=20
+  href=3D"http://www.isi.edu/~bmanning/v6DNS.html#DNSplatform">DNS=20
+  Platform</A><BR><A=20
+  href=3D"http://www.isi.edu/~bmanning/v6DNS.html#Studycase">Study case=20
+  scenario</A><BR><A=20
+  href=3D"http://www.isi.edu/~bmanning/v6DNS.html#named.conf">BIND =
+Configuration=20
+  File</A><BR><A=20
+  href=3D"http://www.isi.edu/~bmanning/v6DNS.html#Forwardzone">Forward =
+lookup zone=20
+  file</A><BR>&nbsp;&nbsp;&nbsp; <A=20
+  =
+href=3D"http://www.isi.edu/~bmanning/v6DNS.html#File:v6.ipv6domain-tottar=
+o.org">Global=20
+  names</A><BR><A=20
+  href=3D"http://www.isi.edu/~bmanning/v6DNS.html#Reversezone">Reverse =
+lookup zone=20
+  files</A><BR>&nbsp;&nbsp;&nbsp; <A=20
+  href=3D"http://www.isi.edu/~bmanning/v6DNS.html#localhost">Local=20
+  addresses</A><BR>&nbsp;&nbsp;&nbsp; <A=20
+  href=3D"http://www.isi.edu/~bmanning/v6DNS.html#globaladdress">Global=20
+  addresses</A><BR><A=20
+  =
+href=3D"http://www.isi.edu/~bmanning/v6DNS.html#Copyright">Copyright</A><=
+/P></BLOCKQUOTE>
+<HR>
+
+<H1><A name=3DIntroduction>Introduction</A></H1>
+<BLOCKQUOTE>
+  <P>There is not yet a native IPv6 DNS root server. At the present time =
+the DNS=20
+  implementations available all run on top of IPv4, and the DNS system=20
+  supporting IPv6 is linked to IPv4 information. However, some of the =
+DNS=20
+  implementations begin to support native IPv6 transportation such as =
+bind8 with=20
+  <A href=3D"http://www.kame.net/">KAME</A> patch, <A=20
+  href=3D"http://www.sfc.wide.ad.jp/~doi/softs/">newbie</A> and =
+bind9(under=20
+  developing).</P></BLOCKQUOTE>
+<BLOCKQUOTE>
+  <P>RFC1886 defines the changes that need to be made the DNS to support =
+IPv6.=20
+  The changes include a new resource record type, AAAA record. =
+Currently, AAAA=20
+  record is used in order to store an IPv6 addresses because the =
+extensions are=20
+  designed to be compatible with existing DNS implementations. =
+</P></BLOCKQUOTE>
+<BLOCKQUOTE>
+  <P>In addition to RFC1886, there is another DNS extensions to support =
+IPv6=20
+  addresses. Draft-ietf-ipngwg-dns-lookups-06 supports renumberable and=20
+  aggregatable IPv6 addressing. &nbsp; But no implementation which =
+support the=20
+  extensions is available. Bind9 will support it but under=20
+developing.</P></BLOCKQUOTE>
+<BLOCKQUOTE>
+  <P>Furthermore, RFC 1912 provides recommendations on how to setup DNS =
+for=20
+  IPv4. It insists in particular on declaring local zone files for the =
+reverse=20
+  lookup of loopback and broadcast addresses so that the load on the =
+root name=20
+  servers is minimized. The setup described here follows the same =
+philosophy,=20
+  but applied to IPv6.</P></BLOCKQUOTE>
+<P>&nbsp;</P>
+<HR>
+
+<H1><A name=3DDNSplatform>DNS platform</A></H1>
+<BLOCKQUOTE>
+  <P>The recommended platform for running DNS with IPv6 is BIND =
+8.2.2-P5.=20
+  Although previous BIND version (starting with 4.9.4) could be used as =
+well,=20
+  BIND 8.2.2-P5 is preferred, because: </P></BLOCKQUOTE>
+<DIV align=3Dcenter>
+<CENTER>
+<TABLE cellSpacing=3D0 cellPadding=3D0 width=3D"80%" border=3D0>
+  <TBODY>
+  <TR msthemelist>
+    <TD vAlign=3Dbaseline width=3D42><IMG height=3D20 hspace=3D11 =
+src=3D"" width=3D20></TD>
+    <TD vAlign=3Dtop width=3D"100%">This is the currently developed =
+code;</TD></TR>
+  <TR msthemelist>
+    <TD vAlign=3Dbaseline width=3D42><IMG height=3D20 hspace=3D11 =
+src=3D"" width=3D20></TD>
+    <TD vAlign=3Dtop width=3D"100%">IPv6 will eventually make extensive =
+use of=20
+      dynamic updates, and other recent enhancements to the DNS =
+protocol. Those=20
+      are supported in BIND 8.*;</TD></TR>
+  <TR msthemelist>
+    <TD vAlign=3Dbaseline width=3D42><IMG height=3D20 hspace=3D11 =
+src=3D"" width=3D20></TD>
+    <TD vAlign=3Dtop width=3D"100%">If one is already playing with IPv6, =
+he/she=20
+      should have the right mindset to undertake a quantum leap with =
+his/her DNS=20
+      platform;</TD></TR>
+  <TR>
+    <TD vAlign=3Dbaseline width=3D42><IMG height=3D20 hspace=3D11 =
+src=3D"" width=3D20></TD>
+    <TD vAlign=3Dtop width=3D"100%">Security=20
+reasons.</TD></TR></TBODY></TABLE></CENTER></DIV>
+<BLOCKQUOTE>
+  <P>The use of DNS in support of IPv6 as described here will therefore =
+assume=20
+  that BIND 8.2.2-P5 is in place. The most recent BIND kits are =
+available from=20
+  the <A href=3D"http://www.isc.org/">Internet Software=20
+Consortium</A>.</P></BLOCKQUOTE>
+<BLOCKQUOTE>
+  <P>By the way, If you want to use the bind8 which supports IPv6 native =
+
+  transportation, <A href=3D"http://www.kame.net/">KAME</A> provides an =
+IPv6=20
+  transportation patch for bind-8.1.2.</P>
+  <P>&nbsp;</P></BLOCKQUOTE>
+<HR>
+
+<H1><A name=3DStudycase>Study case scenario</A></H1>
+<BLOCKQUOTE>
+  <P>The different files described here correspond to the actual setup =
+in use by=20
+  the ipv6domain-tottaro organization.</P></BLOCKQUOTE>
+<BLOCKQUOTE>
+  <P>The organization uses the domain<FONT face=3DArial> =
+ipv6-tottaro.org</FONT>=20
+  for the computer lab where systems are connected to the 6Bone. In =
+order to=20
+  avoid mixing IPv6 and IPv4 attributes for domain names, it has been =
+decided to=20
+  list all the IPv6 hosts and resources within the <FONT=20
+  face=3DArial>v6.ipv6domain-tottaro.org</FONT> subdomain. The principal =
+(and=20
+  primary) nameserver in use is <FONT=20
+  face=3DArial>ns.ipv6domain-tottaro.org</FONT> The resolver on all the =
+hosts in=20
+  the computer lab are using as <FONT=20
+  face=3DArial>ns.ipv6domain-tottaro.org</FONT> their name server. </P>
+  <P>&nbsp;</P></BLOCKQUOTE>
+<HR>
+
+<H1><A name=3Dnamed.conf>BIND Configuration File</A></H1>
+<BLOCKQUOTE>
+  <P>The BIND configuration file (usually<FONT face=3DArial>=20
+  /etc/named.conf</FONT>) instructs the BIND name server about the zone =
+files it=20
+  is serving. The following configuration is in place on <FONT=20
+  =
+face=3DArial>ns.ipv6domain-tottaro.org</FONT>:</P></BLOCKQUOTE><PRE><FONT=
+ color=3Dnavy>
+/*
+ * BIND 8.2.2 boot configuration file
+ *
+ * Author: Bertrand Buclin
+ *
+ * Modification History:
+ *	16-Sep-97	Buclin
+ *		Initial Version
+ *      31-Jan-00      Sekiya
+ *             Revised
+ */
+
+options {
+	directory "/var/named";
+};
+
+//
+// localhost
+//
+zone	"localhost"	{
+		type master;
+		file "localhost";
+};
+
+
+//
+// IPv4 zone files
+//
+zone	"."	{=20
+		type hint;
+		file "root.cache" ;
+};
+
+zone	"1.0.0.127.in-addr.arpa"	{
+		type master;
+		file "localhost";
+};
+
+//
+// IPv6 zone files
+// =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+//
+// First, load the zone for the IPv6 loopback address.
+//
+zone =
+"1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.int.=
+"	{
+		type master;
+		file "localhost";
+};
+
+//
+// 	If your IPv6 domain is "ipv6domain-tottaro.org", you need below =
+zone.
+//
+zone "v6.ipv6domain-tottaro.org"	{
+		type master;
+		file "v6.ipv6domain-tottaro.org";
+};
+
+//
+//	Reverse lookup zones
+//	If you have 3ffe:800::/24 pTLA ID, you need below zone.
+//
+zone "0.8.e.f.f.3.ip6.int"	{
+		type master;
+		file "3ffe:08";
+ };
+
+//
+//	If you have 3ffe:801::/32 pNLA ID, you need below zone.
+//
+zone "1.0.8.0.e.f.f.3.ip6.int"	{
+		type master;
+		file "3ffe:0801";
+};
+
+//
+//	If you have 2001:200::/35 sTLA ID, you need below zones.
+//
+zone "0.0.0.2.0.1.0.0.2.ip6.int"	{
+		type master;
+		file "2001:0200:0";
+};
+
+zone "1.0.0.2.0.1.0.0.2.ip6.int"	{
+		type master;
+		file "2001:0200:1";
+};
+</FONT></PRE>
+<BLOCKQUOTE>
+  <P><A name=3Dfiles_in_var>The zone f</A>iles are stored in the<FONT =
+face=3DArial>=20
+  /var/named/</FONT> filesystem in prevision of dynamic updates: it =
+might be=20
+  dangerous to located them on <FONT face=3DArial>/etc</FONT> or <FONT=20
+  face=3DArial>/usr</FONT> since with dynamic updates, the system =
+manager does not=20
+  master the anymore the updates to the zones files. These might grow =
+rapidly=20
+  (especially when there is some misconfiguration going on...), and =
+could easily=20
+  fill up the root partition.</P></BLOCKQUOTE>
+<P>&nbsp;</P>
+<HR>
+
+<H1><A name=3DForwardzone>Forward lookup zone file</A></H1>
+<BLOCKQUOTE>
+  <P>The forward lookup zone file is the most straightforward to set up. =
+For=20
+  each host or domain carrying an IPv6 address, it is simply a matter of =
+adding=20
+  a AAAA (pronounced quad-A) resource record. There are several forward =
+lookup=20
+  zones to set up, though: </P></BLOCKQUOTE>
+<DIV align=3Dcenter>
+<CENTER>
+<TABLE cellSpacing=3D0 cellPadding=3D0 width=3D"80%" border=3D0>
+  <TBODY>
+  <TR msthemelist>
+    <TD vAlign=3Dbaseline width=3D42><IMG height=3D20 hspace=3D11 =
+src=3D"" width=3D20></TD>
+    <TD vAlign=3Dtop width=3D"100%">One for the globally valid domain =
+names and=20
+      routable addresses,</TD></TR>
+  <TR msthemelist>
+    <TD vAlign=3Dbaseline width=3D42><IMG height=3D20 hspace=3D11 =
+src=3D"" width=3D20></TD>
+    <TD vAlign=3Dtop width=3D"100%">One, or more, for the link local =
+addresses and=20
+      corresponding names,</TD></TR>
+  <TR msthemelist>
+    <TD vAlign=3Dbaseline width=3D42><IMG height=3D20 hspace=3D11 =
+src=3D"" width=3D20></TD>
+    <TD vAlign=3Dtop width=3D"100%">Maybe, one or more zones if a site =
+is using=20
+      site-local or organization local=20
+addresses.</TD></TR></TBODY></TABLE></CENTER></DIV>
+<BLOCKQUOTE>
+  <P>One might be tempted to add the AAAA record to an existing domain =
+name.=20
+  Although the temptation is big, and it is natural to do so, especially =
+for=20
+  systems running IPv4 and IPv6, one should think twice before doing it: =
+the=20
+  AAAA record type is not understood by all DNS resolvers, and some =
+applications=20
+  might fail when receiving such a record back. Of course, such =
+applications=20
+  only get what they deserve since they should not ask for something =
+they don't=20
+  understand... Another situation is when a host is running both stacks =
+and=20
+  attempts to resolve the name of a remote party. Depending again on the =
+
+  implementation, the calling party might be confused if it is presented =
+with=20
+  both an IPv4 and IPv6 address... At the end of the day, though, those =
+issues=20
+  will need to be sorted out to ensure a smooth =
+migration.</P></BLOCKQUOTE>
+<BLOCKQUOTE>
+  <P>The forward translation file for zone <FONT=20
+  face=3DArial>v6.ipv6domain-tottaro.org</FONT> is given =
+below.</P></BLOCKQUOTE><PRE><FONT color=3Dnavy>; <A =
+name=3DFile:v6.ipv6domain-tottaro.org>File:v6.ipv6domain-tottaro.org</A>
+; IPv6 Domain Tottaro Organization.
+; IP v6 test network
+;
+@		IN	SOA	ns.ipv6domain-tottaro.org.	root.ipv6domain-tottaro.org. (
+						100013117=20
+                                                3H	; refresh
+						15M	; retry
+						1W	; expiry
+						1D )	; minimum=20
+		IN	NS		ns.ipv6domain-tottaro.org.
+		IN	NS		ns2.ipv6domain-tottaro.org.
+		IN	NS		ns.ipv4domain-tottaro.org.
+		IN	MX	10	mail.ipv6domain-tottaro.org.
+;
+;
+; Network names
+;
+pTLA-ipv6domain-tottaro		IN	AAAA	3FFE:800::
+sTLA-ipv6domain-tottaro		IN	AAAA	3FFE:200:0::
+							IN	AAAA	3FFE:200:1000::
+pNLA-ipv6domain-tottaro		IN	AAAA	3FFE:801::
+
+;
+; Local hosts
+; ------------------
+host1 			IN	AAAA	3FFE:800::2A8:79FF:FE32:1982
+				IN	AAAA	3FFE:800::80
+WWW			IN	CNAME	host1.v6.ipv6domain-tottaro.org.
+;=09
+host2			IN	AAAA	2001:200:1000:0:25F:23FF:FE80:1234
+;
+host3			IN	AAAA	3FFE:801:1000::2EF:6FFF:FE11:2222
+host4			IN	AAAA	3FFE:801:2000:100:280:9AFF:FE80:3333
+;
+;  Add more hosts !</FONT></PRE>
+<P>&nbsp;</P>
+<HR>
+
+<H1><A name=3DReversezone>Reverse lookup zone files</A></H1>
+<BLOCKQUOTE>
+  <P>Similarly to the forward translation of names, the reverse lookups =
+under=20
+  IPv6 have to cope with the various scopes of the =
+addresses.</P></BLOCKQUOTE>
+<BLOCKQUOTE>
+  <P>There are a few major differences in the way that domain names are =
+used to=20
+  support IPv6 reverse address lookup compared to IPv4. The first one =
+lies in=20
+  the fact that the reverse lookup domain names for IPv6 addresses are =
+listed=20
+  under the <FONT face=3DArial>IP6.INT</FONT> domain. The second one is =
+that each=20
+  digit in the address makes a domain token of its own.</P></BLOCKQUOTE>
+<H2><A name=3Dlocalhost>Loopback, localhost, etc...</A></H2><PRE><FONT =
+color=3Dnavy>;File: localhost
+@		IN	SOA	ns.ipv6domain-tottaro.org.	root.ipv6domain-tottaro.org. (
+					3 ; Serial
+					3H	; refresh
+					15M	; retry
+					1W	; expiry
+					1D )	; minimum=20
+;
+		IN	NS		localhost.
+;
+localhost.				IN	A	127.0.0.1
+1.0.0.127.in-addr.arpa.		IN	PTR		localhost.
+;
+localhost. 				IN 	AAAA	::1
+;
+$ORIGIN 0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.int.
+1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0	IN	PTR		localhost.</FONT></PRE>
+<P>&nbsp;</P>
+<H2><A name=3Dglobaladdress>Global addresses</A></H2>
+<BLOCKQUOTE>
+  <P>The globally routable address must have a reverse lookup defined. =
+Each=20
+  organization operating a top level aggregator receives a sub-domain=20
+  corresponding to their TLA. In turn, they will delegate further =
+subdomains to=20
+  transit providers. The process goes recursively until a prefix is =
+assigned to=20
+  an end site or network.</P>
+  <P>The first example below corresponds to a the zone file the pTLA=20
+  organization would operate, although the actual zone here is that of a =
+pTLA on=20
+  the 6Bone.</P></BLOCKQUOTE><PRE><FONT color=3Dnavy ?>; <A =
+name=3D"File: 3ffe:80">File: 3ffe:80</A>
+; IPv6 reverse lookup zone for 3ffe:800::/24
+; For the 6Bone pTLA
+; Created: 27 August 1997, by Bertrand Buclin
+; Revised: 31 January 2000, by Yuji Sekiya
+;
+;
+@		IN	SOA	ns.ipv6domain-tottaro.org.	root.ipv6domain-tottaro.org. (
+                                                100013117=20
+                                                3H	; refresh
+						15M	; retry
+						1W	; expiry
+						1D )	; minimum
+		IN	NS		ns.ipv6domain-tottaro.org.
+		IN	NS		ns2.ipv6domain-tottaro.org.
+		IN	NS		ns.ipv4domain-tottaro.org.
+;
+; Set the origin to the pTLA prefix.
+;
+$ORIGIN	8.0.e.f.f.3.ip6.int.
+0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0	IN	PTR		=
+pTLA-ipv6domain-tottaro
+2.8.9.1.2.3.e.f.f.f.9.7.8.a.2.0.0.0.0.0.0.0.0.0.0.0.0	IN	PTR		=
+host1.v6.ipv6domain-tottaro.org.
+0.8.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0	IN	PTR		=
+www.v6.ipv6domain-tottaro.org.
+
+
+;
+; pNLA =3D 01 (3ffe:801::/32)=20
+;
+$ORIGIN	1.0.8.0.e.f.f.3.ip6.int.
+@		IN	NS		ns.ipv6domain-tottaro.org.
+		IN	NS		ns2.ipv6domain-tottaro.org.
+		IN	NS		ns.ipv4domain-tottaro.org.
+0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0		IN	PTR		=
+pNLA-ipv6domain-tottaro
+;
+</FONT></PRE>
+<BLOCKQUOTE>
+  <P>The second example below shows a zone file for a pNLA site. In this =
+case,=20
+  all the hosts within the site are listed in this zone. One could also =
+choose=20
+  to organize the file by subnets, and only use the equivalent of the =
+EUI-64=20
+  interface ID in domain label of the resource =
+record.</P></BLOCKQUOTE><PRE><FONT color=3Dnavy>; file: 3ffe:801
+; IP v6 reverse lookup addresses for 3ffe:801::/32 zone
+;
+;
+@		IN	SOA	ns.ipv6domain-tottaro.org.	root.ipv6domain-tottaro.org. (
+                                                100013117=20
+                                                3H	; refresh
+						15M	; retry
+						1W	; expiry
+						1D )	; minimum
+		IN	NS		ns.ipv6domain-tottaro.org.
+		IN	NS		ns2.ipv6domain-tottaro.org.
+		IN	NS		ns.ipv4domain-tottaro.org.
+;
+;	Subnet 3ffe:801:1000::/64
+;
+$ORIGIN	0.0.0.0.0.0.0.1.1.0.8.0.e.f.f.3.ip6.int.
+2.2.2.2.1.1.e.f.f.f.f.6.f.e.2.0		IN	PTR		=
+host3.v6.ipv6domain-tottaro.org.
+
+;
+;	Subnet 3ffe:801:2000:100::/64
+;
+$ORIGIN	0.0.0.1.0.0.0.0.2.1.0.8.0.e.f.f.3.ip6.int.
+3.3.3.3.0.8.e.f.f.f.a.9.0.8.2.0		IN	PTR		=
+host4.v6.ipv6domain-tottaro.org.
+</FONT><FONT color=3D#000000></FONT></PRE>
+<P align=3Dcenter><IMG height=3D10 alt=3DBAR src=3D"" width=3D300></P>
+<H5 align=3Dright><FONT color=3D#003366><A name=3DCopyright>This =
+document </A>was=20
+written by <A=20
+href=3D"mailto:Betrand.Buclin@ch.att.com">Betrand.Buclin@ch.att.com</A> =
+and=20
+revised by <A href=3D"mailto:sekiya@ISI.EDU">Yuji Sekiya</A><BR>Last =
+Modified:=20
+Monday January 31,2000.<BR>Questions or problems regarding this document =
+should=20
+be directed to <A=20
+href=3D"mailto:sekiya@ISI.EDU">sekiya@ISI.EDU</A><BR></H5></FONT></BODY><=
+/HTML>

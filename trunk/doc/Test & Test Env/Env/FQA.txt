@@ -1,0 +1,5 @@
+Q1. linux ipv6 pppoe server how to?
+	A:	(1) configure the pppoe.conf file can meet this request.
+		(2) please make sure install the rp-pppoe
+Q2. linux fileshare friendly for windows how to?
+	A:	ftp server in linux can meet this request.
